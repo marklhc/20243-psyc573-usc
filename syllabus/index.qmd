@@ -98,7 +98,7 @@ To promote independence and critical thinking, students are encouraged to work t
 
 ## Technological Proficiency and Hardware/Software Required
 
-- [R](https://cloud.r-project.org/) and [RStudio](https://rstudio.com/products/rstudio/download/) are needed to complete the course assignments. It is highly recommended that students update to the latest versions of both software (R 4.4.0, RStudio 2024.04.1, or above). We will briefly discuss setting up R and RStudio in Week 1.
+- [R](https://cloud.r-project.org/) and [RStudio](https://rstudio.com/products/rstudio/download/) are needed to complete the course assignments. It is highly recommended that students update to the latest versions of both software (R 4.4.1, RStudio 2024.04.2, or above). We will briefly discuss setting up R and RStudio in Week 1.
 - The textbook and most of the supplemental readings can be accessed through the USC Libraries at <https://libraries.usc.edu/>.
 
 ### USC Computing Center Laptop Loaner Program
@@ -130,32 +130,31 @@ E-copies of all below are available at USC Libraries or publicly available.
 
 ## Description and Assessment of Assignments{#assignments}
 
-1. In-class exercises (10%). During some of the class sessions, students will participate in quizzes or group exercises. If students miss an exercise for participation credit, they can complete the exercise posted on Blackboard within 24 hours to get credits. 
-2. Homework problems (60%). There will be weekly homework assignments for students to apply the concepts and techniques discussed in class to analytic problems. The assignments typically involve performing data analyses using data sets of your own or provided by the instructor, and interpreting the results with guided questions. Please submit your work electronically to Blackboard by **Monday 11:59 p.m. Pacific Time** the week after the homework is assigned. See policy on [late work](#late-work).
-3. Final project (30%: 5% prospectus, 15% presentation, 15% final report). You will complete a research project related to Bayesian analysis, typically a report analyzing real data or a theoretical/methodological analysis of certain aspects of Bayesian data analysis. For empirical analyses, the focuses are (a) formulating and justifying prior distributions from a review of previous literature, (b) obtaining and interpreting posterior distributions, and (c) comprehensive reporting of methods and results. Students can also replicate the analyses of an existing study, as long as the chosen study shared sufficient data and materials and did not use a Bayesian analysis with informative priors. Students interested in project ideas other than an empirical research report (e.g., software package development, systematic review/meta-analysis) are encouraged to discuss their ideas with the instructor. Each student can choose to work on their own or in a group of up to three people.
+1. In-class exercises (10%). During some of the class sessions, students will participate in quizzes or group exercises. If students miss an exercise for participation credit, they can complete the exercise posted on Brightspace within 24 hours to get credits. 
+2. Homework problems (65%). There will be weekly homework assignments for students to apply the concepts and techniques discussed in class to analytic problems. The assignments typically involve performing data analyses using data sets of your own or provided by the instructor, and interpreting the results with guided questions. Please submit your work electronically to Brightspace by **Monday 11:59 p.m. Pacific Time** the week after the homework is assigned. See policy on [late work](#late-work).
+3. Final project (30%: 5% prospectus, 20% final presentation/report). Students will complete a research project related to Bayesian analysis, typically a report analyzing real data or a theoretical/methodological analysis of certain aspects of Bayesian data analysis. Students can choose to do either an oral presentation or a report to communicate their project findings. For empirical analyses, the focuses are (a) formulating and justifying prior distributions from a review of previous literature, (b) obtaining and interpreting posterior distributions, and (c) comprehensive reporting of methods and results. Students can also replicate the analyses of an existing study, as long as the chosen study shared sufficient data and materials and did not use a Bayesian analysis with informative priors. Students interested in project ideas other than an empirical research report (e.g., software package development, systematic review/meta-analysis) are encouraged to discuss their ideas with the instructor. Each student can choose to work on their own or in a group of up to three people.
 
-    There are three grading components for your final project:
+    There are two grading components for your final project:
   
     - Prospectus (5%)  
-    A prospectus about your project should be submitted by **Monday, March 21**. The prospectus should contain a concise description of what you (or your group) plan to do for your project, including a preliminary plan for statistical analysis. The prospectus should be limited to 1 single-spaced page (excluding tables, figures, references, and other supplemental materials).
+    A prospectus about your project should be submitted by **Monday, October 28**. The prospectus should contain a concise description of what you (or your group) plan to do for your project, including a preliminary plan for statistical analysis. The prospectus should be limited to 1 single-spaced page (excluding tables, figures, references, and other supplemental materials).
 
-    - Final Presentation/Report (15%)  
-        If you choose to do a presentation, on **April 26 and 28**, you or your group will give a 15-minute presentation on your project. You will also need to submit your slides to Blackboard for grading **on the day of your presentation**, which should include a link to the reproducible code for your analyses. A grading rubric on the final presentation will be posted on Blackboard.
+    - Final Presentation/Report (25%)  
+        If you choose to do an oral presentation, on **December 3 or 5**, you or your group will give a 15-minute presentation on your project, similar to one given in a professional conference. You will also need to submit your slides to Brightspace for grading **on the day of your presentation**, which should include a link to the reproducible code for your analyses. A grading rubric on the final presentation will be posted on Brightspace.
 
-        If you choose to do a final report, your report will be due **Tuesday, May 10, at 1:00 p.m. Pacific Time** (the assigned final exam time for the class). There should also be a link to the reproducible code for your analyses. The final paper should be 6-10 double-spaced pages of text (i.e., excluding title page, references, tables, figures, and appendices).
+        If you choose to do a final report, your report will be due **Thursday, December 12, at 1:00 p.m. Pacific Time** (the assigned final exam time for the class). There should also be a link to the reproducible code for your analyses. The final paper should be 8-15 double-spaced pages of text (i.e., excluding title page, references, tables, figures, and appendices).
 
 ## Participation
 
 Participation accounts for 10% of the course grade. Students should complete and turn in all in-class exercises to earn full credit for participation. 
   
-|        Assignments       | % of Grade |
-| :----------------------- | ---------- |
-| In-class exercises       | 10         |
-| Homework                 | 60         |
-| Prospectus               | 5          |
-| Final Presentation       | 10         |
-| Final Report             | 15         |
-| **TOTAL**                | 100        |
+|        Assignments        | % of Grade |
+| :-----------------------  | ---------- |
+| In-class exercises        | 10         |
+| Homework                  | 65         |
+| Prospectus                | 5          |
+| Final Presentation/Report | 20         |
+| **TOTAL**                 | 100        |
 
 : Grading Breakdown {#tbl-grading-breakdown}
 
@@ -178,7 +177,7 @@ C-| Below 70 (failing)
 
 ## Assignment Submission
   
-The assignments should be submitted through Blackboard by Monday at 11:59 p.m. Pacific Time.
+The assignments should be submitted through Brightspace by Monday at 11:59 p.m. Pacific Time.
 
 ## Grading Timeline
   
@@ -262,12 +261,12 @@ dates <- paste(
 +-----------------+-----------------------+------------------------------+----------------------+
 |                 |     Topics/Daily      |           Readings           |      Assignment      |
 |                 |      Activities       |                              |        Dates         |
-+=================+=======================+==============================+======================+
-| Week 1\         | - Overview of         | - [McElreath ch. 1][2]       | - Exercise 1         |
-| Aug 27 & 29     | Bayesian Statistics   | - Supplemental:              | - HW 1               |
-|                 |                       | [Gigerenzer (2004)][1]       |                      |
-|                 | - Quarto              | - [Quarto Tutorial][5]       |                      |
-|                 |                       | - [Markdown Basics][4]       |                      |
++:================+:======================+:=============================+:=====================+
+|     Week 1\     |     - Overview of     |    - [McElreath ch. 1][2]    |     - Exercise 1     |
+|   Aug 27 & 29   |  Bayesian Statistics  |       - Supplemental:        |        - HW 1        |
+|                 |                       |    [Gigerenzer (2004)][1]    |                      |
+|                 |       - Quarto        |    - [Quarto Tutorial][5]    |                      |
+|                 |                       |    - [Markdown Basics][4]    |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 2\         | - Probability         | - [McElreath ch. 2][2], 3    | - Exercise 2         |
 | Sep 3 & 5       | - Bayes theorem       | - Supplemental:              | - HW 2               |
@@ -283,42 +282,41 @@ dates <- paste(
 |                 |                       | - [Gelman et al. (2010)][11] |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 5\         | - Linear models       | - McElreath ch. 4, 5, 7, 8   | - Exercise 5         |
-| Sep 24 & 26     | - Interactions        |                              | - HW 4               |
+| Sep 24 & 26     | - Interactions        |                              |                      |
 |                 | - Model comparison    |                              |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 6\         | - Causal Inference    | - McElreath ch. 6            | - Exercise 6         |
-| Oct 1 & 3       |                       |                              | - HW 5               |
+| Oct 1 & 3       |                       |                              | - HW 4               |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 7\         | - Markov Chain        | - McElreath ch. 9            | - Exercise 7         |
-| Oct 8 & ~~10~~  | Monte Carlo           |                              | - HW 6               |
+| Oct 8 & ~~10~~  | Monte Carlo           |                              |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 8\         | - Generalized Linear  | - McElreath ch. 10           | - Exercise 8         |
-| Oct 15 & 17     | model (GLM) I         |                              | - HW 7               |
+| Oct 15 & 17     | model (GLM) I         |                              | - HW 5               |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 9\         | - GLM II              | - McElreath ch. 11           | - Exercise 9         |
 | Oct 22 & 24     |                       |                              | - Project prospectus |
 +-----------------+-----------------------+------------------------------+----------------------+
-| Week 10\        | - Multilevel Models   | - McElreath ch. 13,          |                      |
-| Oct 29 & 31     |                       | 14.1, 14.2                   |                      |
+| Week 10\        | - Multilevel Models   | - McElreath ch. 13,          | - Exercise 10        |
+| Oct 29 & 31     |                       | 14.1, 14.2                   | - HW 6               |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 11\        | - Missing data        | - McElreath ch. 15           | - Exercise 10        |
-| Nov 5 & 7       | - Measurement error   |                              | - HW 8               |
+| Nov 5 & 7       | - Measurement error   |                              | - HW 7               |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 12\        | - Latent variable     | - Supplemental reading       | - Exercise 11        |
-| Nov 12 & 14     | models                | - McElreath ch. 5, 6         | - HW 9               |
+| Nov 12 & 14     | models                | - McElreath ch. 5, 6         |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
-| Week 13\        | - Social networks     | - McElreath ch. 7            | - Exercise 12        |
-| Nov 19 & 21     |                       | - [Broda et al. (2023)][9]   | - HW 10              |
-|                 |                       | Kruschke ch. 10              |                      |
+| Week 13\        | - Social networks     | - McElreath ch. 14.4         | - Exercise 12        |
+| Nov 19 & 21     |                       | - [Broda et al. (2023)][9]   | - HW 8               |
 +-----------------+-----------------------+------------------------------+----------------------+
-| Week 14\        | - Advanced topic      | - McElreath ch. 15           | - Exercise:          |
-| Nov 26 & ~~28~~ |                       |                              | - HW 11              |
+| Week 14\        | - Advanced topic      | - TBD                        | - Project update     |
+| Nov 26 & ~~28~~ |                       |                              |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
-| Week 15\        | - Presentation        | - Kruschke ch. 21--24        | - HW 12              |
-| Dec 2 & 4       |                       | (pick topic of interest)     | - Project update     |
-|                 |                       | - Kruschke ch. 25            |                      |
+| Week 15\        | Presentation          |                              |                      |
+| Dec 3 & 5       |                       |                              |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
-| FINAL           | Final report          |                              | Dec 12 1:00 pm PST   |
+| Dec 12\         | Final report          |                              |                      |
+| 1:00 pm PST     |                       |                              |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
 
 : Course schedule {#tbl-course-schedule}
