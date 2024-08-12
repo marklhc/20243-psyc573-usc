@@ -1,0 +1,30 @@
+project:
+  type: website
+  render:
+    - "*.qmd"
+    - "!usc-psyc573-notes/"
+  resources:
+    - "docs/"
+
+website:
+  title: "PSYC 573 Bayesian Data Analysis (2024 Fall)"
+  navbar:
+    right:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - modules.qmd
+      - href: docs/index.html
+        text: Notes
+      - exercises/index.qmd
+      - href: syllabus/index.qmd
+        text: Syllabus
+
+format:
+  html:
+    theme: litera
+    css: styles.css
+    toc: true
+
+
+

@@ -1,0 +1,106 @@
+---
+title: "Exercise 1"
+author: "Instructor of PSYC 573"
+notes: modified from <https://quarto.org/docs/get-started/authoring/rstudio.html>
+---
+
+## Introduction
+
+In this analysis, we will run a Bayesian analysis to estimate the death rate of patients diagnosed with AIDS in Australia. Let's start by loading the packages we'll use for the analysis.
+
+```{r}
+#| label: load-pkgs
+#| code-summary: "Packages"
+#| message: false
+
+library(tidyverse)  # for data wrangling and visualization
+library(knitr)      # for tables
+library(posterior)  # for summarizing Bayesian analyses
+```
+
+<!-- Ex1: Install the `tidyverse` and the `posterior` packages so that they can be loaded above. Do not include the `install.packages()` statement in the qmd document. -->
+
+```{r}
+#| label: import-data
+data(Aids2, package = "MASS")
+```
+
+We present the results of exploratory data analysis in @sec-eda and the regression model in @sec-model. See <!-- Ex2: Add citation for our textbook () here, using the "insert citation" function in RStudio. -->
+
+## Exploratory data analysis {#sec-eda}
+
+The data contains `{r} nrow(Aids2)` participants.
+
+### Summary statistics
+
+@tbl-state displays basic summary statistics.
+
+```{r}
+#| label: tbl-state
+#| tbl-cap: "Patient status by state"
+
+table(Aids2$state, Aids2$status) |>
+  kable()
+```
+
+## Modeling {#sec-model}
+
+We can fit a simple linear regression model of the form shown in @eq-slr.
+
+<!-- \[Ex 3: Using LaTeX, add here the equation shown in this picture: https://wikimedia.org/api/rest_v1/media/math/render/svg/4211e3e7c3482573cdfbc0653d48a6279104c899\] -->
+
+@tbl-lm shows the regression output for this model.
+
+```{r}
+#| label: tbl-lm
+#| tbl-cap: "Summary of posterior distribution of death rate among patients diagnosed with AIDS in Australia"
+
+prior_a <- 2
+prior_b <- 2
+
+posterior_a <- prior_a + sum(Aids2$status == "D")
+posterior_b <- prior_b + sum(Aids2$status == "A")
+
+posterior_draws <- rbeta(4000, shape1 = posterior_a, shape2 = posterior_b)
+
+list(theta = posterior_draws) |>
+  summarize_draws() |>
+  kable(digits = 2)
+```
+
+@fig-histogram shows the prior and the posterior distributions of the death rate.
+
+<!-- Ex4: Change the aspect ratio of the graph above to 1:1, and `fig-width` to 3.5 -->
+
+```{r}
+#| label: fig-histogram
+#| fig-cap: "Histograms of prior and posterior distributions of death rate"
+#| fig-subcap:
+#|   - "Prior distribution"
+#|   - "Posterior distribution"
+#| layout-ncol: 2
+
+prior_draws <- rbeta(4000, shape1 = prior_a, shape2 = prior_b)
+ggplot(data.frame(theta = prior_draws), aes(x = theta)) +
+  geom_histogram(binwidth = 0.03) +
+  labs(title = "Prior", x = expression(theta)) +
+  scale_x_continuous(limits = c(0, 1), oob = scales::oob_keep)
+
+ggplot(data.frame(theta = posterior_draws), aes(x = theta)) +
+  geom_histogram(binwidth = 0.01) +
+  labs(title = "Posterior", x = expression(theta)) +
+  scale_x_continuous(limits = c(0, 1), oob = scales::oob_keep)
+```
+
+<!-- Ex 5: Make the following section a callout box -->
+
+## Results
+
+The estimated death rate is `{r} round(mean(posterior_draws), 2)`, 95% CI [`{r} paste0(round(quantile(posterior_draws, c(.025, .975)), 2), collapse = ", ")`].
+
+<!-- Ex 6: Change the YAML so that
+a. It contains your name
+b. Change the output to PDF (pdf or typst)
+c. Add a table of content -->
+
+## References {.unnumbered}

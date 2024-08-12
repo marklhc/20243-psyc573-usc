@@ -1,0 +1,7 @@
+format:
+  html:
+    code-tools:
+      source: true
+      toggle: false
+    toc: true
+    df-print: paged

@@ -1,0 +1,347 @@
+---
+format:
+  html: default
+  pdf: default
+execute:
+  echo: false
+---
+
+![](https://identity.usc.edu/wp-content/uploads/2022/09/PrimaryMonogram.png){width=33% fig-alt="Logo of the University of Southern California"}
+
+## PSYC 573 Bayesian Data Analysis {.unlisted .unnumbered}
+
+**Units:** 4  
+**Term--Day--Time:** Fall 2024--Tues & Thurs--10:00-11:50 am
+
+**Location:** SGM 911
+
+**Instructor:** Hok Chio (Mark) Lai  
+**Office:** SGM 621  
+**Office Hours:** Tues 12:00--1:00 pm, and by appointment.  
+**Contact Info:** (Email) [hokchiol@usc.edu](mailto:hokchiol@usc.edu), (Slack) https://usc.enterprise.slack.com/.   
+Timeline for replying to emails: within 48 hours.
+
+**IT Help:** ITS, Brightspace  
+**Contact Info:**  
+ITS (Email, Monday -- Friday, 8:00 A.M. -- 6:00 P.M.) [consult@usc.edu](mailto:consult@usc.edu), 
+(Phone, 24/7/365) 213-740-5555, (Online) [ServiceNow Portal](https://itsusc.service-now.com/)  
+Brightspace (Email, 24/7/365) [usc@d2l.com](mailto:usc@d2l.com), 
+(Online Help) [Brightspace Student Guides](https://www.brightspacehelp.usc.edu/students/)
+
+::: {.callout-note}
+
+## Transition to Brightspace
+
+Welcome to PSYC 573! USC is making a change in our online learning platform, and we are now using Brightspace. 
+
+### How to Log In
+
+To access Brightspace today, follow these steps:
+1. Go to <https://brightspace.usc.edu/d2l/login> to login. You can also find Brightspace on myUSC. 
+2. Enter your USC Net ID to access 
+3. Begin navigating through Brightspace
+
+USC also encourages students to download the mobile app, Brightspace Pulse, available in both the [Apple App Store](https://apps.apple.com/us/app/brightspace-pulse/id1001688546?ls=1) and [Google Play](https://play.google.com/store/apps/details?id=com.d2l.brightspace.student.android&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1&pli=1).
+
+### What to Expect
+
+Brightspace provides an enhanced learning experience with detailed class progress reports. With Brightspace, you can easily see all assignment due dates in one place. Upon opening Brightspace, you will find the following:  
+
+- The 20243 PSYC-573: Bayesian Data Analysis Course: We will use this course to complete work for this course throughout the semester.
+
+### Support Resources
+
+Do you want to learn more about Brightspace? Check out training and resources in the [Brightspace Student Tutorials](https://www.youtube.com/watch?v=YyUKfhc_klE&list=PLxHabmZzFY6k04NnOD0XJqWwJWcesCN12). Find technical support information below:
+
+- Student Guides: Brightspace Student Guides
+- Brightspace Technical Support Line: 888-895-2812
+- Brightspace Email Support: usc@d2l.com
+
+:::
+
+## Course Description
+  
+Bayesian statistics is a coherent framework of doing statistics. It has been one of the biggest ongoing revolutions in quantitative research methods and has been recommended as an alternative to the classical approach of hypothesis testing, as well as a computational device for some problems not easily handled in the classical approach. Students will learn about applications of Bayesian statistical methods specifically on behavioral and social science data and develop skills in conducting Bayesian analysis of real-life data.
+
+The course begins with a brief discussion on the history of the Bayesian method and the Bayesian view of probability and some comments on the philosophical differences between Bayesian and classical statistical analyses. One-parameter models and group comparisons are then discussed, with an emphasis on how Bayesian analysis incorporates information from data to update researchers' beliefs about the world. After an introduction on Markov Chain Monte Carlo Estimation—the engine primarily responsible for the resurrection of Bayesian statistics, the course covers applications of Bayesian statistics in commonly used statistical models, including linear and generalized linear models. It also illustrates the components in the Bayesian workflow, such as the selection of priors, model checking and model comparisons, and missing data handling.
+
+## Learning Objectives
+  
+After the successful completion of this course, students will be able to
+
+1. Describe the foundations of the Bayesian framework of statistics;
+2. Explain to fellow researchers the terminologies in Bayesian analysis, such as prior, posterior, credible intervals, MCMC, etc.;
+3. Explain and demonstrate in applications the advantages and disadvantages of the Bayesian approach in comparisons to classical approaches;
+4. Independently perform Bayesian analyses covered in this class using statistical software on real data;
+5. Conduct a research project involving Bayesian analysis and effectively communicate their findings/products in an oral presentation and a written report.
+
+**Prerequisite(s):** None
+
+**Co-Requisite(s):** None
+
+**Concurrent Enrollment:** None
+
+**Recommended Preparation:** PSYC 501: Classic and Modern Statistical Methods I; Experience with R
+
+## Course Notes
+
+Students are expected to finish the reading assignments before class meetings and actively participate in class discussions and activities. A typical class meeting will include lectures, quizzes, software demonstrations, and small-group discussions/activities. Lecture slides/notes will be posted on the course website before class meetings, but please note that the lecture slides only serve to guide class discussions and cannot replace the assigned readings. Students are expected to bring laptops to class to follow the software demonstration and work on in-class exercises. 
+
+## Communication
+
+To promote independence and critical thinking, students are encouraged to work through the following process for obtaining answers to course-related questions before contacting the instructor: 
+
+- consult the course syllabus;
+- consult a classmate or post your questions on Slack;
+- meet with the instructor during office hours or Q&A sessions on Tuesdays;
+- for personal questions, email the instructor at hokchiol@usc.edu
+
+## Technological Proficiency and Hardware/Software Required
+
+- [R](https://cloud.r-project.org/) and [RStudio](https://rstudio.com/products/rstudio/download/) are needed to complete the course assignments. It is highly recommended that students update to the latest versions of both software (R 4.4.0, RStudio 2024.04.1, or above). We will briefly discuss setting up R and RStudio in Week 1.
+- The textbook and most of the supplemental readings can be accessed through the USC Libraries at <https://libraries.usc.edu/>.
+
+### USC Computing Center Laptop Loaner Program
+
+If you need a laptop to successfully participate in this class, you may be eligible for the [USC Computing Center Laptop Loaner Program](https://itservices.usc.edu/spaces/laptoploaner/).
+
+### USC Technology Support Links 
+
+[Zoom information for students](https://keepteaching.usc.edu/students/student-toolkit/classroom/zoom/)  
+[Brightspace Student Guides](https://www.brightspacehelp.usc.edu/students/)  
+[Slack information for students](https://keepteaching.usc.edu/students/student-toolkit/classroom/slack/)  
+[Software available to USC Campus](https://software.usc.edu/)
+
+## Required Readings and Supplementary Materials
+
+- McElreath, R. (2020). *Statistical rethinking: A Bayesian course with examples in R and Stan* (2nd ed.). CRC Press.
+    * Available from [USC Libraries](https://uosc.primo.exlibrisgroup.com/permalink/01USC_INST/273cgt/cdi_askewsholts_vlebooks_9780429642319) (login required)
+        * To access, click on "O'Reilly Online Learning," select "Institution not listed?" and then enter your usc email.
+
+## Optional Readings and Supplementary Materials
+
+E-copies of all below are available at USC Libraries or publicly available.
+
+- Johnson, A. A., Ott, M. Q., & Dogucu, M. (2022). *Bayes rules! An introduction to Bayesian modeling with R*. CRC Press. <https://www.bayesrulesbook.com/>
+- Gelman, A., Hill, J., & Vehtari, A. (2021). *Regression and Other Stories*. Cambridge University Press. <https://doi.org/10.1017/9781139161879> [Very good book on regression]
+- Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A., & Rubin, D. B. (2014). *Bayesian data analysis* (3rd ed.). CRC Press. [For more technical depth]
+- Kruschke, J. K. (2015). *Doing Bayesian data analysis: A tutorial with R, JAGS, and Stan* (2nd ed.). Academic Press.
+- McGrayne, S. B. (2012). *The theory that would not die: How Bayes' rule cracked the Enigma code, hunted down Russian submarines, and emerged triumphant from two centuries of controversy*. Yale University Press. [A very nice historical account of the Bayes' theorem.]
+
+## Description and Assessment of Assignments{#assignments}
+
+1. In-class exercises (10%). During some of the class sessions, students will participate in quizzes or group exercises. If students miss an exercise for participation credit, they can complete the exercise posted on Blackboard within 24 hours to get credits. 
+2. Homework problems (60%). There will be weekly homework assignments for students to apply the concepts and techniques discussed in class to analytic problems. The assignments typically involve performing data analyses using data sets of your own or provided by the instructor, and interpreting the results with guided questions. Please submit your work electronically to Blackboard by **Monday 11:59 p.m. Pacific Time** the week after the homework is assigned. See policy on [late work](#late-work).
+3. Final project (30%: 5% prospectus, 15% presentation, 15% final report). You will complete a research project related to Bayesian analysis, typically a report analyzing real data or a theoretical/methodological analysis of certain aspects of Bayesian data analysis. For empirical analyses, the focuses are (a) formulating and justifying prior distributions from a review of previous literature, (b) obtaining and interpreting posterior distributions, and (c) comprehensive reporting of methods and results. Students can also replicate the analyses of an existing study, as long as the chosen study shared sufficient data and materials and did not use a Bayesian analysis with informative priors. Students interested in project ideas other than an empirical research report (e.g., software package development, systematic review/meta-analysis) are encouraged to discuss their ideas with the instructor. Each student can choose to work on their own or in a group of up to three people.
+
+    There are three grading components for your final project:
+  
+    - Prospectus (5%)  
+    A prospectus about your project should be submitted by **Monday, March 21**. The prospectus should contain a concise description of what you (or your group) plan to do for your project, including a preliminary plan for statistical analysis. The prospectus should be limited to 1 single-spaced page (excluding tables, figures, references, and other supplemental materials).
+
+    - Final Presentation/Report (15%)  
+        If you choose to do a presentation, on **April 26 and 28**, you or your group will give a 15-minute presentation on your project. You will also need to submit your slides to Blackboard for grading **on the day of your presentation**, which should include a link to the reproducible code for your analyses. A grading rubric on the final presentation will be posted on Blackboard.
+
+        If you choose to do a final report, your report will be due **Tuesday, May 10, at 1:00 p.m. Pacific Time** (the assigned final exam time for the class). There should also be a link to the reproducible code for your analyses. The final paper should be 6-10 double-spaced pages of text (i.e., excluding title page, references, tables, figures, and appendices).
+
+## Participation
+
+Participation accounts for 10% of the course grade. Students should complete and turn in all in-class exercises to earn full credit for participation. 
+  
+|        Assignments       | % of Grade |
+| :----------------------- | ---------- |
+| In-class exercises       | 10         |
+| Homework                 | 60         |
+| Prospectus               | 5          |
+| Final Presentation       | 10         |
+| Final Report             | 15         |
+| **TOTAL**                | 100        |
+
+: Grading Breakdown {#tbl-grading-breakdown}
+
+## Grading Scale
+  
+Course final grades will be determined using the following scale
+
+  |  
+:-|-------
+A | 93-100  
+A-| 89-92  
+B+| 85-88  
+B | 81-84  
+B-| 77-80  
+C+| 73-76  
+C | 70-72  
+C-| Below 70 (failing)
+
+: Course Grading Scale {#tbl-grading-scale}
+
+## Assignment Submission
+  
+The assignments should be submitted through Blackboard by Monday at 11:59 p.m. Pacific Time.
+
+## Grading Timeline
+  
+Generally, all graded work will be returned no later than one week from the submission deadline. However, given the high number of students in the class, the instructor may only grade selected questions in each assignment. Solutions will be posted so that students can check their own work. 
+
+## Course Specific Policies
+
+### Late work
+  
+Late work will be penalized by a 10% reduction in the assignment grade every 24 hours late unless due to an emergency excused by the instructor. Please email the instructor as soon as possible to discuss alternate arrangements due to an emergency.
+
+### Technology in the classroom
+
+#### Phones
+
+Your phone should be turned off or in silent mode (not on vibrate), and should not be used in the classroom.
+
+#### Tablets and Laptops
+
+During lecture time in the classroom, students can use tablets and laptops only for purposes of viewing course materials and taking notes. During the in-class exercises, students should use their laptops to complete the assignments.
+
+## Attendance
+  
+Students are expected to attend all Thursday class sessions on time. If they miss a session, they should complete the class exercises and turn in their work within the timeframe specified in [Description and Assessment of Assignments](#assignments).
+
+## Classroom Norms
+
+The following applies to both in-person and online communications (e.g., Slack discussions and email communications)
+
+- Respect each other's views. 
+- In written communication messages, make sure they are something you could say to someone to their face.
+- Recognize and/or remember that we have different backgrounds.
+- Criticize ideas, not individuals or groups.
+- Either support statements with evidence, or speak from personal experience.
+
+```{bash}
+#| echo: false
+if ! [ -f _academic_integrity.md ]; then
+  pandoc -s AcademicIntegrity.docx --wrap=none -t markdown -o _academic_integrity.md
+fi
+```
+
+```{markdown}
+#| child: _academic_integrity.md
+```
+
+```{bash}
+#| echo: false
+if ! [ -f _course_content_distribution.md ]; then
+  pandoc -s CourseContentDistribution.docx --wrap=none -t markdown -o _course_content_distribution.md
+fi
+```
+
+```{markdown}
+#| child: _course_content_distribution.md
+```
+
+## Course Evaluation
+
+Student feedback is essential to the instructor and the Department to keep improving this course and faculty pedagogy. Students are encouraged to share their feedback and suggestions in a mid-semester feedback survey around week 5, and respond to the standard USC course evaluation survey at the end of the semester.
+
+## (Tentative) Course Schedule
+
+```{r}
+#| eval: false
+weeks <- c(paste("Week", 1:15), "FINAL")
+start_date <- as.Date("1/09", "%m/%d")
+date1 <- start_date + (seq_len(15) - 1) * 7
+date2 <- date1 + 2
+dates <- paste(
+  format(date1, format = "%b %d"),
+  "&",
+  ifelse(months(date2) == months(date1),
+    yes = format(date2, format = "%d"),
+    no = format(date2, format = "%b %d")
+  )
+)
+# paste0(weeks, "\n", dates)
+```
+
++-----------------+-----------------------+------------------------------+----------------------+
+|                 |     Topics/Daily      |           Readings           |      Assignment      |
+|                 |      Activities       |                              |        Dates         |
++=================+=======================+==============================+======================+
+| Week 1\         | - Overview of         | - [McElreath ch. 1][2]       | - Exercise 1         |
+| Aug 27 & 29     | Bayesian Statistics   | - Supplemental:              | - HW 1               |
+|                 |                       | [Gigerenzer (2004)][1]       |                      |
+|                 | - Quarto              | - [Quarto Tutorial][5]       |                      |
+|                 |                       | - [Markdown Basics][4]       |                      |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 2\         | - Probability         | - [McElreath ch. 2][2], 3    | - Exercise 2         |
+| Sep 3 & 5       | - Bayes theorem       | - Supplemental:              | - HW 2               |
+|                 |                       | [James ch. 1][3]             |                      |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 3\         | - One-parameter Model | - [Gigerenzer (2004)][1]     | - Exercise 3         |
+| Sep 10 & 12     | for binary variables  | - [Johnson ch. 3][6]         |                      |
+|                 | - Bayesian workflow   | - [Getting started with      |                      |
+|                 | - STAN                | CmdStanR][10]                |                      |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 4\         | - Hierarchical models | - McElreath ch. 13.1, 13.2   | - Exercise 4         |
+| Sep 17 & 19     |                       | - [Gabry et al. (2019)][7]   | - HW 3               |
+|                 |                       | - [Gelman et al. (2010)][11] |                      |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 5\         | - Linear models       | - McElreath ch. 4, 5, 7, 8   | - Exercise 5         |
+| Sep 24 & 26     | - Interactions        |                              | - HW 4               |
+|                 | - Model comparison    |                              |                      |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 6\         | - Causal Inference    | - McElreath ch. 6            | - Exercise 6         |
+| Oct 1 & 3       |                       |                              | - HW 5               |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 7\         | - Markov Chain        | - McElreath ch. 9            | - Exercise 7         |
+| Oct 8 & ~~10~~  | Monte Carlo           |                              | - HW 6               |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 8\         | - Generalized Linear  | - McElreath ch. 10           | - Exercise 8         |
+| Oct 15 & 17     | model (GLM) I         |                              | - HW 7               |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 9\         | - GLM II              | - McElreath ch. 11           | - Exercise 9         |
+| Oct 22 & 24     |                       |                              | - Project prospectus |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 10\        | - Multilevel Models   | - McElreath ch. 13,          |                      |
+| Oct 29 & 31     |                       | 14.1, 14.2                   |                      |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 11\        | - Missing data        | - McElreath ch. 15           | - Exercise 10        |
+| Nov 5 & 7       | - Measurement error   |                              | - HW 8               |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 12\        | - Latent variable     | - Supplemental reading       | - Exercise 11        |
+| Nov 12 & 14     | models                | - McElreath ch. 5, 6         | - HW 9               |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 13\        | - Social networks     | - McElreath ch. 7            | - Exercise 12        |
+| Nov 19 & 21     |                       | - [Broda et al. (2023)][9]   | - HW 10              |
+|                 |                       | Kruschke ch. 10              |                      |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 14\        | - Advanced topic      | - McElreath ch. 15           | - Exercise:          |
+| Nov 26 & ~~28~~ |                       |                              | - HW 11              |
++-----------------+-----------------------+------------------------------+----------------------+
+| Week 15\        | - Presentation        | - Kruschke ch. 21--24        | - HW 12              |
+| Dec 2 & 4       |                       | (pick topic of interest)     | - Project update     |
+|                 |                       | - Kruschke ch. 25            |                      |
++-----------------+-----------------------+------------------------------+----------------------+
+| FINAL           | Final report          |                              | Dec 12 1:00 pm PST   |
++-----------------+-----------------------+------------------------------+----------------------+
+
+: Course schedule {#tbl-course-schedule}
+
+[1]: https://pure.mpg.de/rest/items/item_2101336/component/file_2101335/content
+[2]: https://xcelab.net/rmpubs/sr2/statisticalrethinking2_chapters1and2.pdf
+[3]: https://jamesstone.sites.sheffield.ac.uk/books/bayes-rule/an-introduction-to-bayes-rule-chapter-1
+[4]: https://quarto.org/docs/authoring/markdown-basics.html
+[5]: https://quarto.org/docs/get-started/authoring/rstudio.html
+[6]: https://www.bayesrulesbook.com/chapter-3
+[7]: https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12378
+[8]: https://chi-feng.github.io/mcmc-demo/app.html
+[9]: https://psycnet.apa.org/manuscript/2022-13411-001.pdf
+[10]: https://mc-stan.org/cmdstanr/articles/cmdstanr.html
+[11]: https://arxiv.org/abs/2011.01808
+
+```{bash}
+#| echo: false
+if ! [ -f _statement_systems.md ]; then
+  pandoc -s USCStatementAcademicConductSupportSystems.docx --wrap=none -t markdown -o _statement_systems.md
+fi
+```
+
+```{markdown}
+#| child: _statement_systems.md
+```

@@ -1,0 +1,5 @@
+---
+title: "Exercises"
+listing: table
+---
+

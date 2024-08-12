@@ -1,0 +1,7 @@
+format:
+  metropolis-revealjs:
+    preview-links: auto
+    slide-number: true
+    # chalkboard: false
+freeze: auto
+subtitle: "PSYC 573"
