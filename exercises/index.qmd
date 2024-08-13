@@ -1,5 +1,8 @@
 ---
 title: "Exercises"
-listing: table
+listing:
+  type: table
+  sort-ui: false
+  filter-ui: false
 ---
 
