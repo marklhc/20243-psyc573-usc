@@ -1,7 +1,19 @@
 ---
-title: "20243-psyc573-usc"
+title: "PSYC 573 Bayesian Data Analysis (2024 Fall)"
+description: |
+  Welcome to the website. Let's have a great semester!
 ---
 
-This is a Quarto website.
+This is a course website for PSYC 573 in the 2024 Fall semester. You will find the syllabus, lecture slides, and course notes in the navigation bar in the top right corner. Homework submission will be through [Brightspace](https://brightspace.usc.edu).
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+::: {.callout-tip}
+## Guide to navigate the course
+
+* [Syllabus](/syllabus/index.qmd), [modules and slides](/modules.qmd), [course notes](/docs/index.html)
+* Homework instruction and submission: [Brightspace](https://blackboard.usc.edu)
+* Course announcement, additional readings: [Slack](https://usc.enterprise.slack.com/)
+* Q & A: [Slack](https://usc.enterprise.slack.com/)
+:::
+
+The code content is licensed under the MIT license. Other course materials are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>  
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>

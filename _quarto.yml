@@ -12,13 +12,13 @@ website:
     right:
       - href: index.qmd
         text: Home
-      - about.qmd
       - modules.qmd
       - href: docs/index.html
         text: Notes
       - exercises/index.qmd
       - href: syllabus/index.qmd
         text: Syllabus
+      - resources.qmd
 
 format:
   html:
