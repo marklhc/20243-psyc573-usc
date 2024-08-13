@@ -301,7 +301,8 @@ dates <- paste(
 | Oct 29 & 31     |                       | 14.1, 14.2                   | - HW 6               |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 11\        | - Missing data        | - McElreath ch. 15           | - Exercise 10        |
-| Nov 5 & 7       | - Measurement error   |                              | - HW 7               |
+| Nov 5 & 7       | - Measurement error   | - [Gelman et al. (2020)][12] | - HW 7               |
+|                 |                       | ch 17.3-17.6                 |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 12\        | - Latent variable     | - Supplemental reading       | - Exercise 11        |
 | Nov 12 & 14     | models                | - McElreath ch. 5, 6         |                      |
@@ -332,6 +333,7 @@ dates <- paste(
 [9]: https://psycnet.apa.org/manuscript/2022-13411-001.pdf
 [10]: https://mc-stan.org/cmdstanr/articles/cmdstanr.html
 [11]: https://arxiv.org/abs/2011.01808
+[12]: https://users.aalto.fi/~ave/ROS.pdf
 
 ```{bash}
 #| echo: false
