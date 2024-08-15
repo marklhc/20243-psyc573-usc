@@ -1,19 +1,60 @@
 ---
-title: "PSYC 573 Bayesian Data Analysis (2024 Fall)"
-description: |
-  Welcome to the website. Let's have a great semester!
+pagetitle: "PSYC 573 Bayesian Data Analysis (2024 Fall)"
+toc: false
 ---
 
-This is a course website for PSYC 573 in the 2024 Fall semester. You will find the syllabus, lecture slides, and course notes in the navigation bar in the top right corner. Homework submission will be through [Brightspace](https://brightspace.usc.edu).
+```{r}
+#| echo: false
+#| fig-width: 3.5
+#| fig-asp: .618
+#| fig-align: center
+#| out-width: 60%
+library(ggplot2)
+theme_set(theme_void())
+source("slides/_common_dnorm_trunc.R")
+grid <- seq(0, 1, length.out = 101)
+set.seed(4)
+dat_x <- rnorm_trunc(10, mean = 0.6, sd = 0.2)
+lik_x <- compute_lik(dat_x)
+ggplot(data.frame(x = c(0, 1)), aes(x = x)) +
+    stat_function(
+        fun = dnorm_trunc, args = list(mean = .8, sd = .1),
+        aes(linetype = "Prior", col = "Prior")
+    ) +
+    geom_line(
+        data = data.frame(x = grid, dens = lik_x),
+        aes(
+            x = x, y = dens, linetype = "Likelihood",
+            col = "Likelihood"
+        )
+    ) +
+    geom_line(
+        data = data.frame(
+            x = grid,
+            dens = update_probs(
+                dnorm_trunc(grid, .8, .1),
+                lik_x
+            )
+        ),
+        aes(x = x, y = dens, col = "Posterior", linetype = "Posterior")
+    ) +
+    ylim(0, 7) +
+    labs(x = NULL, y = NULL) +
+    scale_color_manual("", values = c("red", "blue", "green")) +
+    scale_linetype_manual("", values = c("twodash", "solid", "dashed")) +
+    theme(legend.position = c(.3, .7))
+```
 
-::: {.callout-tip}
-## Guide to navigate the course
+# Welcome to the website. Let's have a great semester!
 
-* [Syllabus](/syllabus/index.qmd), [modules and slides](/modules.qmd), [course notes](/docs/index.html)
-* Homework instruction and submission: [Brightspace](https://blackboard.usc.edu)
-* Course announcement, additional readings: [Slack](https://usc.enterprise.slack.com/)
-* Q & A: [Slack](https://usc.enterprise.slack.com/)
-:::
+This is a course website for PSYC 573 in the 2024 Fall semester. You will find the [syllabus](/syllabus/index.qmd), [lecture slides](/modules.qmd), and [course notes](/docs/index.html) in the navigation bar in the top right corner. Homework submission will be through [Brightspace](https://brightspace.usc.edu){target="_blank"}.
 
-The code content is licensed under the MIT license. Other course materials are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>  
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+For course announcement, additional readings, and Q&A, please use [Slack](https://usc.enterprise.slack.com/){target="_blank"}.
+
+::: {.hero-buttons}
+[Syllabus](/syllabus/index.qmd){.btn-action-primary .btn-action .btn .btn-success .btn-lg role="button"}
+[Brightspace](https://brightspace.usc.edu){.btn-action .btn .btn-info .btn-lg role="button"}
+[Slack](https://usc.enterprise.slack.com/){.btn-action .btn .btn-info .btn-lg role="button"}
+::: 
+
+<p xmlns:cc="http://creativecommons.org/ns#" >This website and the course material are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p> 
