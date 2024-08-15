@@ -1,7 +1,9 @@
 ---
+pagetilte: "Syllabus"
 format:
   html: default
-  pdf: default
+  pdf:
+    output-file: syllabus.pdf
 execute:
   echo: false
 ---
@@ -18,7 +20,7 @@ execute:
 **Instructor:** Hok Chio (Mark) Lai  
 **Office:** SGM 621  
 **Office Hours:** Tues 12:00--1:00 pm, and by appointment.  
-**Contact Info:** (Email) [hokchiol@usc.edu](mailto:hokchiol@usc.edu), (Slack) https://usc.enterprise.slack.com/.   
+**Contact Info:** (Email) [hokchiol@usc.edu](mailto:hokchiol@usc.edu), (Slack) <https://usc.enterprise.slack.com/>.   
 Timeline for replying to emails: within 48 hours.
 
 **IT Help:** ITS, Brightspace  
@@ -27,37 +29,6 @@ ITS (Email, Monday -- Friday, 8:00 A.M. -- 6:00 P.M.) [consult@usc.edu](mailto:c
 (Phone, 24/7/365) 213-740-5555, (Online) [ServiceNow Portal](https://itsusc.service-now.com/)  
 Brightspace (Email, 24/7/365) [usc@d2l.com](mailto:usc@d2l.com), 
 (Online Help) [Brightspace Student Guides](https://www.brightspacehelp.usc.edu/students/)
-
-::: {.callout-note}
-
-## Transition to Brightspace
-
-Welcome to PSYC 573! USC is making a change in our online learning platform, and we are now using Brightspace. 
-
-### How to Log In
-
-To access Brightspace today, follow these steps:
-1. Go to <https://brightspace.usc.edu/d2l/login> to login. You can also find Brightspace on myUSC. 
-2. Enter your USC Net ID to access 
-3. Begin navigating through Brightspace
-
-USC also encourages students to download the mobile app, Brightspace Pulse, available in both the [Apple App Store](https://apps.apple.com/us/app/brightspace-pulse/id1001688546?ls=1) and [Google Play](https://play.google.com/store/apps/details?id=com.d2l.brightspace.student.android&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1&pli=1).
-
-### What to Expect
-
-Brightspace provides an enhanced learning experience with detailed class progress reports. With Brightspace, you can easily see all assignment due dates in one place. Upon opening Brightspace, you will find the following:  
-
-- The 20243 PSYC-573: Bayesian Data Analysis Course: We will use this course to complete work for this course throughout the semester.
-
-### Support Resources
-
-Do you want to learn more about Brightspace? Check out training and resources in the [Brightspace Student Tutorials](https://www.youtube.com/watch?v=YyUKfhc_klE&list=PLxHabmZzFY6k04NnOD0XJqWwJWcesCN12). Find technical support information below:
-
-- Student Guides: Brightspace Student Guides
-- Brightspace Technical Support Line: 888-895-2812
-- Brightspace Email Support: usc@d2l.com
-
-:::
 
 ## Course Description
   
@@ -224,6 +195,8 @@ fi
 #| child: _academic_integrity.md
 ```
 
+In this course, you are allowed to use artificial intelligence (AI)-powered programs to help you with coding in R, but you should also be aware that AI text and code generation tools may present incorrect information, biased responses, and incomplete analyses; thus they may not produce text and analysis that meet the standards of this course. If you use AI tools beyond generating R code, to adhere to our university values and the guidelines from professional organizations, you must cite any AI-generated material (e.g., text, images, etc.) included or referenced in your work and provide the prompts used to generate the content. Please refer to the [Citing Generative AI  Research Guide](https://libguides.usc.edu/generative-AI/citing-generative-ai) by the USC Libraries. Using an AI tool to generate content without proper attribution will be treated as plagiarism and reported to the Office of Academic Integrity.
+
 ```{bash}
 #| echo: false
 if ! [ -f _course_content_distribution.md ]; then
@@ -259,14 +232,14 @@ dates <- paste(
 ```
 
 +-----------------+-----------------------+------------------------------+----------------------+
-|                 |     Topics/Daily      |           Readings           |      Assignment      |
-|                 |      Activities       |                              |        Dates         |
+|                 |     Topics            |           Readings           |      Assignment      |
+|                 |                       |                              |        Dates         |
 +:================+:======================+:=============================+:=====================+
-|     Week 1\     |     - Overview of     |    - [McElreath ch. 1][2]    |     - Exercise 1     |
-|   Aug 27 & 29   |  Bayesian Statistics  |       - Supplemental:        |        - HW 1        |
-|                 |                       |    [Gigerenzer (2004)][1]    |                      |
-|                 |       - Quarto        |    - [Quarto Tutorial][5]    |                      |
-|                 |                       |    - [Markdown Basics][4]    |                      |
+| Week 1\         | - Overview of         | - [McElreath ch. 1][2]       | - Exercise 1         |
+| Aug 27 & 29     | Bayesian Statistics   | - Supplemental:              | - HW 1               |
+|                 |                       | [Gigerenzer (2004)][1]       |                      |
+|                 | - Quarto              | - [Quarto Tutorial][5]       |                      |
+|                 |                       | - [Markdown Basics][4]       |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 2\         | - Probability         | - [McElreath ch. 2][2], 3    | - Exercise 2         |
 | Sep 3 & 5       | - Bayes theorem       | - Supplemental:              | - HW 2               |
