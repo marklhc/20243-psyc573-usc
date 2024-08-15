@@ -15,7 +15,7 @@ Stan Resources
 
 R Programming and Data Visualization
 
-- R for Data Science by Wickham and Grolemund: <https://r4ds.hadley.nz/>
+- R for Data Science by Wickham, Çetinkaya-Rundel, and Grolemund: <https://r4ds.hadley.nz/>
 - Data visualization: A practical introduction by Kieran Healy: <https://socviz.co/>
 
 Reporting

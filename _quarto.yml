@@ -8,6 +8,14 @@ project:
 
 website:
   title: "PSYC 573 Bayesian Data Analysis (2024 Fall)"
+  open-graph: true
+  site-url: https://marklhc.quarto.pub/psyc573-2024fall/
+  repo-url: https://github.com/marklhc/20243-psyc573-usc
+  google-analytics: "UA-225295148"
+  page-footer:
+    left: "Copyright 2024, Hok Chio (Mark) Lai"
+    right: |
+      This website was built with <a href="https://quarto.org/">Quarto</a>.
   navbar:
     right:
       - href: index.qmd
