@@ -28,7 +28,7 @@ By the end of this module, you will be able to
     * Supplemental (i.e., optional) reading: [Gigerenzer (2004)][1]
     * [Markdown Basics][4]
 6. Introduce yourself on the #introduction Slack channel (as part of HW 1)
-7. Complete Homework 1 (see instruction on Blackboard)
+7. Complete Homework 1 (see instruction on Brightspace)
 
 [1]: https://pure.mpg.de/rest/items/item_2101336/component/file_2101335/content
 [2]: https://xcelab.net/rmpubs/sr2/statisticalrethinking2_chapters1and2.pdf
@@ -37,7 +37,7 @@ By the end of this module, you will be able to
 
 ## Slides
 
-<!-- <div>
+<div>
 
 ```{=html}
 <iframe class="slide-deck" src="slides/intro.html" width="525" height="350"></iframe>
@@ -45,8 +45,10 @@ By the end of this module, you will be able to
 
 </div>
 
-[PDF version](/slides/intro.pdf){target="_blank"} -->
+[Link to HTML slides](/slides/intro.qmd){target="_blank"}
 
 # Week 2
 
 :::
+
+P.S.: If'd like to print the slides to PDF, follow <https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf>

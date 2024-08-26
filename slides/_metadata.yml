@@ -5,3 +5,4 @@ format:
     # chalkboard: false
 freeze: auto
 subtitle: "PSYC 573"
+bibliography: ../usc-psyc573-notes/references.yaml

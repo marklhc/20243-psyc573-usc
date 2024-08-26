@@ -1,7 +1,7 @@
 format:
   html:
     code-tools:
-      source: repo
+      caption: ".qmd code"
       toggle: false
     toc: true
     df-print: paged

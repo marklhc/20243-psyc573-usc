@@ -7,8 +7,32 @@ format: metropolis-revealjs
 
 ```{r}
 #| include: false
-#| file: _setting.R
+#| file: "_setting.R"
 ```
+
+::: {.content-hidden unless-profile="class"}
+
+## Introduction
+
+- Name
+- Department & Year
+- Research Interest
+- Reason for taking this class
+
+## Navigate the Course
+
+- Course website
+- Brightspace (for assignment submission)
+
+## Quiz
+
+Complete "Self-test: Bayesian vs. Frequentist" on Brightspace
+
+. . .
+
+Answer key: <https://www.bayesrulesbook.com/chapter-1.html#fn1>
+
+:::
 
 ## History of Bayesian Statistics
 
@@ -84,12 +108,12 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Thomas
 ::::
 
 ::: aside
-One early version of MCMC algorithms was developed to solve problems in the Manhattan Project for building the first atomic bomb. See <https://www.jstor.org/stable/30037292> for a brief history.
+One early version of MCMC algorithms was developed to solve problems in the Manhattan Project for building the first atomic bomb. See [@hitchcock2003](https://www.jstor.org/stable/30037292) for a brief history.
 :::
 
 ## Why Should You Learn About the Bayesian Way?
 
-- Gigerenzer (2004): It is one tool of your statistical toolbox
+- @gigerenzer2004: It is one tool of your statistical toolbox
 
 . . .
 
@@ -122,6 +146,7 @@ Prior (before collecting data)
 #| layout-ncol: 2
 #| fig-width: 3.5
 #| fig-asp: 0.8
+#| out-width: 90%
 tibble(
     eff = factor(1:3,
         labels = c("not effective", "mildly effective", "very effective")
@@ -155,8 +180,9 @@ After seeing results of a trial
 
 ```{r}
 #| layout-ncol: 2
-#| fig-width: 3.5
+#| fig-width: 4
 #| fig-asp: 0.8
+#| out-width: 90%
 post_unscaled <- c(.3^2, .5^2, .8^2)
 tibble(
     eff = factor(1:3,
@@ -247,11 +273,14 @@ ggplot(tibble(x = c(0, 1)), aes(x = x)) +
 
 ## "Turning the Bayesian crank"
 
-1. Identify data
-2. Define a mathematical model with parameters
-3. Specify priors on parameters
-4. Obtain and interpret posterior distributions of the parameters
-5. Posterior predictive check
+1. Define a mathematical model with parameters
+2. Specify priors on parameters
+3. Check priors
+4. Fit model to data
+5. Check for convergence
+6. Evaluate the model using posterior predictive check
+7. Modify the model and repeat 3-6
+8. Obtain and interpret posterior distributions of the parameters
 
 :::
 
@@ -298,14 +327,26 @@ pp_dens +
 
 ## Multiple Experiments
 
+@kay2016, Figure 2
+
 ::: {.content-hidden unless-profile="class"}
 ![](/images/Kay_etal_2016_fig2.png)
 :::
 
-::: aside
-Kay, Nelson, & Hekler (2016, p. 4525, https://dl.acm.org/doi/abs/10.1145/2858036.2858465)
+::: {.content-hidden unless-profile="class"}
+## Syllabus
+
+- Learning objectives
+- Readings
+- Class structure & assessment
+    * Exercises due Friday
+    * Homework due Monday
+    * Final project
+- Use of AI
+
+# R, RStudio, and Quarto
+
+# Homework 1
 :::
 
-::: {.content-hidden unless-profile="class"}
-# Syllabus
-:::
+## Bibliography
