@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>4&nbsp; Beta-Bernoulli Model – PSYC 573 Bayesian Data Analysis (2024 Fall): Course Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04b-beta-bernoulli-stan.html" rel="next">
+<link href="./03-bayes-theorem.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-225295148', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">PSYC 573 Bayesian Data Analysis (2024 Fall): Course Notes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="./../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./../modules.html"> 
+<span class="menu-text">Modules</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./../docs/index.html"> 
+<span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./../exercises/index.html"> 
+<span class="menu-text">Exercises</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./../syllabus/index.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/marklhc/usc-psyc573-notes" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./PSYC-573-Bayesian-Data-Analysis--2024-Fall---Course-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-beta-bernoulli-model.html">Week 3</a></li><li class="breadcrumb-item"><a href="./04-beta-bernoulli-model.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-bayes-theorem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bayes’s Theorem</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-beta-bernoulli-model.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04b-beta-bernoulli-stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model With Stan</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#steps-of-bayesian-data-analysis" id="toc-steps-of-bayesian-data-analysis" class="nav-link active" data-scroll-target="#steps-of-bayesian-data-analysis"><span class="header-section-number">4.1</span> Steps of Bayesian Data Analysis</a></li>
+  <li>
+<a href="#beta-bernoulli-example" id="toc-beta-bernoulli-example" class="nav-link" data-scroll-target="#beta-bernoulli-example"><span class="header-section-number">4.2</span> Beta-Bernoulli Example</a>
+  <ul class="collapse">
+<li><a href="#bernoulli-model" id="toc-bernoulli-model" class="nav-link" data-scroll-target="#bernoulli-model"><span class="header-section-number">4.2.1</span> Bernoulli Model</a></li>
+  <li><a href="#exchangeability" id="toc-exchangeability" class="nav-link" data-scroll-target="#exchangeability"><span class="header-section-number">4.2.2</span> Exchangeability</a></li>
+  <li><a href="#check-the-support" id="toc-check-the-support" class="nav-link" data-scroll-target="#check-the-support"><span class="header-section-number">4.2.3</span> Check the Support</a></li>
+  <li><a href="#conjugate-prior-beta-distribution" id="toc-conjugate-prior-beta-distribution" class="nav-link" data-scroll-target="#conjugate-prior-beta-distribution"><span class="header-section-number">4.2.4</span> Conjugate Prior: Beta Distribution</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">4.2.5</span> Data</a></li>
+  <li><a href="#posterior" id="toc-posterior" class="nav-link" data-scroll-target="#posterior"><span class="header-section-number">4.2.6</span> Posterior</a></li>
+  <li><a href="#summarize-the-posterior" id="toc-summarize-the-posterior" class="nav-link" data-scroll-target="#summarize-the-posterior"><span class="header-section-number">4.2.7</span> Summarize the posterior</a></li>
+  <li><a href="#posterior-predictive-check" id="toc-posterior-predictive-check" class="nav-link" data-scroll-target="#posterior-predictive-check"><span class="header-section-number">4.2.8</span> Posterior Predictive Check</a></li>
+  <li><a href="#comparison-to-frequentist-results" id="toc-comparison-to-frequentist-results" class="nav-link" data-scroll-target="#comparison-to-frequentist-results"><span class="header-section-number">4.2.9</span> Comparison to frequentist results</a></li>
+  <li><a href="#sensitivity-to-different-priors" id="toc-sensitivity-to-different-priors" class="nav-link" data-scroll-target="#sensitivity-to-different-priors"><span class="header-section-number">4.2.10</span> Sensitivity to different priors</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-beta-bernoulli-model.html">Week 3</a></li><li class="breadcrumb-item"><a href="./04-beta-bernoulli-model.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="steps-of-bayesian-data-analysis" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="steps-of-bayesian-data-analysis">
+<span class="header-section-number">4.1</span> Steps of Bayesian Data Analysis</h2>
+<p>Some authors described the process as “turning the Bayesian Crank,” as the same workflow applies to a variety of research scenarios.</p>
+<p>Adapted from <a href="http://www.stat.columbia.edu/~gelman/research/unpublished/Bayesian_Workflow_article.pdf">Gelman et al.&nbsp;(2020)</a>, I conceptualize Bayesian data analysis as the following steps:</p>
+<ol type="1">
+<li>
+<strong>Identify/Collect the data</strong> required to answer the research questions.
+<ul>
+<li>As a general recommendation, it is helpful to <strong>visualize</strong> the data to get a sense of how they look, as well as to inspect for potential anomalies in the data collection.</li>
+</ul>
+</li>
+<li>
+<strong>Choose an initial statistical model</strong> for the data in relation to the research questions. The model should have some theoretical justification and have parameters that are meaningful for the research questions. However, it is unlikely that any chosen model will capture everything important in the data, and this initial model will be modified and expanded in later steps.</li>
+<li>
+<strong>Specify prior distributions</strong> for the model parameters. Although this is a subjective endeavor, the priors chosen should be sensible to a skeptical audience.</li>
+<li>
+<strong>Check the prior distributions</strong>. It is recommended you conduct a <strong>prior predictive check</strong>, by simulating fake data based on the chosen model and prior distributions. This is especially important for complex models as the parameters are more difficult to interpret.</li>
+<li>
+<strong>Obtain the posterior distributions</strong> for the model parameters. As described below and later in the course, this can be obtained by analytical or various mathematical approximations.
+<ul>
+<li>For mathematical approximations, one should check the algorithms for <strong>convergence</strong> to make sure the results closely mimic the target posterior distributions.</li>
+</ul>
+</li>
+<li>Conduct a <strong>posterior predictive check</strong> to examine the fit between the model and the data, i.e., whether the chosen model with the estimated parameters generates predictions that deviate from the data being analyzed on important features.</li>
+<li>It is unlikely that your initial model fully describes the major aspects of the data as pertaining to your research questions. Therefore, one should repeat steps 2 to 6 to <strong>specify and compare different models</strong>.</li>
+<li>If the fit between the model and the data is deemed satisfactory, one can proceed to <strong>interpret the results</strong> in the context of the research questions. It is also important to <strong>visualize the results</strong> in ways that are meaningful for the analysis.</li>
+</ol></section><section id="beta-bernoulli-example" class="level2 page-columns page-full" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="beta-bernoulli-example">
+<span class="header-section-number">4.2</span> Beta-Bernoulli Example</h2>
+<p>We will be using a built-in data set in R about patients diagnosed with AIDS in Australia before July 1, 1991. Here is a description of the variables (from the R documentation):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Australian_States_and_Territories_with_CDS.jpg" class="external img-fluid figure-img"></p>
+<figcaption>Cpc chine at English Wikipedia, CC BY-SA 3.0 <a href="https://creativecommons.org/licenses/by-sa/3.0" class="uri">https://creativecommons.org/licenses/by-sa/3.0</a>, via Wikimedia Commons</figcaption></figure>
+</div>
+<ul>
+<li>
+<code>state</code>: Grouped state of origin: “NSW”includes ACT and “other” is WA, SA, NT, and TAS.</li>
+<li>
+<code>sex</code>: Sex of patient.</li>
+<li>
+<code>diag</code>:(Julian) date of diagnosis.</li>
+<li>
+<code>death</code>: (Julian) date of death or end of observation.</li>
+<li>
+<code>status</code>: “A” (alive) or “D” (dead) at end of observation.</li>
+<li>
+<code>T.categ</code>: Reported transmission category.</li>
+<li>
+<code>age</code>: Age (years) at diagnosis.</li>
+</ul>
+<p>You should always first plot your data and get some summary statistics:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"Aids2"</span>, package <span class="op">=</span> <span class="st">"MASS"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Aids2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["state"],"name":[1],"type":["fct"],"align":["left"]},{"label":["sex"],"name":[2],"type":["fct"],"align":["left"]},{"label":["diag"],"name":[3],"type":["int"],"align":["right"]},{"label":["death"],"name":[4],"type":["int"],"align":["right"]},{"label":["status"],"name":[5],"type":["fct"],"align":["left"]},{"label":["T.categ"],"name":[6],"type":["fct"],"align":["left"]},{"label":["age"],"name":[7],"type":["int"],"align":["right"]}],"data":[{"1":"NSW","2":"M","3":"10905","4":"11081","5":"D","6":"hs","7":"35","_rn_":"1"},{"1":"NSW","2":"M","3":"11029","4":"11096","5":"D","6":"hs","7":"53","_rn_":"2"},{"1":"NSW","2":"M","3":"9551","4":"9983","5":"D","6":"hs","7":"42","_rn_":"3"},{"1":"NSW","2":"M","3":"9577","4":"9654","5":"D","6":"haem","7":"44","_rn_":"4"},{"1":"NSW","2":"M","3":"10015","4":"10290","5":"D","6":"hs","7":"39","_rn_":"5"},{"1":"NSW","2":"M","3":"9971","4":"10344","5":"D","6":"hs","7":"36","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pairs.panels</span><span class="op">(</span><span class="va">Aids2</span>, ellipses <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div class="page-columns page-full">
+<figure class="figure page-columns page-full"><p class="page-columns page-full"><img src="04-beta-bernoulli-model_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img column-body-outset" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We will be using the <code>status</code> variable. Our simple research question is:</p>
+<blockquote class="blockquote">
+<p>What was the death rate of AIDS in Australia when the data were collected?</p>
+</blockquote>
+<section id="bernoulli-model" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="bernoulli-model">
+<span class="header-section-number">4.2.1</span> Bernoulli Model</h3>
+<p>If we assume that the outcomes of the observations are exchangeable, meaning that the observations can be reordered in any way and still give the same inference, then one can choose a model: <span class="math display">\[
+y_i \sim \text{Bern}(\theta) \text{ for }i = 1, 2, \ldots, N
+\]</span></p>
+<ul>
+<li>
+<span class="math inline">\(y_i\)</span> = status of observation <span class="math inline">\(i\)</span> (0 = “A”, 1 = “D”)</li>
+<li>
+<span class="math inline">\(N\)</span> = number of patients in the data set</li>
+<li>
+<span class="math inline">\(\theta\)</span> = probability of “D”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+</li>
+</ul>
+<blockquote class="blockquote">
+<p>The model states that: the sample data <span class="math inline">\(y\)</span> follows a Bernoulli distribution with <span class="math inline">\(n\)</span> with a parameter <span class="math inline">\(\theta\)</span></p>
+</blockquote>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>When the data consist of binary observations, the variable is called a Bernoulli variable. It is conventional to denote one outcome as success and code it as 1, and the other as failure and code it as 0 (poor terminology, maybe, but that’s by convention). Therefore, in the AIDS example, each observation is considered a “Bernoulli” outcome (Alive vs.&nbsp;Dead).</p>
+</div>
+</div>
+</div>
+</section><section id="exchangeability" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="exchangeability">
+<span class="header-section-number">4.2.2</span> Exchangeability</h3>
+<p>To illustrate exchangeability in an example, say we take 6 rows in our data set:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["state"],"name":[1],"type":["fct"],"align":["left"]},{"label":["sex"],"name":[2],"type":["fct"],"align":["left"]},{"label":["diag"],"name":[3],"type":["int"],"align":["right"]},{"label":["death"],"name":[4],"type":["int"],"align":["right"]},{"label":["status"],"name":[5],"type":["fct"],"align":["left"]},{"label":["T.categ"],"name":[6],"type":["fct"],"align":["left"]},{"label":["age"],"name":[7],"type":["int"],"align":["right"]}],"data":[{"1":"NSW","2":"M","3":"10905","4":"11081","5":"D","6":"hs","7":"35","_rn_":"1"},{"1":"NSW","2":"F","3":"10961","4":"11504","5":"A","6":"id","7":"30","_rn_":"31"},{"1":"QLD","2":"F","3":"9495","4":"9753","5":"D","6":"blood","7":"66","_rn_":"1802"},{"1":"QLD","2":"M","3":"10770","4":"11504","5":"A","6":"hsid","7":"29","_rn_":"1811"},{"1":"VIC","2":"M","3":"8499","4":"8568","5":"D","6":"hs","7":"43","_rn_":"2129"},{"1":"VIC","2":"M","3":"9055","4":"9394","5":"D","6":"hs","7":"29","_rn_":"2137"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Now, when we reorder the column <code>status</code> to something like:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["state"],"name":[1],"type":["fct"],"align":["left"]},{"label":["sex"],"name":[2],"type":["fct"],"align":["left"]},{"label":["diag"],"name":[3],"type":["int"],"align":["right"]},{"label":["death"],"name":[4],"type":["int"],"align":["right"]},{"label":["status"],"name":[5],"type":["fct"],"align":["left"]},{"label":["T.categ"],"name":[6],"type":["fct"],"align":["left"]},{"label":["age"],"name":[7],"type":["int"],"align":["right"]}],"data":[{"1":"NSW","2":"M","3":"10905","4":"11081","5":"D","6":"hs","7":"35","_rn_":"1"},{"1":"NSW","2":"F","3":"10961","4":"11504","5":"D","6":"id","7":"30","_rn_":"31"},{"1":"QLD","2":"F","3":"9495","4":"9753","5":"D","6":"blood","7":"66","_rn_":"1802"},{"1":"QLD","2":"M","3":"10770","4":"11504","5":"D","6":"hsid","7":"29","_rn_":"1811"},{"1":"VIC","2":"M","3":"8499","4":"8568","5":"A","6":"hs","7":"43","_rn_":"2129"},{"1":"VIC","2":"M","3":"9055","4":"9394","5":"A","6":"hs","7":"29","_rn_":"2137"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>If the results are expected to be the same, then we say that the observations are assumed exchangeable. It happens when we assume that all observations have one common mean. However, if we think that there is a mean for females and a different mean for males, we cannot reorder the outcome randomly because they are no longer exchangeable (i.e., you cannot exchange a female score for a male score and expect to get the same results).</p>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exchangeability
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A set of observations is said to be exchangeable if their joint probability distribution stays the same under all permutations. Roughly speaking, it means that the observations can be reordered and still provide the same inferences.</p>
+</div>
+</div>
+</section><section id="check-the-support" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="check-the-support">
+<span class="header-section-number">4.2.3</span> Check the Support</h3>
+<p>It is important to identify the <em>support</em> of the parameter, <span class="math inline">\(\theta\)</span>. Because <span class="math inline">\(\theta\)</span> is a probability, its support is <span class="math inline">\([0, 1]\)</span>, meaning it is continuous and can take any value from 0 to 1. For a continuous parameter, there are infinitely many possible values, and it is impossible to specify our beliefs for each value. So, more commonly, we choose a probability density function with the same support as the parameter to express our prior belief.</p>
+</section><section id="conjugate-prior-beta-distribution" class="level3" data-number="4.2.4"><h3 data-number="4.2.4" class="anchored" data-anchor-id="conjugate-prior-beta-distribution">
+<span class="header-section-number">4.2.4</span> Conjugate Prior: Beta Distribution</h3>
+<p>A commonly used family of prior distributions for a Bernoulli/binomial model is the <em>Beta distribution</em>, which has two parameters. We can write the prior as <span class="math display">\[P(\theta) \sim \text{Beta}(a, b)\]</span></p>
+<p><span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the two hyperparameters. Here are a few examples:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-beta" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-beta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-beta-bernoulli-model_files/figure-html/fig-beta-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-beta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Beta distributions with different a and b values
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>You will notice that when <span class="math inline">\(a &gt; b\)</span>, there is more density closer to the right region (i.e., larger <span class="math inline">\(\theta\)</span>), and vice versa. Also, the variance decreases when <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> become larger.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>A nice interpretation of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> in a Beta prior distribution is to consider</p>
+<ul>
+<li>
+<span class="math inline">\(a - 1\)</span> = number of prior ‘successes’ (e.g., “D”)</li>
+<li>
+<span class="math inline">\(b - 1\)</span> = number of prior ‘failures’ (e.g., “A”)</li>
+</ul>
+<p>Therefore, with <span class="math inline">\(\text{Beta}(1, 1)\)</span>, one has seen 0 prior success and 0 failure, meaning that there is no prior information (i.e., <em>noninformative</em>). Therefore, it makes sense that all <span class="math inline">\(\theta\)</span> values are equally likely. On the other hand, if one chooses <span class="math inline">\(\text{Beta}(10, 20)\)</span>, one has seen 9 prior successes and 19 prior failures, so one has quite a lot of prior information (indeed more than the data with only 10 observations), so this is a <em>strong</em> prior.</p>
+<blockquote class="blockquote">
+<p>The smaller the variance of the prior distribution, the stronger one’s belief before looking at the data, the more prior information</p>
+</blockquote>
+<p>So by manipulating the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, which are sometimes called <em>hyperparameters</em>, you can control the shape of the prior distribution as well as its strength, so it is quite flexible. Another advantage of using a beta prior is that it is a <em>conjugate prior</em> of the Bernoulli model, which means that the posterior distribution <span class="math inline">\(P(\theta \mid y)\)</span> is also a beta distribution, the same as the prior distribution, although with different parameter values.</p>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Conjugate Prior
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For a specific model, conjugate priors yield posterior distributions in the same distribution family as the priors</p>
+</div>
+</div>
+<p>Conjugacy greatly simplifies the computational burden for Bayesian analyses, so conjugate priors are almost the only ones used in earlier literature. However, this limited the applications of Bayesian methods, as for many problems, no conjugate priors can provide a realistic representation of one’s belief. Modern Bayesian analysis instead relies on <em>simulation-based</em> methods to approximate the posterior distribution, which can accommodate almost any kind of prior distribution. Aside from a few examples in this note, mainly for pedagogical purposes, we will be using simulation-based methods in the coming weeks.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof of Conjugacy*
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To derive the form of the posterior, first recognize that the Beta distribution has the form:</p>
+<p><span class="math display">\[\begin{align}
+  P(\theta) &amp; = \mathrm{B}^{-1}(a, b) \theta^{a - 1} (1 - \theta)^{b - 1} \\
+  &amp; \propto \theta^{a - 1} (1 - \theta)^{b - 1}
+\end{align}\]</span></p>
+<p>Where <span class="math inline">\(\mathrm{B}(\cdot)\)</span> is the beta function which is not very important for the class. As the density function is a function of <span class="math inline">\(\theta\)</span>, it suffices to write only the terms that involve <span class="math inline">\(\theta\)</span>.</p>
+<p>Similarly, <span class="math display">\[P(\mathbf{y} \mid \theta) \propto \theta^z (1 - \theta)^{N - z}.\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[\begin{align}
+  P(\theta \mid \mathbf{y}) &amp; \propto P(y \mid \theta) P(\theta)  \\
+                &amp; \propto \theta^z (1 - \theta)^{N - z}
+                          \theta^{a - 1} (1 - \theta)^{b - 1}  \\
+                &amp; = \theta^{a + z - 1} (1 - \theta)^{b + N - z - 1}.
+\end{align}\]</span></p>
+<p>If we let <span class="math inline">\(a^* = a + z\)</span>, <span class="math inline">\(b^* = b + N - z\)</span>, we can see that <span class="math inline">\(P(\theta \mid \mathbf{y})\)</span> is in the same form as the prior with <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> replaced by <span class="math inline">\(a^*\)</span> and <span class="math inline">\(b^*\)</span>. Therefore, the posterior is also a beta distribution. So the beta distribution is a conjugate prior for the Bernoulli model.</p>
+</div>
+</div>
+<p>In this example, we will choose a <em>weakly informative</em> Beta(2, 2) prior, which represents a weak belief as below:</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">tibble</span><span class="op">(</span>th <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">th</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">dbeta</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>shape1 <span class="op">=</span> <span class="fl">2</span>, shape2 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ylim</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>y <span class="op">=</span> <span class="st">""</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">"Beta(2, 2)"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-beta-2-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-beta-2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-beta-bernoulli-model_files/figure-html/fig-beta-2-2-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-beta-2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: A weakly informative Beta(2, 2) prior
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Don’t Be Stubborn
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p>A good prior should give a non-zero probability/density for all possible values of a parameter</p>
+</blockquote>
+<p>Otherwise, if the prior density for some parameter values is zero, the posterior density will be zero, regardless of how much the data support those parameter values</p>
+</div>
+</div>
+</section><section id="data" class="level3" data-number="4.2.5"><h3 data-number="4.2.5" class="anchored" data-anchor-id="data">
+<span class="header-section-number">4.2.5</span> Data</h3>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">count</span><span class="op">(</span><span class="va">Aids2</span>, <span class="va">status</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["status"],"name":[1],"type":["fct"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"A","2":"1082"},{"1":"D","2":"1761"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The likelihood function is highly concentrated. I ran into some numerical issues as the computation gave zero, so I plotted the log-likelihood instead.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">loglik</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">th</span>, <span class="va">N</span> <span class="op">=</span> <span class="fl">1082</span> <span class="op">+</span> <span class="fl">1761</span>, <span class="va">z</span> <span class="op">=</span> <span class="fl">1761</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">z</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">th</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">N</span> <span class="op">-</span> <span class="va">z</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">th</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">tibble</span><span class="op">(</span>th <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.61</span>, <span class="fl">0.63</span><span class="op">)</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">th</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">loglik</span>, n <span class="op">=</span> <span class="fl">501</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span>, y <span class="op">=</span> <span class="st">"Log-likelihood"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-status-lik" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-status-lik-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-beta-bernoulli-model_files/figure-html/fig-status-lik-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-status-lik-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: Log-likelihood function of the theta parameter
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Note I only show a range of [0.610, 0.630] for the x-axis, which contains where the likelihood (thus also the log-likelihood) peaked.</p>
+</section><section id="posterior" class="level3" data-number="4.2.6"><h3 data-number="4.2.6" class="anchored" data-anchor-id="posterior">
+<span class="header-section-number">4.2.6</span> Posterior</h3>
+<p>Based on the conjugacy, the posterior of <span class="math inline">\(\theta\)</span> is Beta(1,807, 1,116). As we are using a conjugate prior, the posterior is also a Beta distribution: <span class="math display">\[
+P(\theta \mid y) \sim \text{Beta}(a + z, b + N - z),
+\]</span> which is a distribution for <span class="math inline">\(a + z - 1\)</span> successes and <span class="math inline">\(b + N - z\)</span> failures. This makes perfect sense as our prior information has <span class="math inline">\(a - 1\)</span> successes and <span class="math inline">\(b - 1\)</span> failures, and from our data, we have <span class="math inline">\(y\)</span> successes and <span class="math inline">\(n - y\)</span> failures, so our updated belief is based on adding up those successes and failures.</p>
+</section><section id="summarize-the-posterior" class="level3" data-number="4.2.7"><h3 data-number="4.2.7" class="anchored" data-anchor-id="summarize-the-posterior">
+<span class="header-section-number">4.2.7</span> Summarize the posterior</h3>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2119</span><span class="op">)</span></span>
+<span><span class="va">num_draws</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">sim_theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="va">num_draws</span>, shape1 <span class="op">=</span> <span class="fl">1807</span>, shape2 <span class="op">=</span> <span class="fl">1116</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>`Bayes estimate` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sim_theta</span><span class="op">)</span>,</span>
+<span>  `Posterior median` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">sim_theta</span><span class="op">)</span>,</span>
+<span>  `Posterior SD` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">sim_theta</span><span class="op">)</span>,</span>
+<span>  `MAD` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/mad.html">mad</a></span><span class="op">(</span><span class="va">sim_theta</span><span class="op">)</span>,</span>
+<span>  `90% Credible interval (equal-tailed)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">sim_theta</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">.9</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  `90% HDI` <span class="op">=</span> <span class="fu">HDInterval</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/HDInterval/man/hdi.html">hdi</a></span><span class="op">(</span><span class="va">sim_theta</span>, credMass <span class="op">=</span> <span class="fl">.9</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          Bayes estimate 
+                             0.618209694 
+                        Posterior median 
+                             0.618382945 
+                            Posterior SD 
+                             0.008829290 
+                                     MAD 
+                             0.009254166 
+90% Credible interval (equal-tailed).10% 
+                             0.606862338 
+90% Credible interval (equal-tailed).90% 
+                             0.628990588 
+                           90% HDI.lower 
+                             0.604051851 
+                           90% HDI.upper 
+                             0.632766654 </code></pre>
+</div>
+</div>
+</section><section id="posterior-predictive-check" class="level3" data-number="4.2.8"><h3 data-number="4.2.8" class="anchored" data-anchor-id="posterior-predictive-check">
+<span class="header-section-number">4.2.8</span> Posterior Predictive Check</h3>
+<p>Now, we need to know whether the model fits the data well. We do not have much to check for a Bernoulli model if we only have the <code>status</code> variable. However, as there is information for other variables, we can use them to check the exchangeability assumption. For example, we can ask whether the data from different state categories are exchangeable. The death rate across the 4 state categories are</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>       status
+state      A    D
+  NSW    664 1116
+  Other  107  142
+  QLD     78  148
+  VIC    233  355</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       status
+state           A         D
+  NSW   0.3730337 0.6269663
+  Other 0.4297189 0.5702811
+  QLD   0.3451327 0.6548673
+  VIC   0.3962585 0.6037415</code></pre>
+</div>
+</div>
+<p>We can now generate predictions from our posterior distribution and model.</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"list"</span>, <span class="fl">12L</span><span class="op">)</span></span>
+<span><span class="va">plist</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span></span>
+<span>    <span class="va">Aids2</span>,</span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">state</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">status</span> <span class="op">==</span> <span class="st">"D"</span><span class="op">)</span>, fill <span class="op">=</span> <span class="va">state</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_bar</span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">guides</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Observed data"</span>, y <span class="op">=</span> <span class="st">"Number of Deaths"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme</span><span class="op">(</span>axis.title.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ylim</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1200</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># Get the a value from posterior samples</span></span>
+<span>    <span class="va">theta_post</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1763</span>, <span class="fl">1084</span><span class="op">)</span></span>
+<span>    <span class="co"># For each plausible theta value, generate a status variable</span></span>
+<span>    <span class="va">status_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"A"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">Aids2</span><span class="op">)</span>,</span>
+<span>        replace <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>        prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">theta_post</span>, <span class="fl">1</span> <span class="op">-</span> <span class="va">theta_post</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">df_new</span> <span class="op">&lt;-</span> <span class="va">Aids2</span> <span class="op">|&gt;</span></span>
+<span>        <span class="fu">mutate</span><span class="op">(</span>status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">status_new</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">plist</span><span class="op">[[</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">plist</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">%+%</span> <span class="va">df_new</span> <span class="op">+</span></span>
+<span>        <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Simulated data"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>        <span class="fu">theme</span><span class="op">(</span>axis.title.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span>grobs <span class="op">=</span> <span class="va">plist</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-ppc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ppc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-beta-bernoulli-model_files/figure-html/fig-ppc-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ppc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: Posterior predictive check by comparing the observed data with 11 simulated data sets based on the model
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>So the observed data (the first subplot) look similar to the simulated data. We can also conduct a posterior predictive check by a test statistic for subgroups. Here, we will use the <code>bayesplot</code> package and look at fit across groups:</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Draw posterior samples of theta</span></span>
+<span><span class="va">post_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="fl">1e4</span>, <span class="fl">1807</span>, <span class="fl">1116</span><span class="op">)</span></span>
+<span><span class="co"># Initialize a S by N matrix to store the simulated data</span></span>
+<span><span class="va">y_tilde</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="cn">NA</span>,</span>
+<span>                  nrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">post_sample</span><span class="op">)</span>,</span>
+<span>                  ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">Aids2</span><span class="op">$</span><span class="va">status</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">s</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">post_sample</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">theta_s</span> <span class="op">&lt;-</span> <span class="va">post_sample</span><span class="op">[</span><span class="va">s</span><span class="op">]</span></span>
+<span>    <span class="va">status_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"A"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">Aids2</span><span class="op">)</span>,</span>
+<span>        replace <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>        prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">theta_s</span>, <span class="fl">1</span> <span class="op">-</span> <span class="va">theta_s</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">y_tilde</span><span class="op">[</span><span class="va">s</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">status_new</span> <span class="op">==</span> <span class="st">"D"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">bayesplot</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/PPC-test-statistics.html">ppc_stat_grouped</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Aids2</span><span class="op">$</span><span class="va">status</span> <span class="op">==</span> <span class="st">"D"</span><span class="op">)</span>,</span>
+<span>    yrep <span class="op">=</span> <span class="va">y_tilde</span>,</span>
+<span>    group <span class="op">=</span> <span class="va">Aids2</span><span class="op">$</span><span class="va">state</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-ppc-stat-state" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ppc-stat-state-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-beta-bernoulli-model_files/figure-html/fig-ppc-stat-state-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ppc-stat-state-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.5: Posterior predictive check by states
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>If the fit is good, the mean, indicated by the darker line, should be within the simulated distribution based on the model. So the model that assumes observations are exchangeable across states is not too off, although it seems fitting less well for <code>Other</code> states.</p>
+<section id="another-check-on-age" class="level4" data-number="4.2.8.1"><h4 data-number="4.2.8.1" class="anchored" data-anchor-id="another-check-on-age">
+<span class="header-section-number">4.2.8.1</span> Another check on <code>age</code>
+</h4>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create an age group indicator</span></span>
+<span><span class="va">age50</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Aids2</span><span class="op">$</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">50</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"&lt;= 50"</span>, <span class="st">"&gt; 50"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Draw posterior samples of theta</span></span>
+<span><span class="va">post_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="fl">1e4</span>, <span class="fl">1807</span>, <span class="fl">1116</span><span class="op">)</span></span>
+<span><span class="co"># Initialize a S by N matrix to store the simulated data</span></span>
+<span><span class="va">y_tilde</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="cn">NA</span>,</span>
+<span>                  nrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">post_sample</span><span class="op">)</span>,</span>
+<span>                  ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">Aids2</span><span class="op">$</span><span class="va">status</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">s</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">post_sample</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">theta_s</span> <span class="op">&lt;-</span> <span class="va">post_sample</span><span class="op">[</span><span class="va">s</span><span class="op">]</span></span>
+<span>    <span class="va">status_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"A"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">Aids2</span><span class="op">)</span>,</span>
+<span>        replace <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>        prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">theta_s</span>, <span class="fl">1</span> <span class="op">-</span> <span class="va">theta_s</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">y_tilde</span><span class="op">[</span><span class="va">s</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">status_new</span> <span class="op">==</span> <span class="st">"D"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">bayesplot</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/PPC-test-statistics.html">ppc_stat_grouped</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Aids2</span><span class="op">$</span><span class="va">status</span> <span class="op">==</span> <span class="st">"D"</span><span class="op">)</span>,</span>
+<span>    yrep <span class="op">=</span> <span class="va">y_tilde</span>,</span>
+<span>    group <span class="op">=</span> <span class="va">age50</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-ppc-stat-age" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ppc-stat-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-beta-bernoulli-model_files/figure-html/fig-ppc-stat-age-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ppc-stat-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.6: Posterior predictive check by age groups (&lt;= 50 vs.&nbsp;&gt; 50)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>As can be seen, the model seems off for those aged 50+.</p>
+</section></section><section id="comparison-to-frequentist-results" class="level3" data-number="4.2.9"><h3 data-number="4.2.9" class="anchored" data-anchor-id="comparison-to-frequentist-results">
+<span class="header-section-number">4.2.9</span> Comparison to frequentist results</h3>
+<p>Using maximum likelihood, the estimated death rate would be <span class="math inline">\(\hat \theta = 1761 / 2843 = 0.62\)</span>, with a standard error (<em>SE</em>) of <span class="math inline">\(\sqrt{0.62 (1 - 0.62) / n} = 0.0091\)</span>, with a 90% confidence interval of <span class="math inline">\([0.6, 0.63]\)</span>, which is similar to the interval with Bayesian inference.</p>
+</section><section id="sensitivity-to-different-priors" class="level3" data-number="4.2.10"><h3 data-number="4.2.10" class="anchored" data-anchor-id="sensitivity-to-different-priors">
+<span class="header-section-number">4.2.10</span> Sensitivity to different priors</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-sensitivity" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-beta-bernoulli-model_files/figure-html/fig-sensitivity-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.7: Sensitivity of posterior to different priors
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>You can see one needs (a) a very strong prior (equivalent to 600 data points) and (b) the prior and the data not agreeing to get a substantially different conclusion.</p>
+
+
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>An additional thing to note for the Bernoulli/binomial model is that, instead of setting the prior on <span class="math inline">\(\theta\)</span>, sometimes we are more interested in setting the prior for a transformed parameter that has values between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(\infty\)</span>, such as one on the <em>logit</em> scale (as related to logistic regression).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The <span class="math inline">\(\mathrm{Beta}(1 / 2, 1 / 2)\)</span> distribution is called a <em>Jeffreys prior</em> (https://en.wikipedia.org/wiki/Jeffreys_prior), which is derived according to some statistical principles for different models. One big advantage of a Jeffreys prior is that it is <strong>invariant</strong>, meaning that the prior will stay the same even under reparameterization. However, like conjugate priors, Jeffreys prior limits the choice of prior even when true prior information is available.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./03-bayes-theorem.html" class="pagination-link" aria-label="Bayes's Theorem">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bayes’s Theorem</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04b-beta-bernoulli-stan.html" class="pagination-link" aria-label="Beta-Bernoulli Model With Stan">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model With Stan</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2024, Hok Chio (Mark) Lai</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

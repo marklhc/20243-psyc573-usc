@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>2&nbsp; Probability – PSYC 573 Bayesian Data Analysis (2024 Fall): Course Notes</title>
 <style>
@@ -240,6 +240,29 @@ window.Quarto = {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-beta-bernoulli-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04b-beta-bernoulli-stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model With Stan</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -303,12 +326,12 @@ window.Quarto = {
 <span class="header-section-number">2.1.1</span> Games of chance</h3>
 <p>Correspondence between French Mathematicians (Pierre de Fermat and Blaise Pascal) on gambling problem by Antoine Gombaud, Chevalier de Méré. The problem is roughly of the form<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <blockquote class="blockquote">
-<p>Imagine two people playing a multi-round game. In each round, each person has an equal chance of winning. The first person who wins six rounds will get a huge cash prize. Now, consider a scenario in which A and B have played six rounds, where A has won five and B has won one. At that time, the game had to be stopped due to a thunderstorm. Since neither A and B have reached six wins, instead of giving the prize to either one of them, they agree to divide up the prize. What would be a fair way to do so?</p>
+<p>Imagine two people playing a multi-round game. In each round, each person has an equal chance of winning. The first person who wins six rounds will get a huge cash prize. Now, consider a scenario in which A and B have played six rounds, where A has won five and B has won one. At that time, the game had to be stopped due to a thunderstorm. Since neither A nor B have reached six wins, instead of giving the prize to either one of them, they agree to divide up the prize. What would be a fair way to do so?</p>
 </blockquote>
-<p>The discussion led to the formalization of using mathematics to solve the problem. Basically, one way is to say if A has a 97% chance to win the prize eventually and B has a 3% chance, then A should get 97% of the prize.</p>
+<p>The discussion led to the formalization of using mathematics to solve the problem. Basically, one way is to say if A has a 97% chance of winning the prize eventually and B has a 3% chance, then A should get 97% of the prize.</p>
 </section></section><section id="different-ways-to-interpret-probability" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="different-ways-to-interpret-probability">
 <span class="header-section-number">2.2</span> Different Ways to Interpret Probability</h2>
-<p>There are multiple perspectives for understanding probability.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> What you’ve learned in your statistics training is likely based on the <em>frequentist</em> interpretation of probability (and thus frequentist statistics), whereas what you will learn in this class have the foundation on the <em>subjectivist</em> interpretation of probability. Understanding the different perspectives on probability is helpful for understanding the Bayesian framework.</p>
+<p>There are multiple perspectives for understanding probability.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> What you’ve learned in your statistics training is likely based on the <em>frequentist</em> interpretation of probability (and thus frequentist statistics), whereas the foundation of what you will learn in this class is the <em>subjectivist</em> interpretation of probability. Understanding the different perspectives on probability is helpful for understanding the Bayesian framework.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -321,7 +344,7 @@ window.Quarto = {
 </div>
 <section id="classical-interpretation" class="level3" data-number="2.2.1"><h3 data-number="2.2.1" class="anchored" data-anchor-id="classical-interpretation">
 <span class="header-section-number">2.2.1</span> Classical Interpretation</h3>
-<p>This is an earlier perspective and is based on counting rules. The idea is that probability is equally distributed among all “indifferent” outcomes. “Indifferent” outcomes are those where a person does not have any evidence to say that one outcome is more likely than another. For example, when one throws a die, one does not think that a certain number is more likely than another unless one knows that the die is biased. In this case, there are six equally likely outcomes, so the probability of each outcome is 1 / 6.</p>
+<p>This is an earlier perspective and is based on counting rules. The idea is that probability is equally distributed among all “indifferent” outcomes. “Indifferent” outcomes are those where a person has no evidence to say that one outcome is more likely than another. For example, when one throws a die, one does not think that a certain number is more likely than another unless one knows that the die is biased. In this case, there are six equally likely outcomes, so the probability of each outcome is 1 / 6.</p>
 <p><img src="./images/dice.png" class="img-fluid" style="width:50.0%"></p>
 </section><section id="frequentist-interpretation" class="level3" data-number="2.2.2"><h3 data-number="2.2.2" class="anchored" data-anchor-id="frequentist-interpretation">
 <span class="header-section-number">2.2.2</span> Frequentist Interpretation</h3>
@@ -399,13 +422,13 @@ Figure&nbsp;2.1: Relative frequency when repeatedly rolling a die.
 <p>because the population is fixed and cannot be repeated. Only the samples can be repeated, so probability in frequentist statistics is only about samples.</p>
 <section id="problem-of-the-single-case" class="level4" data-number="2.2.2.1"><h4 data-number="2.2.2.1" class="anchored" data-anchor-id="problem-of-the-single-case">
 <span class="header-section-number">2.2.2.1</span> Problem of the single case</h4>
-<p>Because of the frequentist’s reference to long-run relative frequency, under this framework, it does not make sense to talk about the probability of an event that cannot be repeated. For example, it does not make sense to talk about</p>
+<p>Because of the frequentist’s reference to long-run relative frequency, it does not make sense to talk about the probability of an event that cannot be repeated under this framework. For example, it does not make sense to talk about</p>
 <ul>
 <li>the probability that the Democrats/Republicans will win the 2028 US Presidential Election, or</li>
-<li>the probability that the LA Rams winning the 2024 Super Bowl, or</li>
+<li>the probability that the LA Chargers winning the 2024 Super Bowl, or</li>
 <li>the probability that it will rain on Christmas Day in LA in 2024,</li>
 </ul>
-<p>because all these are specific events that cannot be repeated. However, it is common for lay people to talk about probabilities or chances for these events.</p>
+<p>because all these are specific events that cannot be repeated. However, it is common for laypeople to talk about probabilities or chances for these events.</p>
 </section></section><section id="subjectivist-interpretation" class="level3" data-number="2.2.3"><h3 data-number="2.2.3" class="anchored" data-anchor-id="subjectivist-interpretation">
 <span class="header-section-number">2.2.3</span> Subjectivist Interpretation</h3>
 <p>The frequentist interpretation is sometimes called the “objectivist view,” as the reference of probability is based on empirical evidence of long-run relative frequency (albeit hypothetical in many cases). In contrast, the <em>subjectivist</em> view of probability is based on one’s belief. For example, when I say that the probability of getting a “1” from rolling a die is 1 / 6, it reflects the state of my mind about the die. My belief can arise from different sources: Maybe I make the die and know it is a fair one; maybe I saw someone throwing the die 1,000 times, and the number of “1”s was close to 1,000 / 6, or maybe someone I trust and with authority says that the die has a 1-in-6 chance of showing a “1”.</p>
@@ -452,7 +475,7 @@ Kolmogorov axioms
 <section id="probability-distributions" class="level3" data-number="2.3.1"><h3 data-number="2.3.1" class="anchored" data-anchor-id="probability-distributions">
 <span class="header-section-number">2.3.1</span> Probability Distributions</h3>
 <ul>
-<li><p>Discrete event (e.g., outcome of throwing a die or an election): probability <em>mass</em>. The probability is nonzero, at least for some outcomes. The graph below on the left shows the probability mass of the sum of the numbers from two dice.</p></li>
+<li><p>Discrete event (e.g., the outcome of throwing a die or an election): probability <em>mass</em>. The probability is nonzero, at least for some outcomes. The graph below on the left shows the probability mass of the sum of the numbers from two dice.</p></li>
 <li>
 <p>Continuous event (e.g., temperature): probability <em>density</em>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> The probability is basically zero for any outcome. Instead, the probability density is approximated by <span class="math inline">\(P(A \leq a \leq A + h) / h\)</span> for a very small <span class="math inline">\(h\)</span>.</p>
 <ul>
@@ -776,7 +799,7 @@ Conditional Probability
 </tr>
 </tbody>
 </table>
-<p>Obviously, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are not independent because once we know that the number is four or above, it changes the probability of whether it is an odd number or not.</p>
+<p>Obviously, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are not independent because once we know that the number is four or above, the probability of whether it is an odd number or not changes.</p>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -823,7 +846,7 @@ Law of Total Probability
 <ol>
 <li id="fn1"><p>see the exact form at <a href="https://en.wikipedia.org/wiki/Problem_of_points" class="uri">https://en.wikipedia.org/wiki/Problem_of_points</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>See <a href="http://plato.stanford.edu/entries/probability-interpret/" class="uri">http://plato.stanford.edu/entries/probability-interpret/</a> for more information<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>In a purely subjectivist view of probability, assigning a probability <span class="math inline">\(P\)</span> to an event does not require any justifications, as long as it follows the axioms of probability. For example, I can say that the probability of me winning the lottery and thus becoming the wealthiest person on earth tomorrow is 95%, which by definition would make the probability of me not winning the lottery 5%. Most Bayesian scholars, however, do not endorse this version of subjectivist probability and require justifications of one’s beliefs (that has some correspondence to the world).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>In a purely subjectivist view of probability, assigning a probability <span class="math inline">\(P\)</span> to an event does not require any justifications, as long as it follows the axioms of probability. For example, I can say that the probability of me winning the lottery and thus becoming the wealthiest person on earth tomorrow is 95%, which by definition would make the probability of me not winning the lottery 5%. Most Bayesian scholars, however, do not endorse this version of subjectivist probability and require justifications of one’s beliefs (that have some correspondence to the world).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>For many problems in the social and behavioral sciences, the measured variables are not truly continuous, but we still use continuous distributions to approximate them.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -64,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./04-beta-bernoulli-model.html" rel="next">
 <link href="./02-probability.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -263,6 +283,29 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-beta-bernoulli-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04b-beta-bernoulli-stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model With Stan</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -358,7 +401,7 @@ P(B_i \mid A) \propto P(A \mid B_i) P(B_i)
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>A police officer stops a driver <em>at random</em> and does a breathalyzer test for the driver. The breathalyzer is known to detect true drunkenness 100% of the time, but in 1% of the cases, it gives a false positive when the driver is sober. We also know that in general, for every 1,000 drivers passing through that spot, one is driving drunk. Suppose that the breathalyzer shows positive for the driver. What is the probability that the driver is truly drunk?</p>
+<p>A police officer stops a driver <em>at random</em> and does a breathalyzer test for the driver. The breathalyzer is known to detect true drunkenness 100% of the time, but in 1% of the cases, it gives a false positive when the driver is sober. We also know that, in general, for every 1,000 drivers passing through that spot, one is driving drunk. Suppose that the breathalyzer shows positive for the driver. What is the probability that the driver is truly drunk?</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p><span class="math inline">\(P(\text{positive} | \text{drunk}) = 1\)</span><br>
@@ -418,7 +461,7 @@ P(B_i \mid A) \propto P(A \mid B_i) P(B_i)
 </section>
 <section id="bayesian-statistics" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="bayesian-statistics"><span class="header-section-number">3.2</span> Bayesian Statistics</h2>
-<p><code>Bayesian statistics</code> is a way to estimate some parameter <span class="math inline">\(\theta\)</span> (i.e., some quantities of interest, such as the population mean, regression coefficient, etc) by applying the Bayes’ Theorem.</p>
+<p><code>Bayesian statistics</code> is a way to estimate some parameter <span class="math inline">\(\theta\)</span> (i.e., some quantities of interest, such as the population mean, regression coefficient, etc) by applying Bayes’ Theorem.</p>
 <div class="callout callout-style-simple callout-important no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -434,19 +477,19 @@ P(\theta | D) \propto P(D | \theta) P(\theta)
 <p>There are three components in the above equality:</p>
 <ul>
 <li><span class="math inline">\(P(D | \theta)\)</span>, the probability that you observe data <span class="math inline">\(D\)</span>, given the parameter <span class="math inline">\(\theta\)</span>; this is called the <code>likelihood</code> (Note: It is the likelihood of <span class="math inline">\(\theta\)</span>, but probability about <span class="math inline">\(y\)</span>)</li>
-<li><span class="math inline">\(P(\theta)\)</span>, the probability distribution <span class="math inline">\(\theta\)</span>, without referring to the data <span class="math inline">\(D\)</span>. This usually requires appeals to one’s degree of belief, and so is called the <code>prior</code></li>
-<li><span class="math inline">\(P(\theta | y)\)</span>, the updated probability distribution of <span class="math inline">\(\theta\)</span>, after observing the data <span class="math inline">\(D\)</span>; this is called the <code>posterior</code></li>
+<li><span class="math inline">\(P(\theta)\)</span>, the probability distribution <span class="math inline">\(\theta\)</span>, without referring to the data <span class="math inline">\(D\)</span>. This usually requires appeals to one’s degree of belief, and so is called the <em>prior</em></li>
+<li><span class="math inline">\(P(\theta | y)\)</span>, the updated probability distribution of <span class="math inline">\(\theta\)</span>, after observing the data <span class="math inline">\(D\)</span>; this is called the <em>posterior</em></li>
 </ul>
 <p>On the other hand, classical/frequentist statistics focuses solely on the likelihood function.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> In Bayesian statistics, the goal is to update one’s belief about <span class="math inline">\(\theta\)</span> based on the observed data <span class="math inline">\(D\)</span>.</p>
 </section>
 <section id="example-2-locating-a-plane" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="example-2-locating-a-plane"><span class="header-section-number">3.3</span> Example 2: Locating a Plane</h2>
-<p>Consider a highly simplified scenario of locating a missing plane in the sea. Assume that we know the plane, before missing, happened to be flying on the same latitude, heading west across the Pacific, so we only need to find the longitude of it. We want to go out to collect debris (data) so that we can narrow the location (<span class="math inline">\(\theta\)</span>) of the plane down.</p>
+<p>Consider a highly simplified scenario of locating a missing plane in the sea. Assume that we know the plane, before missing, happened to be flying at the same latitude, heading west across the Pacific, so we only need to find its longitude. We want to go out to collect debris (data) so that we can narrow the location (<span class="math inline">\(\theta\)</span>) of the plane down.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Prior</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Likelihood</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Posterior</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<p>We start with our prior. Assume that we have some rough idea that the plane should be, so we express our belief in a probability distribution like the following:</p>
+<p>We start with our prior. Assume that we have some rough idea where the plane should be, so we express our belief in a probability distribution like the following:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-prior-ex1" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -497,7 +540,7 @@ Figure&nbsp;3.2: More options for prior distribution.
 </figcaption>
 </figure>
 </div>
-<p>The prior is chosen to reflect the researcher’s belief, so it is likely that different researchers will formulate a different prior for the same problem, and that’s okay as long as the prior is reasonable and justified. Later we will learn that in regular Bayesian analyses, with moderate sample size, different priors generally make only negligible differences.</p>
+<p>The prior is chosen to reflect the researcher’s belief, so different researchers will likely formulate a different prior for the same problem, and that’s okay as long as the prior is reasonable and justified. Later, we will learn that in regular Bayesian analyses, with a moderate sample size, different priors generally only make negligible differences.</p>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <p>Now, assume that we have collected debris in the locations shown in the graph,</p>
@@ -591,7 +634,7 @@ Figure&nbsp;3.6
 </ol>
 <p>Whether these three ways give the same posterior depends on whether <strong>data-order invariance</strong> holds. If the inference of <span class="math inline">\(D_1\)</span> does not depend on <span class="math inline">\(D_2\)</span>, or vice versa, then all three ways lead to the same posterior. Specifically, if we have <strong>conditional independence</strong> such that <span class="math display">\[
 P(D_1, D_2 \mid \theta) = P(D_1 \mid \theta) P(D_2 \mid \theta),
-\]</span> then one can show all three ways give the same posterior (see p.&nbsp;108 of Kruschke, 2015).</p>
+\]</span> then one can show all three ways give the same posterior <a href="https://www.bayesrulesbook.com/chapter-4#ch4-sequential"><span class="citation" data-cites="johnson2022">(see section 4.4 and 4.5 of <span>Johnson et al., 2022</span>)</span></a>.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -606,7 +649,7 @@ Exchangeability*
 <ul>
 <li><span class="math inline">\(D_1\)</span> is from year 1990, <span class="math inline">\(D_2\)</span> is from year 2020, and the parameter <span class="math inline">\(\theta\)</span> changes from 1990 to 2020</li>
 </ul>
-<p>When data are exchangeable, the previously discussed conditional independence condition would generally hold.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>When data are exchangeable, conditional independence would generally hold.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 </div>
 </div>
 </section>
@@ -628,7 +671,7 @@ P(y \mid \theta) = \theta^y (1 - \theta)^{(1 - y)},
     &amp; = \theta^{\sum_{i = 1}^N y_i} (1 - \theta)^{\sum_{i = 1}^N (1 - y_i)} \\
     &amp; = \theta^z (1 - \theta)^{N - z}
   \end{aligned},
-\]</span> where <span class="math inline">\(z\)</span> is the number of “1”s (e.g., number of heads in coin flips). Note that the likelihood only depends on <span class="math inline">\(z\)</span>, not the individual <span class="math inline">\(y\)</span>s. In other words, the likelihood is the same as long as there are <span class="math inline">\(z\)</span> heads, regardless of when those heads occur.</p>
+\]</span> where <span class="math inline">\(z\)</span> is the number of “1”s (e.g., the number of heads in coin flips). Note that the likelihood only depends on <span class="math inline">\(z\)</span>, not the individual <span class="math inline">\(y\)</span>s. In other words, the likelihood is the same as long as there are <span class="math inline">\(z\)</span> heads, regardless of when those heads occur.</p>
 <p>Let’s say <span class="math inline">\(N\)</span> = 4 and <span class="math inline">\(z\)</span> = 1. We can plot the likelihood in R:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the likelihood as a function of theta</span></span>
@@ -664,7 +707,7 @@ Figure&nbsp;3.7: Binomial likelihood function with <span class="math inline">\(N
 <section id="setting-priors" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="setting-priors"><span class="header-section-number">3.5.2</span> Setting Priors</h3>
 <p>Remember again the relationship between the prior and the posterior: <span class="math display">\[P(\theta | y) \propto P(y | \theta) P(\theta)\]</span> The posterior distributions are mathematically determined once the priors and the likelihood are set. However, the mathematical form of the posterior is sometimes very difficult to deal with.</p>
-<p>One straight forward, brute-force method is to discretize the parameter space into a number of points. For example, by taking <span class="math inline">\(\theta\)</span> = 0, 0.05, 0.10, . . . , 0.90, 0.95, 1.00, one can evaluate the posterior at these 21 <strong>grid points</strong>.</p>
+<p>One straightforward, brute-force method is to discretize the parameter space into a number of points. For example, by taking <span class="math inline">\(\theta\)</span> = 0, 0.05, 0.10, . . . , 0.90, 0.95, 1.00, one can evaluate the posterior at these 21 <strong>grid points</strong>.</p>
 <p>Let’s use a prior that peaks at 0.5 and linearly decreases to both sides. I assume that <span class="math inline">\(\theta\)</span> = 0.5 is twice as likely as <span class="math inline">\(\theta = 0.25\)</span> or <span class="math inline">\(\theta = 0.75\)</span> to reflect my belief that the coin is more likely to be fair.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a grid for the parameter</span></span>
@@ -684,7 +727,7 @@ Figure&nbsp;3.7: Binomial likelihood function with <span class="math inline">\(N
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="7" data-code-annotation="1">Note the line <code>grid_df$pth &lt;- grid_df$pth / sum(grid_df$pth)</code>, which ensures that the probability values sum to one. This is a trick we will use to obtain the posterior probability.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="7" data-code-annotation="1">This line ensures that the probability values sum to one. This is a trick we will use to obtain the posterior probability.</span>
 </dd>
 </dl>
 </div>
@@ -706,7 +749,7 @@ Prior Predictive Distribution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>One way to check whether the prior is appropriate is to use the <strong>prior predictive distribution</strong>. Bayesian models are <strong>generative</strong> in the sense that they can be used to simulate data. The prior predictive distribution can be obtained by first simulating some <span class="math inline">\(\theta\)</span> values from the prior distribution and then simulating a data set for each <span class="math inline">\(\theta\)</span>.</p>
+<p>One way to check whether the prior is appropriate is to use the <strong>prior predictive distribution</strong>. Bayesian models are <strong>generative</strong> because they can be used to simulate data. The prior predictive distribution can be obtained by first simulating some <span class="math inline">\(\theta\)</span> values from the prior distribution and then simulating a data set for each <span class="math inline">\(\theta\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw one theta</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>num_trials <span class="ot">&lt;-</span> <span class="dv">4</span>  <span class="co"># number of draws</span></span>
@@ -757,7 +800,7 @@ Prior Predictive Distribution
 <section id="summarizing-the-posterior" class="level3" data-number="3.5.3">
 <h3 data-number="3.5.3" class="anchored" data-anchor-id="summarizing-the-posterior"><span class="header-section-number">3.5.3</span> Summarizing the Posterior</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>grid_df <span class="ot">&lt;-</span> grid_df <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>grid_df <span class="ot">&lt;-</span> grid_df <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use our previously defined lik() function</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">py_th =</span> <span class="fu">lik</span>(th, <span class="at">num_flips =</span> <span class="dv">4</span>, <span class="at">num_heads =</span> <span class="dv">1</span>),</span>
@@ -1027,7 +1070,7 @@ Figure&nbsp;3.8: Bernoulli posterior distribution
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <p>If, instead, we have <span class="math inline">\(N\)</span> = 40 and <span class="math inline">\(z\)</span> = 10, the posterior will be more similar to the likelihood.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>grid_df2 <span class="ot">&lt;-</span> grid_df <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>grid_df2 <span class="ot">&lt;-</span> grid_df <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use our previously defined lik() function</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">py_th =</span> <span class="fu">lik</span>(th, <span class="at">num_flips =</span> <span class="dv">40</span>, <span class="at">num_heads =</span> <span class="dv">10</span>),</span>
@@ -1084,7 +1127,7 @@ Figure&nbsp;3.8: Bernoulli posterior distribution
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <p>If we have a very strong prior concentrated at <span class="math inline">\(\theta\)</span> = .5, but still with <span class="math inline">\(N\)</span> = 40 and <span class="math inline">\(z\)</span> = 10, the posterior will be more similar to the prior.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>grid_df3 <span class="ot">&lt;-</span> grid_df <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>grid_df3 <span class="ot">&lt;-</span> grid_df <span class="sc">|&gt;</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># stronger prior</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">pth =</span> pth <span class="sc">^</span> <span class="dv">3</span>,</span>
@@ -1160,12 +1203,17 @@ Figure&nbsp;3.8: Bernoulli posterior distribution
 <p>In this note, we discretized <span class="math inline">\(\theta\)</span> into a finite number of grid points to compute the posterior, mainly for pedagogical purposes. A big limitation is that our posterior will have no density for values other than the chosen grid points. While increasing the number of grid points (e.g., 1,000) can give more precision, the result is still not truly continuous. A bigger issue is that the computation breaks down when there is more than one parameter; if there are <span class="math inline">\(p\)</span> parameters, with 1,000 grid points per parameter, one needs to evaluate the posterior probability for <span class="math inline">\(1,000^p\)</span> grid points, which is not feasible even with modern computers. So more efficient algorithms, namely Markov chain Monte Carlo (MCMC) methods, will be introduced as we progress in the course.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-johnson2022" class="csl-entry" role="listitem">
+Johnson, A. A., Ott, M. Q., &amp; Dogucu, M. (2022). <em>Bayes rules! An introduction to Bayesian modeling with R</em>. CRC Press.
+</div>
+</div>
 </section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>The likelihood function in classical/frequentist statistics is usually written as <span class="math inline">\(P(y; \theta)\)</span>. You will notice that here I write the likelihood for classical/frequentist statistics to be different from the one used in Bayesian statistics. This is intentional: In frequentist conceptualization, <span class="math inline">\(\theta\)</span> is fixed, and it does not make sense to talk about the probability of <span class="math inline">\(\theta\)</span>. This implies that we cannot condition on <span class="math inline">\(\theta\)</span>, because conditional probability is defined only when <span class="math inline">\(P(\theta)\)</span> is defined.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>The likelihood function in classical/frequentist statistics is usually written as <span class="math inline">\(P(y; \theta)\)</span>. You will notice that here, I write the likelihood for classical/frequentist statistics to be different from the one used in Bayesian statistics. This is intentional: In frequentist conceptualization, <span class="math inline">\(\theta\)</span> is fixed, and it does not make sense to talk about the probability of <span class="math inline">\(\theta\)</span>. This implies that we cannot condition on <span class="math inline">\(\theta\)</span>, because conditional probability is defined only when <span class="math inline">\(P(\theta)\)</span> is defined.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>The <a href="https://en.wikipedia.org/wiki/De_Finetti%27s_theorem">de Finetti’s theorem</a> shows that when the data are exchangeable and can be considered an infinite sequence (i.e., not from a tiny finite population), then the data are conditionally independent given some <span class="math inline">\(\theta\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
@@ -1598,8 +1646,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04-beta-bernoulli-model.html" class="pagination-link" aria-label="Beta-Bernoulli Model">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

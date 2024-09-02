@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -247,6 +247,29 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-beta-bernoulli-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04b-beta-bernoulli-stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model With Stan</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -304,33 +327,33 @@ window.Quarto = {
 <h2 data-number="1.1" class="anchored" data-anchor-id="history-of-bayesian-statistics"><span class="header-section-number">1.1</span> History of Bayesian Statistics</h2>
 <p>Here is a nice brief video that covers some of the 250+ years of history of Bayesian statistics:</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/BcvLAw-JRss" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>If you are interested in learning more about the story, check out the nice popular science book, <a href="https://yalebooks.yale.edu/book/9780300188226/theory-would-not-die">“The theory that would not die,” by <span class="citation" data-cites="mcgrayne2011">McGrayne (<span>2011</span>)</span></a></p>
+<p>If you are interested in learning more about the story, check out the popular science book, <a href="https://yalebooks.yale.edu/book/9780300188226/theory-would-not-die">“The theory that would not die,” by <span class="citation" data-cites="mcgrayne2011">McGrayne (<span>2011</span>)</span></a></p>
 <section id="thomas-bayes-17011762" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="thomas-bayes-17011762"><span class="header-section-number">1.1.1</span> Thomas Bayes (1701–1762)</h3>
-<p>You may find a biography of Bayes from <a href="https://www.britannica.com/biography/Thomas-Bayes" class="uri">https://www.britannica.com/biography/Thomas-Bayes</a>. There is also a nice story in the book by <span class="citation" data-cites="lambert2018">Lambert (<a href="references.html#ref-lambert2018" role="doc-biblioref">2018</a>)</span>. He was an English Presbyterian minister. The important work he wrote that founded Bayesian statistics was “An Essay towards solving a Problem in the Doctrine of Chances”, which he did not publish and was later discovered and edited by his friend, Richard Price, after Bayes’s death <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>You may find a biography of Bayes from <a href="https://www.britannica.com/biography/Thomas-Bayes" class="uri">https://www.britannica.com/biography/Thomas-Bayes</a>. There is also a nice story in the book by <span class="citation" data-cites="lambert2018">Lambert (<a href="references.html#ref-lambert2018" role="doc-biblioref">2018</a>)</span>. He was an English Presbyterian minister. The important work he wrote that founded Bayesian statistics was “An Essay Towards Solving a Problem in the Doctrine of Chances,” which he did not publish and was later discovered and edited by his friend, Richard Price, after Bayes’s death <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </section>
 <section id="pierre-simon-laplace-17491827" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="pierre-simon-laplace-17491827"><span class="header-section-number">1.1.2</span> Pierre-Simon Laplace (1749–1827)</h3>
-<p>Laplace, a French Mathematician, was an important figure in not just Bayesian statistics, but also in other areas of mathematics, astronomy, and physics. We actually know much more the work by Laplace than by Bayes, and Laplace has worked independently on the inverse probability problem (i.e., <span class="math inline">\(P[\text{Parameter} | \text{Data}]\)</span>). Indeed, he was credited for largely formalizing Bayesian interpretation of probability and most of the machinery for Bayesian statistics, and making it a useful technique to be applied to different problems, despite the discipline being called “Bayesian.” His other contributions include the methods of least square and the central limit theorem. See a short biography of him at <a href="https://www.britannica.com/biography/Pierre-Simon-marquis-de-Laplace" class="uri">https://www.britannica.com/biography/Pierre-Simon-marquis-de-Laplace</a>.</p>
+<p>Laplace, a French Mathematician, was an important figure in not just Bayesian statistics but other areas of mathematics, astronomy, and physics. We know much more about the work by Laplace than by Bayes, and Laplace has worked independently on the inverse probability problem (i.e., <span class="math inline">\(P[\text{Parameter} | \text{Data}]\)</span>). Indeed, he was credited for largely formalizing the Bayesian interpretation of probability and most of the machinery for Bayesian statistics, and making it a useful technique for different problems, despite the discipline being called “Bayesian.” His other contributions include the methods of least squares and the central limit theorem. See a short biography of him at <a href="https://www.britannica.com/biography/Pierre-Simon-marquis-de-Laplace" class="uri">https://www.britannica.com/biography/Pierre-Simon-marquis-de-Laplace</a>.</p>
 </section>
 <section id="th-century" class="level3" data-number="1.1.3">
 <h3 data-number="1.1.3" class="anchored" data-anchor-id="th-century"><span class="header-section-number">1.1.3</span> 20th Century</h3>
-<p>Until early 1920s, the <em>inverse probability</em> method, which is based on what is now called Bayes’s Theorem, is pretty much the predominant point of view of statistics. Then a point of view later known as <em>frequentist</em> statistics arrived, and quickly became the mainstream school of thinking for statistical inferences, and is still the major framework for quantitative research. In the early 1920s, frequentist scholar, most notably R. A. Fisher and Jerzy Neyman, criticized Bayesian inference for the use of subjective elements in an objective discipline. In Fisher’s word,</p>
+<p>Until the early 1920s, the <em>inverse probability</em> method, which is based on what is now called Bayes’s Theorem, was pretty much the predominant point of view of statistics. Then a point of view later known as <em>frequentist</em> statistics arrived, and quickly became the mainstream school of thinking for statistical inferences, and is still the primary framework for quantitative research. In the early 1920s, frequentist scholars, most notably R. A. Fisher and Jerzy Neyman, criticized Bayesian inference for using subjective elements in an objective discipline. In Fisher’s words,</p>
 <blockquote class="blockquote">
 <p>The theory of inverse probability is founded upon an error, and must be wholly rejected—Fisher, 1925</p>
 </blockquote>
-<p>Ironically, the term <em>Bayesian</em> was first used in one of Fisher’s work. And interestingly, Fisher actually thought he “have been doing almost exactly what Bayes had done in the 18th century.”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Despite criticisms from frequentist scholars, Bayesian methods has been used by scholars in the Allies in World War II, such as Alan Turing, in an algorithm to break coded messages in the Enigma machine that the German Navy used to communicate. However, because of the more complex mathematics involved in Bayesian statistics, Bayesian statistics is limited to straight-forward problems and theoretical discussions until the early 1980s, when computing speed increases tremendously and makes <em>Markov Chain Monte Carlo</em>—the major algorithm for Bayesian estimation in modern Bayesian statistics—feasible. With the help of increased computing speed, Bayesian statistics has come back and been used as an alternative way of thinking, especially given growing dissatisfaction towards the misuse of frequentist statistics by some scholars across disciplines. Bayesian estimation methods have also been applied to many new research questions where frequentist approaches work less well, as well as in big data analytics and machine learning.</p>
+<p>Ironically, the term <em>Bayesian</em> was first used in one of Fisher’s works. And interestingly, Fisher actually thought he “[had] been doing almost exactly what Bayes had done in the 18th century.”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Despite criticisms from frequentist scholars, Bayesian methods have been used by scholars in the Allies in World War II, such as Alan Turing, in an algorithm to break coded messages in the Enigma machine that the German Navy used to communicate. However, because of the more complex mathematics involved in Bayesian statistics, Bayesian statistics is limited to straight-forward problems and theoretical discussions until the early 1980s, when computing speed increased tremendously and made <em>Markov Chain Monte Carlo</em>—the primary algorithm for Bayesian estimation in modern Bayesian statistics—feasible. With the help of increased computing speed, Bayesian statistics has come back and been used as an alternative way of thinking, especially given the growing dissatisfaction towards the misuse of frequentist statistics by some scholars across disciplines. Bayesian estimation methods have also been applied to many new research questions where frequentist approaches work less well, as well as in big data analytics and machine learning.</p>
 </section>
 </section>
 <section id="motivations-for-using-bayesian-methods" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="motivations-for-using-bayesian-methods"><span class="header-section-number">1.2</span> Motivations for Using Bayesian Methods</h2>
-<p>Based on my personal experience, Bayesian methods is used quite often in statistics and related departments, as it is <span style="color:red">consistent and coherent</span>, as contrast to frequentist where a new and probably ad hoc procedure needed to be developed to handle a new problem. For Bayesian, as long as you can formulate a model, you just run the analysis the same way as you would for simpler problems, or in Bayesian people’s word “turning the Bayesian crank,” and likely the difficulties would be more technical than theoretical, which is usually solved with better computational speed.</p>
-<p>Social and behavioral scientists are relatively slow to adopt the Bayesian method, but things have been changing. In a recently accepted paper by <span class="citation" data-cites="vandeschoot2017">Van De Schoot et al. (<a href="references.html#ref-vandeschoot2017" role="doc-biblioref">2017</a>)</span>, the authors reviewed papers in psychology between 1990 and 2015 and found that whereas less than 10% of the papers in 1990 to 1996 mentioned “Bayesian”, the proportion increased steadily and was found in <span style="color:red">close to 45% of the psychology papers in 2015</span>. Among studies using Bayesian methods, more than 1/4 cited <span style="color:red">computational problems (e.g., nonconvergence) in frequentist methods</span> as a reason, and about 13% cited the need to <span style="color:red">incorporate prior knowledge</span> into the estimation process. The other reasons included the <span style="color:red">flexibility</span> of Bayesian methods for complex and nonstandard problems, and the use of techniques traditionally attached to Bayesian such as <span style="color:red">missing data</span> and <span style="color:red">model comparisons</span>.</p>
+<p>Based on my personal experience, Bayesian methods are used quite often in statistics and related departments, as it is <span style="color:red">consistent and coherent</span>, in contrast to frequentist where a new and probably ad hoc procedure needed to be developed to handle a new problem. For Bayesian, as long as you can formulate a model, you just run the analysis the same way as you would for simpler problems, or in Bayesian people’s words “turning the Bayesian crank,” and likely the difficulties would be more technical than theoretical, which is usually solved with better computational speed.</p>
+<p>Social and behavioral scientists are relatively slow to adopt the Bayesian method, but things have been changing. In a recently accepted paper by <span class="citation" data-cites="vandeschoot2017">Van De Schoot et al. (<a href="references.html#ref-vandeschoot2017" role="doc-biblioref">2017</a>)</span>, the authors reviewed papers in psychology between 1990 and 2015 and found that whereas less than 10% of the papers from 1990 to 1996 mentioned “Bayesian”, the proportion increased steadily and was found in <span style="color:red">close to 45% of the psychology papers in 2015</span>. Among studies using Bayesian methods, more than 1/4 cited <span style="color:red">computational problems (e.g., nonconvergence) in frequentist methods</span> as a reason, and about 13% cited the need to <span style="color:red">incorporate prior knowledge</span> into the estimation process. The other reasons included the <span style="color:red">flexibility</span> of Bayesian methods for complex and nonstandard problems, and the use of techniques traditionally attached to Bayesian such as <span style="color:red">missing data</span> and <span style="color:red">model comparisons</span>.</p>
 <section id="problem-with-classical-frequentist-statistics" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="problem-with-classical-frequentist-statistics"><span class="header-section-number">1.2.1</span> Problem with classical (frequentist) statistics</h3>
 <p>The rise of Bayesian methods is also related to the statistical reform movement in the past two decades. The problem is that applied researchers are <span style="color:red">obsessed with <span class="math inline">\(p &lt; .05\)</span></span> and often misinterpreted a small <span class="math inline">\(p\)</span>-value as something that it isn’t <span class="citation" data-cites="gigerenzer2004">(read <a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer, 2004</a>)</span>. Some scholars coined the term <a href="https://www.nimh.nih.gov/about/directors/thomas-insel/blog/2014/p-hacking.shtml"><span class="math inline">\(p\)</span>-hacking</a> to refer to the practice of obtaining statistical significance by choosing to test the data in a certain way, either consciously or subconsciously (e.g., dichotomizing using mean or median, trying the same hypothesis using different measures of the same variable, etc). This is closely related to the recent “replication crisis” in scientific research, <a href="https://nobaproject.com/modules/the-replication-crisis-in-psychology">with psychology being in the center under close scrutiny</a>.</p>
-<p>Bayesian is no panacea to the problem. Indeed, if misused it can give rise to the same problems as statistical significance. My goal in this class is to help you appreciate the Bayesian tradition of <span style="color:red">embracing the uncertainty in your results</span>, and adopt rigorous <span style="color:red">model checking</span> and <span style="color:red">comprehensive reporting</span> rather than relying merely on a <span class="math inline">\(p\)</span>-value. I see this as the most important mission for someone teaching statistics.</p>
+<p>Bayesian is no panacea to the problem. Indeed, if misused, it can give rise to the same problems as statistical significance. My goal in this class is to help you appreciate the Bayesian tradition of <span style="color:red">embracing the uncertainty in your results</span>, and adopt rigorous <span style="color:red">model checking</span> and <span style="color:red">comprehensive reporting</span> rather than relying merely on a <span class="math inline">\(p\)</span>-value. I see this as the most important mission for someone teaching statistics.</p>
 </section>
 </section>
 <section id="comparing-bayesian-and-frequentist-statistics" class="level2" data-number="1.3">
@@ -374,7 +397,7 @@ window.Quarto = {
 </section>
 <section id="software-for-bayesian-statistics" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="software-for-bayesian-statistics"><span class="header-section-number">1.4</span> Software for Bayesian Statistics</h2>
-<p>The following summarizes some of the most popular Bayesian software. Currently, JAGS and STAN are the most popular. General statistical programs like SPSS, SAS, and Stata also have some support for Bayesian analyses as well.</p>
+<p>The following summarizes some of the most popular Bayesian software. Currently, JAGS and Stan are the most popular. General statistical programs like SPSS, SAS, and Stata also have some support for Bayesian analyses as well.</p>
 <ul>
 <li><a href="http://www.mrc-bsu.cam.ac.uk/software/bugs/the-bugs-project-winbugs/">WinBUGS</a>
 <ul>
@@ -386,16 +409,16 @@ window.Quarto = {
 <li><a href="http://mcmc-jags.sourceforge.net/">JAGS</a>
 <ul>
 <li>Just Another Gibbs Sampler</li>
-<li>Very similar to WinBUGS, but written in C++, and support user-defined functionality</li>
+<li>Very similar to WinBUGS, but written in C++, and supports user-defined functionality</li>
 <li>Cross-platform compatibility</li>
 <li>One can communicate from R to JAGS using the package <code>rjags</code> or <code>runjags</code></li>
 </ul></li>
-<li><a href="http://mc-stan.org/">STAN</a>
+<li><a href="http://mc-stan.org/">Stan</a>
 <ul>
 <li>Named in honour of Stanislaw Ulam, who invented the Markov Chain Monte Carlo method</li>
 <li>Uses new algorithms that are different from Gibbs sampling</li>
 <li>Under very active development</li>
-<li>Can interface with R through the package <code>rstan</code>, and the R packages <code>rstanarm</code> and <code>brms</code> automates the procedure for fitting models in STAN for many commonly used models</li>
+<li>Can interface with R through the package <code>rstan</code>, and the R packages <code>rstanarm</code> and <code>brms</code> automates the procedure for fitting models in Stan for many commonly used models</li>
 </ul></li>
 </ul>
 
@@ -418,7 +441,7 @@ Van De Schoot, R., Winter, S. D., Ryan, O., Zondervan-Zwijnenburg, M., &amp; Dep
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Price is another important figure in mathematics and philosopher, and have taken Bayes’ theorem and applied it to insurance and moral philosophy.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Price is another important figure in mathematics and philosophy, and had taken Bayes’ theorem and applied it to insurance and moral philosophy.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>See the <a href="https://projecteuclid.org/download/pdf_1/euclid.ba/1340370565">paper by John Aldrich</a> on this.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
