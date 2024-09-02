@@ -3,6 +3,8 @@ project:
   render:
     - "*.qmd"
     - "!usc-psyc573-notes/"
+    - "!hw/"
+    - "!slides/probability_and_bayes_theorem.qmd"
   resources:
     - "docs/"
 
@@ -11,6 +13,7 @@ website:
   open-graph: true
   site-url: https://marklhc.quarto.pub/psyc573-2024fall/
   repo-url: https://github.com/marklhc/20243-psyc573-usc
+  repo-branch: master
   google-analytics: "UA-225295148"
   page-footer:
     left: "Copyright 2024, Hok Chio (Mark) Lai"

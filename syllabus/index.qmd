@@ -245,10 +245,10 @@ dates <- paste(
 | Sep 3 & 5       | - Bayes theorem       | - Supplemental:              | - HW 2               |
 |                 |                       | [James ch. 1][3]             |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
-| Week 3\         | - One-parameter Model | - [Gigerenzer (2004)][1]     | - Exercise 3         |
-| Sep 10 & 12     | for binary variables  | - [Johnson ch. 3][6]         |                      |
-|                 | - Bayesian workflow   | - [Getting started with      |                      |
-|                 | - STAN                | CmdStanR][10]                |                      |
+| Week 3\         | - One-parameter Model | - [Johnson ch. 3][6]         | - Exercise 3         |
+| Sep 10 & 12     | for binary variables  | - [Getting started wit       |                      |
+|                 | - Bayesian workflow   | CmdStanR][10]                |                      |
+|                 | - Stan                |                              |                      |
 +-----------------+-----------------------+------------------------------+----------------------+
 | Week 4\         | - Hierarchical models | - McElreath ch. 13.1, 13.2   | - Exercise 4         |
 | Sep 17 & 19     |                       | - [Gabry et al. (2019)][7]   | - HW 3               |

@@ -60,6 +60,9 @@ rsconnect/
 # Class slides
 /_class/
 
+# Homework folder
+/hw/
+
 # Temporary files in slides
 /slides/data_files/
 /slides/*.rds
