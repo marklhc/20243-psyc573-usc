@@ -49,6 +49,42 @@ By the end of this module, you will be able to
 
 # Week 2
 
+## Week Learning Objectives
+
+By the end of this module, you will be able to 
+
+- Describe the **subjectivist** interpretation of probability, and contrast it with the **frequentist** interpretation
+- Compute probability density using **simulations**
+- Compute **joint, marginal, and conditional probabilities** with two variables
+- Apply Bayes' rule to obtain **posterior** from prior and data
+- Explain what **data-order invariance** and **exchangeability** are
+- Use **grid approximation** to obtain the posterior for a **Bernoulli** model
+
+## Task List
+
+1. Review the resources (slides and [notes][10])
+2. Attend the Tuesday and Thursday class meetings
+3. Complete the assigned readings
+    * [McElreath ch. 2][2], 3
+    * [James ch. 1][3]
+4. Complete Homework 2 (see instruction on Brightspace)
+
+[2]: https://xcelab.net/rmpubs/sr2/statisticalrethinking2_chapters1and2.pdf
+[3]: https://jamesstone.sites.sheffield.ac.uk/books/bayes-rule/an-introduction-to-bayes-rule-chapter-1
+[5]: docs/02-probability.html
+
+## Slides
+
+<!-- <div>
+
+```{=html}
+<iframe class="slide-deck" src="slides/probability_and_bayes_theorem.html" width="525" height="350"></iframe>
+```
+
+</div>
+
+[Link to HTML slides](/slides/probability_and_bayes_theorem.qmd){target="_blank"} -->
+
 :::
 
 P.S.: If'd like to print the slides to PDF, follow <https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf>
