@@ -1,0 +1,489 @@
+---
+title: "Probability and Bayes Theorem"
+date: "September 3, 2024"
+date-modified: last-modified
+format: metropolis-revealjs
+---
+
+```{r}
+#| include: false
+#| file: _setting.R
+```
+
+::: {.content-hidden unless-profile="class"}
+
+##
+
+- HW 1
+- HW 2 posted
+- Week 4 classes
+- Week 2 overview
+
+## {background-image="https://upload.wikimedia.org/wikipedia/commons/2/28/Casino_Lights_In_Macau.jpg"}
+
+::: {.notes}
+Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Casino_Lights_In_Macau.jpg)
+:::
+
+::::
+
+## History of Probability
+
+- Origin: To study gambling problems
+
+- A mathematical way to study uncertainty/randomness
+
+. . .
+
+::: {.callout}
+## Thought Experiment
+
+Someone asks you to play a game. The person will flip a coin. You win $10 if it shows head, and lose $10 if it shows tail. Would you play?
+
+![](https://images.pexels.com/photos/14911424/pexels-photo-14911424.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1){width="33%" fig-align="right"}
+:::
+
+::: {.notes}
+Image credit: [Jonathan Borba](https://www.pexels.com/photo/close-up-of-cryptocurrency-coins-14911424/)
+:::
+
+##
+
+::: {.callout-note}
+
+## Kolmogorov axioms
+For an event $A_i$ (e.g., getting a "1" from throwing a die)
+
+- $P(A_i) \geq 0$  [All probabilities are non-negative]
+
+- $P(A_1 \cup A_2 \cup \cdots) = 1$  [Union of all possibilities is 1]
+
+- $P(A_1) + P(A_2) = P(A_1 \text{ or } A_2)$ for mutually exclusive $A_1$ and $A_2$ [Addition rule]
+:::
+
+## Throwing a Die With Six Faces
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/ef/One_die.jpeg){.absolute top=100 right=100 width="100" height="100"}
+
+$A_1$ = getting a one, . . . $A_6$ = getting a six
+
+- $P(A_i) \geq 0$
+- $P(\text{the number is 1, 2, 3, 4, 5, or 6}) = 1$
+- $P(\text{the number is 1 or 2}) = P(A_1) + P(A_2)$
+
+Mutually exclusive: $A_1$ and $A_2$ cannot both be true
+
+::: {.notes}
+Image credit: Kcida10 at English Wikipedia, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons
+:::
+
+# Interpretations of Probability
+
+## Ways to Interpret Probability
+
+- **Classical:** Counting rules
+
+- **Frequentist:** long-run relative frequency
+
+- **Subjectivist:** Rational belief
+
+::: aside
+Note: there are other paradigms to interpret probability. See <https://plato.stanford.edu/entries/probability-interpret/>
+:::
+
+## Classical Interpretation
+
+![](../docs/images/dice.png){fig-align="center"}
+
+- Number of target outcomes / Number of possible "indifferent" outcomes
+    * E.g., Probability of getting "1" when throwing a die: 1 / 6
+
+## Frequentist Interpretation
+
+- Long-run relative frequency of an outcome
+
+:::: {.columns}
+
+::: {.column width="40%"}
+```{r}
+set.seed(5)
+die_outcome <- sample(1:6, 1e4, replace = TRUE)
+knitr::kable(cbind(Trial = 1:10, Outcome = die_outcome[1:10]),
+             align = c("c", "c"))
+```
+:::
+
+::: {.column width="60%"}
+```{r}
+#| fig-width: 2.5
+#| fig-asp: 0.8
+#| out-width: 100%
+#| layout-ncol: 2
+#| layout-nrow: 2
+p0 <- ggplot(
+    tibble(x = 1:10, y = die_outcome[1:10]),
+    aes(x = x, y = cumsum(y == 1) / x)
+) +
+    geom_line() +
+    labs(x = "Number of trials", y = 'Relative frequency of "1"')
+p0 + geom_point() +
+    scale_x_continuous(breaks = 1:10)
+p0 %+% tibble(x = 1:100, y = die_outcome[1:100]) +
+    geom_hline(yintercept = 1 / 6, col = "red", linetype = "dashed")
+p0 %+% tibble(x = 1:1e3, y = die_outcome[1:1e3]) +
+    geom_hline(yintercept = 1 / 6, col = "red", linetype = "dashed")
+p0 %+% tibble(x = 1:1e4, y = die_outcome) +
+    geom_hline(yintercept = 1 / 6, col = "red", linetype = "dashed")
+```
+:::
+
+::::
+
+
+## Problem of the single case
+
+Some events cannot be repeated
+
+- Probability of Democrats/Republicans winning the 2024 election
+- Probability of the LA Chargers winning the 2024 Super Bowl
+
+. . .
+
+Or, probability that the null hypothesis is true
+
+. . .
+
+*For frequentist, probability is not meaningful for a single case*
+
+## Subjectivist Interpretation
+
+- State of one's mind; the belief of all outcomes
+    * Subjected to the constraints of:
+        * Axioms of probability
+        * That the person possessing the belief is rational
+
+. . .
+
+```{r}
+#| fig-width: 3
+#| fig-asp: 0.618
+#| out-width: "40%"
+#| layout-ncol: 2
+p0 <- ggplot(tibble(x = 1:6, y = 1 / 6), aes(x = x, y = y)) +
+    ylim(0, 0.5)
+p0 +
+    geom_bar(stat = "identity") +
+    labs(y = "Probability", x = "Person A")
+p0 %+% tibble(x = 1:6, y = c(.25, rep(.75 / 5, 5))) +
+    geom_bar(stat = "identity", fill = "skyblue") +
+    labs(y = "Probability", x = "Person B")
+```
+
+## Describing a Subjective Belief
+
+- Assign a value for every possible outcome
+    * Not an easy task
+
+- Use a *probability distribution* to approximate the belief
+    * Usually by following some conventions
+    * Some distributions preferred for computational efficiency
+
+# Probability Distribution
+
+## Probability Distributions
+
+- Discrete outcome: Probability **mass**
+
+- Continuous outcome: Probability **density**
+
+```{r}
+#| fig-width: 3
+#| fig-asp: 0.8
+#| out-width: 90%
+#| layout-ncol: 2
+# Probability mass
+two_dice_probs <- data.frame(x = 2:12,
+                             prob = c(table(outer(1:6, 1:6, FUN = "+"))) / 36)
+ggplot(two_dice_probs, aes(x = x, y = prob)) +
+    geom_col(width = 0.05) +
+    geom_point() +
+    scale_x_continuous(breaks = 2:12) +
+    labs(x = "Sum of two dice", y = "Probability mass")
+# Probability density
+shaded <- data.frame(x = seq(80, 80.5, length.out = 11))
+shaded$dens <- dnorm(shaded$x, mean = 78, sd = 5)
+ggplot(data.frame(x = c(75, 85)), aes(x = x)) +
+    stat_function(fun = dnorm, args = list(mean = 78, sd = 5)) +
+    geom_ribbon(data = shaded, aes(ymin = 0, ymax = dens), alpha = 0.3) +
+    labs(x = "Score", y = "Probability density")
+```
+
+## Probability Density
+
+- If $X$ is continuous, the probability of $X$ having any particular value $\to$ 0
+    * E.g., probability a person's height is 174.3689 cm
+
+. . .
+
+Instead, we obtain **probability density**: 
+$$
+P(x_0) = \lim_{\Delta x \to 0} \frac{P(x_0 < X < x_0 + \Delta x)}{\Delta x}
+$$
+
+## Normal Probability Density
+
+::: {.panel-tabset}
+
+### Math
+
+$$
+P(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{1}{2}\left[\frac{x - \mu}{\sigma}\right]^2\right)
+$$
+
+### Plot
+
+```{r}
+#| fig-align: center
+#| fig-width: 3.5
+#| fig-asp: .618
+#| out-width: 67%
+ggplot(tibble(x = c(-3, 3)), aes(x = x)) +
+    stat_function(fun = dnorm) +
+    labs(title = "Normal(mu = 0, sigma = 1)", y = "Density")
+```
+
+### R Code
+
+```{r}
+#| eval: false
+#| echo: true
+my_normal_density <- function(x, mu, sigma) {
+    exp(- ((x - mu) / sigma) ^2 / 2) / (sigma * sqrt(2 * pi))
+}
+```
+
+:::
+
+## Some Commonly Used Distributions
+
+[![](https://upload.wikimedia.org/wikipedia/commons/6/69/Relationships_among_some_of_univariate_probability_distributions.jpg)](https://commons.wikimedia.org/wiki/File:Relationships_among_some_of_univariate_probability_distributions.jpg)
+
+::: {.notes}
+Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Relationships_among_some_of_univariate_probability_distributions.jpg)
+:::
+
+## Summarizing a Probability Distribution
+
+::: {.callout}
+
+## Central tendency
+
+The center is usually the region of values with high plausibility
+
+- Mean, median, mode
+
+:::
+
+::: {.callout}
+
+## Dispersion
+
+How concentrated the region with high plausibility is
+
+- Variance, standard deviation
+- Median absolute deviation (MAD)
+
+:::
+
+## Summarizing a Probability Distribution (cont'd)
+
+::: {.callout}
+
+## Interval
+
+- One-sided
+- Symmetric
+- Highest density interval (HDI)
+
+:::
+
+```{r}
+#| fig-align: center
+#| fig-width: 4.5
+#| fig-asp: 0.5
+hdi_lower <- optim(.1,
+                   function(a) diff(qchisq(c(a, .8 + a), df = 4)),
+                   method = "L-BFGS-B",
+                   lower = 0, upper = .2)$par
+ggplot(data.frame(x = c(0, 10)), aes(x = x)) +
+    stat_function(fun = dchisq, args = list(df = 4)) +
+    geom_errorbarh(aes(xmin = 0, xmax = qchisq(.8, df = 4),
+                       y = 0, height = 0.02,
+                       color = "80% One-sided",
+                       linetype = "80% One-sided")) +
+    geom_errorbarh(aes(xmin = qchisq(.1, df = 4),
+                       xmax = qchisq(.9, df = 4),
+                       y = 0.03, height = 0.02,
+                       color = "80% Symmetric",
+                       linetype = "80% Symmetric")) +
+    geom_errorbarh(aes(xmin = qchisq(hdi_lower, df = 4),
+                       xmax = qchisq(hdi_lower + .8, df = 4),
+                       y = 0.06, height = 0.02,
+                       color = "80% HDI",
+                       linetype = "80% HDI")) +
+    labs(y = "Probability density", col = NULL, linetype = NULL)
+```
+
+## Multiple Variables
+
+- Joint probability: $P(X, Y)$
+- Marginal probability: $P(X)$, $P(Y)$
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/ef/One_die.jpeg){.absolute bottom=100 right=100 width="100" height="100"}
+
+|     | >= 4   | <= 3   | Marginal (odd/even) |
+|-----|--------|--------|:-----:|
+| odd | 1/6    | 2/6    | 3/6 |
+| even| 2/6    | 1/6    | 3/6 |
+| Marginal (>= 4 or <= 3) | 3/6  | 3/6  |  1  |
+
+## Multiple Continuous Variables
+
+- Left: Continuous $X$, Discrete $Y$
+- Right: Continuous $X$ and $Y$
+
+```{r}
+#| fig-width: 3.85
+#| fig-asp: 0.8
+#| out-width: 90%
+#| layout-ncol: 2
+# Normal Mixture
+ggplot(tibble(x = c(-4, 5)), aes(x = x)) +
+    stat_function(fun = function(x) dnorm(x, mean = -1) * 0.7) +
+    stat_function(fun = function(x) dnorm(x, mean = 2) * 0.3 + 1) +
+    labs(y = "y") +
+    scale_y_continuous(breaks = c(0, 1))
+# Bivariate Normal
+sim_df <- MASS::mvrnorm(100000,
+    mu = c(0, 0),
+    Sigma = matrix(c(1, 0.3, 0.3, 1),
+        nrow = 2
+    )
+)
+sim_df <- as.data.frame(sim_df)
+names(sim_df) <- c("x", "y")
+ggplot(sim_df, aes(x = x, y = y)) +
+    geom_density2d_filled(show.legend = TRUE, bins = 6) +
+    theme(legend.position = "top")
+```
+
+::: {.notes}
+Example of Mixed continuous-discrete variables: $X$ = continuous outcome, $Y$ = binary treatment indicator
+:::
+
+## Conditional Probability
+
+Knowing the value of $B$, the relative plausibility of each value of outcome $A$
+
+$$
+P(A \mid B_1) = \frac{P(A, B_1)}{P(B_1)}
+$$
+
+E.g., P(Alzheimer's) vs. P(Alzheimer's | family history)
+
+##
+
+E.g., Knowing that the number is odd
+
+|              | >= 4     | <= 3     |
+|--------------|----------|----------|
+| odd          | <span style="color:red">1/6</span>    | <span style="color:red">2/6</span>    |
+| ~~even~~     | ~~2/6~~  | ~~1/6~~  |
+| Marginal (>= 4 or <= 3) | 3/6  | 3/6  |
+
+. . .
+
+Conditional = Joint / Marginal
+
+|              | >= 4     | <= 3     |
+|--------------|----------|----------|
+| odd          | <span style="color:red">1/6</span>    | <span style="color:red">2/6</span>    |
+| Marginal (>= 4 or <= 3) | 3/6  | 3/6  |
+| Conditional (odd) | <span style="color:red">(1/6)</span> / <span style="color:purple">(3/6)</span> = 1/3 | <span style="color:red">(1/6)</span> / <span style="color:purple">(2/6)</span> = 2/3 |
+
+##
+
+### $P(A \mid B) \neq P(B \mid A)$
+
+- $P$(number is six | even number) = 1 / 3
+
+- $P$(even number | number is six) = 1
+
+::: {.callout-tip}
+
+## Another example:
+
+$P$(road is wet | it rains) vs. $P$(it rains | road is wet)
+
+- Problem: Not considering other conditions leading to wet road: sprinkler, street cleaning, etc
+
+Sometimes called the *confusion of the inverse* 
+
+:::
+
+## Independence
+
+::: {.callout-important appearance="simple"}
+$A$ and $B$ are independent if 
+
+$$
+P(A \mid B) = P(A)
+$$
+:::
+
+. . .
+
+E.g.,
+
+- $A$: A die shows five or more
+- $B$: A die shows an odd number
+
+. . .
+
+P(>= 5) = 1/3. P(>=5 | odd number) = ? P(>=5 | even number) = ?
+
+P(<= 5) = 2/3. P(<=5 | odd number) = ? P(>=5 | even number) = ?
+
+## Law of Total Probability
+
+From conditional $P(A \mid B)$ to marginal $P(A)$
+
+- If $B_1, B_2, \cdots, B_n$ are all possibilities for an event (so they add up to a probability of 1), then
+
+$$
+\begin{align}
+    P(A) & = P(A, B_1) + P(A, B_2) + \cdots + P(A, B_n)  \\
+         & = P(A \mid B_1)P(B_1) + P(A \mid B_2)P(B_2) + \cdots + P(A \mid B_n) P(B_n)  \\
+         & = \sum_{k = 1}^n P(A \mid B_k) P(B_k)
+\end{align}
+$$
+
+![](../docs/images/total_probability.png){.absolute bottom="70" right="70" width="400"}
+
+##
+
+::: {.callout-note}
+
+## Example
+
+Consider the use of a depression screening test for people with diabetes. For a person with depression, there is an 85% chance the test is positive. For a person without depression, there is a 28.4% chance the test is positive. Assume that 19.1% of people with diabetes have depression. If the test is given to 1,000 people with diabetes, around how many people will be tested positive? 
+
+:::
+
+::: aside
+Data source: https://doi.org/10.1016/s0165-0327(12)70004-6, https://doi.org/10.1371/journal.pone.0218512
+:::
+
+# Bayes Theorem
+
+{{< include bayes_theorem.qmd >}}

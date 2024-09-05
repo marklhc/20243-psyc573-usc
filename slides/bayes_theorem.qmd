@@ -1,0 +1,460 @@
+
+```{r}
+#| include: false
+#| file: _setting.R
+```
+
+::: {.content-hidden unless-profile="class"}
+
+##
+
+- HW 1 Recap
+
+:::
+
+##
+
+::: {.callout-important}
+
+## Bayes Theorem
+
+Given $P(A, B) = P(A \mid B) P(B) = P(B \mid A) P(A)$ (joint = conditional $\times$ marginal)
+
+$$
+P(B \mid A) = \dfrac{P(A \mid B) P(B)}{P(A)}
+$$
+
+Which says how we can go from $P(A \mid B)$ to $P(B \mid A)$
+
+:::
+
+::: {.callout-important appearance="simple"}
+
+Consider $B_i$ $(i = 1, \ldots, n)$ as one of the many possible mutually exclusive events
+
+$$
+\begin{aligned}
+  P(B_i \mid A) & = \frac{P(A \mid B_i) P(B_i)}{P(A)}  \\
+             & = \frac{P(A \mid B_i) P(B_i)}{\sum_{k = 1}^n P(A \mid B_k)P(B_k)}
+\end{aligned}
+$$
+
+:::
+
+## Example
+
+A police officer stops a driver *at random* and does a breathalyzer test for the driver. The breathalyzer is known to detect true drunkenness 100% of the time, but in **1%** of the cases, it gives a *false positive* when the driver is sober. We also know that in general, for every **1,000** drivers passing through that spot, **one** is driving drunk. Suppose that the breathalyzer shows positive for the driver. What is the probability that the driver is truly drunk?
+
+:::: {.content-hidden unless-profile="class"}
+
+##
+
+:::: {.columns}
+
+::: {.columns width="50%"}
+$P(\text{positive} \mid \text{drunk}) = 1$  
+$P(\text{positive} \mid \text{sober}) = 0.01$  
+:::
+
+::: {.columns width="50%"}
+$P(\text{drunk}) = 1 / 1000$  
+$P(\text{sober}) = 999 / 1000$
+:::
+
+::::
+
+. . .
+
+Using Bayes Theorem, 
+
+$$
+\begin{aligned}
+  & \quad\; P(\text{drunk} \mid \text{positive})  \\
+  & = \frac{P(\text{positive} \mid \text{drunk}) P(\text{drunk})}
+           {P(\text{positive} \mid \text{drunk}) P(\text{drunk}) + 
+            P(\text{positive} \mid \text{sober}) P(\text{sober})}  \\
+  & = \frac{1 \times 0.001}{1 \times 0.001 + 0.01 \times 0.999} \\
+  & = 100 / 1099 \approx 0.091
+\end{aligned}
+$$
+
+---
+
+So there is less than 10% chance that the driver is drunk even when the 
+breathalyzer shows positive.
+
+::: {.callout appearance="simple"}
+A. Even with the breathalyzer showing positive, it is still very likely that the driver is not drunk
+:::
+
+::: {.callout appearance="simple"}
+B. On the other hand, before the breathalyzer result, the person only has a 0.1% chance of being drunk. The breathalyzer result increases that probability to 9.1% (i.e., 91 times bigger)
+:::
+
+. . .
+
+Both (A) and (B) are true. It just means that there is still much uncertainty after one positive test
+
+::: {.notes}
+Having a second test may be helpful, assuming that what causes a false positive in the first test does not guarantee a false positive in the second test (otherwise, the second test is useless). That's one reason for not having consecutive tests too close in time.
+:::
+
+::::
+
+::: {visibility="hidden"}
+
+## Gigerenzer (2004)
+
+$p$ value = $P$(data | hypothesis), not $P$(hypothesis | data)
+
+. . .
+
+Consider:
+
+- $H_0$: the person is sober (not drunk)
+- data: breathalyzer result
+
+$p$ = $P$(positive | sober) = 0.01 $\rightarrow$ reject $H_0$ at .05 level
+
+. . .
+
+However, as we have seen, given that $P(H_0)$ is small, $P(H_0 \mid \text{data})$ is still small
+
+:::
+
+# Bayesian Data Analysis
+
+## Bayes Theorem in Data Analysis
+
+- Bayesian statistics
+    * more than applying Bayes theorem
+    * a way to quantify the plausibility of every possible value of some parameter $\theta$
+        * E.g., population mean, regression coefficient, etc
+    * Goal: **update one's Belief about $\theta$ based on the observed data $D$**
+
+## Going back to the example
+
+Goal: Find the probability that the person is drunk, given the test result
+
+Parameter ($\theta$): drunk (values: drunk, sober)
+
+Data ($D$): test (possible values: positive, negative)
+
+. . .
+
+Bayes theorem: $\underbrace{P(\theta \mid D)}_{\text{posterior}} = \underbrace{P(D \mid \theta)}_{\text{likelihood}} \underbrace{P(\theta)}_{\text{prior}} / \underbrace{P(D)}_{\text{marginal}}$
+
+##
+
+Usually, the marginal is not given, so
+
+$$
+P(\theta \mid D) = \frac{P(D \mid \theta)P(\theta)}{\sum_{\theta^*} P(D \mid \theta^*)P(\theta^*)}
+$$
+
+- $P(D)$ is also called *evidence*, or the *prior predictive distribution*
+    * E.g., probability of a positive test, regardless of the drunk status
+
+## Example 2
+
+```{r}
+#| eval: false
+#| echo: true
+shiny::runGitHub("plane_search", "marklhc")
+```
+
+- Try choosing different priors. How does your choice affect the posterior?
+- Try adding more data. How does the number of data points affect the posterior?
+
+##
+
+The posterior is a synthesis of two sources of information: prior and data (likelihood)
+
+Generally speaking, a narrower distribution (i.e., smaller variance) means more/stronger information
+
+- Prior: narrower = more informative/strong
+- Likelihood: narrower = more data/more informative
+
+::: {visibility="hidden"}
+
+##
+
+Exercise:
+
+- Shiny app with a parameter (fixed)
+- Ask students to formulate a prior distribution
+- Flip a coin, and compute the posterior by hand (with R)
+- Use the posterior as prior, flip again, and obtain the posterior again
+- Compare to use the original prior with two coin flips (both numbers and plots)
+- Flip 10 times, and show how the posterior change (using animation in `knitr`)
+:::
+
+## Priors
+
+*Prior beliefs used in data analysis must be admissible by a skeptical scientific audience (Kruschke, 2015, p. 115)*
+
+. . . 
+
+- **Flat**, noninformative, vague
+- **Weakly informative**: common sense, logic
+- **Informative**: publicly agreed facts or theories
+
+```{r}
+#| layout-ncol: 3
+#| fig-width: 2.5
+#| fig-asp: 0.8
+#| out-width: "95%"
+source("_common_dnorm_trunc.R")
+ggplot(tibble(x = c(0, 1)), aes(x = x)) +
+    stat_function(fun = dunif) +
+    ylim(0, 5) +
+    labs(y = "", x = expression(theta), title = "Flat")
+ggplot(tibble(x = c(0, 1)), aes(x = x)) +
+    stat_function(fun = dnorm_trunc, args = list(mean = .8, sd = .5)) +
+    ylim(0, 5) +
+    labs(y = "", x = expression(theta), title = "Weakly informative")
+ggplot(tibble(x = c(0, 1)), aes(x = x)) +
+    stat_function(fun = dnorm_trunc, args = list(mean = .8, sd = .1)) +
+    ylim(0, 5) +
+    labs(y = "", x = expression(theta), title = "Informative")
+```
+
+## Likelihood/Model/Data $P(D \mid \theta, M)$
+
+*Probability of observing the data **as a function of the parameter(s)***
+
+- Also written as $L(\theta \mid D)$ or $L(\theta; D)$ to emphasize it is a function of $\theta$
+- Also depends on a chosen model $M$: $P(D \mid \theta, M)$
+
+```{r}
+#| layout-ncol: 2
+#| fig-width: 3.5
+#| fig-asp: 0.618
+#| out-width: "90%"
+set.seed(1535)
+ngrid <- 101
+grid <- seq(0, 1, length.out = ngrid)
+x <- rnorm_trunc(10, mean = 0.3, sd = 0.2)
+x1 <- x[1:2]
+lik_x1 <- compute_lik(x1)
+lik_x <- compute_lik(x)
+ggplot(
+    tibble(x = grid, dens = lik_x1),
+    aes(x = x, y = dens)
+) +
+    geom_line() +
+    labs(
+        x = expression(theta), y = "Likelihood (Scaled)",
+        title = "2 data points"
+    ) +
+    geom_point(
+        data = tibble(x = x1), aes(x = x), y = 0,
+        shape = 1
+    )
+ggplot(
+    tibble(x = grid, dens = lik_x),
+    aes(x = x, y = dens)
+) +
+    geom_line() +
+    labs(
+        x = expression(theta), y = "Likelihood (Scaled)",
+        title = "10 data points"
+    ) +
+    geom_point(
+        data = tibble(x = x), aes(x = x), y = 0,
+        shape = 1
+    )
+```
+
+## Likelihood of Multiple Data Points
+
+1. Given $D_1$, obtain *posterior* $P(\theta \mid D_1)$
+2. Use $P(\theta \mid D_1)$ as *prior*, given $D_2$, obtain posterior $P(\theta \mid D_1, D_2)$
+
+The posterior is the same as getting $D_2$ first then $D_1$, or $D_1$ and $D_2$ together, if
+
+- **data-order invariance** is satisfied, which means
+- $D_1$ and $D_2$ are **exchangeable**
+
+##
+
+::: {.callout-important}
+
+## Exchangeability
+
+Joint distribution of the data does not depend on the order of the data
+
+E.g., $P(D_1, D_2, D_3) = P(D_2, D_3, D_1) = P(D_3, D_2, D_1)$
+
+:::
+
+. . .
+
+Example of non-exchangeable data:
+
+- First child = male, second = female vs. first = female, second = male
+- $D_1, D_2$ from School 1; $D_3, D_4$ from School 2 vs. $D_1, D_3$ from School 1; $D_2, D_4$ from School 2
+
+# Bernoulli Example
+
+## Coin Flipping: Binary Outcomes
+
+Q: Estimate the probability that a coin gives a head
+
+- $\theta$: parameter, probability of a head
+
+Flip a coin, showing head
+
+- $y = 1$ for showing head
+
+## Multiple Binary Outcomes
+
+**Bernoulli model** is natural for binary outcomes
+
+Assume the flips are exchangeable given $\theta$,
+$$
+\begin{align}
+P(y_1, \ldots, y_N \mid \theta) &= \prod_{i = 1}^N P(y_i \mid \theta) \\
+&= \theta^z (1 - \theta)^{N - z}
+\end{align}
+$$
+
+:::: {.columns}
+
+::: {.column width=45%}
+$z$ = # of heads; $N$ = # of flips
+:::
+
+::: {.column width=55%}
+```{r}
+#| label: lik
+#| fig-width: 4
+#| fig-asp: 0.618
+#| fig-align: center
+#| out-width: "80%"
+lik <- function(th, num_flips = 4, num_heads = 1) {
+    th ^ num_heads * (1 - th) ^ (num_flips - num_heads)
+}
+# Plot the likelihood
+ggplot(data.frame(th = c(0, 1)), aes(x = th)) +
+    # `stat_function` for plotting a function
+    stat_function(fun = lik) +
+    # use `expression()` to get greek letters
+    labs(x = expression(theta),
+    y = "Likelihood with N = 4 and z = 1")
+```
+:::
+
+::::
+
+## Posterior
+
+### Same posterior, two ways to think about it
+
+:::: {.columns}
+
+::: {.column width=50%}
+
+::: {.callout-note appearance="simple"}
+
+## Prior belief, weighted by the likelihood
+
+$$
+P(\theta \mid y) \propto \underbrace{P(y \mid \theta)}_{\text{weights}} P(\theta)
+$$
+
+:::
+
+:::
+
+::: {.column width=50%}
+
+::: {.callout-note appearance="simple"}
+
+## Likelihood, weighted by the strength of prior belief
+
+$$
+P(\theta \mid y) \propto \underbrace{P(\theta)}_{\text{weights}} P(\theta \mid y)
+$$
+
+:::
+
+:::
+
+::::
+
+## Grid Approximation
+
+See Exercise 2
+
+Discretize a continuous parameter into a finite number of discrete values
+
+For example, with $\theta$: [0, 1] $\to$ [.05, .15, .25, ..., .95]
+
+```{r}
+#| ref-label: lik, grid-lik
+#| layout-ncol: 2
+#| fig-asp: 0.8
+#| fig-width: 3.5
+#| fig-align: center
+#| out-width: "90%"
+```
+
+```{r}
+#| label: grid-lik
+#| include: false
+# Define a grid for the parameter
+grid_df <- data.frame(th = seq(0, 1, by = 0.05)) |>
+    mutate(
+        # Use our previously defined lik() function
+        py_th = lik(th, num_flips = 4, num_heads = 1)
+    )
+ggplot(data = grid_df, aes(x = th)) +
+    geom_col(aes(x = th + 0.005, y = py_th / sum(py_th)), width = 0.01,
+    ) +
+    labs(y = "Likelihood (in grid)", x = expression(theta)) +
+    theme(legend.position = "top")
+```
+
+# Criticism of Bayesian Methods
+
+## Criticism of "Subjectivity"
+
+Main controversy: subjectivity in choosing a prior
+
+- Two people with the same data can get different results because of different chosen priors
+
+::: {.callout-note}
+
+## Counters to the Subjectivity Criticism
+
+- With enough data, different priors hardly make a difference
+- Prior: just a way to express the degree of ignorance
+    * One can choose a weakly informative prior so that the Influence of subjective Belief is small
+
+:::
+
+##
+
+::: {.callout-note}
+
+## Counters to the Subjectivity Criticism 2
+    
+Subjectivity in choosing a prior is
+
+- Same as in choosing a model, which is also done in frequentist statistics
+- Relatively strong prior needs to be justified, 
+    * Open to critique from other researchers
+- Inter-subjectivity $\rightarrow$ Objectivity
+
+:::
+
+::: {.callout-note}
+
+## Counters to the Subjectivity Criticism 3
+    
+The prior is a way to incorporate previous research efforts to accumulate scientific evidence
+
+> Why should we ignore all previous literature every time we conduct a new study?
+
+:::

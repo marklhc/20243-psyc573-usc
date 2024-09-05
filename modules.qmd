@@ -75,7 +75,7 @@ By the end of this module, you will be able to
 
 ## Slides
 
-<!-- <div>
+<div>
 
 ```{=html}
 <iframe class="slide-deck" src="slides/probability_and_bayes_theorem.html" width="525" height="350"></iframe>
@@ -83,7 +83,7 @@ By the end of this module, you will be able to
 
 </div>
 
-[Link to HTML slides](/slides/probability_and_bayes_theorem.qmd){target="_blank"} -->
+[Link to HTML slides](/slides/probability_and_bayes_theorem.qmd){target="_blank"}
 
 :::
 
