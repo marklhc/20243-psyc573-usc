@@ -261,6 +261,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model With Stan</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04c-poisson-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Poisson Model</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item">
@@ -343,8 +349,8 @@ window.Quarto = {
 <span class="header-section-number">4.2</span> Beta-Bernoulli Example</h2>
 <p>We will be using a built-in data set in R about patients diagnosed with AIDS in Australia before July 1, 1991. Here is a description of the variables (from the R documentation):</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Australian_States_and_Territories_with_CDS.jpg" class="external img-fluid figure-img"></p>
-<figcaption>Cpc chine at English Wikipedia, CC BY-SA 3.0 <a href="https://creativecommons.org/licenses/by-sa/3.0" class="uri">https://creativecommons.org/licenses/by-sa/3.0</a>, via Wikimedia Commons</figcaption></figure>
+<figure class="figure"><p><img src="images/Australia_states_1931-present.png" class="img-fluid figure-img"></p>
+<figcaption>Figure from https://commons.wikimedia.org/wiki/File:Australia_states_1931-present.png</figcaption></figure>
 </div>
 <ul>
 <li>
@@ -431,7 +437,7 @@ y_i \sim \text{Bern}(\theta) \text{ for }i = 1, 2, \ldots, N
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["state"],"name":[1],"type":["fct"],"align":["left"]},{"label":["sex"],"name":[2],"type":["fct"],"align":["left"]},{"label":["diag"],"name":[3],"type":["int"],"align":["right"]},{"label":["death"],"name":[4],"type":["int"],"align":["right"]},{"label":["status"],"name":[5],"type":["fct"],"align":["left"]},{"label":["T.categ"],"name":[6],"type":["fct"],"align":["left"]},{"label":["age"],"name":[7],"type":["int"],"align":["right"]}],"data":[{"1":"NSW","2":"M","3":"10905","4":"11081","5":"D","6":"hs","7":"35","_rn_":"1"},{"1":"NSW","2":"F","3":"10961","4":"11504","5":"D","6":"id","7":"30","_rn_":"31"},{"1":"QLD","2":"F","3":"9495","4":"9753","5":"D","6":"blood","7":"66","_rn_":"1802"},{"1":"QLD","2":"M","3":"10770","4":"11504","5":"D","6":"hsid","7":"29","_rn_":"1811"},{"1":"VIC","2":"M","3":"8499","4":"8568","5":"A","6":"hs","7":"43","_rn_":"2129"},{"1":"VIC","2":"M","3":"9055","4":"9394","5":"A","6":"hs","7":"29","_rn_":"2137"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["state"],"name":[1],"type":["fct"],"align":["left"]},{"label":["sex"],"name":[2],"type":["fct"],"align":["left"]},{"label":["diag"],"name":[3],"type":["int"],"align":["right"]},{"label":["death"],"name":[4],"type":["int"],"align":["right"]},{"label":["status"],"name":[5],"type":["fct"],"align":["left"]},{"label":["T.categ"],"name":[6],"type":["fct"],"align":["left"]},{"label":["age"],"name":[7],"type":["int"],"align":["right"]}],"data":[{"1":"NSW","2":"M","3":"10905","4":"11081","5":"A","6":"hs","7":"35","_rn_":"1"},{"1":"NSW","2":"F","3":"10961","4":"11504","5":"D","6":"id","7":"30","_rn_":"31"},{"1":"QLD","2":"F","3":"9495","4":"9753","5":"D","6":"blood","7":"66","_rn_":"1802"},{"1":"QLD","2":"M","3":"10770","4":"11504","5":"D","6":"hsid","7":"29","_rn_":"1811"},{"1":"VIC","2":"M","3":"8499","4":"8568","5":"A","6":"hs","7":"43","_rn_":"2129"},{"1":"VIC","2":"M","3":"9055","4":"9394","5":"D","6":"hs","7":"29","_rn_":"2137"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -512,20 +518,24 @@ Proof of Conjugacy*
   &amp; \propto \theta^{a - 1} (1 - \theta)^{b - 1}
 \end{align}\]</span></p>
 <p>Where <span class="math inline">\(\mathrm{B}(\cdot)\)</span> is the beta function which is not very important for the class. As the density function is a function of <span class="math inline">\(\theta\)</span>, it suffices to write only the terms that involve <span class="math inline">\(\theta\)</span>.</p>
-<p>Similarly, <span class="math display">\[P(\mathbf{y} \mid \theta) \propto \theta^z (1 - \theta)^{N - z}.\]</span></p>
+<p>Similarly, <span class="math display">\[
+P(\mathbf{y} \mid \theta) \propto \theta^z (1 - \theta)^{N - z}.
+\]</span></p>
 <p>Therefore,</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[
+\begin{aligned}
   P(\theta \mid \mathbf{y}) &amp; \propto P(y \mid \theta) P(\theta)  \\
                 &amp; \propto \theta^z (1 - \theta)^{N - z}
                           \theta^{a - 1} (1 - \theta)^{b - 1}  \\
                 &amp; = \theta^{a + z - 1} (1 - \theta)^{b + N - z - 1}.
-\end{align}\]</span></p>
+\end{aligned}
+\]</span></p>
 <p>If we let <span class="math inline">\(a^* = a + z\)</span>, <span class="math inline">\(b^* = b + N - z\)</span>, we can see that <span class="math inline">\(P(\theta \mid \mathbf{y})\)</span> is in the same form as the prior with <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> replaced by <span class="math inline">\(a^*\)</span> and <span class="math inline">\(b^*\)</span>. Therefore, the posterior is also a beta distribution. So the beta distribution is a conjugate prior for the Bernoulli model.</p>
 </div>
 </div>
 <p>In this example, we will choose a <em>weakly informative</em> Beta(2, 2) prior, which represents a weak belief as below:</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">tibble</span><span class="op">(</span>th <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">th</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>th <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">th</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">dbeta</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>shape1 <span class="op">=</span> <span class="fl">2</span>, shape2 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylim</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">labs</span><span class="op">(</span>y <span class="op">=</span> <span class="st">""</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">"Beta(2, 2)"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -573,7 +583,7 @@ Don’t Be Stubborn
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">loglik</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">th</span>, <span class="va">N</span> <span class="op">=</span> <span class="fl">1082</span> <span class="op">+</span> <span class="fl">1761</span>, <span class="va">z</span> <span class="op">=</span> <span class="fl">1761</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">z</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">th</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">N</span> <span class="op">-</span> <span class="va">z</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">th</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">tibble</span><span class="op">(</span>th <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.61</span>, <span class="fl">0.63</span><span class="op">)</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">th</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>th <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.61</span>, <span class="fl">0.63</span><span class="op">)</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">th</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">loglik</span>, n <span class="op">=</span> <span class="fl">501</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span>, y <span class="op">=</span> <span class="st">"Log-likelihood"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
