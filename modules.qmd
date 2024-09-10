@@ -62,16 +62,16 @@ By the end of this module, you will be able to
 
 ## Task List
 
-1. Review the resources (slides and [notes][10])
+1. Review the resources (slides and [notes][9])
 2. Attend the Tuesday and Thursday class meetings
 3. Complete the assigned readings
     * [McElreath ch. 2][2], 3
     * [James ch. 1][3]
-4. Complete Homework 2 (see instruction on Brightspace)
+4. Complete Homework 2 (due in two weeks; see instruction on Brightspace)
 
 [2]: https://xcelab.net/rmpubs/sr2/statisticalrethinking2_chapters1and2.pdf
 [3]: https://jamesstone.sites.sheffield.ac.uk/books/bayes-rule/an-introduction-to-bayes-rule-chapter-1
-[5]: docs/02-probability.html
+[9]: docs/02-probability.html
 
 ## Slides
 
@@ -84,6 +84,43 @@ By the end of this module, you will be able to
 </div>
 
 [Link to HTML slides](/slides/probability_and_bayes_theorem.qmd){target="_blank"}
+
+# Week 3
+
+## Week Learning Objectives
+
+By the end of this module, you will be able to 
+
+- Apply **Bayesian workflow** to analyze real data with a **Bernoulli** model
+- Explain the idea of a **conjugate prior**
+- Summarize the posterior distribution using **simulations**
+- Apply Bayesian **terminology** in summarizing the posterior
+- Use R to perform **prior** and **posterior predictive checks**
+
+## Task List
+
+1. Review the resources (slides and [notes][11])
+2. Attend the Tuesday and Thursday class meetings
+3. Complete the assigned readings
+    * [Johnson ch. 3][6]
+    * [Getting started with CmdStanR][10]
+4. Complete Homework 2 (see instruction on Brightspace)
+
+[6]: https://www.bayesrulesbook.com/chapter-3
+[10]: https://mc-stan.org/cmdstanr/articles/cmdstanr.html
+[11]: docs/04-beta-bernoulli-model.html
+
+## Slides
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="slides/one_parameter_models.html" width="525" height="350"></iframe>
+```
+
+</div>
+
+[Link to HTML slides](/slides/one_parameter_models.qmd){target="_blank"}
 
 :::
 
