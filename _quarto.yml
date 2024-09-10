@@ -4,9 +4,9 @@ project:
     - "*.qmd"
     - "!usc-psyc573-notes/"
     - "!hw/"
-    - "!slides/probability_and_bayes_theorem.qmd"
   resources:
     - "docs/"
+    - "!_class/"
 
 website:
   title: "PSYC 573 Bayesian Data Analysis (2024 Fall)"
