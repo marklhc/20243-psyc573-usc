@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
-date: "August 7, 2024"
-date-modified: "August 19, 2024"
+date: "August 27, 2024"
+date-modified: "August 27, 2024"
 format: metropolis-revealjs
 ---
 
@@ -21,7 +21,7 @@ format: metropolis-revealjs
 
 ## Navigate the Course
 
-- Course website
+- Course website: <https://marklhc.quarto.pub/psyc573-2024fall/>
 - Brightspace (for assignment submission)
 
 ## Quiz
@@ -347,6 +347,35 @@ pp_dens +
 # R, RStudio, and Quarto
 
 # Homework 1
+
+## Quiz Q1
+
+When was Thomas Bayes' work on Bayes' theorem published posthumously?
+
+a. around 1760s
+b. around 1920s
+c. around 1950s
+d. around 1980s
+
+## Quiz Q2
+
+In a Bayesian data analysis, which of the following contains the main result?
+
+a. Prior
+b. Likelihood
+c. Posterior
+
+## Quiz Q3
+
+What is the posterior distribution?
+
+a. The distribution of the data given the parameters.
+b. The distribution of the parameters before observing the data.
+c. The distribution of the parameters after observing the data.
+d. The distribution of the data alone.
+
+P.S.: Parameter = unknown quantity/attribute of interest (e.g., effectiveness of vaccine)
+
 :::
 
 ## Bibliography

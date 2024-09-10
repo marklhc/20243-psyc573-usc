@@ -10,6 +10,10 @@
 
 - HW 1 Recap
 
+## Quiz
+
+In a population, 20% of people carries a gene that makes them more prone to disease X. 10% of the people with the gene gets disease X, whereas only 5% of those without the gene gets disease X. What is the probability that a random person gets disease X?
+
 :::
 
 ##
