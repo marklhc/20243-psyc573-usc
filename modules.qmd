@@ -3,6 +3,24 @@ title: "Modules"
 format: html
 ---
 
+```{r}
+#| include: false
+library(checkdown)
+right_ans <- paste("Correct", emo::ji("+1"))
+wrong_ans <- "That is not correct. Rewatch the video if needed"
+
+# Use callout box for checkdown questions
+practice_question <- function(qtitle, ctitle = "Check your learning", ...) {
+    cat("::: {.callout-note icon=false}\n")
+    cat("\n## ", ctitle, "\n")
+    cat("\n", qtitle, "\n")
+    print(
+        check_question(right = right_ans, wrong = wrong_ans, ...)
+    )
+    cat("\n:::\n")
+}
+```
+
 ::: {.panel-tabset}
 
 # Week 1
@@ -110,6 +128,101 @@ By the end of this module, you will be able to
 [10]: https://mc-stan.org/cmdstanr/articles/cmdstanr.html
 [11]: docs/04-beta-bernoulli-model.html
 
+## Lecture Videos
+
+::: {.panel-tabset}
+
+### Recap of the Beta-Bernoulli Model
+
+{{< video https://youtu.be/TAzX24EpAT4 >}}
+
+```{r}
+#| echo: false
+#| results: asis
+practice_question(
+    "If we do not use a conjugate prior for the Bernoulli model, what is the distribution of the posterior $\\theta$?",
+    answer = "Something not from a known family of distributions", 
+    options = c("Normal distribution", 
+                "Beta distribution",
+                "Something not from a known family of distributions"), 
+    type = "radio"
+)
+```
+
+### Summarizing the Posterior
+
+{{< video https://youtu.be/qb9jDxDd4W0 >}}
+
+```{r}
+#| echo: false
+library(ggplot2)
+ggplot() +
+    stat_function(fun = dchisq, args = list(df = 3), 
+                  geom = "area", fill = "lightblue",
+                  alpha = 0.5, xlim = c(qchisq(.1, df = 3), qchisq(.9, df = 3))) + 
+    stat_function(fun = dchisq, args = list(df = 3)) +
+    lims(x = c(0, 10))
+```
+
+```{r}
+#| echo: false
+#| results: asis
+practice_question(
+    "In the posterior distribution above, the interval bounding the shaded area is",
+    answer = "an equal-tailed credible interval", 
+    options = c("an equal-tailed credible interval", 
+                "a highest density interval",
+                "a one-sided credible interval"), 
+    type = "radio"
+)
+```
+
+### Posterior Predictive Check
+
+{{< video https://youtu.be/UuVMwpnzWU0 >}}
+
+```{r}
+#| echo: false
+#| results: asis
+practice_question(
+    "A researcher asks a participant 10 true/false questions to assess their statistics knowledge. A posterior predictive distribution in this case would be",
+    answer = "a probability distribution of future true/false responses from the participant, based on the posterior distribution of their statistics knowledge", 
+    options = c("a probability distribution of the knowledge of the participant, given their answers", 
+                "a probability distribution of future true/false responses from the participant, based on the posterior distribution of their statistics knowledge",
+                "a probability distribution of the observed responses from the participant, based on the prior distribution of their statistics knowledge",
+                "a probability distribution of the knowledge of the participant, before incorporating the observed responses from them"), 
+    type = "radio"
+)
+```
+
+### Stan (Part 1)
+
+{{< video https://youtu.be/TuAZR3Y2EAo >}}
+
+### Stan (Part 2)
+
+{{< video https://youtu.be/T2XpwCe6aJU >}}
+
+```{r}
+#| echo: false
+#| results: asis
+practice_question(
+    "Which of the following is the correct way to declare a data variable of responses on a 5-point scale from N participants?",
+    answer = "array[N] int<lower=1, upper=5> y;", 
+    options = c("array[N] int<lower=1, upper=5> y", 
+                "array[N] int<lower=1, upper=5> y;",
+                "vector[N] y",
+                "vector[N] y;"), 
+    type = "radio"
+)
+```
+
+### Stan (Part 3)
+
+{{< video https://youtu.be/GQzhUeXeS0o >}}
+
+:::
+
 ## Slides
 
 <div>
@@ -121,6 +234,43 @@ By the end of this module, you will be able to
 </div>
 
 [Link to HTML slides](/slides/one_parameter_models.qmd){target="_blank"}
+
+# Week 4
+
+## Week Learning Objectives
+
+By the end of this module, you will be able to 
+
+- Explain the logic of a **hierarchical model**
+- Apply the **binomial distribution** to describe the sum of multiple Bernoulli trials
+- Program a hierarchical binomial model in Stan
+- Analyze secondary data using a hierarchical normal model (i.e., random-effect meta-analysis)
+
+## Task List
+
+1. Review the resources (slides and [notes][17])
+2. Watch the lecture videos below (to be posted)
+3. Complete the assigned readings
+    * McElreath ch. 13.1, 13.2
+    * [Gabry et al. (2019)][12]
+    * [Gelman et al. (2010)][13]
+4. Start working on Homework 3 (see instruction on Brightspace)
+
+[12]: https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12378
+[13]: https://arxiv.org/abs/2011.01808
+[17]: docs/05-hierarchical-models.html
+
+## Slides
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="slides/hierarchical_models.html" width="525" height="350"></iframe>
+```
+
+</div>
+
+[Link to HTML slides](/slides/hierarchical_models.qmd){target="_blank"}
 
 :::
 
