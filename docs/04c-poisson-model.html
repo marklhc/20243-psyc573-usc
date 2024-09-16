@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./05-hierarchical-models.html" rel="next">
 <link href="./04b-beta-bernoulli-stan.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -269,6 +269,23 @@ window.Quarto = {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-hierarchical-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hierarchical Models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -298,9 +315,9 @@ window.Quarto = {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-beta-bernoulli-model.html">Week 3</a></li><li class="breadcrumb-item"><a href="./04c-poisson-model.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Poisson Model</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title">
+<div class="quarto-title-block"><div><h1 class="title">
 <span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Poisson Model</span>
-</h1>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -898,6 +915,8 @@ Figure&nbsp;6.1: Posterior predictive check.
 <p>So the estimated rate is 1,027 per year, with a 90% CI [1,009, 1,044].</p>
 
 
+<!-- -->
+
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -987,6 +1006,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
@@ -1323,11 +1393,186 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./05-hierarchical-models.html" class="pagination-link" aria-label="Hierarchical Models">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hierarchical Models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb118" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Poisson Model</span></span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a>comma <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">2</span>L) <span class="fu">format</span>(x, <span class="at">digits =</span> digits, <span class="at">big.mark =</span> <span class="st">","</span>)</span>
+<span id="cb118-8"><a href="#cb118-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych, <span class="at">include.only =</span> <span class="st">"pairs.panels"</span>)  <span class="co"># only load one function</span></span>
+<span id="cb118-9"><a href="#cb118-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb118-10"><a href="#cb118-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmdstanr)</span>
+<span id="cb118-11"><a href="#cb118-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb118-12"><a href="#cb118-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
+<span id="cb118-13"><a href="#cb118-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-14"><a href="#cb118-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-15"><a href="#cb118-15" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance="minimal"}</span>
+<span id="cb118-16"><a href="#cb118-16" aria-hidden="true" tabindex="-1"></a>Please note: This document uses count data on fatal police shootings.</span>
+<span id="cb118-17"><a href="#cb118-17" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb118-18"><a href="#cb118-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-19"><a href="#cb118-19" aria-hidden="true" tabindex="-1"></a>I came across this data set from <span class="ot">&lt;https://andrewpwheeler.com/2021/01/11/checking-a-poisson-distribution-fit-an-example-with-officer-involved-shooting-deaths-wapo-data-r-functions/&gt;</span></span>
+<span id="cb118-20"><a href="#cb118-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-21"><a href="#cb118-21" aria-hidden="true" tabindex="-1"></a>As explained <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/washingtonpost/data-police-shootings)</span>, the data are by the Washington Post in an effort to record every fatal shooting in the United States by a police officer since January 1, 2015.</span>
+<span id="cb118-22"><a href="#cb118-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-23"><a href="#cb118-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Research Question</span></span>
+<span id="cb118-24"><a href="#cb118-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-25"><a href="#cb118-25" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; What's the rate of fatal police shootings in the United States per year?</span></span>
+<span id="cb118-26"><a href="#cb118-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-27"><a href="#cb118-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Import and Pre-Processing</span></span>
+<span id="cb118-28"><a href="#cb118-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-29"><a href="#cb118-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r oid}</span></span>
+<span id="cb118-30"><a href="#cb118-30" aria-hidden="true" tabindex="-1"></a><span class="in">#| message: false</span></span>
+<span id="cb118-31"><a href="#cb118-31" aria-hidden="true" tabindex="-1"></a><span class="in"># Import data</span></span>
+<span id="cb118-32"><a href="#cb118-32" aria-hidden="true" tabindex="-1"></a><span class="in">fps_dat &lt;- read_csv(</span></span>
+<span id="cb118-33"><a href="#cb118-33" aria-hidden="true" tabindex="-1"></a><span class="in">    "https://github.com/washingtonpost/data-police-shootings/raw/master/v2/fatal-police-shootings-data.csv"</span></span>
+<span id="cb118-34"><a href="#cb118-34" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb118-35"><a href="#cb118-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-36"><a href="#cb118-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-37"><a href="#cb118-37" aria-hidden="true" tabindex="-1"></a>We first count the data by year</span>
+<span id="cb118-38"><a href="#cb118-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-39"><a href="#cb118-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r count-by-year}</span></span>
+<span id="cb118-40"><a href="#cb118-40" aria-hidden="true" tabindex="-1"></a><span class="in"># Create a year column</span></span>
+<span id="cb118-41"><a href="#cb118-41" aria-hidden="true" tabindex="-1"></a><span class="in">fps_dat &lt;- fps_dat |&gt;</span></span>
+<span id="cb118-42"><a href="#cb118-42" aria-hidden="true" tabindex="-1"></a><span class="in">    mutate(year = format(date, format = "%Y"))</span></span>
+<span id="cb118-43"><a href="#cb118-43" aria-hidden="true" tabindex="-1"></a><span class="in"># Filter out the latest year</span></span>
+<span id="cb118-44"><a href="#cb118-44" aria-hidden="true" tabindex="-1"></a><span class="in">fps_1523 &lt;- filter(fps_dat, year != max(year))</span></span>
+<span id="cb118-45"><a href="#cb118-45" aria-hidden="true" tabindex="-1"></a><span class="in">count(fps_1523, year)</span></span>
+<span id="cb118-46"><a href="#cb118-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-47"><a href="#cb118-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-48"><a href="#cb118-48" aria-hidden="true" tabindex="-1"></a>Our interest is the rate of occurrence of fatal police shootings per year. Denote this as $\theta$. The *support* of $\theta$ is $[0, \infty)$.</span>
+<span id="cb118-49"><a href="#cb118-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-50"><a href="#cb118-50" aria-hidden="true" tabindex="-1"></a>A *Poisson model* is usually a starting point for analyzing count data in a fixed amount of time. It assumes that the data follow a Poisson distribution with a fixed rate parameter:</span>
+<span id="cb118-51"><a href="#cb118-51" aria-hidden="true" tabindex="-1"></a>$$P(y \mid \theta) \propto \theta^y \exp(- \theta),$$</span>
+<span id="cb118-52"><a href="#cb118-52" aria-hidden="true" tabindex="-1"></a>where the data can be any non-negative integers (no decimals).</span>
+<span id="cb118-53"><a href="#cb118-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-54"><a href="#cb118-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## Choosing a Prior</span></span>
+<span id="cb118-55"><a href="#cb118-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-56"><a href="#cb118-56" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">Gamma distribution</span><span class="co">](https://en.wikipedia.org/wiki/Gamma_distribution)</span> has support: $[0, \infty)$, and is a conjugate family to the Poisson model. The Gamma distribution has the form</span>
+<span id="cb118-57"><a href="#cb118-57" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb118-58"><a href="#cb118-58" aria-hidden="true" tabindex="-1"></a>P(\theta) \propto \theta^{a - 1} \exp(-b \theta),</span>
+<span id="cb118-59"><a href="#cb118-59" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb118-60"><a href="#cb118-60" aria-hidden="true" tabindex="-1"></a>where $a$ is the prior incidence rate, and $b$ is the number of prior data points to control for the prior strength. Here, without much prior knowledge, I would simply guess there is one fatal shooting per state per month, so 600 shootings per year, but my belief is pretty weak, so I will assume a prior $b$ of 1 / 200 (one observation is one year). The $a$ will be 600 * $b$ = 3.</span>
+<span id="cb118-61"><a href="#cb118-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-62"><a href="#cb118-62" aria-hidden="true" tabindex="-1"></a>Here's a plot:</span>
+<span id="cb118-63"><a href="#cb118-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-66"><a href="#cb118-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb118-67"><a href="#cb118-67" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">th =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>)), <span class="fu">aes</span>(<span class="at">x =</span> th)) <span class="sc">+</span></span>
+<span id="cb118-68"><a href="#cb118-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dgamma,</span>
+<span id="cb118-69"><a href="#cb118-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">3</span>, <span class="at">rate =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">200</span>)) <span class="sc">+</span></span>
+<span id="cb118-70"><a href="#cb118-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="fu">expression</span>(theta))</span>
+<span id="cb118-71"><a href="#cb118-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-72"><a href="#cb118-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-73"><a href="#cb118-73" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb118-74"><a href="#cb118-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-75"><a href="#cb118-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model Fitting in Stan</span></span>
+<span id="cb118-76"><a href="#cb118-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-79"><a href="#cb118-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{stan}</span></span>
+<span id="cb118-80"><a href="#cb118-80" aria-hidden="true" tabindex="-1"></a><span class="in">#| output.var: pois_mod</span></span>
+<span id="cb118-81"><a href="#cb118-81" aria-hidden="true" tabindex="-1"></a><span class="in">#| file: "stan_code/gamma-poisson-pp.stan"</span></span>
+<span id="cb118-82"><a href="#cb118-82" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false</span></span>
+<span id="cb118-83"><a href="#cb118-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-84"><a href="#cb118-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-85"><a href="#cb118-85" aria-hidden="true" tabindex="-1"></a><span class="fu">### Compiling</span></span>
+<span id="cb118-86"><a href="#cb118-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-89"><a href="#cb118-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb118-90"><a href="#cb118-90" aria-hidden="true" tabindex="-1"></a>pois_mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"stan_code/gamma-poisson-pp.stan"</span>)</span>
+<span id="cb118-91"><a href="#cb118-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-92"><a href="#cb118-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-93"><a href="#cb118-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data for Stan</span></span>
+<span id="cb118-94"><a href="#cb118-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-97"><a href="#cb118-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb118-98"><a href="#cb118-98" aria-hidden="true" tabindex="-1"></a>fps_standata <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb118-99"><a href="#cb118-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">length</span>(<span class="fu">unique</span>(fps_1523<span class="sc">$</span>year)),</span>
+<span id="cb118-100"><a href="#cb118-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">count</span>(fps_1523, year)[, <span class="dv">2</span>, <span class="at">drop =</span> <span class="cn">TRUE</span>],  <span class="co"># integer</span></span>
+<span id="cb118-101"><a href="#cb118-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">prior_a =</span> <span class="dv">3</span>,</span>
+<span id="cb118-102"><a href="#cb118-102" aria-hidden="true" tabindex="-1"></a>    <span class="at">prior_b =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">200</span></span>
+<span id="cb118-103"><a href="#cb118-103" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb118-104"><a href="#cb118-104" aria-hidden="true" tabindex="-1"></a>fps_standata</span>
+<span id="cb118-105"><a href="#cb118-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-106"><a href="#cb118-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-107"><a href="#cb118-107" aria-hidden="true" tabindex="-1"></a><span class="fu">### MCMC Sampling</span></span>
+<span id="cb118-108"><a href="#cb118-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-111"><a href="#cb118-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb118-112"><a href="#cb118-112" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> pois_mod<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb118-113"><a href="#cb118-113" aria-hidden="true" tabindex="-1"></a>    fps_standata,</span>
+<span id="cb118-114"><a href="#cb118-114" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">500</span>  <span class="co"># show progress every 500 iterations</span></span>
+<span id="cb118-115"><a href="#cb118-115" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb118-116"><a href="#cb118-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-117"><a href="#cb118-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-118"><a href="#cb118-118" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb118-119"><a href="#cb118-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-120"><a href="#cb118-120" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prior predictive check</span></span>
+<span id="cb118-121"><a href="#cb118-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-122"><a href="#cb118-122" aria-hidden="true" tabindex="-1"></a>Here I plot simulated trends from the prior distribution.</span>
+<span id="cb118-123"><a href="#cb118-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-126"><a href="#cb118-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb118-127"><a href="#cb118-127" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract predicted y from prior</span></span>
+<span id="cb118-128"><a href="#cb118-128" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"prior_ytilde"</span>, <span class="at">format =</span> <span class="st">"draws_matrix"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb118-129"><a href="#cb118-129" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ppd_intervals</span>(<span class="at">x =</span> <span class="dv">2015</span><span class="sc">:</span><span class="dv">2023</span>) <span class="sc">+</span></span>
+<span id="cb118-130"><a href="#cb118-130" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Predicted count"</span>)</span>
+<span id="cb118-131"><a href="#cb118-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-132"><a href="#cb118-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-133"><a href="#cb118-133" aria-hidden="true" tabindex="-1"></a>The check is on whether the numbers seem reasonably reflective of my knowledge.</span>
+<span id="cb118-134"><a href="#cb118-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-135"><a href="#cb118-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## Posterior</span></span>
+<span id="cb118-136"><a href="#cb118-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-137"><a href="#cb118-137" aria-hidden="true" tabindex="-1"></a>With a conjugate prior, the posterior distribution is Gamma($a$ + $\sum_{i = 1}^N y_i$, $b$ + $N$).</span>
+<span id="cb118-138"><a href="#cb118-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-141"><a href="#cb118-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb118-142"><a href="#cb118-142" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">th =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>)), <span class="fu">aes</span>(<span class="at">x =</span> th)) <span class="sc">+</span></span>
+<span id="cb118-143"><a href="#cb118-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dgamma,</span>
+<span id="cb118-144"><a href="#cb118-144" aria-hidden="true" tabindex="-1"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fu">nrow</span>(fps_1523),</span>
+<span id="cb118-145"><a href="#cb118-145" aria-hidden="true" tabindex="-1"></a>                <span class="at">rate =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">200</span> <span class="sc">+</span> fps_standata<span class="sc">$</span>N), <span class="at">n =</span> <span class="dv">501</span>) <span class="sc">+</span></span>
+<span id="cb118-146"><a href="#cb118-146" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="fu">expression</span>(theta))</span>
+<span id="cb118-147"><a href="#cb118-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-148"><a href="#cb118-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-149"><a href="#cb118-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Posterior Predictive Check</span></span>
+<span id="cb118-150"><a href="#cb118-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-151"><a href="#cb118-151" aria-hidden="true" tabindex="-1"></a>Plot predicted data from the posterior against observed data</span>
+<span id="cb118-152"><a href="#cb118-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-155"><a href="#cb118-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb118-156"><a href="#cb118-156" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-ppc</span></span>
+<span id="cb118-157"><a href="#cb118-157" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb118-158"><a href="#cb118-158" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 4</span></span>
+<span id="cb118-159"><a href="#cb118-159" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Posterior predictive check."</span></span>
+<span id="cb118-160"><a href="#cb118-160" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap:</span></span>
+<span id="cb118-161"><a href="#cb118-161" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Interval plots."</span></span>
+<span id="cb118-162"><a href="#cb118-162" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Ribbon plots."</span></span>
+<span id="cb118-163"><a href="#cb118-163" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract predicted y from posterior</span></span>
+<span id="cb118-164"><a href="#cb118-164" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"ytilde"</span>, <span class="at">format =</span> <span class="st">"draws_matrix"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb118-165"><a href="#cb118-165" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ppc_intervals</span>(</span>
+<span id="cb118-166"><a href="#cb118-166" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> fps_standata<span class="sc">$</span>y,</span>
+<span id="cb118-167"><a href="#cb118-167" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="dv">2015</span><span class="sc">:</span><span class="dv">2023</span></span>
+<span id="cb118-168"><a href="#cb118-168" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb118-169"><a href="#cb118-169" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Predicted count"</span>)</span>
+<span id="cb118-170"><a href="#cb118-170" aria-hidden="true" tabindex="-1"></a><span class="co"># We can also use `bayesplot::ppc_ribbon()`</span></span>
+<span id="cb118-171"><a href="#cb118-171" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"ytilde"</span>, <span class="at">format =</span> <span class="st">"draws_matrix"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb118-172"><a href="#cb118-172" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ppc_ribbon</span>(</span>
+<span id="cb118-173"><a href="#cb118-173" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> fps_standata<span class="sc">$</span>y,</span>
+<span id="cb118-174"><a href="#cb118-174" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="dv">2015</span><span class="sc">:</span><span class="dv">2023</span></span>
+<span id="cb118-175"><a href="#cb118-175" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb118-176"><a href="#cb118-176" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Predicted count"</span>)</span>
+<span id="cb118-177"><a href="#cb118-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-178"><a href="#cb118-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-179"><a href="#cb118-179" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip appearance="simple"}</span>
+<span id="cb118-180"><a href="#cb118-180" aria-hidden="true" tabindex="-1"></a>From @fig-ppc, one can see that the fit is not good, as there is a large gap between the model prediction and the observed data from recent years. This suggests a need to incorporate the time trend in the model.</span>
+<span id="cb118-181"><a href="#cb118-181" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb118-182"><a href="#cb118-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-183"><a href="#cb118-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summary of Posterior</span></span>
+<span id="cb118-184"><a href="#cb118-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-185"><a href="#cb118-185" aria-hidden="true" tabindex="-1"></a>For now, we will proceed with interpreting the posterior distribution, despite the apparent misfit.</span>
+<span id="cb118-186"><a href="#cb118-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-189"><a href="#cb118-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb118-190"><a href="#cb118-190" aria-hidden="true" tabindex="-1"></a>(summ_theta <span class="ot">&lt;-</span> fit<span class="sc">$</span><span class="fu">summary</span>(<span class="st">"theta"</span>))</span>
+<span id="cb118-191"><a href="#cb118-191" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb118-192"><a href="#cb118-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-193"><a href="#cb118-193" aria-hidden="true" tabindex="-1"></a>So the estimated rate is <span class="in">`{r} comma(summ_theta[["mean"]])`</span> per year, with a 90% CI <span class="co">[</span><span class="ot">`{r} paste(comma(unlist(summ_theta[c("q5", "q95")])), collapse = ", ")`</span><span class="co">]</span>.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">

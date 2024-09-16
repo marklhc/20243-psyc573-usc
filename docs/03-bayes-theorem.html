@@ -312,6 +312,23 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-hierarchical-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hierarchical Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -347,7 +364,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-probability.html">Week 2</a></li><li class="breadcrumb-item"><a href="./03-bayes-theorem.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bayes’s Theorem</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bayes’s Theorem</span></h1>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bayes’s Theorem</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -1209,6 +1226,8 @@ Figure&nbsp;3.8: Bernoulli posterior distribution
 <p>In this note, we discretized <span class="math inline">\(\theta\)</span> into a finite number of grid points to compute the posterior, mainly for pedagogical purposes. A big limitation is that our posterior will have no density for values other than the chosen grid points. While increasing the number of grid points (e.g., 1,000) can give more precision, the result is still not truly continuous. A bigger issue is that the computation breaks down when there is more than one parameter; if there are <span class="math inline">\(p\)</span> parameters, with 1,000 grid points per parameter, one needs to evaluate the posterior probability for <span class="math inline">\(1,000^p\)</span> grid points, which is not feasible even with modern computers. So more efficient algorithms, namely Markov chain Monte Carlo (MCMC) methods, will be introduced as we progress in the course.</p>
 
 
+<!-- -->
+
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-johnson2022" class="csl-entry" role="listitem">
 Johnson, A. A., Ott, M. Q., &amp; Dogucu, M. (2022). <em>Bayes rules! An introduction to Bayesian modeling with R</em>. CRC Press.
@@ -1314,6 +1333,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
@@ -1656,7 +1726,690 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Beta-Bernoulli Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb28" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Bayes's Theorem</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">comment =</span> <span class="st">"#&gt;"</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>comma <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">2</span>L) <span class="fu">format</span>(x, <span class="at">digits =</span> digits, <span class="at">big.mark =</span> <span class="st">","</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey92"</span>)))</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>The Bayes's theorem is, surprisingly (or unsurprisingly), very simple:</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>::: {.callout-important appearance="simple" icon="false"}</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>P(B \mid A) = \frac{P(A \mid B) P(B)}{P(A)}</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>More generally, we can expand it to incorporate the law of total probability to make it more applicable to data analysis. Consider $B_i$ as one of the $n$ many possible mutually exclusive events, then</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  P(B_i \mid A) &amp; = \frac{P(A \mid B_i) P(B_i)}{P(A)}  <span class="sc">\\</span></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>             &amp; = \frac{P(A \mid B_i) P(B_i)}</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>                      {P(A \mid B_1)P(B_1) + P(A \mid B_2)P(B_2) + \cdots + </span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>                       P(A \mid B_n)P(B_n)} <span class="sc">\\</span></span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>             &amp; = \frac{P(A \mid B_i) P(B_i)}{\sum_{k = 1}^n P(A \mid B_k)P(B_k)}</span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>If $B_i$ is a continuous variable, we will replace the sum by an integral, </span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>P(B_i \mid A) = \frac{P(A \mid B_i) P(B_i)}{\int_k P(A \mid B_k)P(B_k)}</span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>The denominator is not important for practical Bayesian analysis, therefore, it is sufficient to write the above equality as </span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a>::: {.callout-important appearance="simple" icon="false"}</span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a>P(B_i \mid A) \propto P(A \mid B_i) P(B_i)</span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example 1: Base rate fallacy (From Wikipedia)  </span></span>
+<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### Question {.unnumbered}</span></span>
+<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a>A police officer stops a driver *at random* and does a breathalyzer test for the driver. The breathalyzer is known to detect true drunkenness 100% of the time, but in 1% of the cases, it gives a false positive when the driver is sober. We also know that, in general, for every 1,000 drivers passing through that spot, one is driving drunk. Suppose that the breathalyzer shows positive for the driver. What is the probability that the driver is truly drunk?</span>
+<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### Solution {.unnumbered}</span></span>
+<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a>$P(\text{positive} | \text{drunk}) = 1$  </span>
+<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a>$P(\text{positive} | \text{sober}) = 0.01$  </span>
+<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a>$P(\text{drunk}) = 1 / 1000$  </span>
+<span id="cb28-64"><a href="#cb28-64" aria-hidden="true" tabindex="-1"></a>$P(\text{sober}) = 999 / 1000$</span>
+<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a>Using Bayes' Theorem, </span>
+<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a>  P(\text{drunk} | \text{positive}) </span>
+<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a>  &amp; = \frac{P(\text{positive} | \text{drunk}) P(\text{drunk})}</span>
+<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a>           {P(\text{positive} | \text{drunk}) P(\text{drunk}) + </span>
+<span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a>            P(\text{positive} | \text{sober}) P(\text{sober})}  <span class="sc">\\</span></span>
+<span id="cb28-74"><a href="#cb28-74" aria-hidden="true" tabindex="-1"></a>  &amp; = \frac{1 \times 0.001}{1 \times 0.001 + 0.01 \times 0.999} <span class="sc">\\</span></span>
+<span id="cb28-75"><a href="#cb28-75" aria-hidden="true" tabindex="-1"></a>  &amp; = 100 / 1099 \approx 0.091</span>
+<span id="cb28-76"><a href="#cb28-76" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb28-77"><a href="#cb28-77" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-78"><a href="#cb28-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-79"><a href="#cb28-79" aria-hidden="true" tabindex="-1"></a>So there is less than a 10% chance that the driver is drunk even when the breathalyzer shows positive. </span>
+<span id="cb28-80"><a href="#cb28-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-81"><a href="#cb28-81" aria-hidden="true" tabindex="-1"></a>You can verify that with a simulation using R:</span>
+<span id="cb28-82"><a href="#cb28-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-85"><a href="#cb28-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-86"><a href="#cb28-86" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: sim-ex1</span></span>
+<span id="cb28-87"><a href="#cb28-87" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4</span>)</span>
+<span id="cb28-88"><a href="#cb28-88" aria-hidden="true" tabindex="-1"></a>truly_drunk <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"drunk"</span>, <span class="dv">100</span>), <span class="fu">rep</span>(<span class="st">"sober"</span>, <span class="dv">100</span> <span class="sc">*</span> <span class="dv">999</span>))</span>
+<span id="cb28-89"><a href="#cb28-89" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(truly_drunk)</span>
+<span id="cb28-90"><a href="#cb28-90" aria-hidden="true" tabindex="-1"></a>breathalyzer_test <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(truly_drunk <span class="sc">==</span> <span class="st">"drunk"</span>,</span>
+<span id="cb28-91"><a href="#cb28-91" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If drunk, 100% chance of showing positive</span></span>
+<span id="cb28-92"><a href="#cb28-92" aria-hidden="true" tabindex="-1"></a>    <span class="st">"positive"</span>,</span>
+<span id="cb28-93"><a href="#cb28-93" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If not drunk, 1% chance of showing positive</span></span>
+<span id="cb28-94"><a href="#cb28-94" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"positive"</span>, <span class="st">"negative"</span>), <span class="dv">999000</span>,</span>
+<span id="cb28-95"><a href="#cb28-95" aria-hidden="true" tabindex="-1"></a>        <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">01</span>, .<span class="dv">99</span>)</span>
+<span id="cb28-96"><a href="#cb28-96" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-97"><a href="#cb28-97" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-98"><a href="#cb28-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the probability p(positive | sober)</span></span>
+<span id="cb28-99"><a href="#cb28-99" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(breathalyzer_test[truly_drunk <span class="sc">==</span> <span class="st">"sober"</span>])</span>
+<span id="cb28-100"><a href="#cb28-100" aria-hidden="true" tabindex="-1"></a><span class="co"># 997 / 99900 = 0.00997998, so the error rate is less than 1%</span></span>
+<span id="cb28-101"><a href="#cb28-101" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, Check the probability p(drunk | positive)</span></span>
+<span id="cb28-102"><a href="#cb28-102" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(truly_drunk[breathalyzer_test <span class="sc">==</span> <span class="st">"positive"</span>])</span>
+<span id="cb28-103"><a href="#cb28-103" aria-hidden="true" tabindex="-1"></a><span class="co"># 100 / (100 + 997) = 0.0911577, which is only 9.1%!</span></span>
+<span id="cb28-104"><a href="#cb28-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-105"><a href="#cb28-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-106"><a href="#cb28-106" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-107"><a href="#cb28-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-108"><a href="#cb28-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bayesian Statistics</span></span>
+<span id="cb28-109"><a href="#cb28-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-110"><a href="#cb28-110" aria-hidden="true" tabindex="-1"></a><span class="in">`Bayesian statistics`</span> is a way to estimate some parameter $\theta$ (i.e., some quantities of interest, such as the population mean, regression coefficient, etc) by applying Bayes' Theorem.</span>
+<span id="cb28-111"><a href="#cb28-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-112"><a href="#cb28-112" aria-hidden="true" tabindex="-1"></a>::: {.callout-important appearance="simple" icon="false"}</span>
+<span id="cb28-113"><a href="#cb28-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-114"><a href="#cb28-114" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-115"><a href="#cb28-115" aria-hidden="true" tabindex="-1"></a>P(\theta | D) \propto P(D | \theta) P(\theta)</span>
+<span id="cb28-116"><a href="#cb28-116" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-117"><a href="#cb28-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-118"><a href="#cb28-118" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-119"><a href="#cb28-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-120"><a href="#cb28-120" aria-hidden="true" tabindex="-1"></a>There are three components in the above equality:</span>
+<span id="cb28-121"><a href="#cb28-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-122"><a href="#cb28-122" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$P(D | \theta)$, the probability that you observe data $D$, given the parameter $\theta$; this is called the <span class="in">`likelihood`</span> (Note: It is the likelihood of $\theta$, but probability about $y$)</span>
+<span id="cb28-123"><a href="#cb28-123" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$P(\theta)$, the probability distribution $\theta$, without referring to the data $D$. This usually requires appeals to one's degree of belief, and so is called the *prior*</span>
+<span id="cb28-124"><a href="#cb28-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$P(\theta | y)$, the updated probability distribution of $\theta$, after observing the data $D$; this is called the *posterior*</span>
+<span id="cb28-125"><a href="#cb28-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-126"><a href="#cb28-126" aria-hidden="true" tabindex="-1"></a>On the other hand, classical/frequentist statistics focuses solely on the likelihood function.<span class="ot">[^lik]</span> In Bayesian statistics, the goal is to update one's belief about $\theta$ based on the observed data $D$.</span>
+<span id="cb28-127"><a href="#cb28-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-128"><a href="#cb28-128" aria-hidden="true" tabindex="-1"></a><span class="ot">[^lik]: </span>The likelihood function in classical/frequentist statistics is usually written as $P(y; \theta)$. You will notice that here, I write the likelihood for classical/frequentist statistics to be different from the one used in Bayesian statistics. This is intentional: In frequentist conceptualization, $\theta$ is fixed, and it does not make sense to talk about the probability of $\theta$. This implies that we cannot condition on $\theta$, because conditional probability is defined only when $P(\theta)$ is defined.</span>
+<span id="cb28-129"><a href="#cb28-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-130"><a href="#cb28-130" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example 2: Locating a Plane</span></span>
+<span id="cb28-131"><a href="#cb28-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-132"><a href="#cb28-132" aria-hidden="true" tabindex="-1"></a>Consider a highly simplified scenario of locating a missing plane in the sea. Assume that we know the plane, before missing, happened to be flying at the same latitude, heading west across the Pacific, so we only need to find its longitude. We want to go out to collect debris (data) so that we can narrow the location ($\theta$) of the plane down.</span>
+<span id="cb28-133"><a href="#cb28-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-134"><a href="#cb28-134" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb28-135"><a href="#cb28-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-136"><a href="#cb28-136" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prior</span></span>
+<span id="cb28-137"><a href="#cb28-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-138"><a href="#cb28-138" aria-hidden="true" tabindex="-1"></a>We start with our prior. Assume that we have some rough idea where the plane should be, so we express our belief in a probability distribution like the following:</span>
+<span id="cb28-139"><a href="#cb28-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-142"><a href="#cb28-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-143"><a href="#cb28-143" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-prior-ex1</span></span>
+<span id="cb28-144"><a href="#cb28-144" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Prior distribution."</span></span>
+<span id="cb28-145"><a href="#cb28-145" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 3</span></span>
+<span id="cb28-146"><a href="#cb28-146" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-asp: 0.8</span></span>
+<span id="cb28-147"><a href="#cb28-147" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb28-148"><a href="#cb28-148" aria-hidden="true" tabindex="-1"></a>dnorm_trunc <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">ll =</span> <span class="dv">0</span>, <span class="at">ul =</span> <span class="dv">1</span>) {</span>
+<span id="cb28-149"><a href="#cb28-149" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, mean, sd) <span class="sc">/</span> (<span class="fu">pnorm</span>(ul, mean, sd) <span class="sc">-</span> <span class="fu">pnorm</span>(ll, mean, sd))</span>
+<span id="cb28-150"><a href="#cb28-150" aria-hidden="true" tabindex="-1"></a>    out[x <span class="sc">&gt;</span> ul <span class="sc">|</span> x <span class="sc">&lt;</span> ll] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb28-151"><a href="#cb28-151" aria-hidden="true" tabindex="-1"></a>    out</span>
+<span id="cb28-152"><a href="#cb28-152" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-153"><a href="#cb28-153" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb28-154"><a href="#cb28-154" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm_trunc, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> .<span class="dv">8</span>, <span class="at">sd =</span> .<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb28-155"><a href="#cb28-155" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb28-156"><a href="#cb28-156" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">location</span>(theta)), <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb28-157"><a href="#cb28-157" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"West"</span>, <span class="st">"East"</span>))</span>
+<span id="cb28-158"><a href="#cb28-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-159"><a href="#cb28-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-160"><a href="#cb28-160" aria-hidden="true" tabindex="-1"></a>which says that our belief is that the plane is about twice more likely to be towards the east than towards the west. Below are two other options for priors (out of infinitely many), one providing virtually no information and the other encoding stronger information:</span>
+<span id="cb28-161"><a href="#cb28-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-164"><a href="#cb28-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-165"><a href="#cb28-165" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-more-prior-ex1</span></span>
+<span id="cb28-166"><a href="#cb28-166" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb28-167"><a href="#cb28-167" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-asp: 0.8</span></span>
+<span id="cb28-168"><a href="#cb28-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 3</span></span>
+<span id="cb28-169"><a href="#cb28-169" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "More options for prior distribution."</span></span>
+<span id="cb28-170"><a href="#cb28-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap:</span></span>
+<span id="cb28-171"><a href="#cb28-171" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Noninformative prior."</span></span>
+<span id="cb28-172"><a href="#cb28-172" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Informative prior."</span></span>
+<span id="cb28-173"><a href="#cb28-173" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb28-174"><a href="#cb28-174" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb28-175"><a href="#cb28-175" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dunif) <span class="sc">+</span></span>
+<span id="cb28-176"><a href="#cb28-176" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb28-177"><a href="#cb28-177" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">location</span>(theta)), <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb28-178"><a href="#cb28-178" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"West"</span>, <span class="st">"East"</span>))</span>
+<span id="cb28-179"><a href="#cb28-179" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb28-180"><a href="#cb28-180" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm_trunc, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> .<span class="dv">8</span>, <span class="at">sd =</span> .<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb28-181"><a href="#cb28-181" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb28-182"><a href="#cb28-182" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">location</span>(theta)), <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb28-183"><a href="#cb28-183" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"West"</span>, <span class="st">"East"</span>))</span>
+<span id="cb28-184"><a href="#cb28-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-185"><a href="#cb28-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-186"><a href="#cb28-186" aria-hidden="true" tabindex="-1"></a>The prior is chosen to reflect the researcher's belief, so different researchers will likely formulate a different prior for the same problem, and that's okay as long as the prior is reasonable and justified. Later, we will learn that in regular Bayesian analyses, with a moderate sample size, different priors generally only make negligible differences.</span>
+<span id="cb28-187"><a href="#cb28-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-188"><a href="#cb28-188" aria-hidden="true" tabindex="-1"></a><span class="fu">### Likelihood</span></span>
+<span id="cb28-189"><a href="#cb28-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-190"><a href="#cb28-190" aria-hidden="true" tabindex="-1"></a>Now, assume that we have collected debris in the locations shown in the graph, </span>
+<span id="cb28-191"><a href="#cb28-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-194"><a href="#cb28-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-195"><a href="#cb28-195" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-likelihood-ex1</span></span>
+<span id="cb28-196"><a href="#cb28-196" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb28-197"><a href="#cb28-197" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 3</span></span>
+<span id="cb28-198"><a href="#cb28-198" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-asp: 0.8</span></span>
+<span id="cb28-199"><a href="#cb28-199" aria-hidden="true" tabindex="-1"></a>qnorm_trunc <span class="ot">&lt;-</span> <span class="cf">function</span>(p, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">ll =</span> <span class="dv">0</span>, <span class="at">ul =</span> <span class="dv">1</span>) {</span>
+<span id="cb28-200"><a href="#cb28-200" aria-hidden="true" tabindex="-1"></a>    cdf_ll <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(ll, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd)</span>
+<span id="cb28-201"><a href="#cb28-201" aria-hidden="true" tabindex="-1"></a>    cdf_ul <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(ul, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd)</span>
+<span id="cb28-202"><a href="#cb28-202" aria-hidden="true" tabindex="-1"></a>    <span class="fu">qnorm</span>(cdf_ll <span class="sc">+</span> p <span class="sc">*</span> (cdf_ul <span class="sc">-</span> cdf_ll), <span class="at">mean =</span> mean, <span class="at">sd =</span> sd)</span>
+<span id="cb28-203"><a href="#cb28-203" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-204"><a href="#cb28-204" aria-hidden="true" tabindex="-1"></a>rnorm_trunc <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">ll =</span> <span class="dv">0</span>, <span class="at">ul =</span> <span class="dv">1</span>) {</span>
+<span id="cb28-205"><a href="#cb28-205" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb28-206"><a href="#cb28-206" aria-hidden="true" tabindex="-1"></a>    <span class="fu">qnorm_trunc</span>(p, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd, <span class="at">ll =</span> ll, <span class="at">ul =</span> ul)</span>
+<span id="cb28-207"><a href="#cb28-207" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-208"><a href="#cb28-208" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">101</span>)</span>
+<span id="cb28-209"><a href="#cb28-209" aria-hidden="true" tabindex="-1"></a>compute_lik <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">pts =</span> grid, <span class="at">sd =</span> <span class="fl">0.2</span>, <span class="at">binwidth =</span> .<span class="dv">01</span>) {</span>
+<span id="cb28-210"><a href="#cb28-210" aria-hidden="true" tabindex="-1"></a>    lik_vals <span class="ot">&lt;-</span> <span class="fu">vapply</span>(x, dnorm_trunc,</span>
+<span id="cb28-211"><a href="#cb28-211" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean =</span> pts, <span class="at">sd =</span> sd,</span>
+<span id="cb28-212"><a href="#cb28-212" aria-hidden="true" tabindex="-1"></a>        <span class="at">FUN.VALUE =</span> <span class="fu">numeric</span>(<span class="fu">length</span>(pts))</span>
+<span id="cb28-213"><a href="#cb28-213" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-214"><a href="#cb28-214" aria-hidden="true" tabindex="-1"></a>    lik <span class="ot">&lt;-</span> <span class="fu">apply</span>(lik_vals, <span class="dv">1</span>, prod)</span>
+<span id="cb28-215"><a href="#cb28-215" aria-hidden="true" tabindex="-1"></a>    lik <span class="sc">/</span> <span class="fu">sum</span>(lik) <span class="sc">/</span> binwidth</span>
+<span id="cb28-216"><a href="#cb28-216" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-217"><a href="#cb28-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-218"><a href="#cb28-218" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4</span>)</span>
+<span id="cb28-219"><a href="#cb28-219" aria-hidden="true" tabindex="-1"></a>dat_x <span class="ot">&lt;-</span> <span class="fu">rnorm_trunc</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="fl">0.6</span>, <span class="at">sd =</span> <span class="fl">0.2</span>)</span>
+<span id="cb28-220"><a href="#cb28-220" aria-hidden="true" tabindex="-1"></a>lik_x <span class="ot">&lt;-</span> <span class="fu">compute_lik</span>(dat_x)</span>
+<span id="cb28-221"><a href="#cb28-221" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb28-222"><a href="#cb28-222" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="at">x =</span> grid, <span class="at">dens =</span> lik_x),</span>
+<span id="cb28-223"><a href="#cb28-223" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> dens)</span>
+<span id="cb28-224"><a href="#cb28-224" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb28-225"><a href="#cb28-225" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb28-226"><a href="#cb28-226" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb28-227"><a href="#cb28-227" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> dat_x), <span class="fu">aes</span>(<span class="at">x =</span> x), <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb28-228"><a href="#cb28-228" aria-hidden="true" tabindex="-1"></a>        <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"red"</span></span>
+<span id="cb28-229"><a href="#cb28-229" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-230"><a href="#cb28-230" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Likelihood (Scaled)"</span>, <span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">location</span>(theta))) <span class="sc">+</span></span>
+<span id="cb28-231"><a href="#cb28-231" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"West"</span>, <span class="st">"East"</span>))</span>
+<span id="cb28-232"><a href="#cb28-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-233"><a href="#cb28-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-234"><a href="#cb28-234" aria-hidden="true" tabindex="-1"></a><span class="fu">### Posterior</span></span>
+<span id="cb28-235"><a href="#cb28-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-236"><a href="#cb28-236" aria-hidden="true" tabindex="-1"></a>Now, from Bayes's Theorem,</span>
+<span id="cb28-237"><a href="#cb28-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-238"><a href="#cb28-238" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-239"><a href="#cb28-239" aria-hidden="true" tabindex="-1"></a>\text{Posterior Probability} \propto \text{Prior Probability} \times</span>
+<span id="cb28-240"><a href="#cb28-240" aria-hidden="true" tabindex="-1"></a>                                       \text{Likelihood}</span>
+<span id="cb28-241"><a href="#cb28-241" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-242"><a href="#cb28-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-243"><a href="#cb28-243" aria-hidden="true" tabindex="-1"></a>So we can simply multiply the prior probabilities and the likelihood to get the posterior probability for every location. A rescaling step is needed to ensure that the area under the curve will be 1, which is usually performed by the software.</span>
+<span id="cb28-244"><a href="#cb28-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-247"><a href="#cb28-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-248"><a href="#cb28-248" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-posterior-ex1</span></span>
+<span id="cb28-249"><a href="#cb28-249" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb28-250"><a href="#cb28-250" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 4</span></span>
+<span id="cb28-251"><a href="#cb28-251" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-asp: 0.618</span></span>
+<span id="cb28-252"><a href="#cb28-252" aria-hidden="true" tabindex="-1"></a>update_probs <span class="ot">&lt;-</span> <span class="cf">function</span>(prior_probs, lik, <span class="at">binwidth =</span> .<span class="dv">01</span>) {</span>
+<span id="cb28-253"><a href="#cb28-253" aria-hidden="true" tabindex="-1"></a>    post_probs <span class="ot">&lt;-</span> prior_probs <span class="sc">*</span> lik</span>
+<span id="cb28-254"><a href="#cb28-254" aria-hidden="true" tabindex="-1"></a>    post_probs <span class="sc">/</span> <span class="fu">sum</span>(post_probs) <span class="sc">/</span> binwidth</span>
+<span id="cb28-255"><a href="#cb28-255" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-256"><a href="#cb28-256" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb28-257"><a href="#cb28-257" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(</span>
+<span id="cb28-258"><a href="#cb28-258" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun =</span> dnorm_trunc, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> .<span class="dv">8</span>, <span class="at">sd =</span> .<span class="dv">5</span>),</span>
+<span id="cb28-259"><a href="#cb28-259" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">linetype =</span> <span class="st">"Prior"</span>, <span class="at">col =</span> <span class="st">"Prior"</span>)</span>
+<span id="cb28-260"><a href="#cb28-260" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-261"><a href="#cb28-261" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(</span>
+<span id="cb28-262"><a href="#cb28-262" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> grid, <span class="at">dens =</span> lik_x),</span>
+<span id="cb28-263"><a href="#cb28-263" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
+<span id="cb28-264"><a href="#cb28-264" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> x, <span class="at">y =</span> dens, <span class="at">linetype =</span> <span class="st">"Likelihood"</span>,</span>
+<span id="cb28-265"><a href="#cb28-265" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="st">"Likelihood"</span></span>
+<span id="cb28-266"><a href="#cb28-266" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb28-267"><a href="#cb28-267" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-268"><a href="#cb28-268" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(</span>
+<span id="cb28-269"><a href="#cb28-269" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb28-270"><a href="#cb28-270" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> grid,</span>
+<span id="cb28-271"><a href="#cb28-271" aria-hidden="true" tabindex="-1"></a>            <span class="at">dens =</span> <span class="fu">update_probs</span>(</span>
+<span id="cb28-272"><a href="#cb28-272" aria-hidden="true" tabindex="-1"></a>                <span class="fu">dnorm_trunc</span>(grid, .<span class="dv">8</span>, .<span class="dv">5</span>),</span>
+<span id="cb28-273"><a href="#cb28-273" aria-hidden="true" tabindex="-1"></a>                lik_x</span>
+<span id="cb28-274"><a href="#cb28-274" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb28-275"><a href="#cb28-275" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb28-276"><a href="#cb28-276" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> dens, <span class="at">col =</span> <span class="st">"Posterior"</span>, <span class="at">linetype =</span> <span class="st">"Posterior"</span>)</span>
+<span id="cb28-277"><a href="#cb28-277" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-278"><a href="#cb28-278" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb28-279"><a href="#cb28-279" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">location</span>(theta)), <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb28-280"><a href="#cb28-280" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"West"</span>, <span class="st">"East"</span>)) <span class="sc">+</span></span>
+<span id="cb28-281"><a href="#cb28-281" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="st">""</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb28-282"><a href="#cb28-282" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_linetype_manual</span>(<span class="st">""</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"twodash"</span>, <span class="st">"solid"</span>, <span class="st">"dashed"</span>))</span>
+<span id="cb28-283"><a href="#cb28-283" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-284"><a href="#cb28-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-285"><a href="#cb28-285" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-286"><a href="#cb28-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-287"><a href="#cb28-287" aria-hidden="true" tabindex="-1"></a>As illustrated below, the posterior distribution is a synthesis of (a) the prior and (b) the data (likelihood).</span>
+<span id="cb28-288"><a href="#cb28-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-289"><a href="#cb28-289" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb28-290"><a href="#cb28-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-291"><a href="#cb28-291" aria-hidden="true" tabindex="-1"></a><span class="fu">### Influence of Prior</span></span>
+<span id="cb28-292"><a href="#cb28-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-293"><a href="#cb28-293" aria-hidden="true" tabindex="-1"></a>@fig-posterior-ex1-prior shows what happen with a stronger prior:</span>
+<span id="cb28-294"><a href="#cb28-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-297"><a href="#cb28-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-298"><a href="#cb28-298" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-posterior-ex1-prior</span></span>
+<span id="cb28-299"><a href="#cb28-299" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb28-300"><a href="#cb28-300" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 4</span></span>
+<span id="cb28-301"><a href="#cb28-301" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-asp: 0.618</span></span>
+<span id="cb28-302"><a href="#cb28-302" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb28-303"><a href="#cb28-303" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(</span>
+<span id="cb28-304"><a href="#cb28-304" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun =</span> dnorm_trunc, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> .<span class="dv">8</span>, <span class="at">sd =</span> .<span class="dv">1</span>),</span>
+<span id="cb28-305"><a href="#cb28-305" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">linetype =</span> <span class="st">"Prior"</span>, <span class="at">col =</span> <span class="st">"Prior"</span>)</span>
+<span id="cb28-306"><a href="#cb28-306" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-307"><a href="#cb28-307" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(</span>
+<span id="cb28-308"><a href="#cb28-308" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> grid, <span class="at">dens =</span> lik_x),</span>
+<span id="cb28-309"><a href="#cb28-309" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
+<span id="cb28-310"><a href="#cb28-310" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> x, <span class="at">y =</span> dens, <span class="at">linetype =</span> <span class="st">"Likelihood"</span>,</span>
+<span id="cb28-311"><a href="#cb28-311" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="st">"Likelihood"</span></span>
+<span id="cb28-312"><a href="#cb28-312" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb28-313"><a href="#cb28-313" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-314"><a href="#cb28-314" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(</span>
+<span id="cb28-315"><a href="#cb28-315" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb28-316"><a href="#cb28-316" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> grid,</span>
+<span id="cb28-317"><a href="#cb28-317" aria-hidden="true" tabindex="-1"></a>            <span class="at">dens =</span> <span class="fu">update_probs</span>(</span>
+<span id="cb28-318"><a href="#cb28-318" aria-hidden="true" tabindex="-1"></a>                <span class="fu">dnorm_trunc</span>(grid, .<span class="dv">8</span>, .<span class="dv">1</span>),</span>
+<span id="cb28-319"><a href="#cb28-319" aria-hidden="true" tabindex="-1"></a>                lik_x</span>
+<span id="cb28-320"><a href="#cb28-320" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb28-321"><a href="#cb28-321" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb28-322"><a href="#cb28-322" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> dens, <span class="at">col =</span> <span class="st">"Posterior"</span>, <span class="at">linetype =</span> <span class="st">"Posterior"</span>)</span>
+<span id="cb28-323"><a href="#cb28-323" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-324"><a href="#cb28-324" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb28-325"><a href="#cb28-325" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">location</span>(theta)), <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb28-326"><a href="#cb28-326" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"West"</span>, <span class="st">"East"</span>)) <span class="sc">+</span></span>
+<span id="cb28-327"><a href="#cb28-327" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="st">""</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb28-328"><a href="#cb28-328" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_linetype_manual</span>(<span class="st">""</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"twodash"</span>, <span class="st">"solid"</span>, <span class="st">"dashed"</span>))</span>
+<span id="cb28-329"><a href="#cb28-329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-330"><a href="#cb28-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-331"><a href="#cb28-331" aria-hidden="true" tabindex="-1"></a><span class="fu">### Influence of More Data</span></span>
+<span id="cb28-332"><a href="#cb28-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-333"><a href="#cb28-333" aria-hidden="true" tabindex="-1"></a>@fig-posterior-ex1-data shows what happen with 20 more data points:</span>
+<span id="cb28-334"><a href="#cb28-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-337"><a href="#cb28-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-338"><a href="#cb28-338" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-posterior-ex1-data</span></span>
+<span id="cb28-339"><a href="#cb28-339" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb28-340"><a href="#cb28-340" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 4</span></span>
+<span id="cb28-341"><a href="#cb28-341" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-asp: 0.618</span></span>
+<span id="cb28-342"><a href="#cb28-342" aria-hidden="true" tabindex="-1"></a>dat_x <span class="ot">&lt;-</span> <span class="fu">c</span>(dat_x, <span class="fu">rnorm_trunc</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="fl">0.6</span>, <span class="at">sd =</span> <span class="fl">0.2</span>))</span>
+<span id="cb28-343"><a href="#cb28-343" aria-hidden="true" tabindex="-1"></a>lik_x <span class="ot">&lt;-</span> <span class="fu">compute_lik</span>(dat_x)</span>
+<span id="cb28-344"><a href="#cb28-344" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb28-345"><a href="#cb28-345" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(</span>
+<span id="cb28-346"><a href="#cb28-346" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun =</span> dnorm_trunc, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> .<span class="dv">8</span>, <span class="at">sd =</span> .<span class="dv">1</span>),</span>
+<span id="cb28-347"><a href="#cb28-347" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">linetype =</span> <span class="st">"Prior"</span>, <span class="at">col =</span> <span class="st">"Prior"</span>)</span>
+<span id="cb28-348"><a href="#cb28-348" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-349"><a href="#cb28-349" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(</span>
+<span id="cb28-350"><a href="#cb28-350" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> grid, <span class="at">dens =</span> lik_x),</span>
+<span id="cb28-351"><a href="#cb28-351" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
+<span id="cb28-352"><a href="#cb28-352" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> x, <span class="at">y =</span> dens, <span class="at">linetype =</span> <span class="st">"Likelihood"</span>,</span>
+<span id="cb28-353"><a href="#cb28-353" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="st">"Likelihood"</span></span>
+<span id="cb28-354"><a href="#cb28-354" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb28-355"><a href="#cb28-355" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-356"><a href="#cb28-356" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(</span>
+<span id="cb28-357"><a href="#cb28-357" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb28-358"><a href="#cb28-358" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> grid,</span>
+<span id="cb28-359"><a href="#cb28-359" aria-hidden="true" tabindex="-1"></a>            <span class="at">dens =</span> <span class="fu">update_probs</span>(</span>
+<span id="cb28-360"><a href="#cb28-360" aria-hidden="true" tabindex="-1"></a>                <span class="fu">dnorm_trunc</span>(grid, .<span class="dv">8</span>, .<span class="dv">1</span>),</span>
+<span id="cb28-361"><a href="#cb28-361" aria-hidden="true" tabindex="-1"></a>                lik_x</span>
+<span id="cb28-362"><a href="#cb28-362" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb28-363"><a href="#cb28-363" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb28-364"><a href="#cb28-364" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> dens, <span class="at">col =</span> <span class="st">"Posterior"</span>, <span class="at">linetype =</span> <span class="st">"Posterior"</span>)</span>
+<span id="cb28-365"><a href="#cb28-365" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-366"><a href="#cb28-366" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb28-367"><a href="#cb28-367" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">location</span>(theta)), <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb28-368"><a href="#cb28-368" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"West"</span>, <span class="st">"East"</span>)) <span class="sc">+</span></span>
+<span id="cb28-369"><a href="#cb28-369" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="st">""</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb28-370"><a href="#cb28-370" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_linetype_manual</span>(<span class="st">""</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"twodash"</span>, <span class="st">"solid"</span>, <span class="st">"dashed"</span>))</span>
+<span id="cb28-371"><a href="#cb28-371" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-372"><a href="#cb28-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-373"><a href="#cb28-373" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-374"><a href="#cb28-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-375"><a href="#cb28-375" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data-Order Invariance</span></span>
+<span id="cb28-376"><a href="#cb28-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-377"><a href="#cb28-377" aria-hidden="true" tabindex="-1"></a>In many data analysis applications, researchers collect some data $D_1$, and then collect some more data $D_2$. An example would be researchers conducting two separate experiments to study the same research question. In Bayesian statistics, one can consider three ways to obtain the posterior:</span>
+<span id="cb28-378"><a href="#cb28-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-379"><a href="#cb28-379" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Update the belief with $D_1$, and then with $D_2$</span>
+<span id="cb28-380"><a href="#cb28-380" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Update the belief with $D_2$, and then with $D_1$</span>
+<span id="cb28-381"><a href="#cb28-381" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Update the belief with both $D_1$ and $D_2$ simultaneously</span>
+<span id="cb28-382"><a href="#cb28-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-383"><a href="#cb28-383" aria-hidden="true" tabindex="-1"></a>Whether these three ways give the same posterior depends on whether **data-order invariance** holds. If the inference of $D_1$ does not depend on $D_2$, or vice versa, then all three ways lead to the same posterior. Specifically, if we have **conditional independence** such that</span>
+<span id="cb28-384"><a href="#cb28-384" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-385"><a href="#cb28-385" aria-hidden="true" tabindex="-1"></a>P(D_1, D_2 \mid \theta) = P(D_1 \mid \theta) P(D_2 \mid \theta),</span>
+<span id="cb28-386"><a href="#cb28-386" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-387"><a href="#cb28-387" aria-hidden="true" tabindex="-1"></a>then one can show all three ways give the same posterior [<span class="co">[</span><span class="ot">see section 4.4 and 4.5 of @johnson2022</span><span class="co">]</span>](https://www.bayesrulesbook.com/chapter-4#ch4-sequential).</span>
+<span id="cb28-388"><a href="#cb28-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-389"><a href="#cb28-389" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb28-390"><a href="#cb28-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-391"><a href="#cb28-391" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exchangeability*</span></span>
+<span id="cb28-392"><a href="#cb28-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-393"><a href="#cb28-393" aria-hidden="true" tabindex="-1"></a>Exchangeability is an important concept in Bayesian statistics. Data are exchangeable when the joint distribution, $P(D_1, \ldots, D_N)$, does not depend on the ordering of the data. A simple way to think about it is if you scramble the order of your outcome variable in your data set and still can obtain the same statistical results, then the data are exchangeable. An example situation where data are not exchangeable is</span>
+<span id="cb28-394"><a href="#cb28-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-395"><a href="#cb28-395" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$D_1$ is from year 1990, $D_2$ is from year 2020, and the parameter $\theta$ changes from 1990 to 2020</span>
+<span id="cb28-396"><a href="#cb28-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-397"><a href="#cb28-397" aria-hidden="true" tabindex="-1"></a>When data are exchangeable, conditional independence would generally hold.<span class="ot">[^deFinetti]</span></span>
+<span id="cb28-398"><a href="#cb28-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-399"><a href="#cb28-399" aria-hidden="true" tabindex="-1"></a><span class="ot">[^deFinetti]: </span>The <span class="co">[</span><span class="ot">de Finetti's theorem</span><span class="co">](https://en.wikipedia.org/wiki/De_Finetti%27s_theorem)</span> shows that when the data are exchangeable and can be considered an infinite sequence (i.e., not from a tiny finite population), then the data are conditionally independent given some $\theta$.</span>
+<span id="cb28-400"><a href="#cb28-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-401"><a href="#cb28-401" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-402"><a href="#cb28-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-403"><a href="#cb28-403" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bernoulli Likelihood</span></span>
+<span id="cb28-404"><a href="#cb28-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-405"><a href="#cb28-405" aria-hidden="true" tabindex="-1"></a>For binary data $y$ (e.g., coin flip, pass/fail, diagnosed/not), an intuitive way to analyze is to use a Bernoulli model:</span>
+<span id="cb28-406"><a href="#cb28-406" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-407"><a href="#cb28-407" aria-hidden="true" tabindex="-1"></a>  \begin{aligned}</span>
+<span id="cb28-408"><a href="#cb28-408" aria-hidden="true" tabindex="-1"></a>    P(y = 1 \mid \theta) = \theta <span class="sc">\\</span></span>
+<span id="cb28-409"><a href="#cb28-409" aria-hidden="true" tabindex="-1"></a>    P(y = 0 \mid \theta) = 1 - \theta</span>
+<span id="cb28-410"><a href="#cb28-410" aria-hidden="true" tabindex="-1"></a>  \end{aligned},</span>
+<span id="cb28-411"><a href="#cb28-411" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-412"><a href="#cb28-412" aria-hidden="true" tabindex="-1"></a>which is more compactly written as</span>
+<span id="cb28-413"><a href="#cb28-413" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-414"><a href="#cb28-414" aria-hidden="true" tabindex="-1"></a>P(y \mid \theta) = \theta^y (1 - \theta)^{(1 - y)},</span>
+<span id="cb28-415"><a href="#cb28-415" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-416"><a href="#cb28-416" aria-hidden="true" tabindex="-1"></a>where $\theta \in <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>$ is the probability of a "1". You can verify that the compact form is the same as the longer form.</span>
+<span id="cb28-417"><a href="#cb28-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-418"><a href="#cb28-418" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple Observations</span></span>
+<span id="cb28-419"><a href="#cb28-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-420"><a href="#cb28-420" aria-hidden="true" tabindex="-1"></a>When there are more than one $y$, say $y_1, \ldots, y_N$, that are conditionally independent, we have</span>
+<span id="cb28-421"><a href="#cb28-421" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-422"><a href="#cb28-422" aria-hidden="true" tabindex="-1"></a>  \begin{aligned}</span>
+<span id="cb28-423"><a href="#cb28-423" aria-hidden="true" tabindex="-1"></a>    P(y_1, \ldots, y_N \mid \theta) &amp; = \prod_{i = 1}^N P(y_i \mid \theta) <span class="sc">\\</span></span>
+<span id="cb28-424"><a href="#cb28-424" aria-hidden="true" tabindex="-1"></a>    &amp; = \theta^{\sum_{i = 1}^N y_i} (1 - \theta)^{\sum_{i = 1}^N (1 - y_i)} <span class="sc">\\</span></span>
+<span id="cb28-425"><a href="#cb28-425" aria-hidden="true" tabindex="-1"></a>    &amp; = \theta^z (1 - \theta)^{N - z}</span>
+<span id="cb28-426"><a href="#cb28-426" aria-hidden="true" tabindex="-1"></a>  \end{aligned},</span>
+<span id="cb28-427"><a href="#cb28-427" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-428"><a href="#cb28-428" aria-hidden="true" tabindex="-1"></a>where $z$ is the number of "1"s (e.g., the number of heads in coin flips). Note that the likelihood only depends on $z$, not the individual $y$s. In other words, the likelihood is the same as long as there are $z$ heads, regardless of when those heads occur.</span>
+<span id="cb28-429"><a href="#cb28-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-430"><a href="#cb28-430" aria-hidden="true" tabindex="-1"></a>Let's say $N$ = 4 and $z$ = 1. We can plot the likelihood in R:</span>
+<span id="cb28-431"><a href="#cb28-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-434"><a href="#cb28-434" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-435"><a href="#cb28-435" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-lik</span></span>
+<span id="cb28-436"><a href="#cb28-436" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 3.5</span></span>
+<span id="cb28-437"><a href="#cb28-437" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 3</span></span>
+<span id="cb28-438"><a href="#cb28-438" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Binomial likelihood function with $N$ = 4 and $z$ = 1</span></span>
+<span id="cb28-439"><a href="#cb28-439" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the likelihood as a function of theta</span></span>
+<span id="cb28-440"><a href="#cb28-440" aria-hidden="true" tabindex="-1"></a>lik <span class="ot">&lt;-</span> <span class="cf">function</span>(th, <span class="at">num_flips =</span> <span class="dv">4</span>, <span class="at">num_heads =</span> <span class="dv">1</span>) {</span>
+<span id="cb28-441"><a href="#cb28-441" aria-hidden="true" tabindex="-1"></a>    th <span class="sc">^</span> num_heads <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> th) <span class="sc">^</span> (num_flips <span class="sc">-</span> num_heads)</span>
+<span id="cb28-442"><a href="#cb28-442" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-443"><a href="#cb28-443" aria-hidden="true" tabindex="-1"></a><span class="co"># Likelihood of theta = 0.5</span></span>
+<span id="cb28-444"><a href="#cb28-444" aria-hidden="true" tabindex="-1"></a><span class="fu">lik</span>(<span class="fl">0.5</span>)</span>
+<span id="cb28-445"><a href="#cb28-445" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the likelihood</span></span>
+<span id="cb28-446"><a href="#cb28-446" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">th =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="fu">aes</span>(<span class="at">x =</span> th)) <span class="sc">+</span></span>
+<span id="cb28-447"><a href="#cb28-447" aria-hidden="true" tabindex="-1"></a>    <span class="co"># `stat_function` for plotting a function</span></span>
+<span id="cb28-448"><a href="#cb28-448" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> lik) <span class="sc">+</span></span>
+<span id="cb28-449"><a href="#cb28-449" aria-hidden="true" tabindex="-1"></a>    <span class="co"># use `expression()` to get greek letters</span></span>
+<span id="cb28-450"><a href="#cb28-450" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(theta),</span>
+<span id="cb28-451"><a href="#cb28-451" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Likelihood with N = 4 and z = 1"</span>)</span>
+<span id="cb28-452"><a href="#cb28-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-453"><a href="#cb28-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-454"><a href="#cb28-454" aria-hidden="true" tabindex="-1"></a><span class="fu">### Setting Priors</span></span>
+<span id="cb28-455"><a href="#cb28-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-456"><a href="#cb28-456" aria-hidden="true" tabindex="-1"></a>Remember again the relationship between the prior and the posterior:</span>
+<span id="cb28-457"><a href="#cb28-457" aria-hidden="true" tabindex="-1"></a>$$P(\theta | y) \propto P(y | \theta) P(\theta)$$</span>
+<span id="cb28-458"><a href="#cb28-458" aria-hidden="true" tabindex="-1"></a>The posterior distributions are mathematically determined once the priors and the likelihood are set. However, the mathematical form of the posterior is sometimes very difficult to deal with. </span>
+<span id="cb28-459"><a href="#cb28-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-460"><a href="#cb28-460" aria-hidden="true" tabindex="-1"></a>One straightforward, brute-force method is to discretize the parameter space into a number of points. For example, by taking $\theta$ = 0, 0.05, 0.10, . . . , 0.90, 0.95, 1.00, one can evaluate the posterior at these 21 **grid points**.</span>
+<span id="cb28-461"><a href="#cb28-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-462"><a href="#cb28-462" aria-hidden="true" tabindex="-1"></a>Let's use a prior that peaks at 0.5 and linearly decreases to both sides. I assume that $\theta$ = 0.5 is twice as likely as $\theta = 0.25$ or $\theta = 0.75$ to reflect my belief that the coin is more likely to be fair. </span>
+<span id="cb28-463"><a href="#cb28-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-466"><a href="#cb28-466" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-467"><a href="#cb28-467" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: grid_df-prior</span></span>
+<span id="cb28-468"><a href="#cb28-468" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a grid for the parameter</span></span>
+<span id="cb28-469"><a href="#cb28-469" aria-hidden="true" tabindex="-1"></a>grid_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">th =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.05</span>))</span>
+<span id="cb28-470"><a href="#cb28-470" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the prior mass for each value on the grid</span></span>
+<span id="cb28-471"><a href="#cb28-471" aria-hidden="true" tabindex="-1"></a>grid_df<span class="sc">$</span>pth <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">9</span><span class="sc">:</span><span class="dv">0</span>)  <span class="co"># linearly increasing, then decreasing</span></span>
+<span id="cb28-472"><a href="#cb28-472" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert pth to a proper distribution such that the value</span></span>
+<span id="cb28-473"><a href="#cb28-473" aria-hidden="true" tabindex="-1"></a><span class="co"># sum to one</span></span>
+<span id="cb28-474"><a href="#cb28-474" aria-hidden="true" tabindex="-1"></a>grid_df<span class="sc">$</span>pth <span class="ot">&lt;-</span> grid_df<span class="sc">$</span>pth <span class="sc">/</span> <span class="fu">sum</span>(grid_df<span class="sc">$</span>pth)  <span class="co"># &lt;1&gt;</span></span>
+<span id="cb28-475"><a href="#cb28-475" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the prior</span></span>
+<span id="cb28-476"><a href="#cb28-476" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(grid_df, <span class="fu">aes</span>(<span class="at">x =</span> th, <span class="at">y =</span> pth)) <span class="sc">+</span></span>
+<span id="cb28-477"><a href="#cb28-477" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> th, <span class="at">y =</span> pth),</span>
+<span id="cb28-478"><a href="#cb28-478" aria-hidden="true" tabindex="-1"></a>        <span class="at">width =</span> <span class="fl">0.01</span>,</span>
+<span id="cb28-479"><a href="#cb28-479" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-480"><a href="#cb28-480" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">P</span>(theta)), <span class="at">x =</span> <span class="fu">expression</span>(theta))</span>
+<span id="cb28-481"><a href="#cb28-481" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-482"><a href="#cb28-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-483"><a href="#cb28-483" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>This line ensures that the probability values sum to one. This is a trick we will use to obtain the posterior probability.</span>
+<span id="cb28-484"><a href="#cb28-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-485"><a href="#cb28-485" aria-hidden="true" tabindex="-1"></a>::: {.callout-important appearance="minimal"}</span>
+<span id="cb28-486"><a href="#cb28-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-487"><a href="#cb28-487" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prior Predictive Distribution</span></span>
+<span id="cb28-488"><a href="#cb28-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-489"><a href="#cb28-489" aria-hidden="true" tabindex="-1"></a>One way to check whether the prior is appropriate is to use the **prior predictive distribution**. Bayesian models are **generative** because they can be used to simulate data. The prior predictive distribution can be obtained by first simulating some $\theta$ values from the prior distribution and then simulating a data set for each $\theta$.</span>
+<span id="cb28-490"><a href="#cb28-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-493"><a href="#cb28-493" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-494"><a href="#cb28-494" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: prior-predictive</span></span>
+<span id="cb28-495"><a href="#cb28-495" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 3.5</span></span>
+<span id="cb28-496"><a href="#cb28-496" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 3</span></span>
+<span id="cb28-497"><a href="#cb28-497" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw one theta</span></span>
+<span id="cb28-498"><a href="#cb28-498" aria-hidden="true" tabindex="-1"></a>num_trials <span class="ot">&lt;-</span> <span class="dv">4</span>  <span class="co"># number of draws</span></span>
+<span id="cb28-499"><a href="#cb28-499" aria-hidden="true" tabindex="-1"></a>sim_th1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(grid_df<span class="sc">$</span>th, <span class="at">size =</span> <span class="dv">1</span>,</span>
+<span id="cb28-500"><a href="#cb28-500" aria-hidden="true" tabindex="-1"></a>                  <span class="co"># based on prior probability</span></span>
+<span id="cb28-501"><a href="#cb28-501" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prob =</span> grid_df<span class="sc">$</span>pth)</span>
+<span id="cb28-502"><a href="#cb28-502" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate new data of four flips based on model</span></span>
+<span id="cb28-503"><a href="#cb28-503" aria-hidden="true" tabindex="-1"></a>sim_y1 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(num_trials, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> sim_th1)</span>
+<span id="cb28-504"><a href="#cb28-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-505"><a href="#cb28-505" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat many times</span></span>
+<span id="cb28-506"><a href="#cb28-506" aria-hidden="true" tabindex="-1"></a><span class="co"># Set number of simulation draws</span></span>
+<span id="cb28-507"><a href="#cb28-507" aria-hidden="true" tabindex="-1"></a>num_draws <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb28-508"><a href="#cb28-508" aria-hidden="true" tabindex="-1"></a>sim_th <span class="ot">&lt;-</span> <span class="fu">sample</span>(grid_df<span class="sc">$</span>th, <span class="at">size =</span> num_draws, <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-509"><a href="#cb28-509" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># based on prior probability</span></span>
+<span id="cb28-510"><a href="#cb28-510" aria-hidden="true" tabindex="-1"></a>                 <span class="at">prob =</span> grid_df<span class="sc">$</span>pth)</span>
+<span id="cb28-511"><a href="#cb28-511" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a for loop</span></span>
+<span id="cb28-512"><a href="#cb28-512" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize output</span></span>
+<span id="cb28-513"><a href="#cb28-513" aria-hidden="true" tabindex="-1"></a>sim_y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> num_trials, <span class="at">ncol =</span> num_draws)</span>
+<span id="cb28-514"><a href="#cb28-514" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="fu">seq_len</span>(num_draws)) {</span>
+<span id="cb28-515"><a href="#cb28-515" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store simulated data in the sth column</span></span>
+<span id="cb28-516"><a href="#cb28-516" aria-hidden="true" tabindex="-1"></a>    sim_y[, s] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(num_trials, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> sim_th[s])</span>
+<span id="cb28-517"><a href="#cb28-517" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-518"><a href="#cb28-518" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the first 10 simulated data sets based on prior:</span></span>
+<span id="cb28-519"><a href="#cb28-519" aria-hidden="true" tabindex="-1"></a>sim_y[, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb28-520"><a href="#cb28-520" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of number of heads</span></span>
+<span id="cb28-521"><a href="#cb28-521" aria-hidden="true" tabindex="-1"></a>sim_heads <span class="ot">&lt;-</span> <span class="fu">colSums</span>(sim_y)</span>
+<span id="cb28-522"><a href="#cb28-522" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">z =</span> sim_heads), <span class="fu">aes</span>(<span class="at">x =</span> z)) <span class="sc">+</span></span>
+<span id="cb28-523"><a href="#cb28-523" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span>
+<span id="cb28-524"><a href="#cb28-524" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-525"><a href="#cb28-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-526"><a href="#cb28-526" aria-hidden="true" tabindex="-1"></a>The outcome seems to fit our intuition that it's more likely to be half heads and half tails, but there is a lot of uncertainty.</span>
+<span id="cb28-527"><a href="#cb28-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-528"><a href="#cb28-528" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-529"><a href="#cb28-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-530"><a href="#cb28-530" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summarizing the Posterior</span></span>
+<span id="cb28-531"><a href="#cb28-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-534"><a href="#cb28-534" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-535"><a href="#cb28-535" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: grid_df-post</span></span>
+<span id="cb28-536"><a href="#cb28-536" aria-hidden="true" tabindex="-1"></a>grid_df <span class="ot">&lt;-</span> grid_df <span class="sc">|&gt;</span></span>
+<span id="cb28-537"><a href="#cb28-537" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb28-538"><a href="#cb28-538" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use our previously defined lik() function</span></span>
+<span id="cb28-539"><a href="#cb28-539" aria-hidden="true" tabindex="-1"></a>        <span class="at">py_th =</span> <span class="fu">lik</span>(th, <span class="at">num_flips =</span> <span class="dv">4</span>, <span class="at">num_heads =</span> <span class="dv">1</span>),</span>
+<span id="cb28-540"><a href="#cb28-540" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Product of prior and likelihood</span></span>
+<span id="cb28-541"><a href="#cb28-541" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">prior x lik</span><span class="st">`</span> <span class="ot">=</span> pth <span class="sc">*</span> py_th,</span>
+<span id="cb28-542"><a href="#cb28-542" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Scaled the posterior</span></span>
+<span id="cb28-543"><a href="#cb28-543" aria-hidden="true" tabindex="-1"></a>        <span class="at">pth_y =</span> <span class="st">`</span><span class="at">prior x lik</span><span class="st">`</span> <span class="sc">/</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">prior x lik</span><span class="st">`</span>)</span>
+<span id="cb28-544"><a href="#cb28-544" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-545"><a href="#cb28-545" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a table</span></span>
+<span id="cb28-546"><a href="#cb28-546" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(grid_df)</span>
+<span id="cb28-547"><a href="#cb28-547" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-548"><a href="#cb28-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-551"><a href="#cb28-551" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-552"><a href="#cb28-552" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-grid-post</span></span>
+<span id="cb28-553"><a href="#cb28-553" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-asp: 0.618</span></span>
+<span id="cb28-554"><a href="#cb28-554" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Bernoulli posterior distribution</span></span>
+<span id="cb28-555"><a href="#cb28-555" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb28-556"><a href="#cb28-556" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - Prior and likelihood</span></span>
+<span id="cb28-557"><a href="#cb28-557" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - Posterior</span></span>
+<span id="cb28-558"><a href="#cb28-558" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 2</span></span>
+<span id="cb28-559"><a href="#cb28-559" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the prior/likelihood and the posterior</span></span>
+<span id="cb28-560"><a href="#cb28-560" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> grid_df, <span class="fu">aes</span>(<span class="at">x =</span> th)) <span class="sc">+</span></span>
+<span id="cb28-561"><a href="#cb28-561" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> th <span class="sc">-</span> <span class="fl">0.005</span>, <span class="at">y =</span> pth, <span class="at">fill =</span> <span class="st">"prior"</span>),</span>
+<span id="cb28-562"><a href="#cb28-562" aria-hidden="true" tabindex="-1"></a>        <span class="at">width =</span> <span class="fl">0.01</span>,</span>
+<span id="cb28-563"><a href="#cb28-563" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-564"><a href="#cb28-564" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> th <span class="sc">+</span> <span class="fl">0.005</span>, <span class="at">y =</span> py_th <span class="sc">/</span> <span class="fu">sum</span>(py_th),</span>
+<span id="cb28-565"><a href="#cb28-565" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"scaled likelihood"</span>), <span class="at">width =</span> <span class="fl">0.01</span>,</span>
+<span id="cb28-566"><a href="#cb28-566" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-567"><a href="#cb28-567" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">fill =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">x =</span> <span class="fu">expression</span>(theta)) <span class="sc">+</span></span>
+<span id="cb28-568"><a href="#cb28-568" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb28-569"><a href="#cb28-569" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> grid_df, <span class="fu">aes</span>(<span class="at">x =</span> th)) <span class="sc">+</span></span>
+<span id="cb28-570"><a href="#cb28-570" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> th, <span class="at">y =</span> pth_y), <span class="at">width =</span> <span class="fl">0.01</span>) <span class="sc">+</span></span>
+<span id="cb28-571"><a href="#cb28-571" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb28-572"><a href="#cb28-572" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Posterior"</span>,</span>
+<span id="cb28-573"><a href="#cb28-573" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">expression</span>(theta)</span>
+<span id="cb28-574"><a href="#cb28-574" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-575"><a href="#cb28-575" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-576"><a href="#cb28-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-577"><a href="#cb28-577" aria-hidden="true" tabindex="-1"></a>@fig-grid-post-2 shows the posterior distribution, which represents our updated belief about $\theta$. We can summarize it by simulating $\theta$ values from it and compute summary statistics:</span>
+<span id="cb28-578"><a href="#cb28-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-581"><a href="#cb28-581" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-582"><a href="#cb28-582" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: summarize-post-draws</span></span>
+<span id="cb28-583"><a href="#cb28-583" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function for computing posterior summary</span></span>
+<span id="cb28-584"><a href="#cb28-584" aria-hidden="true" tabindex="-1"></a>summ_draw <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb28-585"><a href="#cb28-585" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(</span>
+<span id="cb28-586"><a href="#cb28-586" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb28-587"><a href="#cb28-587" aria-hidden="true" tabindex="-1"></a>        <span class="at">median =</span> <span class="fu">median</span>(x),</span>
+<span id="cb28-588"><a href="#cb28-588" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd =</span> <span class="fu">sd</span>(x),</span>
+<span id="cb28-589"><a href="#cb28-589" aria-hidden="true" tabindex="-1"></a>        <span class="at">mad =</span> <span class="fu">mad</span>(x),</span>
+<span id="cb28-590"><a href="#cb28-590" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">ci.1</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(x, <span class="at">prob =</span> .<span class="dv">1</span>, <span class="at">names =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb28-591"><a href="#cb28-591" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">ci.9</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(x, <span class="at">prob =</span> .<span class="dv">9</span>, <span class="at">names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb28-592"><a href="#cb28-592" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-593"><a href="#cb28-593" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-594"><a href="#cb28-594" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample from the posterior</span></span>
+<span id="cb28-595"><a href="#cb28-595" aria-hidden="true" tabindex="-1"></a>post_samples <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb28-596"><a href="#cb28-596" aria-hidden="true" tabindex="-1"></a>    grid_df<span class="sc">$</span>th,</span>
+<span id="cb28-597"><a href="#cb28-597" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">1000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-598"><a href="#cb28-598" aria-hidden="true" tabindex="-1"></a>    <span class="at">prob =</span> grid_df<span class="sc">$</span>pth_y</span>
+<span id="cb28-599"><a href="#cb28-599" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-600"><a href="#cb28-600" aria-hidden="true" tabindex="-1"></a><span class="fu">summ_draw</span>(post_samples)</span>
+<span id="cb28-601"><a href="#cb28-601" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, use the `posterior` package</span></span>
+<span id="cb28-602"><a href="#cb28-602" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">theta =</span> post_samples) <span class="sc">|&gt;</span></span>
+<span id="cb28-603"><a href="#cb28-603" aria-hidden="true" tabindex="-1"></a>    posterior<span class="sc">::</span><span class="fu">summarize_draws</span>()</span>
+<span id="cb28-604"><a href="#cb28-604" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-605"><a href="#cb28-605" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-606"><a href="#cb28-606" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb28-607"><a href="#cb28-607" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-608"><a href="#cb28-608" aria-hidden="true" tabindex="-1"></a><span class="fu">### Influence of Sample Size</span></span>
+<span id="cb28-609"><a href="#cb28-609" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-610"><a href="#cb28-610" aria-hidden="true" tabindex="-1"></a>If, instead, we have $N$ = 40 and $z$ = 10, the posterior will be more similar to the likelihood.</span>
+<span id="cb28-611"><a href="#cb28-611" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-614"><a href="#cb28-614" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-615"><a href="#cb28-615" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: grid_df-2</span></span>
+<span id="cb28-616"><a href="#cb28-616" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.asp: 0.618</span></span>
+<span id="cb28-617"><a href="#cb28-617" aria-hidden="true" tabindex="-1"></a>grid_df2 <span class="ot">&lt;-</span> grid_df <span class="sc">|&gt;</span></span>
+<span id="cb28-618"><a href="#cb28-618" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb28-619"><a href="#cb28-619" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use our previously defined lik() function</span></span>
+<span id="cb28-620"><a href="#cb28-620" aria-hidden="true" tabindex="-1"></a>        <span class="at">py_th =</span> <span class="fu">lik</span>(th, <span class="at">num_flips =</span> <span class="dv">40</span>, <span class="at">num_heads =</span> <span class="dv">10</span>),</span>
+<span id="cb28-621"><a href="#cb28-621" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Product of prior and likelihood</span></span>
+<span id="cb28-622"><a href="#cb28-622" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">prior x lik</span><span class="st">`</span> <span class="ot">=</span> pth <span class="sc">*</span> py_th,</span>
+<span id="cb28-623"><a href="#cb28-623" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Scaled the posterior</span></span>
+<span id="cb28-624"><a href="#cb28-624" aria-hidden="true" tabindex="-1"></a>        <span class="at">pth_y =</span> <span class="st">`</span><span class="at">prior x lik</span><span class="st">`</span> <span class="sc">/</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">prior x lik</span><span class="st">`</span>)</span>
+<span id="cb28-625"><a href="#cb28-625" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-626"><a href="#cb28-626" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the prior/likelihood and the posterior</span></span>
+<span id="cb28-627"><a href="#cb28-627" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> grid_df2, <span class="fu">aes</span>(<span class="at">x =</span> th)) <span class="sc">+</span></span>
+<span id="cb28-628"><a href="#cb28-628" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> th <span class="sc">-</span> <span class="fl">0.005</span>, <span class="at">y =</span> pth, <span class="at">fill =</span> <span class="st">"prior"</span>),</span>
+<span id="cb28-629"><a href="#cb28-629" aria-hidden="true" tabindex="-1"></a>        <span class="at">width =</span> <span class="fl">0.01</span>,</span>
+<span id="cb28-630"><a href="#cb28-630" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-631"><a href="#cb28-631" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> th <span class="sc">+</span> <span class="fl">0.005</span>, <span class="at">y =</span> py_th <span class="sc">/</span> <span class="fu">sum</span>(py_th),</span>
+<span id="cb28-632"><a href="#cb28-632" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"scaled likelihood"</span>), <span class="at">width =</span> <span class="fl">0.01</span>,</span>
+<span id="cb28-633"><a href="#cb28-633" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-634"><a href="#cb28-634" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">fill =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">x =</span> <span class="fu">expression</span>(theta)) <span class="sc">+</span></span>
+<span id="cb28-635"><a href="#cb28-635" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb28-636"><a href="#cb28-636" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> grid_df2, <span class="fu">aes</span>(<span class="at">x =</span> th)) <span class="sc">+</span></span>
+<span id="cb28-637"><a href="#cb28-637" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> th, <span class="at">y =</span> pth_y), <span class="at">width =</span> <span class="fl">0.01</span>) <span class="sc">+</span></span>
+<span id="cb28-638"><a href="#cb28-638" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb28-639"><a href="#cb28-639" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Posterior"</span>,</span>
+<span id="cb28-640"><a href="#cb28-640" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">expression</span>(theta)</span>
+<span id="cb28-641"><a href="#cb28-641" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-642"><a href="#cb28-642" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-643"><a href="#cb28-643" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-646"><a href="#cb28-646" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-647"><a href="#cb28-647" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: summarize-post-draws-2</span></span>
+<span id="cb28-648"><a href="#cb28-648" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample from the posterior</span></span>
+<span id="cb28-649"><a href="#cb28-649" aria-hidden="true" tabindex="-1"></a>post_samples <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb28-650"><a href="#cb28-650" aria-hidden="true" tabindex="-1"></a>    grid_df2<span class="sc">$</span>th,</span>
+<span id="cb28-651"><a href="#cb28-651" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">1000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-652"><a href="#cb28-652" aria-hidden="true" tabindex="-1"></a>    <span class="at">prob =</span> grid_df2<span class="sc">$</span>pth_y</span>
+<span id="cb28-653"><a href="#cb28-653" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-654"><a href="#cb28-654" aria-hidden="true" tabindex="-1"></a><span class="fu">summ_draw</span>(post_samples)</span>
+<span id="cb28-655"><a href="#cb28-655" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-656"><a href="#cb28-656" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-657"><a href="#cb28-657" aria-hidden="true" tabindex="-1"></a><span class="fu">### Influence of Prior</span></span>
+<span id="cb28-658"><a href="#cb28-658" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-659"><a href="#cb28-659" aria-hidden="true" tabindex="-1"></a>If we have a very strong prior concentrated at $\theta$ = .5, but still with $N$ = 40 and $z$ = 10, the posterior will be more similar to the prior.</span>
+<span id="cb28-660"><a href="#cb28-660" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-663"><a href="#cb28-663" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-664"><a href="#cb28-664" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: grid_df-3</span></span>
+<span id="cb28-665"><a href="#cb28-665" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-asp: 0.618</span></span>
+<span id="cb28-666"><a href="#cb28-666" aria-hidden="true" tabindex="-1"></a>grid_df3 <span class="ot">&lt;-</span> grid_df <span class="sc">|&gt;</span></span>
+<span id="cb28-667"><a href="#cb28-667" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb28-668"><a href="#cb28-668" aria-hidden="true" tabindex="-1"></a>        <span class="co"># stronger prior</span></span>
+<span id="cb28-669"><a href="#cb28-669" aria-hidden="true" tabindex="-1"></a>        <span class="at">pth =</span> pth <span class="sc">^</span> <span class="dv">3</span>,</span>
+<span id="cb28-670"><a href="#cb28-670" aria-hidden="true" tabindex="-1"></a>        <span class="co"># scale the prior to sume to 1</span></span>
+<span id="cb28-671"><a href="#cb28-671" aria-hidden="true" tabindex="-1"></a>        <span class="at">pth =</span> pth <span class="sc">/</span> <span class="fu">sum</span>(pth),</span>
+<span id="cb28-672"><a href="#cb28-672" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use our previously defined lik() function</span></span>
+<span id="cb28-673"><a href="#cb28-673" aria-hidden="true" tabindex="-1"></a>        <span class="at">py_th =</span> <span class="fu">lik</span>(th, <span class="at">num_flips =</span> <span class="dv">4</span>, <span class="at">num_heads =</span> <span class="dv">1</span>),</span>
+<span id="cb28-674"><a href="#cb28-674" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Product of prior and likelihood</span></span>
+<span id="cb28-675"><a href="#cb28-675" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">prior x lik</span><span class="st">`</span> <span class="ot">=</span> pth <span class="sc">*</span> py_th,</span>
+<span id="cb28-676"><a href="#cb28-676" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Scaled the posterior</span></span>
+<span id="cb28-677"><a href="#cb28-677" aria-hidden="true" tabindex="-1"></a>        <span class="at">pth_y =</span> <span class="st">`</span><span class="at">prior x lik</span><span class="st">`</span> <span class="sc">/</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">prior x lik</span><span class="st">`</span>)</span>
+<span id="cb28-678"><a href="#cb28-678" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-679"><a href="#cb28-679" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the prior/likelihood and the posterior</span></span>
+<span id="cb28-680"><a href="#cb28-680" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> grid_df3, <span class="fu">aes</span>(<span class="at">x =</span> th)) <span class="sc">+</span></span>
+<span id="cb28-681"><a href="#cb28-681" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> th <span class="sc">-</span> <span class="fl">0.005</span>, <span class="at">y =</span> pth, <span class="at">fill =</span> <span class="st">"prior"</span>),</span>
+<span id="cb28-682"><a href="#cb28-682" aria-hidden="true" tabindex="-1"></a>        <span class="at">width =</span> <span class="fl">0.01</span>,</span>
+<span id="cb28-683"><a href="#cb28-683" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-684"><a href="#cb28-684" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> th <span class="sc">+</span> <span class="fl">0.005</span>, <span class="at">y =</span> py_th <span class="sc">/</span> <span class="fu">sum</span>(py_th),</span>
+<span id="cb28-685"><a href="#cb28-685" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"scaled likelihood"</span>), <span class="at">width =</span> <span class="fl">0.01</span>,</span>
+<span id="cb28-686"><a href="#cb28-686" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb28-687"><a href="#cb28-687" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">fill =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">x =</span> <span class="fu">expression</span>(theta)) <span class="sc">+</span></span>
+<span id="cb28-688"><a href="#cb28-688" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb28-689"><a href="#cb28-689" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> grid_df3, <span class="fu">aes</span>(<span class="at">x =</span> th)) <span class="sc">+</span></span>
+<span id="cb28-690"><a href="#cb28-690" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> th, <span class="at">y =</span> pth_y), <span class="at">width =</span> <span class="fl">0.01</span>) <span class="sc">+</span></span>
+<span id="cb28-691"><a href="#cb28-691" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb28-692"><a href="#cb28-692" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Posterior"</span>,</span>
+<span id="cb28-693"><a href="#cb28-693" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">expression</span>(theta)</span>
+<span id="cb28-694"><a href="#cb28-694" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-695"><a href="#cb28-695" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-696"><a href="#cb28-696" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-699"><a href="#cb28-699" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-700"><a href="#cb28-700" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: summarize-post-draws-3</span></span>
+<span id="cb28-701"><a href="#cb28-701" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample from the posterior</span></span>
+<span id="cb28-702"><a href="#cb28-702" aria-hidden="true" tabindex="-1"></a>post_samples <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb28-703"><a href="#cb28-703" aria-hidden="true" tabindex="-1"></a>    grid_df3<span class="sc">$</span>th,</span>
+<span id="cb28-704"><a href="#cb28-704" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">1000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-705"><a href="#cb28-705" aria-hidden="true" tabindex="-1"></a>    <span class="at">prob =</span> grid_df3<span class="sc">$</span>pth_y</span>
+<span id="cb28-706"><a href="#cb28-706" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-707"><a href="#cb28-707" aria-hidden="true" tabindex="-1"></a><span class="fu">summ_draw</span>(post_samples)</span>
+<span id="cb28-708"><a href="#cb28-708" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, use the `posterior` package</span></span>
+<span id="cb28-709"><a href="#cb28-709" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">theta =</span> post_samples) <span class="sc">|&gt;</span></span>
+<span id="cb28-710"><a href="#cb28-710" aria-hidden="true" tabindex="-1"></a>    posterior<span class="sc">::</span><span class="fu">summarize_draws</span>()</span>
+<span id="cb28-711"><a href="#cb28-711" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-712"><a href="#cb28-712" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-713"><a href="#cb28-713" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-714"><a href="#cb28-714" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-715"><a href="#cb28-715" aria-hidden="true" tabindex="-1"></a><span class="fu">### Remark on Grid Approximation</span></span>
+<span id="cb28-716"><a href="#cb28-716" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-717"><a href="#cb28-717" aria-hidden="true" tabindex="-1"></a>In this note, we discretized $\theta$ into a finite number of grid points to compute the posterior, mainly for pedagogical purposes. A big limitation is that our posterior will have no density for values other than the chosen grid points. While increasing the number of grid points (e.g., 1,000) can give more precision, the result is still not truly continuous. A bigger issue is that the computation breaks down when there is more than one parameter; if there are $p$ parameters, with 1,000 grid points per parameter, one needs to evaluate the posterior probability for $1,000^p$ grid points, which is not feasible even with modern computers. So more efficient algorithms, namely Markov chain Monte Carlo (MCMC) methods, will be introduced as we progress in the course.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

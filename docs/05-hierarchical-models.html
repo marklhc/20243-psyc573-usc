@@ -186,7 +186,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-hierarchical-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hierarchical Models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-hierarchical-models.html">Week 4</a></li><li class="breadcrumb-item"><a href="./05-hierarchical-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hierarchical Models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -269,11 +269,22 @@ window.Quarto = {
 </li>
       </ul>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-hierarchical-models.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hierarchical Models</span></span></a>
   </div>
+</li>
+      </ul>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -317,10 +328,10 @@ window.Quarto = {
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-hierarchical-models.html">Week 4</a></li><li class="breadcrumb-item"><a href="./05-hierarchical-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hierarchical Models</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
 <span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hierarchical Models</span>
-</h1>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -476,34 +487,39 @@ Figure&nbsp;7.2: Distribution of proportions of correct responses across partici
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; J;  <span class="co">// number of clusters (e.g., studies, persons)</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span> y;  <span class="co">// number of "1"s in each cluster</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span> N;  <span class="co">// sample size for each cluster</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// whether to sample prior only</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=<span class="dv">1</span>&gt; prior_only;</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cluster-specific probabilities</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt;[J] theta;</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt; mu;  <span class="co">// overall mean probability</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; kappa;        <span class="co">// overall concentration</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (!prior_only) {</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    y ~ binomial(N, theta);  <span class="co">// each observation is binomial</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Priors</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  theta ~ beta_proportion(mu, kappa);</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  mu ~ beta(<span class="fl">1.5</span>, <span class="fl">1.5</span>);      <span class="co">// weak prior</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  kappa ~ gamma(.<span class="dv">01</span>, .<span class="dv">01</span>);  <span class="co">// prior recommended by Kruschke</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span> ytilde = binomial_rng(N, theta);</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cluster-specific probabilities</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt;[J] theta;</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt; mu;  <span class="co">// overall mean probability</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; kappa;        <span class="co">// overall concentration</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  y ~ binomial(N, theta);  <span class="co">// each observation is binomial</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Priors</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  theta ~ beta_proportion(mu, kappa);</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  mu ~ beta(<span class="fl">1.5</span>, <span class="fl">1.5</span>);      <span class="co">// weak prior</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  kappa ~ gamma(.<span class="dv">1</span>, .<span class="dv">1</span>);  <span class="co">// prior recommended by Kruschke</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Prior and prior predictive</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt; prior_mu = beta_rng(<span class="fl">1.5</span>, <span class="fl">1.5</span>);</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; prior_kappa = gamma_rng(.<span class="dv">1</span>, .<span class="dv">1</span>);</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt;[J] prior_theta;</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span>:J) {</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    prior_theta[j] = beta_proportion_rng(prior_mu, prior_kappa);</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span> prior_ytilde = binomial_rng(N, prior_theta);</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Posterior predictive</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span> ytilde = binomial_rng(N, theta);</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hbin_mod</span> <span class="op">&lt;-</span> <span class="fu">cmdstan_model</span><span class="op">(</span><span class="st">"stan_code/hierarchical-binomial.stan"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="prior-predictive" class="level3" data-number="7.1.4"><h3 data-number="7.1.4" class="anchored" data-anchor-id="prior-predictive">
 <span class="header-section-number">7.1.4</span> Prior predictive</h3>
-<p>You can use Stan to sample the prior and obtain the prior predictive distribution; here, I show how to do it in R:</p>
+<p>You can use Stan to sample the prior and obtain the prior predictive distribution; here, I show how to do it in R, with a Gamma(.01, .01) prior on <span class="math inline">\(\kappa\)</span>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1706</span><span class="op">)</span></span>
 <span><span class="va">plist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"list"</span>, <span class="fl">12L</span><span class="op">)</span></span>
@@ -545,8 +561,7 @@ Figure&nbsp;7.3: Prior predictive distribution.
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tt_fit</span> <span class="op">&lt;-</span> <span class="va">hbin_mod</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>J <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">tt_agg</span><span class="op">)</span>,</span>
 <span>                y <span class="op">=</span> <span class="va">tt_agg</span><span class="op">$</span><span class="va">y</span>,</span>
-<span>                N <span class="op">=</span> <span class="va">tt_agg</span><span class="op">$</span><span class="va">n</span>,</span>
-<span>                prior_only <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>                N <span class="op">=</span> <span class="va">tt_agg</span><span class="op">$</span><span class="va">n</span><span class="op">)</span>,</span>
 <span>    seed <span class="op">=</span> <span class="fl">1716</span>,  <span class="co"># for reproducibility</span></span>
 <span>    refresh <span class="op">=</span> <span class="fl">1000</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -557,7 +572,7 @@ Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup)
 Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 0.1 seconds.
+Chain 1 finished in 0.3 seconds.
 Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
 Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) </code></pre>
@@ -566,7 +581,7 @@ Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) </code></pre>
 <pre><code>Chain 2 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Chain 2 Exception: beta_proportion_lpdf: Location parameter is 1, but must be less than 1.000000 (in '/tmp/RtmpSgm7Id/model-1ad5137a176a1d.stan', line 19, column 2 to column 37)</code></pre>
+<pre><code>Chain 2 Exception: beta_proportion_lpdf: Location parameter is 1, but must be less than 1.000000 (in '/tmp/Rtmp2xNIuz/model-9166e680a2e31.stan', line 15, column 2 to column 37)</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Chain 2 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,</code></pre>
@@ -579,21 +594,19 @@ Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 0.1 seconds.
+Chain 2 finished in 0.3 seconds.
 Chain 3 Iteration:    1 / 2000 [  0%]  (Warmup) 
 Chain 3 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 3 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 3 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 3 finished in 0.1 seconds.
-Chain 4 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 4 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 4 Iteration: 1001 / 2000 [ 50%]  (Sampling) </code></pre>
+Chain 3 finished in 0.3 seconds.
+Chain 4 Iteration:    1 / 2000 [  0%]  (Warmup) </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Chain 4 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Chain 4 Exception: beta_proportion_lpdf: Location parameter is 0, but must be positive! (in '/tmp/RtmpSgm7Id/model-1ad5137a176a1d.stan', line 19, column 2 to column 37)</code></pre>
+<pre><code>Chain 4 Exception: beta_proportion_lpdf: Location parameter is 0, but must be positive! (in '/tmp/Rtmp2xNIuz/model-9166e680a2e31.stan', line 15, column 2 to column 37)</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Chain 4 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,</code></pre>
@@ -605,26 +618,24 @@ Chain 4 Iteration: 1001 / 2000 [ 50%]  (Sampling) </code></pre>
 <pre><code>Chain 4 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Chain 4 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 4 finished in 0.1 seconds.
+<pre><code>Chain 4 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+Chain 4 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
+Chain 4 Iteration: 2000 / 2000 [100%]  (Sampling) 
+Chain 4 finished in 0.3 seconds.
 
 All 4 chains finished successfully.
-Mean chain execution time: 0.1 seconds.
-Total execution time: 1.0 seconds.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: 4 of 4 chains had an E-BFMI less than 0.3.
-See https://mc-stan.org/misc/warnings for details.</code></pre>
+Mean chain execution time: 0.3 seconds.
+Total execution time: 1.6 seconds.</code></pre>
 </div>
 </div>
 <p>You can explore the convergence and posterior distributions using the <code>shinystan</code> package</p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">shinystan</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/shinystan/reference/launch_shinystan.html">launch_shinystan</a></span><span class="op">(</span><span class="va">tt_fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">shinystan</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/shinystan/reference/launch_shinystan.html">launch_shinystan</a></span><span class="op">(</span><span class="va">tt_fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="table-of-coefficients" class="level3" data-number="7.1.6"><h3 data-number="7.1.6" class="anchored" data-anchor-id="table-of-coefficients">
 <span class="header-section-number">7.1.6</span> Table of coefficients</h3>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tt_fit</span><span class="op">$</span><span class="fu">summary</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"theta"</span>, <span class="st">"mu"</span>, <span class="st">"kappa"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tt_fit</span><span class="op">$</span><span class="fu">summary</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"theta"</span>, <span class="st">"mu"</span>, <span class="st">"kappa"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="co"># Use `knitr::kable()` for tabulation</span></span>
 <span>    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-coef-hbin" class="cell quarto-float quarto-figure quarto-figure-center anchored">
@@ -636,14 +647,14 @@ Table&nbsp;7.1: Posterior summary of hierarchical binomial model for the therape
 <colgroup>
 <col style="width: 14%">
 <col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 9%">
+<col style="width: 10%">
 <col style="width: 7%">
-<col style="width: 12%">
-<col style="width: 12%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 13%">
+<col style="width: 13%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">variable</th>
@@ -660,363 +671,363 @@ Table&nbsp;7.1: Posterior summary of hierarchical binomial model for the therape
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">theta[1]</td>
-<td style="text-align: right;">0.37</td>
-<td style="text-align: right;">0.38</td>
-<td style="text-align: right;">0.09</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.21</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: right;">1.01</td>
-<td style="text-align: right;">1062.68</td>
-<td style="text-align: right;">1503.87</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3268.39</td>
+<td style="text-align: right;">2404.91</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[2]</td>
-<td style="text-align: right;">0.39</td>
-<td style="text-align: right;">0.39</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.35</td>
+<td style="text-align: right;">0.35</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.19</td>
 <td style="text-align: right;">0.51</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">1307.69</td>
-<td style="text-align: right;">1599.28</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3741.46</td>
+<td style="text-align: right;">2422.69</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[3]</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.28</td>
-<td style="text-align: right;">0.53</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2913.52</td>
-<td style="text-align: right;">2112.89</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4744.99</td>
+<td style="text-align: right;">2794.69</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[4]</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.28</td>
-<td style="text-align: right;">0.54</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2615.19</td>
-<td style="text-align: right;">2296.21</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4859.60</td>
+<td style="text-align: right;">3056.80</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[5]</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.28</td>
-<td style="text-align: right;">0.53</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2355.49</td>
-<td style="text-align: right;">2251.71</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4817.40</td>
+<td style="text-align: right;">2485.43</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[6]</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.28</td>
-<td style="text-align: right;">0.53</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2978.09</td>
-<td style="text-align: right;">2772.27</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5260.92</td>
+<td style="text-align: right;">2493.09</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[7]</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.28</td>
-<td style="text-align: right;">0.53</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2663.56</td>
-<td style="text-align: right;">1995.05</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5586.84</td>
+<td style="text-align: right;">2968.73</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[8]</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.28</td>
-<td style="text-align: right;">0.53</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2672.62</td>
-<td style="text-align: right;">1997.54</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4926.08</td>
+<td style="text-align: right;">3008.76</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[9]</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.28</td>
-<td style="text-align: right;">0.53</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2011.32</td>
-<td style="text-align: right;">2229.77</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4802.85</td>
+<td style="text-align: right;">2558.79</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[10]</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.28</td>
-<td style="text-align: right;">0.53</td>
-<td style="text-align: right;">1.01</td>
-<td style="text-align: right;">2191.05</td>
-<td style="text-align: right;">1657.18</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4743.85</td>
+<td style="text-align: right;">2910.25</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[11]</td>
 <td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.30</td>
-<td style="text-align: right;">0.56</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3389.39</td>
-<td style="text-align: right;">2034.13</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5041.77</td>
+<td style="text-align: right;">3066.93</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[12]</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.31</td>
-<td style="text-align: right;">0.56</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3709.84</td>
-<td style="text-align: right;">2476.70</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6055.56</td>
+<td style="text-align: right;">2896.89</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[13]</td>
 <td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.31</td>
-<td style="text-align: right;">0.55</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3380.03</td>
-<td style="text-align: right;">2398.03</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4898.48</td>
+<td style="text-align: right;">3112.24</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[14]</td>
 <td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.30</td>
-<td style="text-align: right;">0.55</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3460.51</td>
-<td style="text-align: right;">2450.61</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5909.48</td>
+<td style="text-align: right;">3065.15</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[15]</td>
 <td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.31</td>
-<td style="text-align: right;">0.55</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3495.18</td>
-<td style="text-align: right;">2558.68</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6304.56</td>
+<td style="text-align: right;">3049.53</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[16]</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.33</td>
-<td style="text-align: right;">0.58</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2974.70</td>
-<td style="text-align: right;">2655.92</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5642.01</td>
+<td style="text-align: right;">3230.67</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[17]</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.34</td>
-<td style="text-align: right;">0.58</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2790.18</td>
-<td style="text-align: right;">2181.87</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5517.58</td>
+<td style="text-align: right;">3108.00</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[18]</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.33</td>
-<td style="text-align: right;">0.58</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3460.36</td>
-<td style="text-align: right;">2426.77</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5622.46</td>
+<td style="text-align: right;">2837.76</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[19]</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.33</td>
-<td style="text-align: right;">0.58</td>
-<td style="text-align: right;">1.01</td>
-<td style="text-align: right;">3300.66</td>
-<td style="text-align: right;">1827.15</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6228.82</td>
+<td style="text-align: right;">3062.79</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[20]</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.33</td>
-<td style="text-align: right;">0.59</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3063.45</td>
-<td style="text-align: right;">2239.35</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4758.62</td>
+<td style="text-align: right;">2538.88</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[21]</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.33</td>
-<td style="text-align: right;">0.59</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3239.81</td>
-<td style="text-align: right;">2324.64</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5922.64</td>
+<td style="text-align: right;">2921.96</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[22]</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.33</td>
-<td style="text-align: right;">0.59</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3825.35</td>
-<td style="text-align: right;">1928.48</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5218.69</td>
+<td style="text-align: right;">3180.07</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[23]</td>
-<td style="text-align: right;">0.48</td>
-<td style="text-align: right;">0.47</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.36</td>
-<td style="text-align: right;">0.62</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2231.64</td>
-<td style="text-align: right;">1923.25</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.34</td>
+<td style="text-align: right;">0.67</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5424.13</td>
+<td style="text-align: right;">2936.72</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[24]</td>
-<td style="text-align: right;">0.47</td>
-<td style="text-align: right;">0.47</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">0.35</td>
-<td style="text-align: right;">0.62</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2529.68</td>
-<td style="text-align: right;">1714.46</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.34</td>
+<td style="text-align: right;">0.67</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5321.61</td>
+<td style="text-align: right;">2733.91</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[25]</td>
-<td style="text-align: right;">0.50</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
 <td style="text-align: right;">0.38</td>
-<td style="text-align: right;">0.65</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">1368.00</td>
-<td style="text-align: right;">1856.75</td>
+<td style="text-align: right;">0.71</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3861.44</td>
+<td style="text-align: right;">2248.48</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[26]</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: right;">0.48</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
 <td style="text-align: right;">0.37</td>
-<td style="text-align: right;">0.65</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">1507.91</td>
-<td style="text-align: right;">1706.71</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3808.59</td>
+<td style="text-align: right;">2430.69</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[27]</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.37</td>
-<td style="text-align: right;">0.65</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">1261.80</td>
-<td style="text-align: right;">1759.54</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.71</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3679.86</td>
+<td style="text-align: right;">2556.84</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[28]</td>
-<td style="text-align: right;">0.52</td>
-<td style="text-align: right;">0.51</td>
-<td style="text-align: right;">0.09</td>
-<td style="text-align: right;">0.09</td>
-<td style="text-align: right;">0.39</td>
-<td style="text-align: right;">0.68</td>
-<td style="text-align: right;">1.01</td>
-<td style="text-align: right;">865.16</td>
-<td style="text-align: right;">1712.64</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3005.40</td>
+<td style="text-align: right;">2460.66</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">mu</td>
 <td style="text-align: right;">0.44</td>
 <td style="text-align: right;">0.44</td>
-<td style="text-align: right;">0.03</td>
-<td style="text-align: right;">0.03</td>
-<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.38</td>
 <td style="text-align: right;">0.50</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">1183.15</td>
-<td style="text-align: right;">1783.05</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2482.91</td>
+<td style="text-align: right;">2932.61</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">kappa</td>
-<td style="text-align: right;">61.47</td>
-<td style="text-align: right;">41.85</td>
-<td style="text-align: right;">58.41</td>
-<td style="text-align: right;">33.47</td>
-<td style="text-align: right;">11.79</td>
-<td style="text-align: right;">173.22</td>
-<td style="text-align: right;">1.02</td>
-<td style="text-align: right;">259.81</td>
-<td style="text-align: right;">755.36</td>
+<td style="text-align: right;">18.65</td>
+<td style="text-align: right;">16.37</td>
+<td style="text-align: right;">9.63</td>
+<td style="text-align: right;">7.92</td>
+<td style="text-align: right;">7.49</td>
+<td style="text-align: right;">36.92</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">992.72</td>
+<td style="text-align: right;">1793.53</td>
 </tr>
 </tbody>
 </table>
@@ -1036,7 +1047,7 @@ Table&nbsp;7.1: Posterior summary of hierarchical binomial model for the therape
 </ol>
 <p>In our Stan code, I used (1) to check the fit of the observed data. However, (2) can be helpful when one wants to use the model to make predictions of future data, as future data are unlikely to concern exactly the same participants.</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># The bayesplot::ppc_bars() unfortunately contains a bug</span></span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># The bayesplot::ppc_bars() unfortunately contains a bug</span></span>
 <span><span class="co"># (https://github.com/stan-dev/bayesplot/issues/266) at</span></span>
 <span><span class="co"># the time when I wrote this, so I'll use my own code.</span></span>
 <span><span class="co"># tt_fit$draws("ytilde", format = "draws_matrix") |&gt;</span></span>
@@ -1076,7 +1087,7 @@ Figure&nbsp;7.4: Posterior predictive check. The bar graph shows the observed da
 <span class="header-section-number">7.1.8</span> Derived coefficients</h3>
 <p>One nice thing about MCMC is that it is straightforward to obtain posterior distributions that are functions of the parameters. For example, even though we only sampled from the posteriors of the <span class="math inline">\(\theta\)</span>s, we can ask questions like whether there is evidence for a nonzero <em>difference</em> in <span class="math inline">\(\theta\)</span> between person 1 and person 28.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tt_fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tt_fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">mutate_variables</span><span class="op">(</span></span>
 <span>        theta1_minus14 <span class="op">=</span> <span class="va">`theta[1]`</span> <span class="op">-</span> <span class="va">`theta[14]`</span>,</span>
 <span>        theta1_minus28 <span class="op">=</span> <span class="va">`theta[1]`</span> <span class="op">-</span> <span class="va">`theta[28]`</span>,</span>
@@ -1095,7 +1106,7 @@ Figure&nbsp;7.4: Posterior predictive check. The bar graph shows the observed da
 <col style="width: 6%">
 <col style="width: 6%">
 <col style="width: 8%">
-<col style="width: 6%">
+<col style="width: 8%">
 <col style="width: 6%">
 <col style="width: 12%">
 <col style="width: 12%">
@@ -1115,39 +1126,39 @@ Figure&nbsp;7.4: Posterior predictive check. The bar graph shows the observed da
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">theta1_minus14</td>
-<td style="text-align: right;">-0.06</td>
-<td style="text-align: right;">-0.06</td>
-<td style="text-align: right;">0.11</td>
-<td style="text-align: right;">0.10</td>
-<td style="text-align: right;">-0.26</td>
+<td style="text-align: right;">-0.11</td>
+<td style="text-align: right;">-0.11</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">-0.34</td>
 <td style="text-align: right;">0.09</td>
-<td style="text-align: right;">1.01</td>
-<td style="text-align: right;">2698.65</td>
-<td style="text-align: right;">2367.93</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4950.80</td>
+<td style="text-align: right;">2632.63</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta1_minus28</td>
-<td style="text-align: right;">-0.15</td>
-<td style="text-align: right;">-0.13</td>
-<td style="text-align: right;">0.14</td>
-<td style="text-align: right;">0.13</td>
-<td style="text-align: right;">-0.40</td>
-<td style="text-align: right;">0.03</td>
-<td style="text-align: right;">1.01</td>
-<td style="text-align: right;">593.88</td>
-<td style="text-align: right;">1333.57</td>
+<td style="text-align: right;">-0.27</td>
+<td style="text-align: right;">-0.26</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">-0.53</td>
+<td style="text-align: right;">-0.03</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2312.44</td>
+<td style="text-align: right;">3115.27</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta14_minus28</td>
-<td style="text-align: right;">-0.09</td>
-<td style="text-align: right;">-0.07</td>
-<td style="text-align: right;">0.11</td>
-<td style="text-align: right;">0.11</td>
-<td style="text-align: right;">-0.29</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">1226.26</td>
-<td style="text-align: right;">1694.52</td>
+<td style="text-align: right;">-0.15</td>
+<td style="text-align: right;">-0.15</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">-0.38</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4309.81</td>
+<td style="text-align: right;">3013.97</td>
 </tr>
 </tbody>
 </table>
@@ -1159,9 +1170,9 @@ Figure&nbsp;7.4: Posterior predictive check. The bar graph shows the observed da
 </section><section id="shrinkage" class="level3" data-number="7.1.10"><h3 data-number="7.1.10" class="anchored" data-anchor-id="shrinkage">
 <span class="header-section-number">7.1.10</span> Shrinkage</h3>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">mcmc_intervals</span><span class="op">(</span><span class="va">tt_fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="op">)</span>,</span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">mcmc_intervals</span><span class="op">(</span><span class="va">tt_fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>               <span class="co"># plot only parameters matching "theta"</span></span>
-<span>               regex_pars <span class="op">=</span> <span class="st">"theta"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>               regex_pars <span class="op">=</span> <span class="st">"^theta"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_point</span><span class="op">(</span></span>
 <span>        data <span class="op">=</span> <span class="fu">tibble</span><span class="op">(</span></span>
 <span>            parameter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"theta["</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">28</span>, <span class="st">"]"</span><span class="op">)</span>,</span>
@@ -1192,7 +1203,7 @@ Adding another scale for x, which will replace the existing scale.</code></pre>
 <span class="header-section-number">7.2.1</span> Eight Schools Example</h3>
 <p>This is a classic data set first analyzed by <a href="https://journals.sagepub.com/doi/abs/10.3102/10769986006004377">Rubin (1981)</a>. It is also the example used in the <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">RStan Getting Started</a> page. The data contains the effect of coaching from randomized experiments in eight schools. The numbers shown (labelled as <code>y</code>) are the mean difference (i.e., effect size) in performance between the treatment and control groups on SAT-V scores.</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">schools_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">schools_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>    J <span class="op">=</span> <span class="fl">8</span>,</span>
 <span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">8</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">7</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">18</span>, <span class="fl">12</span><span class="op">)</span>,</span>
 <span>    sigma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">16</span>, <span class="fl">11</span>, <span class="fl">9</span>, <span class="fl">11</span>, <span class="fl">10</span>, <span class="fl">18</span><span class="op">)</span></span>
@@ -1240,36 +1251,37 @@ Adding another scale for x, which will replace the existing scale.</code></pre>
   \end{aligned}
 \]</span></p>
 <div class="cell" data-output.var="hnorm_mod">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; J;            <span class="co">// number of schools </span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[J] y;               <span class="co">// estimated treatment effects</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt;[J] sigma;  <span class="co">// s.e. of effect estimates </span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> mu;                   <span class="co">// overall mean</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; tau;         <span class="co">// between-school SD</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[J] eta;             <span class="co">// standardized deviation (z score)</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[J] theta;</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  theta = mu + tau * eta;    <span class="co">// non-centered parameterization</span></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  eta ~ std_normal();        <span class="co">// same as eta ~ normal(0, 1);</span></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  y ~ normal(theta, sigma);</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// priors</span></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  mu ~ normal(<span class="dv">0</span>, <span class="dv">100</span>);</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  tau ~ student_t(<span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">100</span>);</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; J;            <span class="co">// number of schools </span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[J] y;               <span class="co">// estimated treatment effects</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt;[J] sigma;  <span class="co">// s.e. of effect estimates </span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> mu;                   <span class="co">// overall mean</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; tau;         <span class="co">// between-school SD</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[J] eta;             <span class="co">// standardized deviation (z score)</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[J] theta;</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  theta = mu + tau * eta;    <span class="co">// non-centered parameterization</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  eta ~ std_normal();        <span class="co">// same as eta ~ normal(0, 1);</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  y ~ normal(theta, sigma);</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// priors</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  mu ~ normal(<span class="dv">0</span>, <span class="dv">100</span>);</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  tau ~ student_t(<span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">100</span>);</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hnorm_mod</span> <span class="op">&lt;-</span> <span class="fu">cmdstan_model</span><span class="op">(</span><span class="st">"stan_code/hierarchical-normal.stan"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hnorm_mod</span> <span class="op">&lt;-</span> <span class="fu">cmdstan_model</span><span class="op">(</span><span class="st">"stan_code/hierarchical-normal.stan"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="va">hnorm_mod</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span></span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="va">hnorm_mod</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span></span>
 <span>    data <span class="op">=</span> <span class="va">schools_dat</span>,</span>
 <span>    seed <span class="op">=</span> <span class="fl">1804</span>,  <span class="co"># for reproducibility</span></span>
-<span>    refresh <span class="op">=</span> <span class="fl">1000</span></span>
+<span>    refresh <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>    adapt_delta <span class="op">=</span> <span class="fl">0.9</span>  <span class="co"># to improve convergence</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 4 sequential chains...
@@ -1278,7 +1290,7 @@ Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup)
 Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 0.0 seconds.
+Chain 1 finished in 0.1 seconds.
 Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
 Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
@@ -1288,25 +1300,21 @@ Chain 3 Iteration:    1 / 2000 [  0%]  (Warmup)
 Chain 3 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 3 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 3 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 3 finished in 0.0 seconds.
+Chain 3 finished in 0.1 seconds.
 Chain 4 Iteration:    1 / 2000 [  0%]  (Warmup) 
 Chain 4 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 4 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 4 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 4 finished in 0.0 seconds.
+Chain 4 finished in 0.1 seconds.
 
 All 4 chains finished successfully.
-Mean chain execution time: 0.0 seconds.
-Total execution time: 0.5 seconds.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: 7 of 4000 (0.0%) transitions ended with a divergence.
-See https://mc-stan.org/misc/warnings for details.</code></pre>
+Mean chain execution time: 0.1 seconds.
+Total execution time: 0.8 seconds.</code></pre>
 </div>
 </div>
 <p>Treatment effect estimates of individual schools (<span class="math inline">\(\theta\)</span>), average treatment effect (<span class="math inline">\(\mu\)</span>), and treatment effect heterogeneity (<span class="math inline">\(\tau\)</span>).</p>
 <div class="cell">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit</span><span class="op">$</span><span class="fu">summary</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"theta"</span>, <span class="st">"mu"</span>, <span class="st">"tau"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit</span><span class="op">$</span><span class="fu">summary</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"theta"</span>, <span class="st">"mu"</span>, <span class="st">"tau"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -1337,141 +1345,141 @@ See https://mc-stan.org/misc/warnings for details.</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">theta[1]</td>
-<td style="text-align: right;">11.15</td>
-<td style="text-align: right;">9.96</td>
-<td style="text-align: right;">8.36</td>
-<td style="text-align: right;">7.05</td>
-<td style="text-align: right;">-0.14</td>
-<td style="text-align: right;">26.80</td>
+<td style="text-align: right;">11.70</td>
+<td style="text-align: right;">10.60</td>
+<td style="text-align: right;">8.69</td>
+<td style="text-align: right;">7.38</td>
+<td style="text-align: right;">-0.20</td>
+<td style="text-align: right;">27.60</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2660.37</td>
-<td style="text-align: right;">2707.68</td>
+<td style="text-align: right;">3475.69</td>
+<td style="text-align: right;">3347.72</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[2]</td>
-<td style="text-align: right;">7.85</td>
-<td style="text-align: right;">7.53</td>
-<td style="text-align: right;">6.27</td>
-<td style="text-align: right;">5.60</td>
-<td style="text-align: right;">-1.88</td>
-<td style="text-align: right;">18.56</td>
+<td style="text-align: right;">7.98</td>
+<td style="text-align: right;">7.93</td>
+<td style="text-align: right;">6.31</td>
+<td style="text-align: right;">5.82</td>
+<td style="text-align: right;">-2.18</td>
+<td style="text-align: right;">18.34</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">5036.96</td>
-<td style="text-align: right;">2763.40</td>
+<td style="text-align: right;">5870.22</td>
+<td style="text-align: right;">3353.39</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[3]</td>
-<td style="text-align: right;">6.15</td>
-<td style="text-align: right;">6.48</td>
-<td style="text-align: right;">7.54</td>
-<td style="text-align: right;">6.46</td>
-<td style="text-align: right;">-6.75</td>
-<td style="text-align: right;">17.77</td>
+<td style="text-align: right;">6.13</td>
+<td style="text-align: right;">6.77</td>
+<td style="text-align: right;">7.97</td>
+<td style="text-align: right;">6.50</td>
+<td style="text-align: right;">-7.14</td>
+<td style="text-align: right;">17.85</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2934.27</td>
-<td style="text-align: right;">2417.21</td>
+<td style="text-align: right;">4318.80</td>
+<td style="text-align: right;">2941.48</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[4]</td>
-<td style="text-align: right;">7.57</td>
-<td style="text-align: right;">7.42</td>
-<td style="text-align: right;">6.64</td>
-<td style="text-align: right;">5.97</td>
-<td style="text-align: right;">-3.28</td>
-<td style="text-align: right;">18.48</td>
+<td style="text-align: right;">7.69</td>
+<td style="text-align: right;">7.75</td>
+<td style="text-align: right;">6.75</td>
+<td style="text-align: right;">6.15</td>
+<td style="text-align: right;">-3.43</td>
+<td style="text-align: right;">18.53</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3880.47</td>
-<td style="text-align: right;">2391.34</td>
+<td style="text-align: right;">5452.05</td>
+<td style="text-align: right;">3268.65</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[5]</td>
-<td style="text-align: right;">5.04</td>
-<td style="text-align: right;">5.45</td>
-<td style="text-align: right;">6.34</td>
-<td style="text-align: right;">5.83</td>
-<td style="text-align: right;">-6.27</td>
-<td style="text-align: right;">14.75</td>
+<td style="text-align: right;">5.22</td>
+<td style="text-align: right;">5.53</td>
+<td style="text-align: right;">6.22</td>
+<td style="text-align: right;">5.82</td>
+<td style="text-align: right;">-5.64</td>
+<td style="text-align: right;">14.70</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3795.92</td>
-<td style="text-align: right;">3159.94</td>
+<td style="text-align: right;">4118.93</td>
+<td style="text-align: right;">3165.15</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[6]</td>
-<td style="text-align: right;">6.00</td>
-<td style="text-align: right;">6.40</td>
-<td style="text-align: right;">6.86</td>
-<td style="text-align: right;">6.07</td>
-<td style="text-align: right;">-6.49</td>
-<td style="text-align: right;">16.50</td>
+<td style="text-align: right;">6.15</td>
+<td style="text-align: right;">6.52</td>
+<td style="text-align: right;">6.87</td>
+<td style="text-align: right;">6.15</td>
+<td style="text-align: right;">-5.19</td>
+<td style="text-align: right;">16.86</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3408.05</td>
-<td style="text-align: right;">2430.83</td>
+<td style="text-align: right;">4526.45</td>
+<td style="text-align: right;">3352.39</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[7]</td>
-<td style="text-align: right;">10.64</td>
-<td style="text-align: right;">9.89</td>
-<td style="text-align: right;">7.03</td>
-<td style="text-align: right;">6.48</td>
-<td style="text-align: right;">0.40</td>
-<td style="text-align: right;">23.07</td>
+<td style="text-align: right;">10.80</td>
+<td style="text-align: right;">10.14</td>
+<td style="text-align: right;">6.78</td>
+<td style="text-align: right;">6.32</td>
+<td style="text-align: right;">0.88</td>
+<td style="text-align: right;">23.09</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">3230.09</td>
-<td style="text-align: right;">2838.04</td>
+<td style="text-align: right;">4445.48</td>
+<td style="text-align: right;">3533.95</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[8]</td>
-<td style="text-align: right;">8.44</td>
-<td style="text-align: right;">8.06</td>
-<td style="text-align: right;">7.82</td>
-<td style="text-align: right;">6.54</td>
-<td style="text-align: right;">-3.15</td>
-<td style="text-align: right;">21.70</td>
+<td style="text-align: right;">8.55</td>
+<td style="text-align: right;">8.33</td>
+<td style="text-align: right;">7.74</td>
+<td style="text-align: right;">6.42</td>
+<td style="text-align: right;">-3.59</td>
+<td style="text-align: right;">21.11</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2912.53</td>
-<td style="text-align: right;">1671.98</td>
+<td style="text-align: right;">4978.08</td>
+<td style="text-align: right;">3232.97</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">mu</td>
-<td style="text-align: right;">8.06</td>
-<td style="text-align: right;">7.78</td>
-<td style="text-align: right;">5.39</td>
-<td style="text-align: right;">5.01</td>
-<td style="text-align: right;">0.04</td>
-<td style="text-align: right;">16.83</td>
+<td style="text-align: right;">7.95</td>
+<td style="text-align: right;">8.00</td>
+<td style="text-align: right;">5.26</td>
+<td style="text-align: right;">4.97</td>
+<td style="text-align: right;">-0.43</td>
+<td style="text-align: right;">16.20</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">1230.75</td>
-<td style="text-align: right;">672.27</td>
+<td style="text-align: right;">2917.45</td>
+<td style="text-align: right;">1987.36</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">tau</td>
-<td style="text-align: right;">6.50</td>
-<td style="text-align: right;">5.19</td>
-<td style="text-align: right;">5.39</td>
-<td style="text-align: right;">4.59</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">16.91</td>
+<td style="text-align: right;">6.75</td>
+<td style="text-align: right;">5.31</td>
+<td style="text-align: right;">5.91</td>
+<td style="text-align: right;">4.84</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">17.53</td>
 <td style="text-align: right;">1.01</td>
-<td style="text-align: right;">1050.02</td>
-<td style="text-align: right;">1249.05</td>
+<td style="text-align: right;">1316.86</td>
+<td style="text-align: right;">1673.79</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>On average, based on the 90% CI, coaching seemed to improve SAT-V by 0.04 to 16.83 points. There was substantial heterogeneity across schools.</p>
+<p>On average, based on the 90% CI, coaching seemed to improve SAT-V by -0.43 to 16.2 points. There was substantial heterogeneity across schools.</p>
 <p>We can also get the probability that the treatment effect was &gt; 0:</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Obtain draws</span></span>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Obtain draws</span></span>
 <span><span class="va">draws_mu</span> <span class="op">&lt;-</span> <span class="va">fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="st">"mu"</span>, format <span class="op">=</span> <span class="st">"draws_matrix"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">draws_mu</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.951</code></pre>
+<pre><code>[1] 0.93975</code></pre>
 </div>
 </div>
 <p>Here are the individual-school treatment effects:</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">mcmc_areas_ridges</span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="op">)</span>, regex_pars <span class="op">=</span> <span class="st">"theta"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">mcmc_areas_ridges</span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="op">)</span>, regex_pars <span class="op">=</span> <span class="st">"theta"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-areas-hnorm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-areas-hnorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1487,7 +1495,7 @@ Figure&nbsp;7.5: Posterior distribution of the true effect size in the eight sch
 <span class="header-section-number">7.2.4</span> Prediction Interval</h3>
 <p>Posterior distribution of the true effect size of a new study, <span class="math inline">\(\tilde \theta\)</span></p>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Prediction Interval</span></span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Prediction Interval</span></span>
 <span><span class="co"># (can also be done in Stan, as in the previous example)</span></span>
 <span><span class="va">fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mu"</span>, <span class="st">"tau"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">mutate_variables</span><span class="op">(</span></span>
@@ -1523,39 +1531,39 @@ Figure&nbsp;7.5: Posterior distribution of the true effect size in the eight sch
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">mu</td>
-<td style="text-align: right;">8.06</td>
-<td style="text-align: right;">7.78</td>
-<td style="text-align: right;">5.39</td>
-<td style="text-align: right;">5.01</td>
-<td style="text-align: right;">0.04</td>
-<td style="text-align: right;">16.83</td>
+<td style="text-align: right;">7.95</td>
+<td style="text-align: right;">8.00</td>
+<td style="text-align: right;">5.26</td>
+<td style="text-align: right;">4.97</td>
+<td style="text-align: right;">-0.43</td>
+<td style="text-align: right;">16.20</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">1230.75</td>
-<td style="text-align: right;">672.27</td>
+<td style="text-align: right;">2917.45</td>
+<td style="text-align: right;">1987.36</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">tau</td>
-<td style="text-align: right;">6.50</td>
-<td style="text-align: right;">5.19</td>
-<td style="text-align: right;">5.39</td>
-<td style="text-align: right;">4.59</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">16.91</td>
+<td style="text-align: right;">6.75</td>
+<td style="text-align: right;">5.31</td>
+<td style="text-align: right;">5.91</td>
+<td style="text-align: right;">4.84</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">17.53</td>
 <td style="text-align: right;">1.01</td>
-<td style="text-align: right;">1050.02</td>
-<td style="text-align: right;">1249.05</td>
+<td style="text-align: right;">1316.86</td>
+<td style="text-align: right;">1673.79</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta_tilde</td>
-<td style="text-align: right;">7.90</td>
-<td style="text-align: right;">7.72</td>
-<td style="text-align: right;">10.04</td>
-<td style="text-align: right;">7.02</td>
-<td style="text-align: right;">-6.70</td>
-<td style="text-align: right;">23.36</td>
+<td style="text-align: right;">8.03</td>
+<td style="text-align: right;">7.87</td>
+<td style="text-align: right;">10.19</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">-6.69</td>
+<td style="text-align: right;">22.89</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2543.39</td>
-<td style="text-align: right;">1869.40</td>
+<td style="text-align: right;">3947.08</td>
+<td style="text-align: right;">3042.56</td>
 </tr>
 </tbody>
 </table>
@@ -1563,6 +1571,8 @@ Figure&nbsp;7.5: Posterior distribution of the true effect size in the eight sch
 </div>
 <p>The posterior interval for <span class="math inline">\(\tilde \theta\)</span> indicates a range of the treatment effect for a new study.</p>
 
+
+<!-- -->
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1653,6 +1663,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
@@ -1993,7 +2054,464 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb35" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Hierarchical Models</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>comma <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">2</span>L) <span class="fu">format</span>(x, <span class="at">digits =</span> digits, <span class="at">big.mark =</span> <span class="st">","</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey92"</span>)))</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmdstanr)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>Although many statistical models can be fitted using Bayesian or frequentist methods, some models are more naturally used in the Bayesian framework. One class of such models is the family of **hierarchical models.** Consider situations when the data contain *clusters*, such as multiple data points in each of many participants, or multiple participants in each of several treatment conditions. While it is possible to run $J$ Bayesian analyses for the $J$ subsets of the data, it is usually more efficient to pool the data together. In this approach, each cluster $j$ has some parameters $\theta_j$, and these $J$ $\theta$ values themselves come from a common distribution. @fig-hier-bin shows a graphical representation of the concept of pooling. This is the same idea as multilevel modeling, a topic we will discuss more later in the course.</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>A hierarchical model is one in which some higher-level distributions govern one or more parameters, and those higher-level distributions are characterized by *hyperparameters* and can be assigned *hyperpriors*.</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>Hierarchical models are commonly used to study and account for individual differences in some model parameters. </span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{dot}</span></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a><span class="in">//| label: fig-hier-bin</span></span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a><span class="in">//| fig-cap: "A graphical representation of a hierarchical binomial model."</span></span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a><span class="in">digraph hierarchical_binomial {</span></span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a><span class="in">  graph [layout = neato, overlap = true, fontsize = 30]</span></span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a><span class="in">  node [penwidth = 0]</span></span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a><span class="in">  # Common parameters</span></span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a><span class="in">  mu_kappa [pos = "0,2!", label = &lt;&amp;mu;, &amp;kappa;&gt;]</span></span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a><span class="in">  # Person</span></span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a><span class="in">  theta_1 [pos = "-1.2,1!", label = &lt;&amp;theta;&lt;SUB&gt;1&lt;/SUB&gt;&gt;]</span></span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a><span class="in">  theta_2 [pos = "-0.6,1!", label = &lt;&amp;theta;&lt;SUB&gt;2&lt;/SUB&gt;&gt;]</span></span>
+<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a><span class="in">  theta_3 [pos = "0,1!", label = "..."]</span></span>
+<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a><span class="in">  theta_J [pos = "0.6,1!", label = &lt;&amp;theta;&lt;SUB&gt;J&lt;/SUB&gt;&gt;]</span></span>
+<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a><span class="in">  # Repeated measures</span></span>
+<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a><span class="in">  y_1 [pos = "-1.2,0!", label = &lt;y&lt;SUB&gt;1&lt;/SUB&gt;&gt;]</span></span>
+<span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a><span class="in">  y_2 [pos = "-0.6,0!", label = &lt;y&lt;SUB&gt;2&lt;/SUB&gt;&gt;]</span></span>
+<span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a><span class="in">  y_3 [pos = "0,0!", label = "..."]</span></span>
+<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a><span class="in">  y_J [pos = "0.6,0!", label = &lt;y&lt;SUB&gt;J&lt;/SUB&gt;&gt;]</span></span>
+<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-48"><a href="#cb35-48" aria-hidden="true" tabindex="-1"></a><span class="in">  # edges</span></span>
+<span id="cb35-49"><a href="#cb35-49" aria-hidden="true" tabindex="-1"></a><span class="in">  mu_kappa -&gt; {theta_1; theta_2; theta_J;}</span></span>
+<span id="cb35-50"><a href="#cb35-50" aria-hidden="true" tabindex="-1"></a><span class="in">  theta_1 -&gt; y_1</span></span>
+<span id="cb35-51"><a href="#cb35-51" aria-hidden="true" tabindex="-1"></a><span class="in">  theta_2 -&gt; y_2</span></span>
+<span id="cb35-52"><a href="#cb35-52" aria-hidden="true" tabindex="-1"></a><span class="in">  theta_J -&gt; y_J</span></span>
+<span id="cb35-53"><a href="#cb35-53" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb35-54"><a href="#cb35-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-55"><a href="#cb35-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-56"><a href="#cb35-56" aria-hidden="true" tabindex="-1"></a>In this note, you will see two examples, one from a textbook <span class="co">[</span><span class="ot">(Kruschke, 2015)</span><span class="co">](https://jkkweb.sitehost.iu.edu/DoingBayesianDataAnalysis/)</span> with a hierarchical Bernoulli/binomial model, and another from a classic data set with eight schools, modelled by a hierarchical normal model.</span>
+<span id="cb35-57"><a href="#cb35-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-58"><a href="#cb35-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hierarchical Bernoulli/Binomial</span></span>
+<span id="cb35-59"><a href="#cb35-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-60"><a href="#cb35-60" aria-hidden="true" tabindex="-1"></a>We will first consider a therapeutic touch example (Kruschke, 2015, Chapter 9). Therapeutic touch is a technique in alternative medicine to relieve pain, but scientific evidence does not support its effectiveness. The data here are from an experiment where the experimenter randomly hovered their hand over either the participant's left or right hand, and the participant had to guess which hand was being hovered without seeing. This is repeated 10 times for each participant. There are a total of 28 participants in the dataset. </span>
+<span id="cb35-61"><a href="#cb35-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-62"><a href="#cb35-62" aria-hidden="true" tabindex="-1"></a>Previously, we have seen the Bernoulli model for $N$ outcomes (i.e., whether the guess is correct):</span>
+<span id="cb35-63"><a href="#cb35-63" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-64"><a href="#cb35-64" aria-hidden="true" tabindex="-1"></a>y_i \sim \text{Bern}(\theta), \text{for }i = 1, \ldots, N</span>
+<span id="cb35-65"><a href="#cb35-65" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-66"><a href="#cb35-66" aria-hidden="true" tabindex="-1"></a>We assumed exchangeability with $\theta$ being the participant's "ability" to guess correctly. </span>
+<span id="cb35-67"><a href="#cb35-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-68"><a href="#cb35-68" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb35-69"><a href="#cb35-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-70"><a href="#cb35-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Alternative Parameterization of Beta</span></span>
+<span id="cb35-71"><a href="#cb35-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a>In the last class, we have used the Beta(a, b) prior for a Bernoulli outcome, such that</span>
+<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-74"><a href="#cb35-74" aria-hidden="true" tabindex="-1"></a>P(\theta \mid a, b) \propto \theta^{a - 1} (1 - \theta)^{b - 1}.</span>
+<span id="cb35-75"><a href="#cb35-75" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-76"><a href="#cb35-76" aria-hidden="true" tabindex="-1"></a>However, in hierarchical models to be discussed later, it is beneficial to consider another way to express the Beta distribution, in terms of the *prior mean*, $\mu = a / (a + b)$, $\mu \in <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>$, and the concentration, $\kappa = a + b$, $\kappa \in [0, \infty)$. So, instead of the above formula, we can write</span>
+<span id="cb35-77"><a href="#cb35-77" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-78"><a href="#cb35-78" aria-hidden="true" tabindex="-1"></a>P(\theta \mid \mu, \kappa) \propto \theta^{\mu \kappa - 1} (1 - \theta)^{(1 - \mu) \kappa - 1}.</span>
+<span id="cb35-79"><a href="#cb35-79" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-80"><a href="#cb35-80" aria-hidden="true" tabindex="-1"></a>The two expressions represent exactly the same distribution, but just in terms of parameters of different meanings. Therefore, they are referred to as **different parameterization** of the Beta distribution.</span>
+<span id="cb35-81"><a href="#cb35-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-82"><a href="#cb35-82" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb35-83"><a href="#cb35-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-84"><a href="#cb35-84" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- &lt;aside&gt;</span></span>
+<span id="cb35-85"><a href="#cb35-85" aria-hidden="true" tabindex="-1"></a><span class="co">Note your textbook used $\omega$ = $(a - 1) / (a + b - 2)$ for the mode, instead of the mean. This is yet another parameterization in terms of $\omega$ and $\kappa$, but I found the mean parameterization more natural and common in the literature. </span></span>
+<span id="cb35-86"><a href="#cb35-86" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;/aside&gt; --&gt;</span></span>
+<span id="cb35-87"><a href="#cb35-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-88"><a href="#cb35-88" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple Bernoulli = Binomial</span></span>
+<span id="cb35-89"><a href="#cb35-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-90"><a href="#cb35-90" aria-hidden="true" tabindex="-1"></a>With $N$ exchangeable Bernoulli observations, an equivalent but more efficient way to code the model is to use the *binomial* distribution. Let $z = \sum_{i = 1}^N y_i$, then</span>
+<span id="cb35-91"><a href="#cb35-91" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-92"><a href="#cb35-92" aria-hidden="true" tabindex="-1"></a>z \sim \mathrm{Bin}(N, \theta)</span>
+<span id="cb35-93"><a href="#cb35-93" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-94"><a href="#cb35-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-95"><a href="#cb35-95" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple Binomial Observations</span></span>
+<span id="cb35-96"><a href="#cb35-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-97"><a href="#cb35-97" aria-hidden="true" tabindex="-1"></a>Now, because we have multiple participants, we could study whether each participant had noticeable differences in their guessing ability. We can use a binomial model for each participant, from participant 1 to participant $J$:</span>
+<span id="cb35-98"><a href="#cb35-98" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-99"><a href="#cb35-99" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb35-100"><a href="#cb35-100" aria-hidden="true" tabindex="-1"></a>  z_1 \sim \mathrm{Bin}(N_1, \theta_1) <span class="sc">\\</span></span>
+<span id="cb35-101"><a href="#cb35-101" aria-hidden="true" tabindex="-1"></a>  z_2 \sim \mathrm{Bin}(N_2, \theta_2) <span class="sc">\\</span></span>
+<span id="cb35-102"><a href="#cb35-102" aria-hidden="true" tabindex="-1"></a>  \vdots <span class="sc">\\</span></span>
+<span id="cb35-103"><a href="#cb35-103" aria-hidden="true" tabindex="-1"></a>  z_J \sim \mathrm{Bin}(N_J, \theta_J)</span>
+<span id="cb35-104"><a href="#cb35-104" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb35-105"><a href="#cb35-105" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-106"><a href="#cb35-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-107"><a href="#cb35-107" aria-hidden="true" tabindex="-1"></a>Or instead of writing $J$ equations, we can use the subscript $j$ to refer to each participant:</span>
+<span id="cb35-108"><a href="#cb35-108" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-109"><a href="#cb35-109" aria-hidden="true" tabindex="-1"></a>z_{\textcolor{red}{j}} \sim \mathrm{Bin}(N_{\textcolor{red}{j}}, \theta_{\textcolor{red}{j}})</span>
+<span id="cb35-110"><a href="#cb35-110" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-111"><a href="#cb35-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-112"><a href="#cb35-112" aria-hidden="true" tabindex="-1"></a>If we believe that all participants have the same ability, then we could consider the model</span>
+<span id="cb35-113"><a href="#cb35-113" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-114"><a href="#cb35-114" aria-hidden="true" tabindex="-1"></a>z_j \sim \mathrm{Bin}(N_j, \theta),</span>
+<span id="cb35-115"><a href="#cb35-115" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-116"><a href="#cb35-116" aria-hidden="true" tabindex="-1"></a>which still contains only one parameter, $\theta$. However, if we have reason to believe that the coins have different biases, then we should have</span>
+<span id="cb35-117"><a href="#cb35-117" aria-hidden="true" tabindex="-1"></a>$$z_j \sim \mathrm{Bin}(N_j, \theta_{\color{red}{j}}),$$</span>
+<span id="cb35-118"><a href="#cb35-118" aria-hidden="true" tabindex="-1"></a>with parameters $\theta_1, \ldots, \theta_j$.</span>
+<span id="cb35-119"><a href="#cb35-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-120"><a href="#cb35-120" aria-hidden="true" tabindex="-1"></a>We can assign priors to each $\theta_j$. However, suppose our prior belief is that there's something common among the different participants (e.g., they're all human beings), so they come from a common distribution. In that case, we can have common parameters for the prior distributions of the $\theta$s:</span>
+<span id="cb35-121"><a href="#cb35-121" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-122"><a href="#cb35-122" aria-hidden="true" tabindex="-1"></a>\theta_j \sim \mathrm{Beta<span class="sc">\_</span>Proportion}(\mu, \kappa),</span>
+<span id="cb35-123"><a href="#cb35-123" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-124"><a href="#cb35-124" aria-hidden="true" tabindex="-1"></a>note I use Beta_Proportion to denote the mean parameterization. Here, we express the prior belief that the **mean ability** of the different participants is $\mu$, and how each participant differs from the mean depends on $\kappa$. Now, $\mu$ and $\kappa$ are hyperparameters. We can assign some fixed values to $\mu$ and $\kappa$, as if we know what the average ability is. However, the power of the hierarchical model is that we can put priors (or hyper priors) on $\mu$ and $\kappa$, and obtain posterior distributions of them, based on what the data say. </span>
+<span id="cb35-125"><a href="#cb35-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-126"><a href="#cb35-126" aria-hidden="true" tabindex="-1"></a>What priors to use for $\mu$ and $\kappa$? $\mu$ is relatively easy because it is the mean ability; if we put a Beta prior for each participant's ability, we can again use a Beta prior for the mean ability. $\kappa$ is more challenging. A larger $\kappa$ means that the participants' abilities are more similar to each other. We can perform a prior predictive check to see what the data look like. As a starting point, some textbook (e.g., chapter 9 of Kruschke, 2015) suggested using Gamma(0.01, 0.01). So the full model in our case, with a weak Beta(1.5, 1.5) prior on $\mu$, is</span>
+<span id="cb35-127"><a href="#cb35-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-128"><a href="#cb35-128" aria-hidden="true" tabindex="-1"></a>Model:</span>
+<span id="cb35-129"><a href="#cb35-129" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-130"><a href="#cb35-130" aria-hidden="true" tabindex="-1"></a>  \begin{aligned}</span>
+<span id="cb35-131"><a href="#cb35-131" aria-hidden="true" tabindex="-1"></a>    z_j &amp; \sim \mathrm{Bin}(N_j, \theta_j) <span class="sc">\\</span></span>
+<span id="cb35-132"><a href="#cb35-132" aria-hidden="true" tabindex="-1"></a>    \theta_j &amp; \sim \mathrm{Beta2}(\mu, \kappa)</span>
+<span id="cb35-133"><a href="#cb35-133" aria-hidden="true" tabindex="-1"></a>  \end{aligned}</span>
+<span id="cb35-134"><a href="#cb35-134" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-135"><a href="#cb35-135" aria-hidden="true" tabindex="-1"></a>Prior:</span>
+<span id="cb35-136"><a href="#cb35-136" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-137"><a href="#cb35-137" aria-hidden="true" tabindex="-1"></a>  \begin{aligned}</span>
+<span id="cb35-138"><a href="#cb35-138" aria-hidden="true" tabindex="-1"></a>    \mu &amp; \sim \mathrm{Beta}(1.5, 1.5) <span class="sc">\\</span></span>
+<span id="cb35-139"><a href="#cb35-139" aria-hidden="true" tabindex="-1"></a>    \kappa &amp; \sim \mathrm{Gamma}(0.01, 0.01)</span>
+<span id="cb35-140"><a href="#cb35-140" aria-hidden="true" tabindex="-1"></a>  \end{aligned}</span>
+<span id="cb35-141"><a href="#cb35-141" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-142"><a href="#cb35-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-143"><a href="#cb35-143" aria-hidden="true" tabindex="-1"></a>We will import the data and fit the model</span>
+<span id="cb35-144"><a href="#cb35-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-147"><a href="#cb35-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-148"><a href="#cb35-148" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tt_dat</span></span>
+<span id="cb35-149"><a href="#cb35-149" aria-hidden="true" tabindex="-1"></a><span class="co"># Data file from GitHub</span></span>
+<span id="cb35-150"><a href="#cb35-150" aria-hidden="true" tabindex="-1"></a>tt_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb35-151"><a href="#cb35-151" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://github.com/boboppie/kruschke-doing_bayesian_data_analysis/"</span>,</span>
+<span id="cb35-152"><a href="#cb35-152" aria-hidden="true" tabindex="-1"></a>    <span class="st">"raw/master/2e/TherapeuticTouchData.csv"</span></span>
+<span id="cb35-153"><a href="#cb35-153" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-154"><a href="#cb35-154" aria-hidden="true" tabindex="-1"></a>tt_dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(tt_url)</span>
+<span id="cb35-155"><a href="#cb35-155" aria-hidden="true" tabindex="-1"></a><span class="co"># Get aggregated data by summing the counts</span></span>
+<span id="cb35-156"><a href="#cb35-156" aria-hidden="true" tabindex="-1"></a>tt_agg <span class="ot">&lt;-</span> tt_dat <span class="sc">|&gt;</span></span>
+<span id="cb35-157"><a href="#cb35-157" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(s) <span class="sc">|&gt;</span></span>
+<span id="cb35-158"><a href="#cb35-158" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">y =</span> <span class="fu">sum</span>(y),  <span class="co"># total number of correct</span></span>
+<span id="cb35-159"><a href="#cb35-159" aria-hidden="true" tabindex="-1"></a>              <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb35-160"><a href="#cb35-160" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot proportion correct distribution</span></span>
+<span id="cb35-161"><a href="#cb35-161" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(tt_agg, <span class="fu">aes</span>(<span class="at">x =</span> y <span class="sc">/</span> n)) <span class="sc">+</span></span>
+<span id="cb35-162"><a href="#cb35-162" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-163"><a href="#cb35-163" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Proportion Correct"</span>)</span>
+<span id="cb35-164"><a href="#cb35-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-165"><a href="#cb35-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-168"><a href="#cb35-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-169"><a href="#cb35-169" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb35-170"><a href="#cb35-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-p1</span></span>
+<span id="cb35-171"><a href="#cb35-171" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribution of proportions of correct responses across participants."</span></span>
+<span id="cb35-172"><a href="#cb35-172" aria-hidden="true" tabindex="-1"></a>p1</span>
+<span id="cb35-173"><a href="#cb35-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-174"><a href="#cb35-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-175"><a href="#cb35-175" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stan Code</span></span>
+<span id="cb35-176"><a href="#cb35-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-179"><a href="#cb35-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{stan}</span></span>
+<span id="cb35-180"><a href="#cb35-180" aria-hidden="true" tabindex="-1"></a><span class="in">#| output.var: hbin_mod</span></span>
+<span id="cb35-181"><a href="#cb35-181" aria-hidden="true" tabindex="-1"></a><span class="in">#| file: "stan_code/hierarchical-binomial.stan"</span></span>
+<span id="cb35-182"><a href="#cb35-182" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false</span></span>
+<span id="cb35-183"><a href="#cb35-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-184"><a href="#cb35-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-187"><a href="#cb35-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-188"><a href="#cb35-188" aria-hidden="true" tabindex="-1"></a>hbin_mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"stan_code/hierarchical-binomial.stan"</span>)</span>
+<span id="cb35-189"><a href="#cb35-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-190"><a href="#cb35-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-191"><a href="#cb35-191" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prior predictive</span></span>
+<span id="cb35-192"><a href="#cb35-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-193"><a href="#cb35-193" aria-hidden="true" tabindex="-1"></a>You can use Stan to sample the prior and obtain the prior predictive distribution; here, I show how to do it in R, with a Gamma(.01, .01) prior on $\kappa$:</span>
+<span id="cb35-194"><a href="#cb35-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-197"><a href="#cb35-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-198"><a href="#cb35-198" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-prior-pred</span></span>
+<span id="cb35-199"><a href="#cb35-199" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Prior predictive distribution."</span></span>
+<span id="cb35-200"><a href="#cb35-200" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1706</span>)</span>
+<span id="cb35-201"><a href="#cb35-201" aria-hidden="true" tabindex="-1"></a>plist <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="dv">12</span>L)</span>
+<span id="cb35-202"><a href="#cb35-202" aria-hidden="true" tabindex="-1"></a>plist[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> p1 <span class="sc">+</span></span>
+<span id="cb35-203"><a href="#cb35-203" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Observed data"</span>) <span class="sc">+</span></span>
+<span id="cb35-204"><a href="#cb35-204" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"red"</span>))</span>
+<span id="cb35-205"><a href="#cb35-205" aria-hidden="true" tabindex="-1"></a>num_subjects <span class="ot">&lt;-</span> <span class="dv">28</span></span>
+<span id="cb35-206"><a href="#cb35-206" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>) {</span>
+<span id="cb35-207"><a href="#cb35-207" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get prior values of mu and kappa</span></span>
+<span id="cb35-208"><a href="#cb35-208" aria-hidden="true" tabindex="-1"></a>    mu_s <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, <span class="at">shape1 =</span> <span class="fl">1.5</span>, <span class="at">shape2 =</span> <span class="fl">1.5</span>)</span>
+<span id="cb35-209"><a href="#cb35-209" aria-hidden="true" tabindex="-1"></a>    kappa_s <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(<span class="dv">1</span>, <span class="at">shape =</span> <span class="fl">0.01</span>, <span class="at">rate =</span> <span class="fl">0.01</span>)</span>
+<span id="cb35-210"><a href="#cb35-210" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate theta</span></span>
+<span id="cb35-211"><a href="#cb35-211" aria-hidden="true" tabindex="-1"></a>    theta <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(num_subjects,</span>
+<span id="cb35-212"><a href="#cb35-212" aria-hidden="true" tabindex="-1"></a>                   <span class="at">shape1 =</span> mu_s <span class="sc">*</span> kappa_s,</span>
+<span id="cb35-213"><a href="#cb35-213" aria-hidden="true" tabindex="-1"></a>                   <span class="at">shape2 =</span> (<span class="dv">1</span> <span class="sc">-</span> mu_s) <span class="sc">*</span> kappa_s)</span>
+<span id="cb35-214"><a href="#cb35-214" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate data</span></span>
+<span id="cb35-215"><a href="#cb35-215" aria-hidden="true" tabindex="-1"></a>    new_y <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(num_subjects, <span class="at">size =</span> tt_agg<span class="sc">$</span>n, <span class="at">prob =</span> theta)</span>
+<span id="cb35-216"><a href="#cb35-216" aria-hidden="true" tabindex="-1"></a>    plist[[s <span class="sc">+</span> <span class="dv">1</span>]] <span class="ot">&lt;-</span></span>
+<span id="cb35-217"><a href="#cb35-217" aria-hidden="true" tabindex="-1"></a>        p1 <span class="sc">%+%</span> <span class="fu">mutate</span>(tt_agg, <span class="at">y =</span> new_y) <span class="sc">+</span></span>
+<span id="cb35-218"><a href="#cb35-218" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">paste</span>(<span class="st">"Simulated data"</span>, s)) <span class="sc">+</span></span>
+<span id="cb35-219"><a href="#cb35-219" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>))</span>
+<span id="cb35-220"><a href="#cb35-220" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-221"><a href="#cb35-221" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(<span class="at">grobs =</span> plist, <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb35-222"><a href="#cb35-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-223"><a href="#cb35-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-224"><a href="#cb35-224" aria-hidden="true" tabindex="-1"></a>The prior on $\kappa$ is not very realistic because it pushes the bias to either 0 or 1. Using something like Gamma(0.1, 0.1) or Gamma(2, 0.01) may be more reasonable (you can try it out yourself).</span>
+<span id="cb35-225"><a href="#cb35-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-226"><a href="#cb35-226" aria-hidden="true" tabindex="-1"></a><span class="fu">### Calling Stan</span></span>
+<span id="cb35-227"><a href="#cb35-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-230"><a href="#cb35-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-231"><a href="#cb35-231" aria-hidden="true" tabindex="-1"></a>tt_fit <span class="ot">&lt;-</span> hbin_mod<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb35-232"><a href="#cb35-232" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">list</span>(<span class="at">J =</span> <span class="fu">nrow</span>(tt_agg),</span>
+<span id="cb35-233"><a href="#cb35-233" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> tt_agg<span class="sc">$</span>y,</span>
+<span id="cb35-234"><a href="#cb35-234" aria-hidden="true" tabindex="-1"></a>                <span class="at">N =</span> tt_agg<span class="sc">$</span>n),</span>
+<span id="cb35-235"><a href="#cb35-235" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">1716</span>,  <span class="co"># for reproducibility</span></span>
+<span id="cb35-236"><a href="#cb35-236" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">1000</span></span>
+<span id="cb35-237"><a href="#cb35-237" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-238"><a href="#cb35-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-239"><a href="#cb35-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-240"><a href="#cb35-240" aria-hidden="true" tabindex="-1"></a>You can explore the convergence and posterior distributions using the <span class="in">`shinystan`</span> package</span>
+<span id="cb35-241"><a href="#cb35-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-242"><a href="#cb35-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{r shinystan}</span></span>
+<span id="cb35-243"><a href="#cb35-243" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false</span></span>
+<span id="cb35-244"><a href="#cb35-244" aria-hidden="true" tabindex="-1"></a><span class="in">shinystan::launch_shinystan(tt_fit)</span></span>
+<span id="cb35-245"><a href="#cb35-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-246"><a href="#cb35-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-249"><a href="#cb35-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-250"><a href="#cb35-250" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb35-251"><a href="#cb35-251" aria-hidden="true" tabindex="-1"></a>tt_fit<span class="sc">$</span><span class="fu">save_object</span>(<span class="st">"tt_fit.RDS"</span>)</span>
+<span id="cb35-252"><a href="#cb35-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-253"><a href="#cb35-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-254"><a href="#cb35-254" aria-hidden="true" tabindex="-1"></a><span class="fu">### Table of coefficients</span></span>
+<span id="cb35-255"><a href="#cb35-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-258"><a href="#cb35-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-259"><a href="#cb35-259" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-coef-hbin</span></span>
+<span id="cb35-260"><a href="#cb35-260" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Posterior summary of hierarchical binomial model for the therapeutic touch example."</span></span>
+<span id="cb35-261"><a href="#cb35-261" aria-hidden="true" tabindex="-1"></a>tt_fit<span class="sc">$</span><span class="fu">summary</span>(<span class="fu">c</span>(<span class="st">"theta"</span>, <span class="st">"mu"</span>, <span class="st">"kappa"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-262"><a href="#cb35-262" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use `knitr::kable()` for tabulation</span></span>
+<span id="cb35-263"><a href="#cb35-263" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb35-264"><a href="#cb35-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-265"><a href="#cb35-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-266"><a href="#cb35-266" aria-hidden="true" tabindex="-1"></a><span class="fu">### Posterior Predictive Check</span></span>
+<span id="cb35-267"><a href="#cb35-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-268"><a href="#cb35-268" aria-hidden="true" tabindex="-1"></a>With hierarchical models, there are two types of posterior predictive distributions:</span>
+<span id="cb35-269"><a href="#cb35-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-270"><a href="#cb35-270" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>*Same participants but new observations*. We can use the model to generate new observations, but the individual parameters (e.g., $\theta_j$) remain the same. In our example, this would be the situation where we ask **the same 28 participants** to each do 10 more trials.</span>
+<span id="cb35-271"><a href="#cb35-271" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>*New participants and new observations*. We can use the model to generate new observations with new parameters from the higher-order distribution (e.g., the Beta distribution for $\theta_j$). In our example, this would be the situation where we ask **a new set of 28 participants** to each do 10 more trials.</span>
+<span id="cb35-272"><a href="#cb35-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-273"><a href="#cb35-273" aria-hidden="true" tabindex="-1"></a>In our Stan code, I used (1) to check the fit of the observed data. However, (2) can be helpful when one wants to use the model to make predictions of future data, as future data are unlikely to concern exactly the same participants.</span>
+<span id="cb35-274"><a href="#cb35-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-277"><a href="#cb35-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-278"><a href="#cb35-278" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-ppc-hbin</span></span>
+<span id="cb35-279"><a href="#cb35-279" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Posterior predictive check. The bar graph shows the observed data, and the error bars show the 90% posterior predictive interval in replicated data. The dots are the medians in the posterior predictive distribution.</span></span>
+<span id="cb35-280"><a href="#cb35-280" aria-hidden="true" tabindex="-1"></a><span class="co"># The bayesplot::ppc_bars() unfortunately contains a bug</span></span>
+<span id="cb35-281"><a href="#cb35-281" aria-hidden="true" tabindex="-1"></a><span class="co"># (https://github.com/stan-dev/bayesplot/issues/266) at</span></span>
+<span id="cb35-282"><a href="#cb35-282" aria-hidden="true" tabindex="-1"></a><span class="co"># the time when I wrote this, so I'll use my own code.</span></span>
+<span id="cb35-283"><a href="#cb35-283" aria-hidden="true" tabindex="-1"></a><span class="co"># tt_fit$draws("ytilde", format = "draws_matrix") |&gt;</span></span>
+<span id="cb35-284"><a href="#cb35-284" aria-hidden="true" tabindex="-1"></a><span class="co">#     ppc_bars(y = tt_agg$y)</span></span>
+<span id="cb35-285"><a href="#cb35-285" aria-hidden="true" tabindex="-1"></a>yrep <span class="ot">&lt;-</span> tt_fit<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"ytilde"</span>, <span class="at">format =</span> <span class="st">"draws_matrix"</span>)</span>
+<span id="cb35-286"><a href="#cb35-286" aria-hidden="true" tabindex="-1"></a>yrep_intervals <span class="ot">&lt;-</span> <span class="fu">apply</span>(</span>
+<span id="cb35-287"><a href="#cb35-287" aria-hidden="true" tabindex="-1"></a>    yrep, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> \(x) <span class="fu">table</span>(<span class="fu">factor</span>(x, <span class="at">levels =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>))</span>
+<span id="cb35-288"><a href="#cb35-288" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb35-289"><a href="#cb35-289" aria-hidden="true" tabindex="-1"></a>    <span class="fu">apply</span>(<span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> \(x) {</span>
+<span id="cb35-290"><a href="#cb35-290" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(</span>
+<span id="cb35-291"><a href="#cb35-291" aria-hidden="true" tabindex="-1"></a>            <span class="at">lo =</span> <span class="fu">quantile</span>(x, .<span class="dv">05</span>)[[<span class="dv">1</span>]],</span>
+<span id="cb35-292"><a href="#cb35-292" aria-hidden="true" tabindex="-1"></a>            <span class="at">me =</span> <span class="fu">median</span>(x),</span>
+<span id="cb35-293"><a href="#cb35-293" aria-hidden="true" tabindex="-1"></a>            <span class="at">hi =</span> <span class="fu">quantile</span>(x, .<span class="dv">95</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb35-294"><a href="#cb35-294" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb35-295"><a href="#cb35-295" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb35-296"><a href="#cb35-296" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb35-297"><a href="#cb35-297" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">table</span>(<span class="fu">factor</span>(tt_agg<span class="sc">$</span>y, <span class="at">levels =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>))</span>
+<span id="cb35-298"><a href="#cb35-298" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb35-299"><a href="#cb35-299" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-300"><a href="#cb35-300" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cbind</span>(<span class="fu">t</span>(yrep_intervals)) <span class="sc">|&gt;</span></span>
+<span id="cb35-301"><a href="#cb35-301" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb35-302"><a href="#cb35-302" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb35-303"><a href="#cb35-303" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">y =</span> me, <span class="at">ymin =</span> lo, <span class="at">ymax =</span> hi)) <span class="sc">+</span></span>
+<span id="cb35-304"><a href="#cb35-304" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"count"</span>, <span class="at">x =</span> <span class="cn">NULL</span>)</span>
+<span id="cb35-305"><a href="#cb35-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-306"><a href="#cb35-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-307"><a href="#cb35-307" aria-hidden="true" tabindex="-1"></a><span class="fu">### Derived coefficients</span></span>
+<span id="cb35-308"><a href="#cb35-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-309"><a href="#cb35-309" aria-hidden="true" tabindex="-1"></a>One nice thing about MCMC is that it is straightforward to obtain posterior distributions that are functions of the parameters. For example, even though we only sampled from the posteriors of the $\theta$s, we can ask questions like whether there is evidence for a nonzero *difference* in $\theta$ between person 1 and person 28.</span>
+<span id="cb35-310"><a href="#cb35-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-313"><a href="#cb35-313" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-314"><a href="#cb35-314" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: derived-draws</span></span>
+<span id="cb35-315"><a href="#cb35-315" aria-hidden="true" tabindex="-1"></a>tt_fit<span class="sc">$</span><span class="fu">draws</span>() <span class="sc">|&gt;</span></span>
+<span id="cb35-316"><a href="#cb35-316" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_variables</span>(</span>
+<span id="cb35-317"><a href="#cb35-317" aria-hidden="true" tabindex="-1"></a>        <span class="at">theta1_minus14 =</span> <span class="st">`</span><span class="at">theta[1]</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">theta[14]</span><span class="st">`</span>,</span>
+<span id="cb35-318"><a href="#cb35-318" aria-hidden="true" tabindex="-1"></a>        <span class="at">theta1_minus28 =</span> <span class="st">`</span><span class="at">theta[1]</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">theta[28]</span><span class="st">`</span>,</span>
+<span id="cb35-319"><a href="#cb35-319" aria-hidden="true" tabindex="-1"></a>        <span class="at">theta14_minus28 =</span> <span class="st">`</span><span class="at">theta[14]</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">theta[28]</span><span class="st">`</span></span>
+<span id="cb35-320"><a href="#cb35-320" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb35-321"><a href="#cb35-321" aria-hidden="true" tabindex="-1"></a>    <span class="fu">subset</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"theta1_minus14"</span>, <span class="st">"theta1_minus28"</span>,</span>
+<span id="cb35-322"><a href="#cb35-322" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"theta14_minus28"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-323"><a href="#cb35-323" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise_draws</span>() <span class="sc">|&gt;</span></span>
+<span id="cb35-324"><a href="#cb35-324" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb35-325"><a href="#cb35-325" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-326"><a href="#cb35-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-327"><a href="#cb35-327" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conclusion</span></span>
+<span id="cb35-328"><a href="#cb35-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-329"><a href="#cb35-329" aria-hidden="true" tabindex="-1"></a>As 0.5 is included in the 95% CI of $\theta$ for all participants, there is insufficient evidence that people can sense "therapeutic touch."</span>
+<span id="cb35-330"><a href="#cb35-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-331"><a href="#cb35-331" aria-hidden="true" tabindex="-1"></a><span class="fu">### Shrinkage</span></span>
+<span id="cb35-332"><a href="#cb35-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-335"><a href="#cb35-335" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-336"><a href="#cb35-336" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: lab-shrinkage</span></span>
+<span id="cb35-337"><a href="#cb35-337" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb35-338"><a href="#cb35-338" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Shrinkage effect in a hierarchical model.</span></span>
+<span id="cb35-339"><a href="#cb35-339" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(tt_fit<span class="sc">$</span><span class="fu">draws</span>(),</span>
+<span id="cb35-340"><a href="#cb35-340" aria-hidden="true" tabindex="-1"></a>               <span class="co"># plot only parameters matching "theta"</span></span>
+<span id="cb35-341"><a href="#cb35-341" aria-hidden="true" tabindex="-1"></a>               <span class="at">regex_pars =</span> <span class="st">"^theta"</span>) <span class="sc">+</span></span>
+<span id="cb35-342"><a href="#cb35-342" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb35-343"><a href="#cb35-343" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> <span class="fu">tibble</span>(</span>
+<span id="cb35-344"><a href="#cb35-344" aria-hidden="true" tabindex="-1"></a>            <span class="at">parameter =</span> <span class="fu">paste0</span>(<span class="st">"theta["</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>, <span class="st">"]"</span>),</span>
+<span id="cb35-345"><a href="#cb35-345" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> tt_agg<span class="sc">$</span>y <span class="sc">/</span> tt_agg<span class="sc">$</span>n</span>
+<span id="cb35-346"><a href="#cb35-346" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb35-347"><a href="#cb35-347" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> parameter),</span>
+<span id="cb35-348"><a href="#cb35-348" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"red"</span></span>
+<span id="cb35-349"><a href="#cb35-349" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb35-350"><a href="#cb35-350" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb35-351"><a href="#cb35-351" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-352"><a href="#cb35-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-353"><a href="#cb35-353" aria-hidden="true" tabindex="-1"></a>As can be seen, the posterior distributions are closer to the center than the data (in red). This **pooling** results from the belief that the participants have something in common.</span>
+<span id="cb35-354"><a href="#cb35-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-355"><a href="#cb35-355" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple Comparisons?</span></span>
+<span id="cb35-356"><a href="#cb35-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-357"><a href="#cb35-357" aria-hidden="true" tabindex="-1"></a>Another benefit of a Bayesian hierarchical model is that *you don't need to worry about multiple comparisons*. There are multiple angles on why this is the case, but the basic answer is that the use of common prior distributions builds in the prior belief that the clusters/groups are likely to be equal. See discussion <span class="co">[</span><span class="ot">here</span><span class="co">](https://statmodeling.stat.columbia.edu/2016/08/22/bayesian-inference-completely-solves-the-multiple-comparisons-problem/)</span> and <span class="co">[</span><span class="ot">here</span><span class="co">](https://stats.stackexchange.com/questions/203378/why-dont-bayesian-methods-require-multiple-testing-corrections)</span>.</span>
+<span id="cb35-358"><a href="#cb35-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-359"><a href="#cb35-359" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hierarchical Normal Model</span></span>
+<span id="cb35-360"><a href="#cb35-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-361"><a href="#cb35-361" aria-hidden="true" tabindex="-1"></a><span class="fu">### Eight Schools Example</span></span>
+<span id="cb35-362"><a href="#cb35-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-363"><a href="#cb35-363" aria-hidden="true" tabindex="-1"></a>This is a classic data set first analyzed by <span class="co">[</span><span class="ot">Rubin (1981)</span><span class="co">](https://journals.sagepub.com/doi/abs/10.3102/10769986006004377)</span>. It is also the example used in the <span class="co">[</span><span class="ot">RStan Getting Started</span><span class="co">](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started)</span> page. The data contains the effect of coaching from randomized experiments in eight schools. The numbers shown (labelled as <span class="in">`y`</span>) are the mean difference (i.e., effect size) in performance between the treatment and control groups on SAT-V scores. </span>
+<span id="cb35-364"><a href="#cb35-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-367"><a href="#cb35-367" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-368"><a href="#cb35-368" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: schools-dat</span></span>
+<span id="cb35-369"><a href="#cb35-369" aria-hidden="true" tabindex="-1"></a>schools_dat <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb35-370"><a href="#cb35-370" aria-hidden="true" tabindex="-1"></a>    <span class="at">J =</span> <span class="dv">8</span>,</span>
+<span id="cb35-371"><a href="#cb35-371" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">28</span>, <span class="dv">8</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="dv">7</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">18</span>, <span class="dv">12</span>),</span>
+<span id="cb35-372"><a href="#cb35-372" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">10</span>, <span class="dv">16</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">18</span>)</span>
+<span id="cb35-373"><a href="#cb35-373" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-374"><a href="#cb35-374" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-375"><a href="#cb35-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-376"><a href="#cb35-376" aria-hidden="true" tabindex="-1"></a>In the above data, some numbers are positive, and some are negative. Because the sample sizes are different, the data also contained the standard errors (labelled as <span class="in">`sigma`</span>) of the effect sizes. Generally speaking, a larger sample size corresponds to a smaller standard error. The research question is</span>
+<span id="cb35-377"><a href="#cb35-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-378"><a href="#cb35-378" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 1. What is the average treatment effect of coaching?</span></span>
+<span id="cb35-379"><a href="#cb35-379" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 2. Are the treatment effects similar across schools?</span></span>
+<span id="cb35-380"><a href="#cb35-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-381"><a href="#cb35-381" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model</span></span>
+<span id="cb35-382"><a href="#cb35-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-383"><a href="#cb35-383" aria-hidden="true" tabindex="-1"></a>Model:</span>
+<span id="cb35-384"><a href="#cb35-384" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-385"><a href="#cb35-385" aria-hidden="true" tabindex="-1"></a>  \begin{aligned}</span>
+<span id="cb35-386"><a href="#cb35-386" aria-hidden="true" tabindex="-1"></a>    d_j &amp; \sim N(\theta_j, s_j) <span class="sc">\\</span></span>
+<span id="cb35-387"><a href="#cb35-387" aria-hidden="true" tabindex="-1"></a>    \theta_j &amp; \sim N(\mu, \tau)</span>
+<span id="cb35-388"><a href="#cb35-388" aria-hidden="true" tabindex="-1"></a>  \end{aligned}</span>
+<span id="cb35-389"><a href="#cb35-389" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-390"><a href="#cb35-390" aria-hidden="true" tabindex="-1"></a>Prior:</span>
+<span id="cb35-391"><a href="#cb35-391" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-392"><a href="#cb35-392" aria-hidden="true" tabindex="-1"></a>  \begin{aligned}</span>
+<span id="cb35-393"><a href="#cb35-393" aria-hidden="true" tabindex="-1"></a>    \mu &amp; \sim N(0, 100) <span class="sc">\\</span></span>
+<span id="cb35-394"><a href="#cb35-394" aria-hidden="true" tabindex="-1"></a>    \tau &amp; \sim t^+_4(0, 100)</span>
+<span id="cb35-395"><a href="#cb35-395" aria-hidden="true" tabindex="-1"></a>  \end{aligned}</span>
+<span id="cb35-396"><a href="#cb35-396" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-397"><a href="#cb35-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-398"><a href="#cb35-398" aria-hidden="true" tabindex="-1"></a>Given the SAT score range, it is unlikely that a coaching program will improve scores by 100 or so, so we use a prior of $\mu \sim N(0, 100)$ and $\tau \sim t^+_4(0, 100)$.</span>
+<span id="cb35-399"><a href="#cb35-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-400"><a href="#cb35-400" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb35-401"><a href="#cb35-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-402"><a href="#cb35-402" aria-hidden="true" tabindex="-1"></a>The model above is the same as one used in a *random-effect meta-analysis*. See <span class="co">[</span><span class="ot">this paper</span><span class="co">](https://onlinelibrary.wiley.com/doi/abs/10.1002/jrsm.12)</span> for an introduction.</span>
+<span id="cb35-403"><a href="#cb35-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-404"><a href="#cb35-404" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb35-405"><a href="#cb35-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-406"><a href="#cb35-406" aria-hidden="true" tabindex="-1"></a><span class="fu">### Non-Centered Parameterization</span></span>
+<span id="cb35-407"><a href="#cb35-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-408"><a href="#cb35-408" aria-hidden="true" tabindex="-1"></a>The hierarchical model is known to create issues in MCMC sampling, such that the posterior draws tend to be highly correlated even with more advanced techniques like HMC. One way to alleviate that is to reparameterize the model using what is called the **non-centered parameterization**. The basic idea is that, instead of treating the $\theta$s as parameters, one uses the **standardized deviation** from the mean to be parameters. You can think about it as converting the $\theta$s into $z$ scores, and then sample the $z$ scores instead of the original $\theta$s. </span>
+<span id="cb35-409"><a href="#cb35-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-410"><a href="#cb35-410" aria-hidden="true" tabindex="-1"></a>Model:</span>
+<span id="cb35-411"><a href="#cb35-411" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-412"><a href="#cb35-412" aria-hidden="true" tabindex="-1"></a>  \begin{aligned}</span>
+<span id="cb35-413"><a href="#cb35-413" aria-hidden="true" tabindex="-1"></a>    d_j &amp; \sim N(\theta_j, s_j) <span class="sc">\\</span></span>
+<span id="cb35-414"><a href="#cb35-414" aria-hidden="true" tabindex="-1"></a>    \theta_j &amp; = \mu + \tau \eta_j <span class="sc">\\</span></span>
+<span id="cb35-415"><a href="#cb35-415" aria-hidden="true" tabindex="-1"></a>    \eta_j &amp; \sim N(0, 1)</span>
+<span id="cb35-416"><a href="#cb35-416" aria-hidden="true" tabindex="-1"></a>  \end{aligned}</span>
+<span id="cb35-417"><a href="#cb35-417" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb35-418"><a href="#cb35-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-421"><a href="#cb35-421" aria-hidden="true" tabindex="-1"></a><span class="in">```{stan}</span></span>
+<span id="cb35-422"><a href="#cb35-422" aria-hidden="true" tabindex="-1"></a><span class="in">#| output.var: hnorm_mod</span></span>
+<span id="cb35-423"><a href="#cb35-423" aria-hidden="true" tabindex="-1"></a><span class="in">#| file: "stan_code/hierarchical-normal.stan"</span></span>
+<span id="cb35-424"><a href="#cb35-424" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false</span></span>
+<span id="cb35-425"><a href="#cb35-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-426"><a href="#cb35-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-429"><a href="#cb35-429" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-430"><a href="#cb35-430" aria-hidden="true" tabindex="-1"></a>hnorm_mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"stan_code/hierarchical-normal.stan"</span>)</span>
+<span id="cb35-431"><a href="#cb35-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-432"><a href="#cb35-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-435"><a href="#cb35-435" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-436"><a href="#cb35-436" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> hnorm_mod<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb35-437"><a href="#cb35-437" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> schools_dat,</span>
+<span id="cb35-438"><a href="#cb35-438" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">1804</span>,  <span class="co"># for reproducibility</span></span>
+<span id="cb35-439"><a href="#cb35-439" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">1000</span>,</span>
+<span id="cb35-440"><a href="#cb35-440" aria-hidden="true" tabindex="-1"></a>    <span class="at">adapt_delta =</span> <span class="fl">0.9</span>  <span class="co"># to improve convergence</span></span>
+<span id="cb35-441"><a href="#cb35-441" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-442"><a href="#cb35-442" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-443"><a href="#cb35-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-446"><a href="#cb35-446" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-447"><a href="#cb35-447" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb35-448"><a href="#cb35-448" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">save_object</span>(<span class="st">"hnorm_mod.RDS"</span>)</span>
+<span id="cb35-449"><a href="#cb35-449" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-450"><a href="#cb35-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-451"><a href="#cb35-451" aria-hidden="true" tabindex="-1"></a>Treatment effect estimates of individual schools ($\theta$), average treatment effect ($\mu$), and treatment effect heterogeneity ($\tau$).</span>
+<span id="cb35-452"><a href="#cb35-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-455"><a href="#cb35-455" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-456"><a href="#cb35-456" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">summary</span>(<span class="fu">c</span>(<span class="st">"theta"</span>, <span class="st">"mu"</span>, <span class="st">"tau"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-457"><a href="#cb35-457" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb35-458"><a href="#cb35-458" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-459"><a href="#cb35-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-460"><a href="#cb35-460" aria-hidden="true" tabindex="-1"></a>On average, based on the 90% CI, coaching seemed to improve SAT-V by <span class="in">`r paste(round(fit$summary("mu")[, c("q5", "q95")], 2), collapse = " to ")`</span> points. There was substantial heterogeneity across schools.</span>
+<span id="cb35-461"><a href="#cb35-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-462"><a href="#cb35-462" aria-hidden="true" tabindex="-1"></a>We can also get the probability that the treatment effect was &gt; 0:</span>
+<span id="cb35-463"><a href="#cb35-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-466"><a href="#cb35-466" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-467"><a href="#cb35-467" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain draws</span></span>
+<span id="cb35-468"><a href="#cb35-468" aria-hidden="true" tabindex="-1"></a>draws_mu <span class="ot">&lt;-</span> fit<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"mu"</span>, <span class="at">format =</span> <span class="st">"draws_matrix"</span>)</span>
+<span id="cb35-469"><a href="#cb35-469" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(draws_mu <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb35-470"><a href="#cb35-470" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-471"><a href="#cb35-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-472"><a href="#cb35-472" aria-hidden="true" tabindex="-1"></a>Here are the individual-school treatment effects:</span>
+<span id="cb35-473"><a href="#cb35-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-476"><a href="#cb35-476" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-477"><a href="#cb35-477" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-areas-hnorm</span></span>
+<span id="cb35-478"><a href="#cb35-478" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Posterior distribution of the true effect size in the eight schools example."</span></span>
+<span id="cb35-479"><a href="#cb35-479" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb35-480"><a href="#cb35-480" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit<span class="sc">$</span><span class="fu">draws</span>(), <span class="at">regex_pars =</span> <span class="st">"theta"</span>)</span>
+<span id="cb35-481"><a href="#cb35-481" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-482"><a href="#cb35-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-483"><a href="#cb35-483" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prediction Interval</span></span>
+<span id="cb35-484"><a href="#cb35-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-485"><a href="#cb35-485" aria-hidden="true" tabindex="-1"></a>Posterior distribution of the true effect size of a new study, $\tilde \theta$</span>
+<span id="cb35-486"><a href="#cb35-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-489"><a href="#cb35-489" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-490"><a href="#cb35-490" aria-hidden="true" tabindex="-1"></a><span class="co"># Prediction Interval</span></span>
+<span id="cb35-491"><a href="#cb35-491" aria-hidden="true" tabindex="-1"></a><span class="co"># (can also be done in Stan, as in the previous example)</span></span>
+<span id="cb35-492"><a href="#cb35-492" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">draws</span>(<span class="fu">c</span>(<span class="st">"mu"</span>, <span class="st">"tau"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-493"><a href="#cb35-493" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_variables</span>(</span>
+<span id="cb35-494"><a href="#cb35-494" aria-hidden="true" tabindex="-1"></a>        <span class="at">theta_tilde =</span> <span class="fu">rnorm</span>(<span class="dv">4000</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> tau)) <span class="sc">|&gt;</span></span>
+<span id="cb35-495"><a href="#cb35-495" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise_draws</span>() <span class="sc">|&gt;</span></span>
+<span id="cb35-496"><a href="#cb35-496" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb35-497"><a href="#cb35-497" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-498"><a href="#cb35-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-499"><a href="#cb35-499" aria-hidden="true" tabindex="-1"></a>The posterior interval for $\tilde \theta$ indicates a range of the treatment effect for a new study.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
