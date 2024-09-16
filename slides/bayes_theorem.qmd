@@ -179,7 +179,67 @@ Generally speaking, a narrower distribution (i.e., smaller variance) means more/
 - Prior: narrower = more informative/strong
 - Likelihood: narrower = more data/more informative
 
-::: {visibility="hidden"}
+::: {.content-hidden unless-profile="class"}
+
+## Q1
+
+The posterior distribution describes the
+
+A. conditional probability of the parameters given the data
+
+B. joint probability of the parameters and the data
+
+C. conditional probability of the data given the parameters
+
+D. marginal probability of the data
+
+## Q2
+
+Which of the following is a weak prior, compared to the other?
+
+```{r}
+#| layout-ncol: 2
+#| fig-width: 4.5
+#| echo: false
+library(ggplot2)
+# Possible value of parameter
+thetas <- seq(.05, to = .95, by = .10)
+# Prior (change the numbers below according to the relative plausibility)
+pth <- c(
+    `.05` = 0, # for .05
+    `.15` = .1, # for .15
+    `.25` = .1, # for .25
+    `.35` = .1, # for .35
+    `.45` = .2, # for .45
+    `.55` = .2, # for .55
+    `.65` = .1, # for .65
+    `.75` = .1, # for .75
+    `.85` = .1, # for .85
+    `.95` = 0 # for .95
+)
+pth <- pth / sum(pth)
+p1 <- ggplot(data.frame(th = thetas, prior_prob = pth),
+       aes(x = th, y = prior_prob)) +
+    geom_col(width = 0.01) +
+    labs(x = expression(theta), y = "Prior probability") +
+    scale_x_continuous(breaks = thetas) +
+    ylim(0, 0.5)
+pth2 <- c(
+    `.05` = 0, # for .05
+    `.15` = 0.05, # for .15
+    `.25` = .1, # for .25
+    `.35` = .35, # for .35
+    `.45` = .25, # for .45
+    `.55` = .15, # for .55
+    `.65` = .05, # for .65
+    `.75` = .05, # for .75
+    `.85` = 0, # for .85
+    `.95` = 0 # for .95
+)
+p2 <- p1 %+% data.frame(th = thetas, prior_prob = pth2)
+p1
+p2
+```
 
 ##
 

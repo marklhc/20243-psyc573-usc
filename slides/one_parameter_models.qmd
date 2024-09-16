@@ -72,12 +72,11 @@ flowchart LR
   end
     %% B --> C[Choose/Modify Model]
   subgraph MODEL
-    I -->|Model fit not satisfactory|C
+    H -->|Model fit not satisfactory|C
     C[Choose/Modify Model] --> D[Specify Priors]
     D --> E[Prior Predictive Check]
     E --> G[MCMC Sampling with Convergence diagnostics]
-    G --> H[Conduct Posterior Predictive Check]
-    H --> I[Posterior Predictive Check]
+    G --> H[Posterior Predictive Check]
   end
   subgraph RESULTS
     %% I -->|Model is reasonable|J[Model comparisons/averaging]
@@ -86,6 +85,10 @@ flowchart LR
   DATA --> MODEL
   MODEL --> RESULTS
 ```
+
+::: aside
+Adapted from [@gelman2020](http://www.stat.columbia.edu/~gelman/research/unpublished/Bayesian_Workflow_article.pdf)
+:::
 
 ## Choose a Model: Bernoulli
 
@@ -111,13 +114,14 @@ P(y_1, y_2, \ldots, y_N) = \theta^z (1 - \theta)^{N - z}
 $$
 
 $z$ = number of "successes" ("D")
+
 - $z$ = 6 in this illustrative sample
 
 ---
 
 :::: {.columns}
 
-::: {.column width="50%"}
+::: {.column width="35%"}
 
 ```{r}
 th <- seq(0, 1, by = 0.1)
@@ -133,11 +137,11 @@ data.frame(
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="65%"}
 
 ```{r}
-#| fig-height: 3.5
 #| fig-width: 3.5
+#| fig-asp: 0.618
 #| out-width: "90%"
 ggplot(
     data.frame(x = c(0, 1)),
@@ -158,7 +162,7 @@ ggplot(
 
 When choosing priors, start with the **support** of the parameter(s)
 
-- Values that are possible
+- Support: Values that are possible
 
 . . .
 
@@ -414,7 +418,7 @@ data.frame(
         )
     )
 ) |>
-    knitr::kable()
+    knitr::kable(col.names = c("Statistic", "Common Name", "Value"))
 ```
 
 ## Using the Full Data
@@ -433,10 +437,6 @@ ggplot(data.frame(x = c(0, 1)), aes(x = x)) +
     labs(title = "Beta(a = 1763, b = 1084)", y = "Density",
          x = expression(theta~"|"~y))
 ```
-
-# Stan
-
-See [notes](/docs/04b-beta-bernoulli-stan.html)
 
 ## Posterior Predictive Check
 
@@ -519,6 +519,26 @@ gridExtra::grid.arrange(grobs = plist, nrow = 3)
     * If not fit, age should be incorporated in the model
 
 See an example in @gabry2019
+
+# Stan
+
+See [notes](/docs/04b-beta-bernoulli-stan.html)
+
+## Stan Example
+
+```{stan}
+#| echo: true
+#| output.var: bern_mod
+#| file: "../usc-psyc573-notes/stan_code/beta-bernoulli.stan"
+#| eval: false
+```
+
+```{r}
+#| echo: true
+#| eval: false
+bern_mod <- cmdstan_model("stan_code/beta-bernoulli.stan")
+fit <- bern_mod$sample(Aids2_standata)
+```
 
 ## Example Check: Sample mean by age group
 
