@@ -1,0 +1,73 @@
+---
+title: "Exercise 3"
+author: "Instructor of PSYC 573"
+eval: false
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+library(cmdstanr)
+library(posterior)
+library(bayesplot)
+```
+
+In this exercise, you will complete the analysis for a Bernoulli model in Stan. **Please make sure you change the YAML option to `eval: true`.
+
+## Data
+
+You'll use the Therapeutic Touch data discussed in the lectures. Specifically, there are two participants: `S02`, who guessed the correct hand 2 times out of 10, and `S08`, who guessed the correct hand 8 times out of 10.
+
+```{r}
+# Data for S01 (1 out of 10)
+data_s02 <- list(
+    N = 10,
+    y = c(1, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+)
+# Data for S28 (8 out of 10)
+data_s28 <- list(
+    N = 10,
+    y = c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0)
+)
+```
+
+Q1: Compile the attached "beta-bernoulli-pp.stan" file with the following code (Make sure the Stan file is in the same folder as this qmd):
+
+```{stan}
+#| output.var: bern_mod
+#| file: "beta-bernoulli-pp.stan"
+#| eval: false
+```
+
+```{r}
+bern_mod <- cmdstan_model("beta-bernoulli-pp.stan")
+```
+
+Q2: As the model compiled successfully, the following performs MCMC sampling for participant `S02` to estimate the "ability" of guessing the correct hand (i.e., $\theta$). Repeat the sampling for participant `S28`.
+
+```{r}
+s02_fit <- bern_mod$sample(data_s02)
+# Add code for `s28_fit`
+
+```
+
+Q3: Plot the posterior distribution of $\theta$ for the two participants.
+
+```{r}
+# First, extract theta
+# Note: an MCMC draw is simply a simulated value of the parameter
+#       from the posterior distribution
+theta_s02 <- s02_fit$draws("theta")
+mcmc_hist(theta_s02)
+# For S28, try mcmc_dens()
+theta_s28 <- s28_fit$draws("theta")
+
+```
+
+Q4: Use the following code to obtain the posterior distribution of the **difference** in $\theta$ between the two participants. Compute the probability that $\theta$ for participant `S28` is greater than that of participant `S02`.
+
+```{r}
+theta_diff <- theta_s28 - theta_s02
+# Compute the probability that theta_s28 > theta_s02
+
+```
