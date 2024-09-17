@@ -295,7 +295,7 @@ Prior:
 $$
 \begin{aligned}
   \mu & \sim \mathrm{Beta}(1.5, 1.5) \\
-  \kappa & \sim \mathrm{Gamma}(0.01, 0.01)
+  \kappa & \sim \mathrm{Gamma}(0.1, 0.1)
 \end{aligned}
 $$
 
@@ -336,8 +336,7 @@ hbin_mod <- cmdstan_model("stan_code/hierarchical-binomial.stan")
 tt_fit <- hbin_mod$sample(
     data = list(J = nrow(tt_agg),
                 y = tt_agg$y,
-                N = tt_agg$n,
-                prior_only = FALSE),
+                N = tt_agg$n),
     seed = 1716,  # for reproducibility
     refresh = 1000
 )
