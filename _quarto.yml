@@ -4,6 +4,7 @@ project:
     - "*.qmd"
     - "!usc-psyc573-notes/"
     - "!hw/"
+    - "!slides/bayes_theorem.qmd"
   resources:
     - "docs/"
     - "!_class/"
