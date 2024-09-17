@@ -253,12 +253,131 @@ By the end of this module, you will be able to
 3. Complete the assigned readings
     * McElreath ch. 13.1, 13.2
     * [Gabry et al. (2019)][12]
-    * [Gelman et al. (2010)][13]
+    * [Gelman et al. (2020)][13]
 4. Start working on Homework 3 (see instruction on Brightspace)
 
 [12]: https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12378
 [13]: https://arxiv.org/abs/2011.01808
 [17]: docs/05-hierarchical-models.html
+
+## Lecture Videos
+
+::: {.panel-tabset}
+
+### Hierarchical Models
+
+{{< video https://youtu.be/U_W2wsBRGNY >}}
+
+```{r}
+#| echo: false
+#| results: asis
+practice_question(
+    "In terms of statistical inference, a binomial variable $Z$ with *N* = 10 and theta ($\\theta$) is equivalent to",
+    answer = "10 binary variables that are exchangeable, and each has the same theta", 
+    options = c("10 Bernoulli variables that are dependent, and each has the same theta", 
+                "10 Bernoulli variables that are exchangeable, and each has a different theta",
+                "10 binary variables that are dependent, and each has a different theta",
+                "10 binary variables that are exchangeable, and each has the same theta"), 
+    type = "radio"
+)
+```
+
+### Partial Pooling
+
+{{< video https://youtu.be/GLMXkzls0YA >}}
+
+{{< video https://youtu.be/pRj3lyBu12o >}}
+
+::: {.callout-note icon=false}
+
+## Check your learning
+
+Based on the notation in the slides, a Beta2(0.5, 6) distribution is the same as
+
+```{r}
+#| echo: false
+#| results: asis
+check_question(
+    right = right_ans,
+    wrong = "Consider how $\\mu$ and $\\kappa$ are defined in the Beta2 distribution",
+    answer = "A Beta distribution with a = 3, b = 3", 
+    options = c("A Beta distribution with a = 2, b = 6", 
+                "A Beta distribution with a = 3, b = 3",
+                "A Beta distribution with a = 4, b = 2"), 
+    type = "radio"
+)
+```
+
+:::
+
+```{r}
+#| echo: false
+#| results: asis
+practice_question(
+    "A Gamma distribution is handy as a prior for kappa ($\\kappa$) because",
+    answer = "A Gamma distribution is defined in the range 0 to infinity, which matches the range of kappa", 
+    options = c("A Gamma distribution is defined in the range 0 to infinity, which matches the range of kappa", 
+                "A Gamma distribution only has one parameter, which is easy to work with",
+                "A Gamma distribution is a conjugate prior to the Beta model"), 
+    type = "radio"
+)
+```
+
+### Hierarchical Binomial
+
+::: {.callout-tip icon="false" appearance="minimal"}
+The following videos are from an older class, so the slides may look slightly different.
+:::
+
+::: {.callout-tip icon="false" appearance="minimal"}
+For the first video, please skip to 04:12.
+:::
+
+{{< video https://youtu.be/GJcs8utKhBQ
+    start="252"
+>}}
+
+{{< video https://youtu.be/GCpRvcrqQ9E >}}
+
+```{r}
+#| echo: false
+#| results: asis
+practice_question(
+    "With shrinkage, the posterior distribution of individual-specific $\\theta_j$ is",
+    answer = "pulled towards the center of the common distribution of theta", 
+    options = c("pulled farther away from the center of the common distribution of theta", 
+                "typically more concentrated due to borrowing information from other clusters",
+                "A Gamma distribution is a conjugate prior to the Beta model"), 
+    type = "radio"
+)
+```
+
+### Hierarchical Normal
+
+::: {.callout-tip icon="false" appearance="minimal"}
+The following videos are from an older class, so the slides may look slightly different.
+:::
+
+{{< video https://youtu.be/GmB2rs-W1eE >}}
+
+{{< video https://youtu.be/OC9oH5GRErU >}}
+
+{{< video https://youtu.be/yQExiCLVcCk >}}
+
+```{r}
+#| echo: false
+#| results: asis
+practice_question(
+    "In the hierarchical normal distribution discussed in the lecture, the treatment effect estimate in each study",
+    answer = "has a different mean and a difference standard deviation", 
+    options = c("has the same mean with the hierarchical model", 
+                "has a different mean but the same standard deviation",
+                "has a different mean and a difference standard deviation"), 
+    type = "radio"
+)
+```
+
+:::
 
 ## Slides
 
