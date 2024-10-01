@@ -12,7 +12,7 @@ library(posterior)
 library(bayesplot)
 ```
 
-In this exercise, you will complete the analysis for a Bernoulli model in Stan. **Please make sure you change the YAML option to `eval: true`.
+In this exercise, you will complete the analysis for a Bernoulli model in Stan. **Please make sure you change the YAML option to `eval: true`**.
 
 ## Data
 

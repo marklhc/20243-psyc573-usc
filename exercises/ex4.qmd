@@ -1,0 +1,90 @@
+---
+title: "Exercise 4"
+author: "Instructor of PSYC 573"
+eval: false
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+library(cmdstanr)
+# register_knitr_engine()
+library(bayesplot)
+```
+
+In this exercise, we will perform some prior predictive checks for a hierarchical model to evaluate the sensibility of different priors. **Please make sure you change the YAML option to `eval: true`**.
+
+## Data
+
+You'll use the Therapeutic Touch example discussed in the lectures, but we don't need the data as we'll just focus on the prior part.
+
+Q1: Copy the following Stan code and save it as a new file "hierarchical-binomial-prior.stan".
+
+```{stan}
+#| eval: false
+#| output.var: hbin_mod
+data {
+  int<lower=0> J;  // number of clusters (e.g., studies, persons)
+  array[J] int N;  // sample size for each cluster
+  real prior_a;  // hyperparameter "a" for gamma
+  real prior_b;  // hyperparameter "b" for gamma
+}
+parameters {
+  // cluster-specific probabilities
+  vector<lower=0, upper=1>[J] theta;
+  real<lower=0, upper=1> mu;  // overall mean probability
+  real<lower=0> kappa;        // overall concentration
+}
+model {
+  // Priors
+  theta ~ beta_proportion(mu, kappa);
+  mu ~ beta(1.5, 1.5);      // weak prior
+  kappa ~ gamma(prior_a, prior_b);
+}
+generated quantities {
+  // Prior predictive
+  array[J] int prior_ytilde = binomial_rng(N, theta);
+}
+```
+
+Q2: Compile the Stan model using the code below (and modify the file path as needed).
+
+```{r}
+hbin_mod <- cmdstan_model("hierarchical-binomial-prior.stan")
+```
+
+Q3: The following shows the prior predictive distribution with `prior_a = .01` and `prior_b = .01`. In a few sentences, explain what the following two code blocks do.
+
+<!-- Write down your response below -->
+
+```{r}
+prior_fit1 <- hbin_mod$sample(
+    data = list(J = 28,
+                N = rep(10, 28),
+                prior_a = .01,
+                prior_b = .01),
+    seed = 1424,  # for reproducibility
+    refresh = 1000
+)
+```
+
+```{r}
+ytilde1 <- prior_fit1$draws("prior_ytilde", format = "draws_matrix")
+ppd_hist(ytilde1[sample.int(4000, size = 12), ],
+         breaks = 0:10) +
+    scale_x_continuous(breaks = 0:10) +
+    labs(x = "Simulated counts of correct responses with N = 28")
+```
+
+Q4: Add code below to repeat the analyses in Q3, but use `prior_a = 2` and `prior_b = .1`.
+
+```{r}
+# insert R code
+```
+
+Q5: Comparing the plots in Q3 and Q4, how does the two different gamma priors affect the predicted data?
+
+<!-- Insert your response for Q5 -->
+
+Q6: Use the `bayesplot::ppd_stat()`{.r} function to compare the predicted standard deviation of the data. Please refer to the documentation of the function.
+
