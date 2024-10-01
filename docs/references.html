@@ -83,7 +83,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./05-hierarchical-models.html" rel="prev">
+<link href="./07b-stacking-and-regularization.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -296,6 +296,58 @@ ga('send', {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06b-multiple-predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multiple Predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06c-regression-diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Diagnostics</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 6</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-model-comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Model Comparison</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07b-stacking-and-regularization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stacking, Regularization, and Variable Selection</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link active">
@@ -333,9 +385,23 @@ ga('send', {
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-carvalho2010" class="csl-entry" role="listitem">
+Carvalho, C. M., Polson, N. G., &amp; Scott, J. G. (2010). The horseshoe
+estimator for sparse signals. <em>Biometrika</em>, <em>97</em>(2),
+465–480. <a href="https://doi.org/10.1093/biomet/asq017">https://doi.org/10.1093/biomet/asq017</a>
+</div>
+<div id="ref-gelman2021" class="csl-entry" role="listitem">
+Gelman, A., Hill, J., &amp; Vehtari, A. (2021). <em>Regression and other
+stories</em>. Cambridge University Press.
+</div>
 <div id="ref-gigerenzer2004" class="csl-entry" role="listitem">
 Gigerenzer, G. (2004). Mindless statistics. <em>The Journal of
 Socio-Economics</em>, <em>33</em>(5), 587–606. <a href="https://doi.org/10.1016/j.socec.2004.09.033">https://doi.org/10.1016/j.socec.2004.09.033</a>
+</div>
+<div id="ref-hoeting1999" class="csl-entry" role="listitem">
+Hoeting, J. A., Madigan, D., Raftery, A. E., &amp; Volinsky, C. T.
+(1999). Bayesian model averaging: A tutorial. <em>Statistical
+Science</em>, <em>14</em>(4). <a href="https://doi.org/10.1214/ss/1009212519">https://doi.org/10.1214/ss/1009212519</a>
 </div>
 <div id="ref-johnson2022" class="csl-entry" role="listitem">
 Johnson, A. A., Ott, M. Q., &amp; Dogucu, M. (2022). <em>Bayes rules! An
@@ -345,17 +411,41 @@ introduction to Bayesian modeling with R</em>. CRC Press.
 Lambert, B. (2018). <em>A student’s guide to Bayesian statistics</em>.
 SAGE.
 </div>
+<div id="ref-mcelreath2020" class="csl-entry" role="listitem">
+McElreath, R. (2020). <em>Statistical rethinking: a Bayesian course with
+examples in R and Stan</em> (Second edition). CRC Press.
+</div>
 <div id="ref-mcgrayne2011" class="csl-entry" role="listitem">
 McGrayne, S. B. (2011). <em>The theory that would not die: How Bayes’
 rule cracked the enigma code, hunted down Russian submarines, &amp;
 emerged triumphant from two centuries of controversy</em>. Yale
 university press.
 </div>
+<div id="ref-piironen2020" class="csl-entry" role="listitem">
+Piironen, J., Paasiniemi, M., &amp; Vehtari, A. (2020). Projective
+inference in high-dimensional problems: Prediction and feature
+selection. <em>Electronic Journal of Statistics</em>, <em>14</em>(1). <a href="https://doi.org/10.1214/20-EJS1711">https://doi.org/10.1214/20-EJS1711</a>
+</div>
+<div id="ref-piironen2017" class="csl-entry" role="listitem">
+Piironen, J., &amp; Vehtari, A. (2017). Sparsity information and
+regularization in the horseshoe and other shrinkage priors.
+<em>Electronic Journal of Statistics</em>, <em>11</em>(2). <a href="https://doi.org/10.1214/17-EJS1337SI">https://doi.org/10.1214/17-EJS1337SI</a>
+</div>
 <div id="ref-vandeschoot2017" class="csl-entry" role="listitem">
 Van De Schoot, R., Winter, S. D., Ryan, O., Zondervan-Zwijnenburg, M.,
 &amp; Depaoli, S. (2017). A systematic review of Bayesian articles in
 psychology: The last 25 years. <em>Psychological Methods</em>,
 <em>22</em>(2), 217–239. <a href="https://doi.org/10.1037/met0000100">https://doi.org/10.1037/met0000100</a>
+</div>
+<div id="ref-vehtari2017" class="csl-entry" role="listitem">
+Vehtari, A., Gelman, A., &amp; Gabry, J. (2017). Practical Bayesian
+model evaluation using leave-one-out cross-validation and WAIC.
+<em>Statistics and Computing</em>, <em>27</em>(5), 1413–1432. <a href="https://doi.org/10.1007/s11222-016-9696-4">https://doi.org/10.1007/s11222-016-9696-4</a>
+</div>
+<div id="ref-yao2018" class="csl-entry" role="listitem">
+Yao, Y., Vehtari, A., Simpson, D., &amp; Gelman, A. (2018). Using
+stacking to average Bayesian predictive distributions (with discussion).
+<em>Bayesian Analysis</em>, <em>13</em>(3). <a href="https://doi.org/10.1214/17-BA1091">https://doi.org/10.1214/17-BA1091</a>
 </div>
 </div>
 
@@ -837,8 +927,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05-hierarchical-models.html" class="pagination-link" aria-label="Hierarchical Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hierarchical Models</span></span>
+      <a href="./07b-stacking-and-regularization.html" class="pagination-link" aria-label="Stacking, Regularization, and Variable Selection">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stacking, Regularization, and Variable Selection</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
