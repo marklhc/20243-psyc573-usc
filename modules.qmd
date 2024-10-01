@@ -344,7 +344,7 @@ For the first video, please skip to 04:12.
 #| results: asis
 practice_question(
     "With shrinkage, the posterior distribution of individual-specific $\\theta_j$ is",
-    answer = "pulled towards the center of the common distribution of theta", 
+    answer = "typically more concentrated due to borrowing information from other clusters", 
     options = c("pulled farther away from the center of the common distribution of theta", 
                 "typically more concentrated due to borrowing information from other clusters",
                 "A Gamma distribution is a conjugate prior to the Beta model"), 
@@ -391,6 +391,73 @@ practice_question(
 
 [Link to HTML slides](/slides/hierarchical_models.qmd){target="_blank"}
 
+# Week 5
+
+## Week Learning Objectives
+
+By the end of this module, you will be able to 
+
+- Interpret the coefficients in a linear regression model
+- Obtain posterior predictive distributions and checks
+- Explain how the assumptions of regression are coded in the model equations
+- Perform Bayesian regression with the R package `brms`
+- Interpret results from an interaction model using **plots** and **posterior predictions**
+
+## Task List
+
+1. Review the resources (slides and [notes][18])
+2. Attend the Tuesday and Thursday class meetings
+3. Complete the assigned readings
+    * McElreath ch. 4, 5, 7, 8
+4. Complete Homework 3 (see instruction on Brightspace)
+
+[18]: docs/06-linear-models.html
+
+## Slides
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="slides/linear_models.html" width="525" height="350"></iframe>
+```
+
+</div>
+
+[Link to HTML slides](/slides/linear_models.qmd){target="_blank"}
+
+# Week 6
+
+## Week Learning Objectives
+
+By the end of this module, you will be able to 
+
+## Week Learning Objectives
+
+By the end of this module, you will be able to 
+
+- Explain how **information criteria** approximates **out-of-sample** **divergence** from the "true" model
+- Use **WAIC** and **LOO-IC** to compare models
+
+## Task List
+
+1. Review the resources (slides and [notes][19])
+2. Attend the Tuesday and Thursday class meetings
+3. Complete Homework 4 (see instruction on Brightspace)
+
+[19]: docs/07-model-comparison.html
+
+## Slides
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="slides/model_comparison.html" width="525" height="350"></iframe>
+```
+
+</div>
+
+[Link to HTML slides](/slides/model_comparison.qmd){target="_blank"}
+
 :::
 
-P.S.: If'd like to print the slides to PDF, follow <https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf>
+P.S.: If you'd like to print the slides to PDF, follow <https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf>
