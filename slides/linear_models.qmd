@@ -1,0 +1,613 @@
+---
+title: "Linear Models"
+date-modified: last-modified
+format: metropolis-revealjs
+---
+
+```{r}
+#| include: false
+#| file: _setting.R
+```
+
+::: {.content-hidden unless-profile="class"}
+
+- HW 2
+    * Law of total probability
+    * Posterior mean
+- One-parameter model
+    * Bernoulli
+    * Binomial
+    * Poisson
+- Stan, Exercise 3
+- Hierarchical models
+- HW 3
+- Exercise 4
+
+:::
+
+# Statistical Model
+
+A set of assumptions that form a simplified representation of how the data are generated
+
+## Regression
+
+![](https://upload.wikimedia.org/wikipedia/commons/6/62/Galton-height-regress.png){width="400" fig-align="center"}
+
+::: aside
+Madprime, CC0, via Wikimedia Commons
+:::
+
+## Regression
+
+A *systematic* and a *random* components
+
+```{r}
+#| layout-ncol: 2
+#| fig-asp: 1
+#| fig-width: 4
+set.seed(1)
+x <- round(runif(10, 1, 5), 3)
+y <- 0.7 + 0.5 * log(x - 1) + rnorm(10, sd = 0.2)
+yhat <- 0.7 + 0.5 * log(x - 1)
+df <- data.frame(x, y, yhat)
+ggplot(df, aes(x, yhat)) +
+    stat_function(fun = function(x) 0.7 + 0.5 * log(x - 1), n = 501) +
+    geom_point(col = "red") +
+    xlim(1, 5) +
+    ylim(-1, 2) +
+    ylab("y") +
+    geom_curve(aes(x = x, y = yhat + 0.5, xend = x, yend = yhat - 0.5),
+        curvature = -0.4, col = "red", linetype = "dotdash"
+    ) +
+    geom_vline(aes(xintercept = x), linetype = "dotted") +
+    geom_point(aes(x, y), size = 2)
+ggplot(df, aes(x, y)) +
+    geom_point(size = 2) +
+    xlim(1, 5) +
+    ylim(-1, 2)
+```
+
+## Regression for Prediction
+
+One outcome $Y$, one or more predictors $X_1$, $X_2$, $\ldots$
+
+. . .
+
+E.g.,
+
+- What will a student's college GPA be given an SAT score of $x$?
+- How long will a person live if the person adopts diet $x$?
+- What will the earth's global temperature be if the carbon emission level is $x$?
+
+## Keep These in Mind
+
+1. Likelihood function is defined for the outcome $Y$
+
+2. Prediction is probabilistic (i.e., uncertain) and contains error
+
+## Linear Regression
+
+Many relations can be approximated as linear
+
+But many relations cannot be approximated as linear
+
+## Example: "Bread and Peace" Model
+
+```{r}
+# Economy and elections data
+hibbs <- read.table("../usc-psyc573-notes/data/hibbs.dat", header = TRUE)
+```
+
+```{r}
+#| fig-width: 6
+#| fig-asp: .618
+#| fig-align: center
+ggplot(hibbs, aes(x = growth, y = vote, label = year)) +
+    geom_point() +
+    ggrepel::geom_text_repel() +
+    labs(x = "Average recent growth in personal income",
+         y = "Incumbent party's vote share (%)")
+```
+
+## Linear Regression Model
+
+Model:
+
+$$
+\begin{aligned}
+  \text{vote}_i & \sim N(\mu_i, \sigma) \\
+  \mu_i & = \beta_0 + \beta_1 \text{growth}_i
+\end{aligned}
+$$
+
+$\sigma$: SD (margin) of prediction error
+
+Prior:
+
+$$
+\begin{aligned}
+  \beta_0 & \sim N(45, 10)  \\
+  \beta_1 & \sim N(0, 10)  \\
+  \sigma & \sim t^+_4(0, 5)
+\end{aligned}
+$$
+
+## Stan Code
+
+```{stan}
+#| echo: true
+#| output.var: linear_reg
+#| file: "../usc-psyc573-notes/stan_code/linear_reg.stan"
+#| eval: false
+```
+
+```{r}
+#| include: false
+m1_post <- readRDS("../usc-psyc573-notes/lin_reg.RDS")
+```
+
+## Meaning of Coefficients
+
+When growth = 0, $\text{vote} \sim N(\beta_0, \sigma)$
+
+When growth = 1, $\text{vote} \sim N(\beta_0 + \beta_1, \sigma)$
+
+```{r, warning = FALSE}
+#| fig-width: 5
+#| fig-asp: .618
+#| fig-align: center
+sigma <- 3.99
+b0 <- 46.21
+b1 <- 3.05
+ggplot(
+    data.frame(x = c(40, 70), y = c(0, 4)),
+    aes(x = x, y = y)
+) +
+    geom_abline(intercept = -b0 / b1, slope = 1 / b1) +
+    stat_function(
+        fun = function(x) dnorm(x, mean = b0, sd = sigma) * 2,
+        xlim = c(-2, 2) * sigma + b0,
+    ) +
+    stat_function(
+        fun = function(x) dnorm(x, mean = b0 + b1, sd = sigma) * 2 + 1,
+        xlim = c(-2, 2) * sigma + b0 + b1,
+    ) +
+    geom_segment(x = 0, xend = b0, y = 0, yend = 0, col = "red") +
+    geom_text(
+        x = b0 - 2, y = -0.05,
+        label = "beta[0]",
+        parse = TRUE, size = 4
+    ) +
+    geom_segment(
+        x = b0, xend = b0 + b1,
+        y = 1, yend = 1, col = "red",
+        arrow = arrow(length = unit(0.03, "npc"), ends = "both")
+    ) +
+    geom_segment(
+        x = b0, xend = b0,
+        y = 0, yend = 1, col = "red"
+    ) +
+    geom_text(
+        x = b0 + b1 - 1.5, y = 1.1,
+        label = "beta[1]",
+        parse = TRUE, size = 4
+    ) +
+    lims(x = c(40, 70), y = c(0, 4)) +
+    labs(x = "vote", y = "growth") +
+    coord_flip()
+```
+
+## Posterior Predictive Check
+
+```{r}
+#| fig-width: 6
+#| fig-asp: .618
+#| fig-align: center
+library(bayesplot)
+m1_post$draws("ytilde", format = "matrix") |>
+    ppc_intervals(y = hibbs$vote, x = hibbs$growth) +
+    labs(x = "Average recent growth in personal income",
+         y = "Predicted incumbent party's vote share (%)") +
+    ggrepel::geom_label_repel(
+        aes(y = hibbs$vote, label = hibbs$year)
+    )
+```
+
+The model fits a majority of the data, but not everyone. The biggest discrepancy is 1952.
+
+## Posterior Distributions
+
+```{r}
+#| fig-width: 6
+#| fig-asp: .309
+#| fig-align: center
+m1_post$draws(c("beta0", "beta1", "sigma")) |>
+    mcmc_dens()
+```
+
+## Prediction
+
+```{r}
+#| include: false
+m1_pred <- readRDS("../usc-psyc573-notes/m1_pred.RDS")
+```
+
+Predicted vote share when growth = 2: $\tilde y \mid y \sim N(\beta_0 + \beta_1 \times 2, \sigma)$
+
+```{r}
+#| fig-width: 5
+#| fig-asp: .618
+#| fig-align: center
+m1_pred$draws("ypred") |>
+    mcmc_dens()
+```
+
+Probability of incumbent's vote share > 50% = `r mean(m1_pred$draws("ypred") > 50)`
+
+## Regression Diagnostics
+
+- **L**inearity
+- **I**ndependent observations
+    - Exchangeability in Bayesian (conditional on the predictors)
+- **N**ormality
+- **E**qual variance of errors
+    - Same $\sigma$ for all observations
+- Correct **S**pecification of the model
+
+---
+
+## Linearity (functional form)
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-width: 3.5
+#| fig-asp: .618
+#| out-width: 100%
+num_obs <- 100
+x <- runif(num_obs, min = 1, max = 5)  # uniform x
+beta0 <- 0.2; beta1 <- 0.5
+eta <- beta0 + beta1 * log(x)
+mu <- eta
+y <- rnorm(num_obs, mean = mu, sd = 0.2)
+ggplot(data.frame(x = x, y = y),
+       aes(x = x, y = y)) +
+    geom_point()
+```
+
+```{r}
+#| include: false
+library(brms)
+options(brms.backend = "cmdstanr")
+m_lin <- brm(y ~ x, data = data.frame(y, x),
+             file = "m_lin")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| fig-width: 3.5
+#| fig-asp: .618
+#| out-width: 100%
+pp_check(m_lin, type = "intervals", x = "x") +
+    geom_smooth(se = FALSE, col = "blue") +
+    geom_smooth(aes(x = x, y = y), se = FALSE,
+                col = "red", linetype = "dashed")
+```
+
+:::
+
+::::
+
+## Residual Plots
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-width: 3.5
+#| fig-asp: .618
+#| out-width: 100%
+num_obs <- 100
+x <- runif(num_obs, min = 1, max = 5)  # uniform x
+beta0 <- 0.2; beta1 <- 0.5
+eta <- beta0 + beta1 * x
+mu <- eta
+y <- rpois(num_obs, lambda = mu)
+ggplot(data.frame(x = x, y = y),
+       aes(x = x, y = y)) +
+    geom_point()
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| include: false
+m_lin_norm <- brm(y ~ x, data = data.frame(y, x),
+                  file = "m_lin_norm")
+```
+
+```{r}
+#| echo: true
+#| fig-width: 3.5
+#| fig-asp: .618
+#| out-width: 100%
+pp_check(m_lin_norm,
+         type = "error_scatter_avg_vs_x",
+         x = "x")
+```
+
+:::
+
+::::
+
+# Multiple Predictors
+
+Data from the 2009 American Community Survey (ACS)
+
+```{r}
+waffle_divorce <- read_delim(  # read delimited files
+    "../usc-psyc573-notes/data/WaffleDivorce.csv",
+    delim = ";"
+)
+# Rescale Marriage and Divorce by dividing by 10
+waffle_divorce$Marriage <- waffle_divorce$Marriage / 10
+waffle_divorce$Divorce <- waffle_divorce$Divorce / 10
+waffle_divorce$MedianAgeMarriage <- waffle_divorce$MedianAgeMarriage / 10
+# Recode `South` to a factor variable
+waffle_divorce$South <- factor(waffle_divorce$South,
+    levels = c(0, 1),
+    labels = c("non-south", "south")
+)
+```
+
+```{r}
+#| fig-width: 6
+#| fig-asp: .618
+ggplot(waffle_divorce,
+       aes(x = MedianAgeMarriage, y = Divorce, col = South)) +
+    geom_point() +
+    geom_smooth() +
+    labs(x = "Median age marriage (10 years)",
+         y = "Divorce rate (per 10 adults)",
+         col = "Southern states") +
+    ggrepel::geom_text_repel(aes(label = Loc))
+```
+
+## Additive Model
+
+$$
+\begin{aligned}
+  D_i & \sim N(\mu_i, \sigma)  \\
+  \mu_i & = \beta_0 + \beta_1 S_i + \beta_2 A_i \\
+  \beta_0 & \sim N(0, 10) \\
+  \beta_1 & \sim N(0, 10) \\
+  \beta_2 & \sim N(0, 1)  \\
+  \sigma & \sim t^+_4(0, 3)
+\end{aligned}
+$$
+
+- $\beta_1$: Expected difference in divorce rate between southern and non-southern states.
+- $\beta_2$: Expected difference in divorce rate for one unit difference in median age of marriage.
+
+## The `brms` R package
+
+```{r}
+#| echo: true
+library(brms)
+options(brms.backend = "cmdstanr")  # use cmdstanr instead of rstan
+get_prior(Divorce ~ MedianAgeMarriage + South,
+          data = waffle_divorce)
+```
+
+::: {.callout-caution}
+
+## Beware of the default priors
+
+Please note that the default priors could change in future versions of the `brms` package. It has changed in previous releases.
+:::
+
+---
+
+```{r}
+#| echo: true
+#| message: false
+#| output-location: slide
+m_additive <- brm(
+    Divorce ~ South + MedianAgeMarriage,       # <1>
+    data = waffle_divorce,
+    prior = prior(normal(0, 2), class = "b") + # <2> 
+        prior(normal(0, 10), class = "b", coef = "Southsouth") +
+        prior(normal(0, 10), class = "Intercept") +
+        prior(student_t(4, 0, 3), class = "sigma"),
+    seed = 941,                                # <3>
+    file = "m_additive"                        # <4>
+)
+summary(m_additive)
+```
+1. Same formula syntax as in `lm()`.
+2. Prior distributions (`class = b`{.r} for $\beta$ coefficients, `sigma` for the $\sigma$ parameter)
+3. For reproducibility
+4. Save results to `m_additive.rds`
+
+---
+
+Slopes are parallel
+
+```{r}
+plot(
+    conditional_effects(m_additive,
+        effects = "MedianAgeMarriage",
+        conditions = data.frame(South = c("south", "non-south"),
+                                cond__ = c("South", "Non-South"))
+    ),
+    points = TRUE
+)
+```
+
+## Interactions
+
+$$
+\begin{aligned}
+  D_i & \sim N(\mu_i, \sigma)  \\
+  \mu_i & = \beta_0 + \beta_1 S_i + \beta_2 A_i + \beta_3 S_i \times A_i \\
+  \beta_0, \beta_1 & \sim N(0, 10) \\
+  \beta_2 & \sim N(0, 1) \\
+  \beta_3 & \sim N(0, 2) \\
+  \sigma & \sim t^+_4(0, 3)
+\end{aligned}
+$$
+
+- $\beta_1$: Difference in intercept between southern and non-southern states.
+- $\beta_3$: Difference in the coefficient for A &rarr; D between southern and non-southern states
+
+---
+
+::: {.callout-caution}
+
+## $\beta_1$ and $\beta_2$ Are Not Main Effects
+
+When an interaction term is included, the coefficient of $A$ is the **conditional effect when $D$ = 0.**
+
+:::
+
+## Reporting I
+
+> We fit a Bayesian linear model using the *brms* R package to examine the interaction effects between state-level median age of marriage and location of the state (southern vs. non-southern). We use weakly informative priors for all model parameters, as shown below: [insert the model equations]
+
+## Reporting II
+
+> The posterior distributions are obtained using Markov Chain Monte Carlo (MCMC) sampling, with 4 chains and 2,000 iterations for each chain (the first 1,000 discarded as warm-ups). Convergence of MCMC chains were determined by examining trace plots of the posterior samples and the $\hat R$ statistics (< 1.01 for all model parameters; Vehtari et al., 2021), and the effective sample sizes are > 400 to ensure accurate approximation of the posterior distributions.
+
+---
+
+```{r}
+#| include: false
+#| message: false
+m_inter <- brm(
+    Divorce ~ South * MedianAgeMarriage,
+    data = waffle_divorce,
+    prior = prior(normal(0, 2), class = "b") +
+        prior(normal(0, 10), class = "b", coef = "Southsouth") +
+        prior(normal(0, 10), class = "Intercept") +
+        prior(student_t(4, 0, 3), class = "sigma"),
+    seed = 941,
+    iter = 4000,
+    file = "m_inter"
+)
+```
+
+```{r}
+m_inter
+```
+
+---
+
+## Simple Slopes/Conditional Effects
+
+- Slope when South = 0: $\beta_1$
+- Slope when South = 1: $\beta_1 + \beta_3$
+
+```{r}
+library(posterior)
+as_draws(m_inter) |>
+    mutate_variables(
+        b_nonsouth = b_MedianAgeMarriage,
+        b_south = b_MedianAgeMarriage + `b_Southsouth:MedianAgeMarriage`
+    ) |>
+    posterior::subset_draws(
+        variable = c("b_nonsouth", "b_south")
+    ) |>
+    summarize_draws() |>
+    knitr::kable(digits = 2)
+```
+
+---
+
+```{r}
+#| label: fig-cond-eff-inter
+#| fig-cap: "Model-implied simple slopes based on the interaction model (posterior median and 95% symmetric credible band)."
+plot(
+    conditional_effects(m_inter,
+        effects = "MedianAgeMarriage",
+        conditions = data.frame(South = c("south", "non-south"),
+                                cond__ = c("South", "Non-South"))
+    ),
+    points = TRUE
+)
+```
+
+## Posterior Predictive Checks
+
+```{r}
+#| layout-nrow: 2
+#| fig-width: 6
+#| fig-height: 1.5
+#| out-width: 100%
+# Check density (normality)
+pp_check(m_inter, type = "dens_overlay_grouped", group = "South")
+# Check prediction (a few outliers)
+pp_check(m_inter,
+    type = "ribbon_grouped", x = "MedianAgeMarriage",
+    group = "South",
+    y_draw = "points"
+)
+```
+
+## Reporting III
+
+```{r}
+#| include: false
+# Helper for extracting coefficients
+summ_fixef <- function(i, summ, unit = "", unit_ci = "") {
+    paste0(
+        round(summ[i, "Estimate"], 2), unit,
+        ", 95% CI [",
+        round(summ[i, "Q2.5"], 2), unit_ci, ", ",
+        round(summ[i, "Q97.5"], 2), unit_ci, "]"
+    )
+}
+```
+
+> As shown in @fig-cond-eff-inter, median age of marriage negatively predicts divorce rate in both southern and non-southern states. For non-southern states, a 10-year difference in median age of marriage corresponds to a difference of `r summ_fixef(3, fixef(m_inter), unit = " per 10 adults")` in divorce rate. There is evidence for a nonzero interaction effect such that the negative association between median age of marriage and divorce rate in southern states is stronger than in non-southern states, $\beta_3$ = `r summ_fixef(4, fixef(m_inter))`.
+
+## Centering
+
+Intercept ($\beta_0$): Predicted $y$ when all predictors are 0
+
+- i.e., non-southern states with median marriage age of 0.
+
+. . .
+
+To make $\beta_0$ more meaningful, center the predictors at a more meaningful value.
+
+---
+
+The Intercept below shows the predicted divorce rate with a median age of marriage of 25. $\beta_1$ represents the difference between southern and non-southern states **conditional** on median marriage age of 25.
+
+```{r}
+#| include: false
+m_interc <- brm(
+    Divorce ~ South * I(MedianAgeMarriage - 2.5),
+    data = waffle_divorce,
+    prior = prior(normal(0, 2), class = "b") +
+        prior(normal(0, 10), class = "b", coef = "Southsouth") +
+        prior(normal(0, 10), class = "Intercept") +
+        prior(student_t(4, 0, 3), class = "sigma"),
+    seed = 941,
+    iter = 4000,
+    file = "m_interc"
+)
+```
+
+```{r}
+m_interc
+```
