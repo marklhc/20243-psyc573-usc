@@ -295,7 +295,7 @@ Prior:
 $$
 \begin{aligned}
   \mu & \sim \mathrm{Beta}(1.5, 1.5) \\
-  \kappa & \sim \mathrm{Gamma}(0.1, 0.1)
+  \kappa & \sim \mathrm{Gamma}(0.01, 0.01)
 \end{aligned}
 $$
 
@@ -336,7 +336,8 @@ hbin_mod <- cmdstan_model("stan_code/hierarchical-binomial.stan")
 tt_fit <- hbin_mod$sample(
     data = list(J = nrow(tt_agg),
                 y = tt_agg$y,
-                N = tt_agg$n),
+                N = tt_agg$n,
+                prior_only = FALSE),
     seed = 1716,  # for reproducibility
     refresh = 1000
 )
@@ -388,7 +389,7 @@ ggplot() +
 theta15_post <- tt_fit$draws("theta[15]", format = "draws_df")
 ggplot() +
     stat_function(
-        fun = dbeta, args = list(shape1 = 2, shape2 = 10),
+        fun = dbeta, args = list(shape1 = 6, shape2 = 6),
         aes(col = "no pooling")
     ) +
     geom_density(
