@@ -1,0 +1,92 @@
+---
+title: "Exercise 6"
+author: "Instructor of PSYC 573"
+echo: false
+format: pdf
+---
+
+The analyses in this exercise are from the example in the note "9 Multiple Predictors" (<https://marklhc.quarto.pub/psyc573-2024fall/docs/06b-multiple-predictors.html#conditional-effectssimple-slopes>)
+
+```{r}
+#| message: false
+library(tidyverse)
+library(brms)
+options(brms.backend = "cmdstanr")
+```
+
+```{r}
+#| include: false
+waffle_divorce <- read_delim(  # read delimited files
+    "https://raw.githubusercontent.com/rmcelreath/rethinking/master/data/WaffleDivorce.csv",
+    delim = ";"
+)
+# Rescale Marriage and Divorce by dividing by 10
+waffle_divorce$Marriage <- waffle_divorce$Marriage / 10
+waffle_divorce$Divorce <- waffle_divorce$Divorce / 10
+waffle_divorce$MedianAgeMarriage <- waffle_divorce$MedianAgeMarriage / 10
+# Recode `South` to a factor variable
+waffle_divorce$South <- factor(waffle_divorce$South,
+    levels = c(0, 1),
+    labels = c("non-south", "south")
+)
+# See data description at https://rdrr.io/github/rmcelreath/rethinking/man/WaffleDivorce.html
+```
+
+S = 0 for non-southern states; S = 1 for southern states
+
+Consider the interaction model
+
+$$
+  \begin{aligned}
+    D_i & \sim N(\mu_i, \sigma)  \\
+    \mu_i & = \beta_0 + \beta_1 S_i + \beta_2 A_i + \beta_3 S_i \times A_i
+  \end{aligned}
+$$
+
+## Q1
+
+Express, in terms of the model parameters (e.g., $\beta_0$, $\beta_1$),
+
+(a) the predicted divorce rate ($\mu$) for a southern state with `MedianAgeMarriage` = 2.5: _____________________
+
+(b) the predicted $\mu$ for a non-southern state with `MedianAgeMarriage` = 2.5: _____________________
+
+(c) the difference between (a) and (b): ____________________________
+
+## Q2
+
+```{r}
+#| include: false
+m_inter <- brm(
+    Divorce ~ South * MedianAgeMarriage,
+    data = waffle_divorce,
+    prior = prior(normal(0, 2), class = "b") +
+        prior(normal(0, 10), class = "b", coef = "Southsouth") +
+        prior(normal(0, 10), class = "Intercept") +
+        prior(student_t(4, 0, 3), class = "sigma"),
+    seed = 941,
+    file = "ex6_inter"
+)
+```
+
+The following shows the estimated coefficients (from `brms`)
+
+```{r}
+fixef(m_inter) |>
+    knitr::kable(digits = 2)
+```
+
+and the interaction plot:
+
+```{r}
+plot(
+    conditional_effects(m_inter,
+        effects = "MedianAgeMarriage",
+        conditions = data.frame(South = c("south", "non-south"),
+                                cond__ = c("South", "Non-South"))
+    ),
+    points = TRUE
+)
+```
+
+Label $\beta_0$, $\beta_1$, $\beta_2$, $\beta_3$, and $\sigma$ in the graph above (or describe where they are in your words).

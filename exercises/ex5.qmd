@@ -1,0 +1,133 @@
+---
+title: "Exercise 5"
+author: "Instructor of PSYC 573"
+---
+
+```{r}
+#| message: false
+library(here)  # for managing directories
+library(tidyverse)
+library(readxl)  # for reading excel files
+library(brms)
+options(brms.backend = "cmdstanr")
+library(bayesplot)
+```
+
+In this exercise, please answer questions 1-5 below.. **Please make sure you change the YAML option to `eval: true`**. Submit the **knitted** file (HTML/PDF/WORD) to Blackboard. Be sure to include your name.
+
+A previous paper (https://www.nber.org/papers/w9853.pdf) suggested that instructional ratings were generally higher for those who were viewed as better looking.
+
+Here is the description of some of the variables in the data:
+
+- `tenured`: 1 = tenured professor, 0 = not
+- `minority`: 1 = yes, 0 = no
+- `age`: in years
+- `btystdave`: standardized composite beauty rating based on the ratings of six undergraduates
+- `profevaluation`: evaluation rating of the instructor: 1 (very unsatisfactory) to 5 (excellent)
+- `female`: 1 = female, 0 = male
+- `lower`: 1 = lower-division course, 1 = upper-division
+- `nonenglish`: 1 = non-native English speakers, 0 = native-English speakers
+
+You can import the excel data using the `readxl::read_excel()` function.
+
+```{r}
+beauty <- read_excel(here("data_files", "ProfEvaltnsBeautyPublic.xls"))
+# Convert `lower` to factor
+beauty$lower <- factor(beauty$lower, levels = c(0, 1),
+                       labels = c("upper", "lower"))
+```
+
+Here is a look on `profevaluation` across upper- and lower-division courses
+
+```{r}
+ggplot(beauty, aes(x = lower, y = profevaluation)) +
+    geom_violin() +
+    geom_jitter(width = .05, alpha = 0.2)
+```
+
+Q1: The following code obtains the priors for a model with `lower` predicting `profevaluation`. The model is
+
+$$
+  \begin{aligned}
+    \text{profevaluation}_i & \sim N(\mu_i, \sigma) \\
+    \mu_i & = \beta_0 + \beta_1 \text{lower}_i
+  \end{aligned}
+$$
+
+Describe what each model parameter means, and what prior is used by default in `brms`.
+
+```{r}
+f1 <- profevaluation ~ lower
+get_prior(f1, data = beauty)
+```
+
+<!-- Insert your answer to Q1 here -->
+
+Q2: The following simulates some data based on some vague priors, and shows the distributions of the simulated data. Do the priors seem reasonable?
+
+```{r}
+#| results: 'hide'
+m1_prior <- brm(f1, data = beauty,
+                prior = prior(normal(3, 2), class = "Intercept") + 
+                    prior(normal(0, 1), class = "b", 
+                          coef = "lowerlower") +
+                    prior(student_t(3, 0, 2.5), class = "sigma"),
+                sample_prior = "only",
+                file = "ex5_m1_prior")
+```
+
+```{r}
+# Prior predictive draws
+prior_ytilde <- posterior_predict(m1_prior)
+# lower = lower
+prior_ytilde_lower <- prior_ytilde[, beauty$lower == "lower"]
+ppd_dens_overlay(prior_ytilde_lower)
+# lower = upper
+prior_ytilde_upper <- prior_ytilde[, beauty$lower == "upper"]
+ppd_dens_overlay(prior_ytilde_upper)
+```
+
+Q3: Modify the code below to assign more reasonable priors, and run the code to draw posterior samples.
+
+```{r}
+m1 <- brm(f1, data = beauty,
+          prior = prior(normal(3, 2), class = "Intercept") + 
+              prior(normal(0, 1), class = "b", coef = "lowerlower") +
+              prior(student_t(3, 0, 2.5), class = "sigma"),
+          file = "ex5_m1")
+```
+
+Q4: Below are plots showing the predictive distribution of the sample SD by lower and upper divisions. Does it appear that the error variance is different for upper-division and lower-division courses?
+
+```{r}
+# sample SD from the posterior predictive distribution
+pp_check(m1, type = "stat_grouped", group = "lower", stat = "sd")
+```
+
+Q5: The following model includes `lower` as a predictor for `sigma`. Does it appear that the error variance/sd is related to `lower`?
+
+$$
+  \begin{aligned}
+    \text{profevaluation}_i & \sim N(\mu_i, \sigma_i) \\
+    \mu_i & = \beta_0 + \beta_1 \text{lower}_i \\
+    \log \sigma_i & = \beta_0^s + \beta_1^s \text{lower}_i
+  \end{aligned}
+$$
+
+```{r}
+m2 <- brm(bf(f1, sigma ~ lower), data = beauty,
+          file = "ex5_m2")
+```
+
+```{r}
+# Compare models 1 and 2
+loo(m1, m2)
+```
+
+```{r}
+print(m2)
+```
+
+```{r}
+pp_check(m2, type = "stat_grouped", group = "lower", stat = "sd")
+```
