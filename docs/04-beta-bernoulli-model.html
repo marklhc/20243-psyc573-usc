@@ -289,7 +289,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 5</span></a>
+ <span class="menu-text">Week 5–6</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -318,7 +318,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 6</span></a>
+ <span class="menu-text">Week 7</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -334,6 +334,29 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./07b-stacking-and-regularization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stacking, Regularization, and Variable Selection</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 9</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-causal-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Causal Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08b-mediation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mediation</span></span></a>
   </div>
 </li>
       </ul>
@@ -506,7 +529,7 @@ y_i \sim \text{Bern}(\theta) \text{ for }i = 1, 2, \ldots, N
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["state"],"name":[1],"type":["fct"],"align":["left"]},{"label":["sex"],"name":[2],"type":["fct"],"align":["left"]},{"label":["diag"],"name":[3],"type":["int"],"align":["right"]},{"label":["death"],"name":[4],"type":["int"],"align":["right"]},{"label":["status"],"name":[5],"type":["fct"],"align":["left"]},{"label":["T.categ"],"name":[6],"type":["fct"],"align":["left"]},{"label":["age"],"name":[7],"type":["int"],"align":["right"]}],"data":[{"1":"NSW","2":"M","3":"10905","4":"11081","5":"A","6":"hs","7":"35","_rn_":"1"},{"1":"NSW","2":"F","3":"10961","4":"11504","5":"D","6":"id","7":"30","_rn_":"31"},{"1":"QLD","2":"F","3":"9495","4":"9753","5":"A","6":"blood","7":"66","_rn_":"1802"},{"1":"QLD","2":"M","3":"10770","4":"11504","5":"D","6":"hsid","7":"29","_rn_":"1811"},{"1":"VIC","2":"M","3":"8499","4":"8568","5":"D","6":"hs","7":"43","_rn_":"2129"},{"1":"VIC","2":"M","3":"9055","4":"9394","5":"D","6":"hs","7":"29","_rn_":"2137"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["state"],"name":[1],"type":["fct"],"align":["left"]},{"label":["sex"],"name":[2],"type":["fct"],"align":["left"]},{"label":["diag"],"name":[3],"type":["int"],"align":["right"]},{"label":["death"],"name":[4],"type":["int"],"align":["right"]},{"label":["status"],"name":[5],"type":["fct"],"align":["left"]},{"label":["T.categ"],"name":[6],"type":["fct"],"align":["left"]},{"label":["age"],"name":[7],"type":["int"],"align":["right"]}],"data":[{"1":"NSW","2":"M","3":"10905","4":"11081","5":"A","6":"hs","7":"35","_rn_":"1"},{"1":"NSW","2":"F","3":"10961","4":"11504","5":"D","6":"id","7":"30","_rn_":"31"},{"1":"QLD","2":"F","3":"9495","4":"9753","5":"D","6":"blood","7":"66","_rn_":"1802"},{"1":"QLD","2":"M","3":"10770","4":"11504","5":"A","6":"hsid","7":"29","_rn_":"1811"},{"1":"VIC","2":"M","3":"8499","4":"8568","5":"D","6":"hs","7":"43","_rn_":"2129"},{"1":"VIC","2":"M","3":"9055","4":"9394","5":"D","6":"hs","7":"29","_rn_":"2137"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
