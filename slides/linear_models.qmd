@@ -256,6 +256,21 @@ Probability of incumbent's vote share > 50% = `r mean(m1_pred$draws("ypred") > 5
 
 ---
 
+::: {.content-hidden unless-profile="class"}
+
+## Thought Exercise
+
+How are the assumptions coded in the model?
+
+$$
+\begin{aligned}
+  \text{vote}_i & \sim N(\mu_i, \sigma) \\
+  \mu_i & = \beta_0 + \beta_1 \text{growth}_i
+\end{aligned}
+$$
+
+:::
+
 ## Linearity (functional form)
 
 :::: {.columns}
@@ -395,8 +410,8 @@ $$
 \end{aligned}
 $$
 
-- $\beta_1$: Expected difference in divorce rate between southern and non-southern states.
-- $\beta_2$: Expected difference in divorce rate for one unit difference in median age of marriage.
+- $\beta_1$: Expected difference in divorce rate between southern and non-southern states **with the same median age of marriage**.
+- $\beta_2$: Expected difference in divorce rate for one unit difference in median age of marriage, **when both states are southern (or non-southern)**.
 
 ## The `brms` R package
 
@@ -475,7 +490,7 @@ $$
 
 ## $\beta_1$ and $\beta_2$ Are Not Main Effects
 
-When an interaction term is included, the coefficient of $A$ is the **conditional effect when $D$ = 0.**
+When an interaction term is included, the coefficient of $A$ is the **conditional effect when $S$ = 0.**
 
 :::
 
@@ -544,6 +559,21 @@ plot(
     points = TRUE
 )
 ```
+
+---
+
+::: {.content-hidden unless-profile="class"}
+
+## Thought Exercise
+
+Where does the previous graph shows
+
+- $\hat \beta_0$ = 2.78
+- $\hat \beta_1$ = 3.20
+- $\hat \beta_2$ = -0.70
+- $\hat \beta_3$ = -1.22
+
+:::
 
 ## Posterior Predictive Checks
 

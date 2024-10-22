@@ -138,6 +138,17 @@ p_list2 <- map(1:6, function(i) {
 do.call(grid.arrange, c(p_list2, nrow = 2))
 ```
 
+## Terminologies
+
+|          |What it is (roughly) |Better when index is |
+|----------|---------------------|---------------------|
+| Entropy  | Amount of uncertainty/information in the outcome variable(s) | --- |
+| KL Divergence | "Discrepancy" from "true" model | smaller |
+| elpd     | "Fit" to sample data| larger              |
+| deviance | $-2$ $\times$ in-sample elpd | smaller             |
+| AIC/WAIC | out-of-sample prediction error | smaller  |
+| LOOIC    | out-of-sample prediction error | smaller  |
+
 ## What Is A Good Model?
 
 - Closeness from the proposed model ($M_1$) to a "true" model ($M_0$)
@@ -292,10 +303,10 @@ elpd_df |>
 
 Approximate discrepancy between in-sample and out-of-sample elpd
 
-IC = -2 $\times$ (in-sample elpd - $p$)
+- IC = $-2$ $\times$ (in-sample elpd $-$ $p$)
 
-$p$ = penalty for model complexity
-- function of number of parameters
+- $p$ = penalty for model complexity
+    * function of number of parameters
 
 . . .
 
@@ -307,13 +318,13 @@ Bayesian ICs: DIC, WAIC, etc
 
 ## Cross-Validation
 
-- Split the sample into $K$ parts
+- Split the sample into *K* parts
 
-- Fit a model with $K$ - 1 parts, and obtain elpd for the "hold-out" part
+- Fit a model with *K* - 1 parts, and obtain elpd for the "hold-out" part
 
 . . .
 
-Leave-one-out: $K$ = $N$
+Leave-one-out: *K* = *N*
 
 - Very computationally intensive
 
