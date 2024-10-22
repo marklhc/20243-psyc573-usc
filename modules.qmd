@@ -431,10 +431,6 @@ By the end of this module, you will be able to
 
 By the end of this module, you will be able to 
 
-## Week Learning Objectives
-
-By the end of this module, you will be able to 
-
 - Explain how **information criteria** approximates **out-of-sample** **divergence** from the "true" model
 - Use **WAIC** and **LOO-IC** to compare models
 
@@ -457,6 +453,41 @@ By the end of this module, you will be able to
 </div>
 
 [Link to HTML slides](/slides/model_comparison.qmd){target="_blank"}
+
+# Week 9
+
+## Week Learning Objectives
+
+By the end of this module, you will be able to 
+
+- Draw a **directed acyclic graph (DAG)** to represent causal assumptions
+- Use a DAG to guide analyses for obtaining **causal effects**
+- Describe how **randomization** can remove potential **confounders**
+- Explain how the **back-door criterion** can be used to identify a set of adjusted variables with nonexperimental data
+- Perform a **mediation analysis** and interpret the results
+
+## Task List
+
+1. Complete the assigned readings
+    * McElreath ch 6
+2. Review the resources (slides and [notes][20])
+3. Attend the Tuesday and Thursday class meetings
+4. Complete Project Prospectus (see instruction on Brightspace)
+5. Schedule a meeting with the instructor for your prospectus (sign-up link will be posted on Slack)
+
+[20]: docs/08-causal-inference.html
+
+## Slides
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="slides/causal_inference.html" width="525" height="350"></iframe>
+```
+
+</div>
+
+[Link to HTML slides](/slides/causal_inference.qmd){target="_blank"}
 
 :::
 
