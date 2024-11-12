@@ -243,6 +243,7 @@ Absence of a link
 ## Fork
 
 aka Classic confounding
+
 - *Confound*: something that misleads us about a causal influence
 
 M &larr; <span style="color:red">A</span> &rarr; D
@@ -250,6 +251,7 @@ M &larr; <span style="color:red">A</span> &rarr; D
 . . .
 
 Assuming the DAG is correct,
+
 - the *causal effect* of M &rarr; D can be obtained by holding constant A
     * stratifying by A; "controlling" for A
 
@@ -389,12 +391,6 @@ Adjusting/"controlling" for covariates imply a causal interpretation
 
 > Please do not simply adjust for a variable without thinking about it (especially variables that may be impacted by the treatment)
 
-See @chatton2024, Figure 1
-
-::: {.content-hidden unless-profile="class"}
-![](/images/Chatton_etal_2024_fig1.png)
-:::
-
 ## Data for Framing Experiment
 
 - `cong_mesg`: binary variable indicating whether or not the participant agreed to send a letter about immigration policy to his or her member of Congress
@@ -443,6 +439,15 @@ Positive framing: emphasizing benefits
 
 Which one estimates the causal effect of `tone`?
 
+::: {.content-hidden unless-profile="class"}
+
+---
+
+See @chatton2024, Figure 1
+
+![](/images/Chatton_etal_2024_fig1.png)
+:::
+
 # Mediation
 
 Mediation is a causal analysis, by definition
@@ -461,6 +466,7 @@ p6
 ```
 
 In the DAG, E is a post-treatment variable potentially influenced by T
+
 - E is a potential **mediator**
 
 . . .
@@ -687,6 +693,9 @@ p8
 - Propensity score analysis
     * Estimate probability of being in the treatment for each participant based on other covariates
     * Balancing out pre-treatment covariates so that the comparison more resembles a randomized experiments
+
+. . .
+
 - Regression discontinuity
     * E.g., Assigning to treatment only when pre-test score is below a cutoff
     * Pre-test score becomes the only confounding variable to be adjusted for

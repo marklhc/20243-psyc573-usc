@@ -413,3 +413,63 @@ See notes on stacking and regularization
 - Stacking: average predictions from multiple models
 - Regularization: using sparsity-inducing priors to identify major predictors
 - Variable selection: using projection-based methods
+
+::: {.content-hidden unless-profile="class"}
+
+## Week 9
+
+- Ex 7 (cont'd)
+- Recap
+- Prospectus meeting
+- Causal inference
+
+## Quiz
+
+Q1: In the following table, which model is preferred by AIC?
+
+```{r}
+set.seed(2324)
+x1 <- runif(100)
+x2 <- x1 + rnorm(100, sd = 0.5)
+y <- 0.5 * x2 + rnorm(100, sd = 0.5)
+x1[95:100] <- NA
+m1 <- lm(y ~ x2)
+m2 <- lm(y ~ x1 + x2)
+modelsummary::msummary(list(m1, m2))
+```
+
+## Quiz (cont'd)
+
+Q2: What can be concluded from the following table?
+
+```{r}
+y[95:100] <- NA
+m1 <- lm(y ~ x2)
+m2 <- lm(y ~ x1 + x2)
+modelsummary::msummary(list(m1, m2))
+```
+
+A. x1 has no effect on y
+B. including x1 does not seem to improve the out-of-sample prediction of y
+C. x2 is more likely to be a cause of y than x1
+
+## "No" Effect?
+
+```{r}
+curve(dnorm(x, mean = 1.5), from = -4, to = 4,
+      xlab = "Harmful effect", ylab = "Posterior density")
+```
+
+Should a drug dealer claim that the drug has no harmful effect?
+
+## How about this
+
+```{r}
+curve(dnorm(x, mean = 0, sd = 0.05), from = -4, to = 4,
+      xlab = "Harmful effect", ylab = "Posterior density")
+```
+
+Should a drug dealer claim that the drug has no harmful effect?
+
+
+:::
