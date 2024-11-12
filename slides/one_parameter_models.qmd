@@ -2,9 +2,6 @@
 title: "One Parameter Models"
 date: "September 10, 2024"
 date-modified: last-modified
-format:
-  metropolis-revealjs:
-    mermaid-format: svg
 ---
 
 ```{r}
