@@ -489,6 +489,71 @@ By the end of this module, you will be able to
 
 [Link to HTML slides](/slides/causal_inference.qmd){target="_blank"}
 
+# Week 10
+
+## Week Learning Objectives
+
+By the end of this module, you will be able to 
+
+- Explain *what* is unique for samples using **Markov Chain Monte Carlo (MCMC)**
+- Explain *why* we need MCMC to **approximate the posterior**
+- Describe *when* MCMC samples are **representative** and **accurate** for approximating the posterior
+- Use R to perform **convergence diagnostics** for MCMC samples
+
+## Task List
+
+1. Complete the assigned readings
+    * McElreath ch 9
+2. Review the resources (slides and [notes][21])
+3. Attend the Tuesday and Thursday class meetings
+4. Complete Homework 6 (see instruction on Brightspace)
+
+[21]: docs/09-mcmc.html
+
+## Slides
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="slides/mcmc.html" width="525" height="350"></iframe>
+```
+
+</div>
+
+[Link to HTML slides](/slides/mcmc.qmd){target="_blank"}
+
+# Week 12
+
+## Week Learning Objectives
+
+By the end of this module, you will be able to 
+
+- Describe the three components of the **generalized linear model (GLM)**
+- Name examples of the GLM (e.g., linear regression, Poisson regression)
+- Obtain posterior predictive distributions and checks
+
+## Task List
+
+1. Complete the assigned readings
+    * McElreath ch 10, 11
+2. Review the resources (slides and [notes][22])
+3. Attend the Tuesday and Thursday class meetings
+4. Complete Homework 7 (see instruction on Brightspace)
+
+[22]: docs/10-glm.html
+
+## Slides
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="slides/glm.html" width="525" height="350"></iframe>
+```
+
+</div>
+
+[Link to HTML slides](/slides/mcmc.qmd){target="_blank"}
+
 :::
 
 P.S.: If you'd like to print the slides to PDF, follow <https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf>
