@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.33">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>13&nbsp; Causal Inference – PSYC 573 Bayesian Data Analysis (2024 Fall): Course Notes</title>
 <style>
@@ -87,10 +87,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-6d9163938730c4bb45bb2ddd9242afb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -128,7 +128,8 @@ ga('send', {
   hitType: 'pageview',
   'anonymizeIp': true,
 });
-</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
@@ -377,6 +378,58 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./08b-mediation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mediation</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 10–11</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-mcmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Markov Chain Monte Carlo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09b-gibbs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Gibbs Sampling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09c-hmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Hamiltonian Monte Carlo</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 12</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Generalized Linear Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10b-glm2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Generalized Linear Model (II)</span></span></a>
   </div>
 </li>
       </ul>
@@ -762,11 +815,222 @@ Figure&nbsp;13.3: DAG for a hypothetical model with two measured and one unobser
 <span>          iter <span class="op">=</span> <span class="fl">4000</span>,</span>
 <span>          file <span class="op">=</span> <span class="st">"08_m1"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Start sampling</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 4 sequential chains...
+
+Chain 1 Iteration:    1 / 4000 [  0%]  (Warmup) 
+Chain 1 Iteration:  100 / 4000 [  2%]  (Warmup) 
+Chain 1 Iteration:  200 / 4000 [  5%]  (Warmup) 
+Chain 1 Iteration:  300 / 4000 [  7%]  (Warmup) 
+Chain 1 Iteration:  400 / 4000 [ 10%]  (Warmup) 
+Chain 1 Iteration:  500 / 4000 [ 12%]  (Warmup) 
+Chain 1 Iteration:  600 / 4000 [ 15%]  (Warmup) 
+Chain 1 Iteration:  700 / 4000 [ 17%]  (Warmup) 
+Chain 1 Iteration:  800 / 4000 [ 20%]  (Warmup) 
+Chain 1 Iteration:  900 / 4000 [ 22%]  (Warmup) 
+Chain 1 Iteration: 1000 / 4000 [ 25%]  (Warmup) 
+Chain 1 Iteration: 1100 / 4000 [ 27%]  (Warmup) 
+Chain 1 Iteration: 1200 / 4000 [ 30%]  (Warmup) 
+Chain 1 Iteration: 1300 / 4000 [ 32%]  (Warmup) 
+Chain 1 Iteration: 1400 / 4000 [ 35%]  (Warmup) 
+Chain 1 Iteration: 1500 / 4000 [ 37%]  (Warmup) 
+Chain 1 Iteration: 1600 / 4000 [ 40%]  (Warmup) 
+Chain 1 Iteration: 1700 / 4000 [ 42%]  (Warmup) 
+Chain 1 Iteration: 1800 / 4000 [ 45%]  (Warmup) 
+Chain 1 Iteration: 1900 / 4000 [ 47%]  (Warmup) 
+Chain 1 Iteration: 2000 / 4000 [ 50%]  (Warmup) 
+Chain 1 Iteration: 2001 / 4000 [ 50%]  (Sampling) 
+Chain 1 Iteration: 2100 / 4000 [ 52%]  (Sampling) 
+Chain 1 Iteration: 2200 / 4000 [ 55%]  (Sampling) 
+Chain 1 Iteration: 2300 / 4000 [ 57%]  (Sampling) 
+Chain 1 Iteration: 2400 / 4000 [ 60%]  (Sampling) 
+Chain 1 Iteration: 2500 / 4000 [ 62%]  (Sampling) 
+Chain 1 Iteration: 2600 / 4000 [ 65%]  (Sampling) 
+Chain 1 Iteration: 2700 / 4000 [ 67%]  (Sampling) 
+Chain 1 Iteration: 2800 / 4000 [ 70%]  (Sampling) 
+Chain 1 Iteration: 2900 / 4000 [ 72%]  (Sampling) 
+Chain 1 Iteration: 3000 / 4000 [ 75%]  (Sampling) 
+Chain 1 Iteration: 3100 / 4000 [ 77%]  (Sampling) 
+Chain 1 Iteration: 3200 / 4000 [ 80%]  (Sampling) 
+Chain 1 Iteration: 3300 / 4000 [ 82%]  (Sampling) 
+Chain 1 Iteration: 3400 / 4000 [ 85%]  (Sampling) 
+Chain 1 Iteration: 3500 / 4000 [ 87%]  (Sampling) 
+Chain 1 Iteration: 3600 / 4000 [ 90%]  (Sampling) 
+Chain 1 Iteration: 3700 / 4000 [ 92%]  (Sampling) 
+Chain 1 Iteration: 3800 / 4000 [ 95%]  (Sampling) 
+Chain 1 Iteration: 3900 / 4000 [ 97%]  (Sampling) 
+Chain 1 Iteration: 4000 / 4000 [100%]  (Sampling) 
+Chain 1 finished in 0.0 seconds.
+Chain 2 Iteration:    1 / 4000 [  0%]  (Warmup) 
+Chain 2 Iteration:  100 / 4000 [  2%]  (Warmup) 
+Chain 2 Iteration:  200 / 4000 [  5%]  (Warmup) 
+Chain 2 Iteration:  300 / 4000 [  7%]  (Warmup) 
+Chain 2 Iteration:  400 / 4000 [ 10%]  (Warmup) 
+Chain 2 Iteration:  500 / 4000 [ 12%]  (Warmup) 
+Chain 2 Iteration:  600 / 4000 [ 15%]  (Warmup) 
+Chain 2 Iteration:  700 / 4000 [ 17%]  (Warmup) 
+Chain 2 Iteration:  800 / 4000 [ 20%]  (Warmup) 
+Chain 2 Iteration:  900 / 4000 [ 22%]  (Warmup) 
+Chain 2 Iteration: 1000 / 4000 [ 25%]  (Warmup) 
+Chain 2 Iteration: 1100 / 4000 [ 27%]  (Warmup) 
+Chain 2 Iteration: 1200 / 4000 [ 30%]  (Warmup) 
+Chain 2 Iteration: 1300 / 4000 [ 32%]  (Warmup) 
+Chain 2 Iteration: 1400 / 4000 [ 35%]  (Warmup) 
+Chain 2 Iteration: 1500 / 4000 [ 37%]  (Warmup) 
+Chain 2 Iteration: 1600 / 4000 [ 40%]  (Warmup) 
+Chain 2 Iteration: 1700 / 4000 [ 42%]  (Warmup) 
+Chain 2 Iteration: 1800 / 4000 [ 45%]  (Warmup) 
+Chain 2 Iteration: 1900 / 4000 [ 47%]  (Warmup) 
+Chain 2 Iteration: 2000 / 4000 [ 50%]  (Warmup) 
+Chain 2 Iteration: 2001 / 4000 [ 50%]  (Sampling) 
+Chain 2 Iteration: 2100 / 4000 [ 52%]  (Sampling) 
+Chain 2 Iteration: 2200 / 4000 [ 55%]  (Sampling) 
+Chain 2 Iteration: 2300 / 4000 [ 57%]  (Sampling) 
+Chain 2 Iteration: 2400 / 4000 [ 60%]  (Sampling) 
+Chain 2 Iteration: 2500 / 4000 [ 62%]  (Sampling) 
+Chain 2 Iteration: 2600 / 4000 [ 65%]  (Sampling) 
+Chain 2 Iteration: 2700 / 4000 [ 67%]  (Sampling) 
+Chain 2 Iteration: 2800 / 4000 [ 70%]  (Sampling) 
+Chain 2 Iteration: 2900 / 4000 [ 72%]  (Sampling) 
+Chain 2 Iteration: 3000 / 4000 [ 75%]  (Sampling) 
+Chain 2 Iteration: 3100 / 4000 [ 77%]  (Sampling) 
+Chain 2 Iteration: 3200 / 4000 [ 80%]  (Sampling) 
+Chain 2 Iteration: 3300 / 4000 [ 82%]  (Sampling) 
+Chain 2 Iteration: 3400 / 4000 [ 85%]  (Sampling) 
+Chain 2 Iteration: 3500 / 4000 [ 87%]  (Sampling) 
+Chain 2 Iteration: 3600 / 4000 [ 90%]  (Sampling) 
+Chain 2 Iteration: 3700 / 4000 [ 92%]  (Sampling) 
+Chain 2 Iteration: 3800 / 4000 [ 95%]  (Sampling) 
+Chain 2 Iteration: 3900 / 4000 [ 97%]  (Sampling) 
+Chain 2 Iteration: 4000 / 4000 [100%]  (Sampling) 
+Chain 2 finished in 0.0 seconds.
+Chain 3 Iteration:    1 / 4000 [  0%]  (Warmup) 
+Chain 3 Iteration:  100 / 4000 [  2%]  (Warmup) 
+Chain 3 Iteration:  200 / 4000 [  5%]  (Warmup) 
+Chain 3 Iteration:  300 / 4000 [  7%]  (Warmup) 
+Chain 3 Iteration:  400 / 4000 [ 10%]  (Warmup) 
+Chain 3 Iteration:  500 / 4000 [ 12%]  (Warmup) 
+Chain 3 Iteration:  600 / 4000 [ 15%]  (Warmup) 
+Chain 3 Iteration:  700 / 4000 [ 17%]  (Warmup) 
+Chain 3 Iteration:  800 / 4000 [ 20%]  (Warmup) 
+Chain 3 Iteration:  900 / 4000 [ 22%]  (Warmup) 
+Chain 3 Iteration: 1000 / 4000 [ 25%]  (Warmup) 
+Chain 3 Iteration: 1100 / 4000 [ 27%]  (Warmup) 
+Chain 3 Iteration: 1200 / 4000 [ 30%]  (Warmup) 
+Chain 3 Iteration: 1300 / 4000 [ 32%]  (Warmup) 
+Chain 3 Iteration: 1400 / 4000 [ 35%]  (Warmup) 
+Chain 3 Iteration: 1500 / 4000 [ 37%]  (Warmup) 
+Chain 3 Iteration: 1600 / 4000 [ 40%]  (Warmup) 
+Chain 3 Iteration: 1700 / 4000 [ 42%]  (Warmup) 
+Chain 3 Iteration: 1800 / 4000 [ 45%]  (Warmup) 
+Chain 3 Iteration: 1900 / 4000 [ 47%]  (Warmup) 
+Chain 3 Iteration: 2000 / 4000 [ 50%]  (Warmup) 
+Chain 3 Iteration: 2001 / 4000 [ 50%]  (Sampling) 
+Chain 3 Iteration: 2100 / 4000 [ 52%]  (Sampling) 
+Chain 3 Iteration: 2200 / 4000 [ 55%]  (Sampling) 
+Chain 3 Iteration: 2300 / 4000 [ 57%]  (Sampling) 
+Chain 3 Iteration: 2400 / 4000 [ 60%]  (Sampling) 
+Chain 3 Iteration: 2500 / 4000 [ 62%]  (Sampling) 
+Chain 3 Iteration: 2600 / 4000 [ 65%]  (Sampling) 
+Chain 3 Iteration: 2700 / 4000 [ 67%]  (Sampling) 
+Chain 3 Iteration: 2800 / 4000 [ 70%]  (Sampling) 
+Chain 3 Iteration: 2900 / 4000 [ 72%]  (Sampling) 
+Chain 3 Iteration: 3000 / 4000 [ 75%]  (Sampling) 
+Chain 3 Iteration: 3100 / 4000 [ 77%]  (Sampling) 
+Chain 3 Iteration: 3200 / 4000 [ 80%]  (Sampling) 
+Chain 3 Iteration: 3300 / 4000 [ 82%]  (Sampling) 
+Chain 3 Iteration: 3400 / 4000 [ 85%]  (Sampling) 
+Chain 3 Iteration: 3500 / 4000 [ 87%]  (Sampling) 
+Chain 3 Iteration: 3600 / 4000 [ 90%]  (Sampling) 
+Chain 3 Iteration: 3700 / 4000 [ 92%]  (Sampling) 
+Chain 3 Iteration: 3800 / 4000 [ 95%]  (Sampling) 
+Chain 3 Iteration: 3900 / 4000 [ 97%]  (Sampling) 
+Chain 3 Iteration: 4000 / 4000 [100%]  (Sampling) 
+Chain 3 finished in 0.1 seconds.
+Chain 4 Iteration:    1 / 4000 [  0%]  (Warmup) 
+Chain 4 Iteration:  100 / 4000 [  2%]  (Warmup) 
+Chain 4 Iteration:  200 / 4000 [  5%]  (Warmup) 
+Chain 4 Iteration:  300 / 4000 [  7%]  (Warmup) 
+Chain 4 Iteration:  400 / 4000 [ 10%]  (Warmup) 
+Chain 4 Iteration:  500 / 4000 [ 12%]  (Warmup) 
+Chain 4 Iteration:  600 / 4000 [ 15%]  (Warmup) 
+Chain 4 Iteration:  700 / 4000 [ 17%]  (Warmup) 
+Chain 4 Iteration:  800 / 4000 [ 20%]  (Warmup) 
+Chain 4 Iteration:  900 / 4000 [ 22%]  (Warmup) 
+Chain 4 Iteration: 1000 / 4000 [ 25%]  (Warmup) 
+Chain 4 Iteration: 1100 / 4000 [ 27%]  (Warmup) 
+Chain 4 Iteration: 1200 / 4000 [ 30%]  (Warmup) 
+Chain 4 Iteration: 1300 / 4000 [ 32%]  (Warmup) 
+Chain 4 Iteration: 1400 / 4000 [ 35%]  (Warmup) 
+Chain 4 Iteration: 1500 / 4000 [ 37%]  (Warmup) 
+Chain 4 Iteration: 1600 / 4000 [ 40%]  (Warmup) 
+Chain 4 Iteration: 1700 / 4000 [ 42%]  (Warmup) 
+Chain 4 Iteration: 1800 / 4000 [ 45%]  (Warmup) 
+Chain 4 Iteration: 1900 / 4000 [ 47%]  (Warmup) 
+Chain 4 Iteration: 2000 / 4000 [ 50%]  (Warmup) 
+Chain 4 Iteration: 2001 / 4000 [ 50%]  (Sampling) 
+Chain 4 Iteration: 2100 / 4000 [ 52%]  (Sampling) 
+Chain 4 Iteration: 2200 / 4000 [ 55%]  (Sampling) 
+Chain 4 Iteration: 2300 / 4000 [ 57%]  (Sampling) 
+Chain 4 Iteration: 2400 / 4000 [ 60%]  (Sampling) 
+Chain 4 Iteration: 2500 / 4000 [ 62%]  (Sampling) 
+Chain 4 Iteration: 2600 / 4000 [ 65%]  (Sampling) 
+Chain 4 Iteration: 2700 / 4000 [ 67%]  (Sampling) 
+Chain 4 Iteration: 2800 / 4000 [ 70%]  (Sampling) 
+Chain 4 Iteration: 2900 / 4000 [ 72%]  (Sampling) 
+Chain 4 Iteration: 3000 / 4000 [ 75%]  (Sampling) 
+Chain 4 Iteration: 3100 / 4000 [ 77%]  (Sampling) 
+Chain 4 Iteration: 3200 / 4000 [ 80%]  (Sampling) 
+Chain 4 Iteration: 3300 / 4000 [ 82%]  (Sampling) 
+Chain 4 Iteration: 3400 / 4000 [ 85%]  (Sampling) 
+Chain 4 Iteration: 3500 / 4000 [ 87%]  (Sampling) 
+Chain 4 Iteration: 3600 / 4000 [ 90%]  (Sampling) 
+Chain 4 Iteration: 3700 / 4000 [ 92%]  (Sampling) 
+Chain 4 Iteration: 3800 / 4000 [ 95%]  (Sampling) 
+Chain 4 Iteration: 3900 / 4000 [ 97%]  (Sampling) 
+Chain 4 Iteration: 4000 / 4000 [100%]  (Sampling) 
+Chain 4 finished in 0.0 seconds.
+
+All 4 chains finished successfully.
+Mean chain execution time: 0.0 seconds.
+Total execution time: 0.6 seconds.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: rstan</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: StanHeaders</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+rstan version 2.32.5 (Stan version 2.32.2)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>For execution on a local, multicore CPU with excess RAM we recommend calling
+options(mc.cores = parallel::detectCores()).
+To avoid recompilation of unchanged Stan programs, we recommend calling
+rstan_options(auto_write = TRUE)
+For within-chain threading using `reduce_sum()` or `map_rect()` Stan functions,
+change `threads_per_chain` option:
+rstan_options(threads_per_chain = 1)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'rstan'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:tidyr':
+
+    extract</code></pre>
+</div>
 </div>
 <section id="table" class="level3" data-number="13.4.1"><h3 data-number="13.4.1" class="anchored" data-anchor-id="table">
 <span class="header-section-number">13.4.1</span> Table</h3>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">msummary</span><span class="op">(</span><span class="va">m1</span>,</span>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">msummary</span><span class="op">(</span><span class="va">m1</span>,</span>
 <span>         estimate <span class="op">=</span> <span class="st">"{estimate} [{conf.low}, {conf.high}]"</span>,</span>
 <span>         statistic <span class="op">=</span> <span class="cn">NULL</span>, fmt <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -786,148 +1050,66 @@ expensive. See `?performance::performance` for details.
 Table&nbsp;13.1: Model results for the divorce rate example.
 </figcaption><div aria-describedby="tbl-m1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<!-- preamble start -->
-
-    <script>
-      function styleCell_7mjhlynzbvxedbj33ixh(i, j, css_id) {
-        var table = document.getElementById("tinytable_7mjhlynzbvxedbj33ixh");
-        table.rows[i].cells[j].classList.add(css_id);
-      }
-      function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_7mjhlynzbvxedbj33ixh');
-        var newRow = table.insertRow(i);
-        var newCell = newRow.insertCell(0);
-        newCell.setAttribute("colspan", colspan);
-        // newCell.innerText = content;
-        // this may be unsafe, but innerText does not interpret <br>
-        newCell.innerHTML = content;
-      }
-      function spanCell_7mjhlynzbvxedbj33ixh(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_7mjhlynzbvxedbj33ixh");
-        const targetRow = table.rows[i];
-        const targetCell = targetRow.cells[j];
-        for (let r = 0; r < rowspan; r++) {
-          // Only start deleting cells to the right for the first row (r == 0)
-          if (r === 0) {
-            // Delete cells to the right of the target cell in the first row
-            for (let c = colspan - 1; c > 0; c--) {
-              if (table.rows[i + r].cells[j + c]) {
-                table.rows[i + r].deleteCell(j + c);
-              }
-            }
-          }
-          // For rows below the first, delete starting from the target column
-          if (r > 0) {
-            for (let c = colspan - 1; c >= 0; c--) {
-              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
-                table.rows[i + r].deleteCell(j);
-              }
-            }
-          }
-        }
-        // Set rowspan and colspan of the target cell
-        targetCell.rowSpan = rowspan;
-        targetCell.colSpan = colspan;
-      }
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(0, 0, 'tinytable_css_idx1lcva0wl8syvcynsbjj') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(0, 1, 'tinytable_css_id575bgairailpq0qz9wi5') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(1, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(1, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(2, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(2, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(3, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(3, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(4, 0, 'tinytable_css_idsbh7gohx3onk5xw8lmii') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(4, 1, 'tinytable_css_idnpqqy4xvw9w4ageltn1c') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(5, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(5, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(6, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(6, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(7, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(7, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(8, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(8, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(9, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(9, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(10, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(10, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(11, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(11, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(12, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(12, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(13, 0, 'tinytable_css_id9k82uay42g4u44kc84wa') })
-window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(13, 1, 'tinytable_css_idd4tmyt93bvyy8jzcvws9') })
-    </script><style>
-    .table td.tinytable_css_idx1lcva0wl8syvcynsbjj, .table th.tinytable_css_idx1lcva0wl8syvcynsbjj {  text-align: left;  border-bottom: solid 0.1em #d3d8dc; }
-    .table td.tinytable_css_id575bgairailpq0qz9wi5, .table th.tinytable_css_id575bgairailpq0qz9wi5 {  text-align: center;  border-bottom: solid 0.1em #d3d8dc; }
-    .table td.tinytable_css_id9k82uay42g4u44kc84wa, .table th.tinytable_css_id9k82uay42g4u44kc84wa {  text-align: left; }
-    .table td.tinytable_css_idd4tmyt93bvyy8jzcvws9, .table th.tinytable_css_idd4tmyt93bvyy8jzcvws9 {  text-align: center; }
-    .table td.tinytable_css_idsbh7gohx3onk5xw8lmii, .table th.tinytable_css_idsbh7gohx3onk5xw8lmii {  border-bottom: solid 0.05em black;  text-align: left; }
-    .table td.tinytable_css_idnpqqy4xvw9w4ageltn1c, .table th.tinytable_css_idnpqqy4xvw9w4ageltn1c {  border-bottom: solid 0.05em black;  text-align: center; }
-    </style>
-<div class="container">
-      <table class="table table-borderless" id="tinytable_7mjhlynzbvxedbj33ixh" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
-<thead><tr>
-<th scope="col"> </th>
-                <th scope="col">(1)</th>
-              </tr></thead>
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead><tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">&nbsp;(1)</th>
+</tr></thead>
 <tbody>
-<tr>
-<td>b_Intercept        </td>
-                  <td>3.49 [1.98, 5.02]   </td>
-                </tr>
-<tr>
-<td>b_MedianAgeMarriage</td>
-                  <td>-0.93 [-1.43, -0.45]</td>
-                </tr>
-<tr>
-<td>b_Marriage         </td>
-                  <td>-0.04 [-0.20, 0.12] </td>
-                </tr>
-<tr>
-<td>sigma              </td>
-                  <td>0.15 [0.12, 0.19]   </td>
-                </tr>
-<tr>
-<td>Num.Obs.           </td>
-                  <td>50                  </td>
-                </tr>
-<tr>
-<td>R2                 </td>
-                  <td>0.349               </td>
-                </tr>
-<tr>
-<td>R2 Adj.            </td>
-                  <td>0.284               </td>
-                </tr>
-<tr>
-<td>ELPD               </td>
-                  <td>21.0                </td>
-                </tr>
-<tr>
-<td>ELPD s.e.          </td>
-                  <td>6.4                 </td>
-                </tr>
-<tr>
-<td>LOOIC              </td>
-                  <td>-42.0               </td>
-                </tr>
-<tr>
-<td>LOOIC s.e.         </td>
-                  <td>12.9                </td>
-                </tr>
-<tr>
-<td>WAIC               </td>
-                  <td>-42.2               </td>
-                </tr>
-<tr>
-<td>RMSE               </td>
-                  <td>0.14                </td>
-                </tr>
+<tr class="odd">
+<td style="text-align: left;">b_Intercept</td>
+<td style="text-align: center;">3.49 [1.98, 5.02]</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b_MedianAgeMarriage</td>
+<td style="text-align: center;">−0.93 [−1.43, −0.45]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">b_Marriage</td>
+<td style="text-align: center;">−0.04 [−0.20, 0.12]</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; box-shadow: 0px 1.5px;">sigma</td>
+<td style="text-align: center; box-shadow: 0px 1.5px;">0.15 [0.12, 0.19]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Num.Obs.</td>
+<td style="text-align: center;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R2</td>
+<td style="text-align: center;">0.349</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R2 Adj.</td>
+<td style="text-align: center;">0.283</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ELPD</td>
+<td style="text-align: center;">21.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ELPD s.e.</td>
+<td style="text-align: center;">6.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LOOIC</td>
+<td style="text-align: center;">−42.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LOOIC s.e.</td>
+<td style="text-align: center;">12.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">WAIC</td>
+<td style="text-align: center;">−42.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RMSE</td>
+<td style="text-align: center;">0.14</td>
+</tr>
 </tbody>
 </table>
-</div>
-<!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
 </figure>
@@ -936,13 +1118,13 @@ window.addEventListener('load', function () { styleCell_7mjhlynzbvxedbj33ixh(13,
 <p>As shown in the table, when holding constant the median marriage age of states, marriage rate has only a small effect on divorce rate.</p>
 </section><section id="posterior-predictive-checks" class="level3" data-number="13.4.2"><h3 data-number="13.4.2" class="anchored" data-anchor-id="posterior-predictive-checks">
 <span class="header-section-number">13.4.2</span> Posterior predictive checks</h3>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">m1</span>, ndraws <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="co"># density</span></span>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">m1</span>, ndraws <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="co"># density</span></span>
 <span><span class="fu">pp_check</span><span class="op">(</span><span class="va">m1</span>, type <span class="op">=</span> <span class="st">"intervals"</span>, x <span class="op">=</span> <span class="st">"Marriage"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Marriage"</span>, y <span class="op">=</span> <span class="st">"Divorce"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Using all posterior draws for ppc type 'intervals' by default.</code></pre>
 </div>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">m1</span>, type <span class="op">=</span> <span class="st">"intervals"</span>, x <span class="op">=</span> <span class="st">"MedianAgeMarriage"</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">m1</span>, type <span class="op">=</span> <span class="st">"intervals"</span>, x <span class="op">=</span> <span class="st">"MedianAgeMarriage"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"MedianAgeMarriage"</span>, y <span class="op">=</span> <span class="st">"Divorce"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Using all posterior draws for ppc type 'intervals' by default.</code></pre>
@@ -1009,7 +1191,7 @@ Figure&nbsp;13.4: Posterior predictive checks for the multiple regression model.
 \]</span></p>
 <p>Here is what the model would predict in terms of the change in the divorce rate (holding median marriage age to 25 years old), using R:</p>
 <div class="cell">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pred_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pred_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>    Marriage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>    MedianAgeMarriage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2.5</span>, <span class="fl">2.5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -1048,7 +1230,7 @@ Figure&nbsp;13.4: Posterior predictive checks for the multiple regression model.
 </div>
 <p>The difference should be just the estimate of <span class="math inline">\(\beta_2\)</span>, which has the following posterior distribution:</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">mcmc_dens</span><span class="op">(</span><span class="va">m1</span>, pars <span class="op">=</span> <span class="st">"b_Marriage"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">mcmc_dens</span><span class="op">(</span><span class="va">m1</span>, pars <span class="op">=</span> <span class="st">"b_Marriage"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-marriage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-marriage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1067,7 +1249,7 @@ Figure&nbsp;13.5: Estimated “causal” effect of marriage rate on divorce rate
 <p>Suppose you look at just the people that your friend dated. In that case, they are either nice or good-looking, but the fact that you select to look at (condition on) only the people that your friend dated would automatically eliminate people who are neither nice nor good-looking. This induces a spurious negative association between nice and good-looking, so your friend may believe that nice people would be less likely to have appearances that fit their taste, and vice versa.</p>
 <p>As another example, is research that is newsworthy less trustworthy? There could be a negative association due to collider bias, because people who select research to be reported, funded, or published, consider both newsworthiness and trustworthiness. Assume that trustworthiness has no causal relation with newsworthiness, below shows what happens when we only focus on papers that are either high on newsworthiness or trustworthiness:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2221</span><span class="op">)</span> <span class="co"># different seed from the text</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2221</span><span class="op">)</span> <span class="co"># different seed from the text</span></span>
 <span><span class="va">num_proposals</span> <span class="op">&lt;-</span> <span class="fl">200</span> <span class="co"># number of grant proposals</span></span>
 <span><span class="va">prop_selected</span> <span class="op">&lt;-</span> <span class="fl">0.1</span> <span class="co"># proportion to select</span></span>
 <span><span class="co"># Simulate independent newsworthiness and trustworthiness</span></span>
@@ -1117,7 +1299,7 @@ Figure&nbsp;13.6: Simulation of newsworthiness and trustworthiness.
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dag7</span> <span class="op">&lt;-</span> <span class="fu">dagitty</span><span class="op">(</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dag7</span> <span class="op">&lt;-</span> <span class="fu">dagitty</span><span class="op">(</span></span>
 <span>    <span class="st">"dag{</span></span>
 <span><span class="st">      X -&gt; Y; X -&gt; S; Y -&gt; S</span></span>
 <span><span class="st">    }"</span></span>
@@ -1148,7 +1330,7 @@ Age and Happiness, conditioned on Marital Status (Example from text)
 <div class="callout-body-container callout-body">
 <p>In this example, we assume that age and happiness are not related, but as people age, they are more likely to get married.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Code adapted from the rethinking package (https://github.com/rmcelreath/rethinking/blob/master/R/sim_happiness.R)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Code adapted from the rethinking package (https://github.com/rmcelreath/rethinking/blob/master/R/sim_happiness.R)</span></span>
 <span><span class="va">sim_happiness</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">seed</span> <span class="op">=</span> <span class="fl">1977</span>, <span class="va">N_years</span> <span class="op">=</span> <span class="fl">100</span>,</span>
 <span>                          <span class="va">max_age</span> <span class="op">=</span> <span class="fl">65</span>, <span class="va">N_births</span> <span class="op">=</span> <span class="fl">50</span>,</span>
 <span>                          <span class="va">aom</span> <span class="op">=</span> <span class="fl">18</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1178,7 +1360,7 @@ Age and Happiness, conditioned on Marital Status (Example from text)
 </details>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dd</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">happiness</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dd</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">happiness</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_point</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.1</span>, size <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-age-happiness" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1192,7 +1374,7 @@ Figure&nbsp;13.8: Age and happiness.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dd</span><span class="op">[</span><span class="va">dd</span><span class="op">$</span><span class="va">married</span> <span class="op">==</span> <span class="fl">1</span>, <span class="op">]</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">happiness</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dd</span><span class="op">[</span><span class="va">dd</span><span class="op">$</span><span class="va">married</span> <span class="op">==</span> <span class="fl">1</span>, <span class="op">]</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">happiness</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_point</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.5</span>, size <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-age-happiness-married" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1712,416 +1894,416 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb33" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Causal Inference</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>comma <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">2</span>L) <span class="fu">format</span>(x, <span class="at">digits =</span> digits, <span class="at">big.mark =</span> <span class="st">","</span>)</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey92"</span>)))</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dagitty)</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">brms.backend =</span> <span class="st">"cmdstanr"</span>)</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmdstanr)</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>Causal inference is an important topic in statistics, but it also has a complicated history with statistics. Early-day statisticians saw causality as a taboo such that researchers were discouraged from drawing any causal conclusions in nonexperimental research. In the past few decades, much progress has been made on causal inference in epidemiology, computer science, and statistics, with several frameworks proposed and many tools developed for experimental and nonexperimental data.<span class="ot">[^taboo]</span> This note will introduce the causal diagram framework for encoding causal assumptions, which can be used to guide analysis for drawing causal conclusions. The goal is to give you some basic ideas so that you can learn more from other sources, such as the book <span class="co">[</span><span class="ot">*Causality* by Pearl</span><span class="co">](http://bayes.cs.ucla.edu/BOOK-2K/)</span> and the book <span class="co">[</span><span class="ot">*Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction* by Imbens and Rubin</span><span class="co">](https://doi.org/10.1017/CBO9781139025751)</span>.</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="ot">[^taboo]: </span>See this paper: <span class="ot">&lt;https://doi.org/10.1177/1745691620921521&gt;</span> for an argument of how the taboo against causal inference has impeded the progress of psychology research.</span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>Two prominent frameworks for causal inference are</span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Structural causal model, which uses tools such as DAGs and $d$-separation, is thoroughly described in the book <span class="co">[</span><span class="ot">*Causality* by Pearl</span><span class="co">](http://bayes.cs.ucla.edu/BOOK-2K/)</span>, and</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Potential outcome model, which is thoroughly described in the book <span class="co">[</span><span class="ot">*Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction* by Imbens and Rubin</span><span class="co">](https://doi.org/10.1017/CBO9781139025751)</span>.</span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>In this note, we will draw on both frameworks.</span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## What is Causal Inference?</span></span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>Causal inference is the process of determining the causal effect of one variable on another, based on data and causal assumptions. Two common ways of interpreting a causal effect are (a) *intervention*: how $Y$ will change if $X$ is manipulated to be $x$; (b) *counterfactual*: what would $Y$ be if $X$ were set to $x$.</span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Potential Outcomes</span></span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>Consider a binary treatment variable. For each individual, there are two *potential outcomes*: one if they receive the treatment (T = 1) and one if they do not (T = 0). Here is a hypothetical data set of a new drug for improving statistics knowledge, with the treatment condition receiving the drug and the control condition receiving a placebo:</span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>po_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">person =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>),</span>
-<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">attitude =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">2</span>),</span>
-<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">treat =</span> <span class="fu">c</span>(<span class="dv">75</span>, <span class="dv">80</span>, <span class="dv">70</span>, <span class="dv">90</span>, <span class="dv">85</span>, <span class="dv">82</span>, <span class="dv">95</span>, <span class="dv">78</span>),</span>
-<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">c</span>(<span class="dv">70</span>, <span class="dv">88</span>, <span class="dv">75</span>, <span class="dv">92</span>, <span class="dv">82</span>, <span class="dv">85</span>, <span class="dv">90</span>, <span class="dv">78</span>)</span>
-<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(po_dat,</span>
-<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Person"</span>, <span class="st">"Math Attitude"</span>, <span class="st">"Y (if T = 1)"</span>, <span class="st">"Y (if T = 0)"</span>))</span>
-<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a>If one could observe the two potential outcomes for each person (which is impossible in the real world), one could compute the treatment effect for each person:</span>
-<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a>(te <span class="ot">&lt;-</span> po_dat<span class="sc">$</span>treat <span class="sc">-</span> po_dat<span class="sc">$</span>control)</span>
-<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a>and the **average treatment effect (ATE)** (here we just compute it on the sample, so the sample ATE):</span>
-<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a>(ate <span class="ot">&lt;-</span> <span class="fu">mean</span>(te))</span>
-<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a>However, in practice, we can only observe one of the two potential outcomes. For example, if persons 2, 4, 6, 7 are in the treatment condition, we have</span>
-<span id="cb33-76"><a href="#cb33-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-79"><a href="#cb33-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-80"><a href="#cb33-80" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb33-81"><a href="#cb33-81" aria-hidden="true" tabindex="-1"></a>po_dat<span class="sc">$</span>t <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(po_dat<span class="sc">$</span>person <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">7</span>), <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb33-82"><a href="#cb33-82" aria-hidden="true" tabindex="-1"></a>po_dat<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(po_dat<span class="sc">$</span>t, po_dat<span class="sc">$</span>treat, po_dat<span class="sc">$</span>control)</span>
-<span id="cb33-83"><a href="#cb33-83" aria-hidden="true" tabindex="-1"></a>po_dat[<span class="fu">c</span>(<span class="st">"t"</span>, <span class="st">"y"</span>)] <span class="sc">|&gt;</span></span>
-<span id="cb33-84"><a href="#cb33-84" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Observed Y"</span>))</span>
-<span id="cb33-85"><a href="#cb33-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-86"><a href="#cb33-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-87"><a href="#cb33-87" aria-hidden="true" tabindex="-1"></a>and the naive comparison of those in the treatment condition and those in the control condition will have a mean difference of</span>
-<span id="cb33-88"><a href="#cb33-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-91"><a href="#cb33-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-92"><a href="#cb33-92" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(po_dat<span class="sc">$</span>y[po_dat<span class="sc">$</span>t <span class="sc">==</span> <span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">mean</span>(po_dat<span class="sc">$</span>y[po_dat<span class="sc">$</span>t <span class="sc">==</span> <span class="dv">0</span>])</span>
-<span id="cb33-93"><a href="#cb33-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-94"><a href="#cb33-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-95"><a href="#cb33-95" aria-hidden="true" tabindex="-1"></a>which gives a misleading estimate of the ATE.</span>
-<span id="cb33-96"><a href="#cb33-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-97"><a href="#cb33-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## Directed Acyclic Graph (DAG)</span></span>
-<span id="cb33-98"><a href="#cb33-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-99"><a href="#cb33-99" aria-hidden="true" tabindex="-1"></a>DAG is a tool for encoding causal assumptions. It contains nodes and paths. A node is usually a variable that can be measured in the data or unmeasured. Generally, paths in a DAG are directional (as implied by *directed*), which indicates the directions of causal relations. Acyclic means the causal chain does not close in a loop. </span>
-<span id="cb33-100"><a href="#cb33-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-101"><a href="#cb33-101" aria-hidden="true" tabindex="-1"></a>We will use an example described in @mcelreath2020, chapter 5, about data from 50 U.S. states from the 2009 American Community Survey (ACS), which we have already seen in @sec-multiple-predictors and @fig-waffle-divorce.</span>
-<span id="cb33-102"><a href="#cb33-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-105"><a href="#cb33-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-106"><a href="#cb33-106" aria-hidden="true" tabindex="-1"></a>waffle_divorce <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(  <span class="co"># read delimited files</span></span>
-<span id="cb33-107"><a href="#cb33-107" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://raw.githubusercontent.com/rmcelreath/rethinking/master/data/WaffleDivorce.csv"</span>,</span>
-<span id="cb33-108"><a href="#cb33-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">";"</span></span>
-<span id="cb33-109"><a href="#cb33-109" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-110"><a href="#cb33-110" aria-hidden="true" tabindex="-1"></a><span class="co"># Rescale Marriage and Divorce by dividing by 10</span></span>
-<span id="cb33-111"><a href="#cb33-111" aria-hidden="true" tabindex="-1"></a>waffle_divorce<span class="sc">$</span>Marriage <span class="ot">&lt;-</span> waffle_divorce<span class="sc">$</span>Marriage <span class="sc">/</span> <span class="dv">10</span></span>
-<span id="cb33-112"><a href="#cb33-112" aria-hidden="true" tabindex="-1"></a>waffle_divorce<span class="sc">$</span>Divorce <span class="ot">&lt;-</span> waffle_divorce<span class="sc">$</span>Divorce <span class="sc">/</span> <span class="dv">10</span></span>
-<span id="cb33-113"><a href="#cb33-113" aria-hidden="true" tabindex="-1"></a>waffle_divorce<span class="sc">$</span>MedianAgeMarriage <span class="ot">&lt;-</span> waffle_divorce<span class="sc">$</span>MedianAgeMarriage <span class="sc">/</span> <span class="dv">10</span></span>
-<span id="cb33-114"><a href="#cb33-114" aria-hidden="true" tabindex="-1"></a><span class="co"># See data description at https://rdrr.io/github/rmcelreath/rethinking/man/WaffleDivorce.html</span></span>
-<span id="cb33-115"><a href="#cb33-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-116"><a href="#cb33-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-117"><a href="#cb33-117" aria-hidden="true" tabindex="-1"></a>The outcome of interest is the divorce rate. Remember the plot shows how marriage rate is related to divorce rate at the state level. It looks like marriage rate can predict divorce rate. A causal interpretation would be a stronger assertion, such that we expect a higher divorce rate if policymakers encourage more people to get married. In order to make a causal claim, we need to remove potential confounders. </span>
-<span id="cb33-118"><a href="#cb33-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-119"><a href="#cb33-119" aria-hidden="true" tabindex="-1"></a>A potential confounder is when people get married. Suppose people are forced to get married later in life. In that case, fewer people in the population will be married, and people may have less time, opportunity, and motivation to get divorced (as it may be harder to find a new partner). Therefore, we can use the following DAG:</span>
-<span id="cb33-120"><a href="#cb33-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-123"><a href="#cb33-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-124"><a href="#cb33-124" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dag1</span></span>
-<span id="cb33-125"><a href="#cb33-125" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "DAG for the relationship between marriage rate (M) and divorce rate (D) example, with median age of marriage (A) as a potential confounder."</span></span>
-<span id="cb33-126"><a href="#cb33-126" aria-hidden="true" tabindex="-1"></a>dag1 <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">"dag{ A -&gt; D; A -&gt; M; M -&gt; D }"</span>)</span>
-<span id="cb33-127"><a href="#cb33-127" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(dag1) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">M =</span> <span class="dv">0</span>, <span class="at">A =</span> <span class="dv">1</span>, <span class="at">D =</span> <span class="dv">2</span>),</span>
-<span id="cb33-128"><a href="#cb33-128" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> <span class="fu">c</span>(<span class="at">M =</span> <span class="dv">0</span>, <span class="at">A =</span> <span class="dv">1</span>, <span class="at">D =</span> <span class="dv">0</span>))</span>
-<span id="cb33-129"><a href="#cb33-129" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb33-130"><a href="#cb33-130" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag1) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span>
-<span id="cb33-131"><a href="#cb33-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-132"><a href="#cb33-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-133"><a href="#cb33-133" aria-hidden="true" tabindex="-1"></a>We can look at how the median age people get married in different states relates to the divorce rate:</span>
-<span id="cb33-134"><a href="#cb33-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-137"><a href="#cb33-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-138"><a href="#cb33-138" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-scatter-age-divorce</span></span>
-<span id="cb33-139"><a href="#cb33-139" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Scatter plot of divorce rate (y) vs median age of marriage (x)."</span></span>
-<span id="cb33-140"><a href="#cb33-140" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(waffle_divorce,</span>
-<span id="cb33-141"><a href="#cb33-141" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> MedianAgeMarriage, <span class="at">y =</span> Divorce)) <span class="sc">+</span></span>
-<span id="cb33-142"><a href="#cb33-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb33-143"><a href="#cb33-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb33-144"><a href="#cb33-144" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Median age marriage (10 years)"</span>,</span>
-<span id="cb33-145"><a href="#cb33-145" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Divorce rate (per 10 adults)"</span>) <span class="sc">+</span></span>
-<span id="cb33-146"><a href="#cb33-146" aria-hidden="true" tabindex="-1"></a>    ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> Loc))</span>
-<span id="cb33-147"><a href="#cb33-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-148"><a href="#cb33-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-149"><a href="#cb33-149" aria-hidden="true" tabindex="-1"></a><span class="fu">### Assumptions in a DAG</span></span>
-<span id="cb33-150"><a href="#cb33-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-151"><a href="#cb33-151" aria-hidden="true" tabindex="-1"></a>In a graphical model, there are usually two kinds of assumptions conveyed. Perhaps counterintuitively, the weaker assumptions are the ones you can see, whereas the stronger assumptions are ones you **do not see**. </span>
-<span id="cb33-152"><a href="#cb33-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-153"><a href="#cb33-153" aria-hidden="true" tabindex="-1"></a>For example, a weak assumption is:</span>
-<span id="cb33-154"><a href="#cb33-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-155"><a href="#cb33-155" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Marriage age *may* directly influence the number of people who are married</span>
-<span id="cb33-156"><a href="#cb33-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-157"><a href="#cb33-157" aria-hidden="true" tabindex="-1"></a>On the other hand, examples of a strong assumption are:</span>
-<span id="cb33-158"><a href="#cb33-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-159"><a href="#cb33-159" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Marriage rate does not directly influence the age people get married</span>
-<span id="cb33-160"><a href="#cb33-160" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>there is no other variable in the causal pathway M <span class="dv">&amp;rarr;</span> D</span>
-<span id="cb33-161"><a href="#cb33-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-162"><a href="#cb33-162" aria-hidden="true" tabindex="-1"></a>The last assumption will not hold if there is a common cause of M and D other than A.</span>
-<span id="cb33-163"><a href="#cb33-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-164"><a href="#cb33-164" aria-hidden="true" tabindex="-1"></a><span class="fu">### Basic Types of Junctions</span></span>
-<span id="cb33-165"><a href="#cb33-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-166"><a href="#cb33-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fork: A <span class="dv">&amp;larr;</span> B <span class="dv">&amp;rarr;</span> C</span>
-<span id="cb33-167"><a href="#cb33-167" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>A and C are correlated due to a common cause B</span>
-<span id="cb33-168"><a href="#cb33-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-169"><a href="#cb33-169" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Chain/Pipe: A <span class="dv">&amp;rarr;</span> B <span class="dv">&amp;rarr;</span> C</span>
-<span id="cb33-170"><a href="#cb33-170" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>B is on the causal pathway of A to C</span>
-<span id="cb33-171"><a href="#cb33-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-172"><a href="#cb33-172" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Collider: A <span class="dv">&amp;rarr;</span> B <span class="dv">&amp;larr;</span> C</span>
-<span id="cb33-173"><a href="#cb33-173" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>B is a *descendant* of both A and C</span>
-<span id="cb33-174"><a href="#cb33-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-175"><a href="#cb33-175" aria-hidden="true" tabindex="-1"></a>Going back to our example, there is a fork relation: M <span class="dv">&amp;rarr;</span> &lt;span style="color:red"&gt;A&lt;/span&gt; <span class="dv">&amp;rarr;</span> D. In this case, A is a confounder when estimating the causal relation between M and D. In this case, the causal effect of M to D can be obtained by adjusting for A, which means looking at the subsets of data where A is constant. In regression, adjustment is obtained by including both M and A as predictors of D.</span>
-<span id="cb33-176"><a href="#cb33-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-177"><a href="#cb33-177" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Back-Door Criterion: Estimating Causal Effect in Nonexperimental Data</span></span>
-<span id="cb33-178"><a href="#cb33-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-179"><a href="#cb33-179" aria-hidden="true" tabindex="-1"></a>Randomization is one---but not the only---way to rule out confounding variables. Much progress has been made in clarifying that causal effects **can** be estimated in nonexperimental data. After all, researchers have not randomly assigned individuals to smoke $x$ cigarettes per day, but we are confident that smoking causes cancer; we never manipulated the moon's gravitational force, but we are pretty sure that the moon is a cause of high and low tides.</span>
-<span id="cb33-180"><a href="#cb33-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-181"><a href="#cb33-181" aria-hidden="true" tabindex="-1"></a>In a DAG, the back-door criterion can be used to identify variables that we should adjust for to obtain a causal effect. The set of variables to be adjusted should (a) blocks every path between X and Y that contains an arrow entering X and (b) does not contain variables that are descendant of X.</span>
-<span id="cb33-182"><a href="#cb33-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-185"><a href="#cb33-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-186"><a href="#cb33-186" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dag4</span></span>
-<span id="cb33-187"><a href="#cb33-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "DAG for a hypothetical model with two measured and one unobserved confounder."</span></span>
-<span id="cb33-188"><a href="#cb33-188" aria-hidden="true" tabindex="-1"></a>dag4 <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(</span>
-<span id="cb33-189"><a href="#cb33-189" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dag{</span></span>
-<span id="cb33-190"><a href="#cb33-190" aria-hidden="true" tabindex="-1"></a><span class="st">      X -&gt; Y; W1 -&gt; X; U -&gt; W2; W2 -&gt; X; W1 -&gt; Y; U -&gt; Y</span></span>
-<span id="cb33-191"><a href="#cb33-191" aria-hidden="true" tabindex="-1"></a><span class="st">    }"</span></span>
-<span id="cb33-192"><a href="#cb33-192" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-193"><a href="#cb33-193" aria-hidden="true" tabindex="-1"></a><span class="fu">latents</span>(dag4) <span class="ot">&lt;-</span> <span class="st">"U"</span></span>
-<span id="cb33-194"><a href="#cb33-194" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(dag4) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X =</span> <span class="dv">0</span>, <span class="at">W1 =</span> <span class="fl">0.66</span>, <span class="at">U =</span> <span class="fl">1.32</span>, <span class="at">W2 =</span> <span class="fl">0.66</span>, <span class="at">Y =</span> <span class="dv">2</span>),</span>
-<span id="cb33-195"><a href="#cb33-195" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X =</span> <span class="dv">0</span>, <span class="at">W1 =</span> <span class="dv">1</span>, <span class="at">U =</span> <span class="dv">1</span>, <span class="at">W2 =</span> <span class="fl">0.5</span>, <span class="at">Y =</span> <span class="dv">0</span>))</span>
-<span id="cb33-196"><a href="#cb33-196" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag4) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span>
-<span id="cb33-197"><a href="#cb33-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-198"><a href="#cb33-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-199"><a href="#cb33-199" aria-hidden="true" tabindex="-1"></a>We can use a function in the <span class="in">`daggity`</span> package to identify the set of variables that satisfy the back-door criterion. In this case, we say that X and Y are $d$-separated by this set of adjusted variables:</span>
-<span id="cb33-200"><a href="#cb33-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-203"><a href="#cb33-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-204"><a href="#cb33-204" aria-hidden="true" tabindex="-1"></a><span class="fu">adjustmentSets</span>(dag4, <span class="at">exposure =</span> <span class="st">"X"</span>, <span class="at">outcome =</span> <span class="st">"Y"</span>,</span>
-<span id="cb33-205"><a href="#cb33-205" aria-hidden="true" tabindex="-1"></a>               <span class="at">effect =</span> <span class="st">"direct"</span>)</span>
-<span id="cb33-206"><a href="#cb33-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-207"><a href="#cb33-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-208"><a href="#cb33-208" aria-hidden="true" tabindex="-1"></a><span class="fu">## Using Multiple Regression Model</span></span>
-<span id="cb33-209"><a href="#cb33-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-210"><a href="#cb33-210" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb33-211"><a href="#cb33-211" aria-hidden="true" tabindex="-1"></a>  \begin{aligned}</span>
-<span id="cb33-212"><a href="#cb33-212" aria-hidden="true" tabindex="-1"></a>    D_i &amp; \sim N(\mu_i, \sigma)  <span class="sc">\\</span></span>
-<span id="cb33-213"><a href="#cb33-213" aria-hidden="true" tabindex="-1"></a>    \mu_i &amp; = \beta_0 + \beta_1 A_i + \beta_2 M_i <span class="sc">\\</span></span>
-<span id="cb33-214"><a href="#cb33-214" aria-hidden="true" tabindex="-1"></a>    \beta_0 &amp; \sim N(0, 1) <span class="sc">\\</span></span>
-<span id="cb33-215"><a href="#cb33-215" aria-hidden="true" tabindex="-1"></a>    \beta_1 &amp; \sim N(0, 1) <span class="sc">\\</span></span>
-<span id="cb33-216"><a href="#cb33-216" aria-hidden="true" tabindex="-1"></a>    \beta_2 &amp; \sim N(0, 1) <span class="sc">\\</span></span>
-<span id="cb33-217"><a href="#cb33-217" aria-hidden="true" tabindex="-1"></a>  \end{aligned}</span>
-<span id="cb33-218"><a href="#cb33-218" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb33-219"><a href="#cb33-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-220"><a href="#cb33-220" aria-hidden="true" tabindex="-1"></a>Assuming a correctly specified DAG, all all assumptions of a linear model are met, $\beta_2$ is the causal effect of M on D. Here is the <span class="in">`brms`</span>{.r} code:</span>
-<span id="cb33-221"><a href="#cb33-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-224"><a href="#cb33-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-225"><a href="#cb33-225" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">brm</span>(Divorce <span class="sc">~</span> MedianAgeMarriage <span class="sc">+</span> Marriage,</span>
-<span id="cb33-226"><a href="#cb33-226" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> waffle_divorce,</span>
-<span id="cb33-227"><a href="#cb33-227" aria-hidden="true" tabindex="-1"></a>          <span class="at">prior =</span> <span class="fu">prior</span>(<span class="fu">std_normal</span>(), <span class="at">class =</span> <span class="st">"b"</span>) <span class="sc">+</span></span>
-<span id="cb33-228"><a href="#cb33-228" aria-hidden="true" tabindex="-1"></a>              <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">class =</span> <span class="st">"Intercept"</span>) <span class="sc">+</span></span>
-<span id="cb33-229"><a href="#cb33-229" aria-hidden="true" tabindex="-1"></a>              <span class="fu">prior</span>(<span class="fu">student_t</span>(<span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">3</span>), <span class="at">class =</span> <span class="st">"sigma"</span>),</span>
-<span id="cb33-230"><a href="#cb33-230" aria-hidden="true" tabindex="-1"></a>          <span class="at">seed =</span> <span class="dv">941</span>,</span>
-<span id="cb33-231"><a href="#cb33-231" aria-hidden="true" tabindex="-1"></a>          <span class="at">iter =</span> <span class="dv">4000</span>,</span>
-<span id="cb33-232"><a href="#cb33-232" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"08_m1"</span></span>
-<span id="cb33-233"><a href="#cb33-233" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-234"><a href="#cb33-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-235"><a href="#cb33-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-236"><a href="#cb33-236" aria-hidden="true" tabindex="-1"></a><span class="fu">### Table</span></span>
-<span id="cb33-237"><a href="#cb33-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-240"><a href="#cb33-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-241"><a href="#cb33-241" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-m1</span></span>
-<span id="cb33-242"><a href="#cb33-242" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Model results for the divorce rate example."</span></span>
-<span id="cb33-243"><a href="#cb33-243" aria-hidden="true" tabindex="-1"></a><span class="fu">msummary</span>(m1,</span>
-<span id="cb33-244"><a href="#cb33-244" aria-hidden="true" tabindex="-1"></a>         <span class="at">estimate =</span> <span class="st">"{estimate} [{conf.low}, {conf.high}]"</span>,</span>
-<span id="cb33-245"><a href="#cb33-245" aria-hidden="true" tabindex="-1"></a>         <span class="at">statistic =</span> <span class="cn">NULL</span>, <span class="at">fmt =</span> <span class="dv">2</span></span>
-<span id="cb33-246"><a href="#cb33-246" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-247"><a href="#cb33-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-248"><a href="#cb33-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-249"><a href="#cb33-249" aria-hidden="true" tabindex="-1"></a>As shown in the table, when holding constant the median marriage age of states, marriage rate has only a small effect on divorce rate.</span>
-<span id="cb33-250"><a href="#cb33-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-251"><a href="#cb33-251" aria-hidden="true" tabindex="-1"></a><span class="fu">### Posterior predictive checks</span></span>
-<span id="cb33-252"><a href="#cb33-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-255"><a href="#cb33-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-256"><a href="#cb33-256" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-m1-pp-check</span></span>
-<span id="cb33-257"><a href="#cb33-257" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Posterior predictive checks for the multiple regression model."</span></span>
-<span id="cb33-258"><a href="#cb33-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb33-259"><a href="#cb33-259" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap:</span></span>
-<span id="cb33-260"><a href="#cb33-260" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Posterior predictive density of divorce rate."</span></span>
-<span id="cb33-261"><a href="#cb33-261" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Posterior predictive intervals of marriage rate predicting divorce rate."</span></span>
-<span id="cb33-262"><a href="#cb33-262" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Posterior predictive intervals of median marriage age predicting marriage rate."</span></span>
-<span id="cb33-263"><a href="#cb33-263" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(m1, <span class="at">ndraws =</span> <span class="dv">100</span>) <span class="co"># density</span></span>
-<span id="cb33-264"><a href="#cb33-264" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(m1, <span class="at">type =</span> <span class="st">"intervals"</span>, <span class="at">x =</span> <span class="st">"Marriage"</span>) <span class="sc">+</span></span>
-<span id="cb33-265"><a href="#cb33-265" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Marriage"</span>, <span class="at">y =</span> <span class="st">"Divorce"</span>)</span>
-<span id="cb33-266"><a href="#cb33-266" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(m1, <span class="at">type =</span> <span class="st">"intervals"</span>, <span class="at">x =</span> <span class="st">"MedianAgeMarriage"</span>) <span class="sc">+</span></span>
-<span id="cb33-267"><a href="#cb33-267" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"MedianAgeMarriage"</span>, <span class="at">y =</span> <span class="st">"Divorce"</span>)</span>
-<span id="cb33-268"><a href="#cb33-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-269"><a href="#cb33-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-270"><a href="#cb33-270" aria-hidden="true" tabindex="-1"></a>The model does not fit every state (e.g., UT, ME, ID).</span>
-<span id="cb33-271"><a href="#cb33-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-272"><a href="#cb33-272" aria-hidden="true" tabindex="-1"></a><span class="fu">## Predicting an Intervention</span></span>
-<span id="cb33-273"><a href="#cb33-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-274"><a href="#cb33-274" aria-hidden="true" tabindex="-1"></a>If the causal assumption in our DAG is reasonable, we have obtained an estimate of the causal effect of marriage rate on divorce rate at the state level. This allows us to answer questions like</span>
-<span id="cb33-275"><a href="#cb33-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-276"><a href="#cb33-276" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; What would happen to the divorce rate if we encouraged more people to get married (so the marriage rate would increase by 10 percentage points)?</span></span>
-<span id="cb33-277"><a href="#cb33-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-278"><a href="#cb33-278" aria-hidden="true" tabindex="-1"></a>We can use the Bayesian model, which is generative, to make such predictions. Consider a state with a marriage rate of 2 (per 10 adults). The predicted divorce rate is</span>
-<span id="cb33-279"><a href="#cb33-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-280"><a href="#cb33-280" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb33-281"><a href="#cb33-281" aria-hidden="true" tabindex="-1"></a>\beta_0 + \beta_1 A + \beta_2 (2)</span>
-<span id="cb33-282"><a href="#cb33-282" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb33-283"><a href="#cb33-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-284"><a href="#cb33-284" aria-hidden="true" tabindex="-1"></a>Consider an intervention that increases the marriage rate from 2 to 3. The predicted divorce rate will be</span>
-<span id="cb33-285"><a href="#cb33-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-286"><a href="#cb33-286" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb33-287"><a href="#cb33-287" aria-hidden="true" tabindex="-1"></a>\beta_0 + \beta_1 A + \beta_2 (3)</span>
-<span id="cb33-288"><a href="#cb33-288" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb33-289"><a href="#cb33-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-290"><a href="#cb33-290" aria-hidden="true" tabindex="-1"></a>The change in divorce rate is</span>
-<span id="cb33-291"><a href="#cb33-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-292"><a href="#cb33-292" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb33-293"><a href="#cb33-293" aria-hidden="true" tabindex="-1"></a>\beta_0 + \beta_1 A + \beta_2 (3) - \beta_0 + \beta_1 A + \beta_2 (2) = \beta_2</span>
-<span id="cb33-294"><a href="#cb33-294" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb33-295"><a href="#cb33-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-296"><a href="#cb33-296" aria-hidden="true" tabindex="-1"></a>Here is what the model would predict in terms of the change in the divorce rate (holding median marriage age to 25 years old), using R:</span>
-<span id="cb33-297"><a href="#cb33-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-300"><a href="#cb33-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-301"><a href="#cb33-301" aria-hidden="true" tabindex="-1"></a>pred_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb33-302"><a href="#cb33-302" aria-hidden="true" tabindex="-1"></a>    <span class="at">Marriage =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb33-303"><a href="#cb33-303" aria-hidden="true" tabindex="-1"></a>    <span class="at">MedianAgeMarriage =</span> <span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">2.5</span>)</span>
-<span id="cb33-304"><a href="#cb33-304" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-305"><a href="#cb33-305" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(pred_df, <span class="fu">fitted</span>(m1, <span class="at">newdata =</span> pred_df)) <span class="sc">%&gt;%</span></span>
-<span id="cb33-306"><a href="#cb33-306" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb33-307"><a href="#cb33-307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-308"><a href="#cb33-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-309"><a href="#cb33-309" aria-hidden="true" tabindex="-1"></a>The difference should be just the estimate of $\beta_2$, which has the following posterior distribution:</span>
-<span id="cb33-310"><a href="#cb33-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-313"><a href="#cb33-313" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-314"><a href="#cb33-314" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-marriage</span></span>
-<span id="cb33-315"><a href="#cb33-315" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Estimated \"causal\" effect of marriage rate on divorce rate, based on the specified DAG and a linear model."</span></span>
-<span id="cb33-316"><a href="#cb33-316" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_dens</span>(m1, <span class="at">pars =</span> <span class="st">"b_Marriage"</span>)</span>
-<span id="cb33-317"><a href="#cb33-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-318"><a href="#cb33-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-319"><a href="#cb33-319" aria-hidden="true" tabindex="-1"></a><span class="fu">## Collider</span></span>
-<span id="cb33-320"><a href="#cb33-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-321"><a href="#cb33-321" aria-hidden="true" tabindex="-1"></a>A collider is a descendant of two parent nodes. When one holds the collider constant, it induces a spurious association between the parents. This leads to many unexpected results in data analysis and daily life. For example, consider people who are nice and who are good-looking. Is there an association between a person being nice and a person being good-looking? Maybe. But this association can be induced when we condition on a collider. Let's say a friend of yours only dates people who are either nice or good-looking. So we have this colliding relation:</span>
-<span id="cb33-322"><a href="#cb33-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-323"><a href="#cb33-323" aria-hidden="true" tabindex="-1"></a>Nice <span class="dv">&amp;rarr;</span> Dating <span class="dv">&amp;larr;</span> Good looking</span>
-<span id="cb33-324"><a href="#cb33-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-325"><a href="#cb33-325" aria-hidden="true" tabindex="-1"></a>Suppose you look at just the people that your friend dated. In that case, they are either nice or good-looking, but the fact that you select to look at (condition on) only the people that your friend dated would automatically eliminate people who are neither nice nor good-looking. This induces a spurious negative association between nice and good-looking, so your friend may believe that nice people would be less likely to have appearances that fit their taste, and vice versa.</span>
-<span id="cb33-326"><a href="#cb33-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-327"><a href="#cb33-327" aria-hidden="true" tabindex="-1"></a>As another example, is research that is newsworthy less trustworthy? There could be a negative association due to collider bias, because people who select research to be reported, funded, or published, consider both newsworthiness and trustworthiness. Assume that trustworthiness has no causal relation with newsworthiness, below shows what happens when we only focus on papers that are either high on newsworthiness or trustworthiness:</span>
-<span id="cb33-328"><a href="#cb33-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-331"><a href="#cb33-331" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-332"><a href="#cb33-332" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb33-333"><a href="#cb33-333" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-sim-news</span></span>
-<span id="cb33-334"><a href="#cb33-334" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Simulation of newsworthiness and trustworthiness."</span></span>
-<span id="cb33-335"><a href="#cb33-335" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2221</span>) <span class="co"># different seed from the text</span></span>
-<span id="cb33-336"><a href="#cb33-336" aria-hidden="true" tabindex="-1"></a>num_proposals <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="co"># number of grant proposals</span></span>
-<span id="cb33-337"><a href="#cb33-337" aria-hidden="true" tabindex="-1"></a>prop_selected <span class="ot">&lt;-</span> <span class="fl">0.1</span> <span class="co"># proportion to select</span></span>
-<span id="cb33-338"><a href="#cb33-338" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate independent newsworthiness and trustworthiness</span></span>
-<span id="cb33-339"><a href="#cb33-339" aria-hidden="true" tabindex="-1"></a>plot_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb33-340"><a href="#cb33-340" aria-hidden="true" tabindex="-1"></a>    <span class="at">nw =</span> <span class="fu">rnorm</span>(num_proposals),</span>
-<span id="cb33-341"><a href="#cb33-341" aria-hidden="true" tabindex="-1"></a>    <span class="at">tw =</span> <span class="fu">rnorm</span>(num_proposals)</span>
-<span id="cb33-342"><a href="#cb33-342" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-343"><a href="#cb33-343" aria-hidden="true" tabindex="-1"></a>plot_dat <span class="ot">&lt;-</span> plot_dat <span class="sc">|&gt;</span></span>
-<span id="cb33-344"><a href="#cb33-344" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total =</span> nw <span class="sc">+</span> tw)</span>
-<span id="cb33-345"><a href="#cb33-345" aria-hidden="true" tabindex="-1"></a>sel_dat <span class="ot">&lt;-</span> plot_dat <span class="sc">|&gt;</span></span>
-<span id="cb33-346"><a href="#cb33-346" aria-hidden="true" tabindex="-1"></a>    <span class="co"># select top 10% of combined scores</span></span>
-<span id="cb33-347"><a href="#cb33-347" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_max</span>(<span class="at">order_by =</span> total, <span class="at">prop =</span> prop_selected)</span>
-<span id="cb33-348"><a href="#cb33-348" aria-hidden="true" tabindex="-1"></a>plot_dat <span class="sc">|&gt;</span></span>
-<span id="cb33-349"><a href="#cb33-349" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> nw, <span class="at">y =</span> tw)) <span class="sc">+</span></span>
-<span id="cb33-350"><a href="#cb33-350" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb33-351"><a href="#cb33-351" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> sel_dat, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb33-352"><a href="#cb33-352" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb33-353"><a href="#cb33-353" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb33-354"><a href="#cb33-354" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">data =</span> sel_dat, <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb33-355"><a href="#cb33-355" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> <span class="st">"purple"</span>) <span class="sc">+</span></span>
-<span id="cb33-356"><a href="#cb33-356" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"newsworthiness"</span>, <span class="at">y =</span> <span class="st">"trustworthiness"</span>)</span>
-<span id="cb33-357"><a href="#cb33-357" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-358"><a href="#cb33-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-359"><a href="#cb33-359" aria-hidden="true" tabindex="-1"></a>As you can see, a negative correlation happens. This is collider bias: spurious correlation due to conditioning on the common descendant. This also goes by the name <span class="co">[</span><span class="ot">Berkson's Paradox</span><span class="co">](https://brilliant.org/wiki/berksons-paradox/)</span>.</span>
-<span id="cb33-360"><a href="#cb33-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-361"><a href="#cb33-361" aria-hidden="true" tabindex="-1"></a>In the DAG below, X and Y have no causal association. Conditioning on S, however, induces a negative correlation between X and Y. With the DAG below,</span>
-<span id="cb33-362"><a href="#cb33-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-363"><a href="#cb33-363" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb33-364"><a href="#cb33-364" aria-hidden="true" tabindex="-1"></a>Generally speaking, do not condition on a collider, unless you're going to de-confound the spurious association using other variables.</span>
-<span id="cb33-365"><a href="#cb33-365" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-366"><a href="#cb33-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-369"><a href="#cb33-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-370"><a href="#cb33-370" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb33-371"><a href="#cb33-371" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dag7</span></span>
-<span id="cb33-372"><a href="#cb33-372" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "DAG with collider bias."</span></span>
-<span id="cb33-373"><a href="#cb33-373" aria-hidden="true" tabindex="-1"></a>dag7 <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(</span>
-<span id="cb33-374"><a href="#cb33-374" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dag{</span></span>
-<span id="cb33-375"><a href="#cb33-375" aria-hidden="true" tabindex="-1"></a><span class="st">      X -&gt; Y; X -&gt; S; Y -&gt; S</span></span>
-<span id="cb33-376"><a href="#cb33-376" aria-hidden="true" tabindex="-1"></a><span class="st">    }"</span></span>
-<span id="cb33-377"><a href="#cb33-377" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-378"><a href="#cb33-378" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(dag7) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X =</span> <span class="dv">0</span>, <span class="at">S =</span> <span class="dv">1</span>, <span class="at">Y =</span> <span class="dv">2</span>),</span>
-<span id="cb33-379"><a href="#cb33-379" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X =</span> <span class="dv">0</span>, <span class="at">S =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">Y =</span> <span class="dv">0</span>))</span>
-<span id="cb33-380"><a href="#cb33-380" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag7) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span>
-<span id="cb33-381"><a href="#cb33-381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-382"><a href="#cb33-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-383"><a href="#cb33-383" aria-hidden="true" tabindex="-1"></a>::: {.callout}</span>
-<span id="cb33-384"><a href="#cb33-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-385"><a href="#cb33-385" aria-hidden="true" tabindex="-1"></a><span class="fu">## Age and Happiness, conditioned on Marital Status (Example from text)</span></span>
-<span id="cb33-386"><a href="#cb33-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-387"><a href="#cb33-387" aria-hidden="true" tabindex="-1"></a>In this example, we assume that age and happiness are not related, but as people age, they are more likely to get married.</span>
-<span id="cb33-388"><a href="#cb33-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-391"><a href="#cb33-391" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-392"><a href="#cb33-392" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb33-393"><a href="#cb33-393" aria-hidden="true" tabindex="-1"></a><span class="co"># Code adapted from the rethinking package (https://github.com/rmcelreath/rethinking/blob/master/R/sim_happiness.R)</span></span>
-<span id="cb33-394"><a href="#cb33-394" aria-hidden="true" tabindex="-1"></a>sim_happiness <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="dv">1977</span>, <span class="at">N_years =</span> <span class="dv">100</span>,</span>
-<span id="cb33-395"><a href="#cb33-395" aria-hidden="true" tabindex="-1"></a>                          <span class="at">max_age =</span> <span class="dv">65</span>, <span class="at">N_births =</span> <span class="dv">50</span>,</span>
-<span id="cb33-396"><a href="#cb33-396" aria-hidden="true" tabindex="-1"></a>                          <span class="at">aom =</span> <span class="dv">18</span>) {</span>
-<span id="cb33-397"><a href="#cb33-397" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(seed)</span>
-<span id="cb33-398"><a href="#cb33-398" aria-hidden="true" tabindex="-1"></a>    H <span class="ot">&lt;-</span> M <span class="ot">&lt;-</span> A <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb33-399"><a href="#cb33-399" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (t <span class="cf">in</span> <span class="fu">seq_len</span>(N_years)) {</span>
-<span id="cb33-400"><a href="#cb33-400" aria-hidden="true" tabindex="-1"></a>        A <span class="ot">&lt;-</span> A <span class="sc">+</span> <span class="dv">1</span> <span class="co"># age existing individuals</span></span>
-<span id="cb33-401"><a href="#cb33-401" aria-hidden="true" tabindex="-1"></a>        A <span class="ot">&lt;-</span> <span class="fu">c</span>(A, <span class="fu">rep</span>(<span class="dv">1</span>, N_births)) <span class="co"># newborns</span></span>
-<span id="cb33-402"><a href="#cb33-402" aria-hidden="true" tabindex="-1"></a>        H <span class="ot">&lt;-</span> <span class="fu">c</span>(H, <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">length.out =</span> N_births)) <span class="co"># sim happiness trait - never changes</span></span>
-<span id="cb33-403"><a href="#cb33-403" aria-hidden="true" tabindex="-1"></a>        M <span class="ot">&lt;-</span> <span class="fu">c</span>(M, <span class="fu">rep</span>(<span class="dv">0</span>, N_births)) <span class="co"># not yet married</span></span>
-<span id="cb33-404"><a href="#cb33-404" aria-hidden="true" tabindex="-1"></a>        <span class="co"># for each person over 17, chance get married</span></span>
-<span id="cb33-405"><a href="#cb33-405" aria-hidden="true" tabindex="-1"></a>        M[A <span class="sc">&gt;=</span> aom <span class="sc">&amp;</span> M <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> </span>
-<span id="cb33-406"><a href="#cb33-406" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rbinom</span>(A[A <span class="sc">&gt;=</span> aom <span class="sc">&amp;</span> M <span class="sc">==</span> <span class="dv">0</span>], <span class="at">size =</span> <span class="dv">1</span>,</span>
-<span id="cb33-407"><a href="#cb33-407" aria-hidden="true" tabindex="-1"></a>                   <span class="at">prob =</span> <span class="fu">plogis</span>(H[A <span class="sc">&gt;=</span> aom <span class="sc">&amp;</span> M <span class="sc">==</span> <span class="dv">0</span>] <span class="sc">-</span> <span class="fl">7.9</span>))</span>
-<span id="cb33-408"><a href="#cb33-408" aria-hidden="true" tabindex="-1"></a>        <span class="co"># mortality</span></span>
-<span id="cb33-409"><a href="#cb33-409" aria-hidden="true" tabindex="-1"></a>        deaths <span class="ot">&lt;-</span> <span class="fu">which</span>(A <span class="sc">&gt;</span> max_age)</span>
-<span id="cb33-410"><a href="#cb33-410" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">length</span>(deaths) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb33-411"><a href="#cb33-411" aria-hidden="true" tabindex="-1"></a>            A <span class="ot">&lt;-</span> A[<span class="sc">-</span>deaths]</span>
-<span id="cb33-412"><a href="#cb33-412" aria-hidden="true" tabindex="-1"></a>            H <span class="ot">&lt;-</span> H[<span class="sc">-</span>deaths]</span>
-<span id="cb33-413"><a href="#cb33-413" aria-hidden="true" tabindex="-1"></a>            M <span class="ot">&lt;-</span> M[<span class="sc">-</span>deaths]</span>
-<span id="cb33-414"><a href="#cb33-414" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb33-415"><a href="#cb33-415" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb33-416"><a href="#cb33-416" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> A, <span class="at">married =</span> M, <span class="at">happiness =</span> H)</span>
-<span id="cb33-417"><a href="#cb33-417" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(d)</span>
-<span id="cb33-418"><a href="#cb33-418" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb33-419"><a href="#cb33-419" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">sim_happiness</span>(<span class="dv">2024</span>, <span class="at">N_years =</span> <span class="dv">100</span>)</span>
-<span id="cb33-420"><a href="#cb33-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-421"><a href="#cb33-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-424"><a href="#cb33-424" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-425"><a href="#cb33-425" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-age-happiness</span></span>
-<span id="cb33-426"><a href="#cb33-426" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Age and happiness."</span></span>
-<span id="cb33-427"><a href="#cb33-427" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dd, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
-<span id="cb33-428"><a href="#cb33-428" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">1</span>, <span class="at">size =</span> .<span class="dv">5</span>)</span>
-<span id="cb33-429"><a href="#cb33-429" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-430"><a href="#cb33-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-433"><a href="#cb33-433" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb33-434"><a href="#cb33-434" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-age-happiness-married</span></span>
-<span id="cb33-435"><a href="#cb33-435" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Age and happiness, conditioned on married couples."</span></span>
-<span id="cb33-436"><a href="#cb33-436" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dd[dd<span class="sc">$</span>married <span class="sc">==</span> <span class="dv">1</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
-<span id="cb33-437"><a href="#cb33-437" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">size =</span> .<span class="dv">5</span>)</span>
-<span id="cb33-438"><a href="#cb33-438" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-439"><a href="#cb33-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-440"><a href="#cb33-440" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-441"><a href="#cb33-441" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-442"><a href="#cb33-442" aria-hidden="true" tabindex="-1"></a>Some other collider examples:</span>
-<span id="cb33-443"><a href="#cb33-443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-444"><a href="#cb33-444" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>impulsivity <span class="dv">&amp;rarr;</span> high-risk youth <span class="dv">&amp;larr;</span> delinquency</span>
-<span id="cb33-445"><a href="#cb33-445" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>healthcare worker <span class="dv">&amp;rarr;</span> COVID-19 testing <span class="dv">&amp;larr;</span> COVID-19 severity</span>
-<span id="cb33-446"><a href="#cb33-446" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>standardized test <span class="dv">&amp;rarr;</span> admission <span class="dv">&amp;larr;</span> research skills</span>
-<span id="cb33-447"><a href="#cb33-447" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>maternal smoking <span class="dv">&amp;rarr;</span> birth weight <span class="dv">&amp;rarr;</span> birth defect <span class="dv">&amp;larr;</span> mortality</span>
-<span id="cb33-448"><a href="#cb33-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-449"><a href="#cb33-449" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some Additional References</span></span>
-<span id="cb33-450"><a href="#cb33-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-451"><a href="#cb33-451" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>https://doi.org/10.1177/25152459221095823</span>
-<span id="cb33-452"><a href="#cb33-452" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>https://doi.org/10.1038/s41562-024-01939-z</span>
+<div class="sourceCode" id="cb41" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Causal Inference</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>comma <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">2</span>L) <span class="fu">format</span>(x, <span class="at">digits =</span> digits, <span class="at">big.mark =</span> <span class="st">","</span>)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey92"</span>)))</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dagitty)</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">brms.backend =</span> <span class="st">"cmdstanr"</span>)</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmdstanr)</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>Causal inference is an important topic in statistics, but it also has a complicated history with statistics. Early-day statisticians saw causality as a taboo such that researchers were discouraged from drawing any causal conclusions in nonexperimental research. In the past few decades, much progress has been made on causal inference in epidemiology, computer science, and statistics, with several frameworks proposed and many tools developed for experimental and nonexperimental data.<span class="ot">[^taboo]</span> This note will introduce the causal diagram framework for encoding causal assumptions, which can be used to guide analysis for drawing causal conclusions. The goal is to give you some basic ideas so that you can learn more from other sources, such as the book <span class="co">[</span><span class="ot">*Causality* by Pearl</span><span class="co">](http://bayes.cs.ucla.edu/BOOK-2K/)</span> and the book <span class="co">[</span><span class="ot">*Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction* by Imbens and Rubin</span><span class="co">](https://doi.org/10.1017/CBO9781139025751)</span>.</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a><span class="ot">[^taboo]: </span>See this paper: <span class="ot">&lt;https://doi.org/10.1177/1745691620921521&gt;</span> for an argument of how the taboo against causal inference has impeded the progress of psychology research.</span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>Two prominent frameworks for causal inference are</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Structural causal model, which uses tools such as DAGs and $d$-separation, is thoroughly described in the book <span class="co">[</span><span class="ot">*Causality* by Pearl</span><span class="co">](http://bayes.cs.ucla.edu/BOOK-2K/)</span>, and</span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Potential outcome model, which is thoroughly described in the book <span class="co">[</span><span class="ot">*Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction* by Imbens and Rubin</span><span class="co">](https://doi.org/10.1017/CBO9781139025751)</span>.</span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a>In this note, we will draw on both frameworks.</span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## What is Causal Inference?</span></span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>Causal inference is the process of determining the causal effect of one variable on another, based on data and causal assumptions. Two common ways of interpreting a causal effect are (a) *intervention*: how $Y$ will change if $X$ is manipulated to be $x$; (b) *counterfactual*: what would $Y$ be if $X$ were set to $x$.</span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Potential Outcomes</span></span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a>Consider a binary treatment variable. For each individual, there are two *potential outcomes*: one if they receive the treatment (T = 1) and one if they do not (T = 0). Here is a hypothetical data set of a new drug for improving statistics knowledge, with the treatment condition receiving the drug and the control condition receiving a placebo:</span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a>po_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb41-50"><a href="#cb41-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">person =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>),</span>
+<span id="cb41-51"><a href="#cb41-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">attitude =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">2</span>),</span>
+<span id="cb41-52"><a href="#cb41-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">treat =</span> <span class="fu">c</span>(<span class="dv">75</span>, <span class="dv">80</span>, <span class="dv">70</span>, <span class="dv">90</span>, <span class="dv">85</span>, <span class="dv">82</span>, <span class="dv">95</span>, <span class="dv">78</span>),</span>
+<span id="cb41-53"><a href="#cb41-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">c</span>(<span class="dv">70</span>, <span class="dv">88</span>, <span class="dv">75</span>, <span class="dv">92</span>, <span class="dv">82</span>, <span class="dv">85</span>, <span class="dv">90</span>, <span class="dv">78</span>)</span>
+<span id="cb41-54"><a href="#cb41-54" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-55"><a href="#cb41-55" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(po_dat,</span>
+<span id="cb41-56"><a href="#cb41-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Person"</span>, <span class="st">"Math Attitude"</span>, <span class="st">"Y (if T = 1)"</span>, <span class="st">"Y (if T = 0)"</span>))</span>
+<span id="cb41-57"><a href="#cb41-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-58"><a href="#cb41-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-59"><a href="#cb41-59" aria-hidden="true" tabindex="-1"></a>If one could observe the two potential outcomes for each person (which is impossible in the real world), one could compute the treatment effect for each person:</span>
+<span id="cb41-60"><a href="#cb41-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-63"><a href="#cb41-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-64"><a href="#cb41-64" aria-hidden="true" tabindex="-1"></a>(te <span class="ot">&lt;-</span> po_dat<span class="sc">$</span>treat <span class="sc">-</span> po_dat<span class="sc">$</span>control)</span>
+<span id="cb41-65"><a href="#cb41-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-66"><a href="#cb41-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-67"><a href="#cb41-67" aria-hidden="true" tabindex="-1"></a>and the **average treatment effect (ATE)** (here we just compute it on the sample, so the sample ATE):</span>
+<span id="cb41-68"><a href="#cb41-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-71"><a href="#cb41-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-72"><a href="#cb41-72" aria-hidden="true" tabindex="-1"></a>(ate <span class="ot">&lt;-</span> <span class="fu">mean</span>(te))</span>
+<span id="cb41-73"><a href="#cb41-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-74"><a href="#cb41-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-75"><a href="#cb41-75" aria-hidden="true" tabindex="-1"></a>However, in practice, we can only observe one of the two potential outcomes. For example, if persons 2, 4, 6, 7 are in the treatment condition, we have</span>
+<span id="cb41-76"><a href="#cb41-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-79"><a href="#cb41-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-80"><a href="#cb41-80" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb41-81"><a href="#cb41-81" aria-hidden="true" tabindex="-1"></a>po_dat<span class="sc">$</span>t <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(po_dat<span class="sc">$</span>person <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">7</span>), <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb41-82"><a href="#cb41-82" aria-hidden="true" tabindex="-1"></a>po_dat<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(po_dat<span class="sc">$</span>t, po_dat<span class="sc">$</span>treat, po_dat<span class="sc">$</span>control)</span>
+<span id="cb41-83"><a href="#cb41-83" aria-hidden="true" tabindex="-1"></a>po_dat[<span class="fu">c</span>(<span class="st">"t"</span>, <span class="st">"y"</span>)] <span class="sc">|&gt;</span></span>
+<span id="cb41-84"><a href="#cb41-84" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Observed Y"</span>))</span>
+<span id="cb41-85"><a href="#cb41-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-86"><a href="#cb41-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-87"><a href="#cb41-87" aria-hidden="true" tabindex="-1"></a>and the naive comparison of those in the treatment condition and those in the control condition will have a mean difference of</span>
+<span id="cb41-88"><a href="#cb41-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-91"><a href="#cb41-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-92"><a href="#cb41-92" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(po_dat<span class="sc">$</span>y[po_dat<span class="sc">$</span>t <span class="sc">==</span> <span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">mean</span>(po_dat<span class="sc">$</span>y[po_dat<span class="sc">$</span>t <span class="sc">==</span> <span class="dv">0</span>])</span>
+<span id="cb41-93"><a href="#cb41-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-94"><a href="#cb41-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-95"><a href="#cb41-95" aria-hidden="true" tabindex="-1"></a>which gives a misleading estimate of the ATE.</span>
+<span id="cb41-96"><a href="#cb41-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-97"><a href="#cb41-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## Directed Acyclic Graph (DAG)</span></span>
+<span id="cb41-98"><a href="#cb41-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-99"><a href="#cb41-99" aria-hidden="true" tabindex="-1"></a>DAG is a tool for encoding causal assumptions. It contains nodes and paths. A node is usually a variable that can be measured in the data or unmeasured. Generally, paths in a DAG are directional (as implied by *directed*), which indicates the directions of causal relations. Acyclic means the causal chain does not close in a loop. </span>
+<span id="cb41-100"><a href="#cb41-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-101"><a href="#cb41-101" aria-hidden="true" tabindex="-1"></a>We will use an example described in @mcelreath2020, chapter 5, about data from 50 U.S. states from the 2009 American Community Survey (ACS), which we have already seen in @sec-multiple-predictors and @fig-waffle-divorce.</span>
+<span id="cb41-102"><a href="#cb41-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-105"><a href="#cb41-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-106"><a href="#cb41-106" aria-hidden="true" tabindex="-1"></a>waffle_divorce <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(  <span class="co"># read delimited files</span></span>
+<span id="cb41-107"><a href="#cb41-107" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://raw.githubusercontent.com/rmcelreath/rethinking/master/data/WaffleDivorce.csv"</span>,</span>
+<span id="cb41-108"><a href="#cb41-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">";"</span></span>
+<span id="cb41-109"><a href="#cb41-109" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-110"><a href="#cb41-110" aria-hidden="true" tabindex="-1"></a><span class="co"># Rescale Marriage and Divorce by dividing by 10</span></span>
+<span id="cb41-111"><a href="#cb41-111" aria-hidden="true" tabindex="-1"></a>waffle_divorce<span class="sc">$</span>Marriage <span class="ot">&lt;-</span> waffle_divorce<span class="sc">$</span>Marriage <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb41-112"><a href="#cb41-112" aria-hidden="true" tabindex="-1"></a>waffle_divorce<span class="sc">$</span>Divorce <span class="ot">&lt;-</span> waffle_divorce<span class="sc">$</span>Divorce <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb41-113"><a href="#cb41-113" aria-hidden="true" tabindex="-1"></a>waffle_divorce<span class="sc">$</span>MedianAgeMarriage <span class="ot">&lt;-</span> waffle_divorce<span class="sc">$</span>MedianAgeMarriage <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb41-114"><a href="#cb41-114" aria-hidden="true" tabindex="-1"></a><span class="co"># See data description at https://rdrr.io/github/rmcelreath/rethinking/man/WaffleDivorce.html</span></span>
+<span id="cb41-115"><a href="#cb41-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-116"><a href="#cb41-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-117"><a href="#cb41-117" aria-hidden="true" tabindex="-1"></a>The outcome of interest is the divorce rate. Remember the plot shows how marriage rate is related to divorce rate at the state level. It looks like marriage rate can predict divorce rate. A causal interpretation would be a stronger assertion, such that we expect a higher divorce rate if policymakers encourage more people to get married. In order to make a causal claim, we need to remove potential confounders. </span>
+<span id="cb41-118"><a href="#cb41-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-119"><a href="#cb41-119" aria-hidden="true" tabindex="-1"></a>A potential confounder is when people get married. Suppose people are forced to get married later in life. In that case, fewer people in the population will be married, and people may have less time, opportunity, and motivation to get divorced (as it may be harder to find a new partner). Therefore, we can use the following DAG:</span>
+<span id="cb41-120"><a href="#cb41-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-123"><a href="#cb41-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-124"><a href="#cb41-124" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dag1</span></span>
+<span id="cb41-125"><a href="#cb41-125" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "DAG for the relationship between marriage rate (M) and divorce rate (D) example, with median age of marriage (A) as a potential confounder."</span></span>
+<span id="cb41-126"><a href="#cb41-126" aria-hidden="true" tabindex="-1"></a>dag1 <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">"dag{ A -&gt; D; A -&gt; M; M -&gt; D }"</span>)</span>
+<span id="cb41-127"><a href="#cb41-127" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(dag1) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">M =</span> <span class="dv">0</span>, <span class="at">A =</span> <span class="dv">1</span>, <span class="at">D =</span> <span class="dv">2</span>),</span>
+<span id="cb41-128"><a href="#cb41-128" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> <span class="fu">c</span>(<span class="at">M =</span> <span class="dv">0</span>, <span class="at">A =</span> <span class="dv">1</span>, <span class="at">D =</span> <span class="dv">0</span>))</span>
+<span id="cb41-129"><a href="#cb41-129" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb41-130"><a href="#cb41-130" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag1) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span>
+<span id="cb41-131"><a href="#cb41-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-132"><a href="#cb41-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-133"><a href="#cb41-133" aria-hidden="true" tabindex="-1"></a>We can look at how the median age people get married in different states relates to the divorce rate:</span>
+<span id="cb41-134"><a href="#cb41-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-137"><a href="#cb41-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-138"><a href="#cb41-138" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-scatter-age-divorce</span></span>
+<span id="cb41-139"><a href="#cb41-139" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Scatter plot of divorce rate (y) vs median age of marriage (x)."</span></span>
+<span id="cb41-140"><a href="#cb41-140" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(waffle_divorce,</span>
+<span id="cb41-141"><a href="#cb41-141" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> MedianAgeMarriage, <span class="at">y =</span> Divorce)) <span class="sc">+</span></span>
+<span id="cb41-142"><a href="#cb41-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb41-143"><a href="#cb41-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb41-144"><a href="#cb41-144" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Median age marriage (10 years)"</span>,</span>
+<span id="cb41-145"><a href="#cb41-145" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Divorce rate (per 10 adults)"</span>) <span class="sc">+</span></span>
+<span id="cb41-146"><a href="#cb41-146" aria-hidden="true" tabindex="-1"></a>    ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> Loc))</span>
+<span id="cb41-147"><a href="#cb41-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-148"><a href="#cb41-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-149"><a href="#cb41-149" aria-hidden="true" tabindex="-1"></a><span class="fu">### Assumptions in a DAG</span></span>
+<span id="cb41-150"><a href="#cb41-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-151"><a href="#cb41-151" aria-hidden="true" tabindex="-1"></a>In a graphical model, there are usually two kinds of assumptions conveyed. Perhaps counterintuitively, the weaker assumptions are the ones you can see, whereas the stronger assumptions are ones you **do not see**. </span>
+<span id="cb41-152"><a href="#cb41-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-153"><a href="#cb41-153" aria-hidden="true" tabindex="-1"></a>For example, a weak assumption is:</span>
+<span id="cb41-154"><a href="#cb41-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-155"><a href="#cb41-155" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Marriage age *may* directly influence the number of people who are married</span>
+<span id="cb41-156"><a href="#cb41-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-157"><a href="#cb41-157" aria-hidden="true" tabindex="-1"></a>On the other hand, examples of a strong assumption are:</span>
+<span id="cb41-158"><a href="#cb41-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-159"><a href="#cb41-159" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Marriage rate does not directly influence the age people get married</span>
+<span id="cb41-160"><a href="#cb41-160" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>there is no other variable in the causal pathway M <span class="dv">&amp;rarr;</span> D</span>
+<span id="cb41-161"><a href="#cb41-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-162"><a href="#cb41-162" aria-hidden="true" tabindex="-1"></a>The last assumption will not hold if there is a common cause of M and D other than A.</span>
+<span id="cb41-163"><a href="#cb41-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-164"><a href="#cb41-164" aria-hidden="true" tabindex="-1"></a><span class="fu">### Basic Types of Junctions</span></span>
+<span id="cb41-165"><a href="#cb41-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-166"><a href="#cb41-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fork: A <span class="dv">&amp;larr;</span> B <span class="dv">&amp;rarr;</span> C</span>
+<span id="cb41-167"><a href="#cb41-167" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>A and C are correlated due to a common cause B</span>
+<span id="cb41-168"><a href="#cb41-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-169"><a href="#cb41-169" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Chain/Pipe: A <span class="dv">&amp;rarr;</span> B <span class="dv">&amp;rarr;</span> C</span>
+<span id="cb41-170"><a href="#cb41-170" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>B is on the causal pathway of A to C</span>
+<span id="cb41-171"><a href="#cb41-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-172"><a href="#cb41-172" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Collider: A <span class="dv">&amp;rarr;</span> B <span class="dv">&amp;larr;</span> C</span>
+<span id="cb41-173"><a href="#cb41-173" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>B is a *descendant* of both A and C</span>
+<span id="cb41-174"><a href="#cb41-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-175"><a href="#cb41-175" aria-hidden="true" tabindex="-1"></a>Going back to our example, there is a fork relation: M <span class="dv">&amp;rarr;</span> &lt;span style="color:red"&gt;A&lt;/span&gt; <span class="dv">&amp;rarr;</span> D. In this case, A is a confounder when estimating the causal relation between M and D. In this case, the causal effect of M to D can be obtained by adjusting for A, which means looking at the subsets of data where A is constant. In regression, adjustment is obtained by including both M and A as predictors of D.</span>
+<span id="cb41-176"><a href="#cb41-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-177"><a href="#cb41-177" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Back-Door Criterion: Estimating Causal Effect in Nonexperimental Data</span></span>
+<span id="cb41-178"><a href="#cb41-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-179"><a href="#cb41-179" aria-hidden="true" tabindex="-1"></a>Randomization is one---but not the only---way to rule out confounding variables. Much progress has been made in clarifying that causal effects **can** be estimated in nonexperimental data. After all, researchers have not randomly assigned individuals to smoke $x$ cigarettes per day, but we are confident that smoking causes cancer; we never manipulated the moon's gravitational force, but we are pretty sure that the moon is a cause of high and low tides.</span>
+<span id="cb41-180"><a href="#cb41-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-181"><a href="#cb41-181" aria-hidden="true" tabindex="-1"></a>In a DAG, the back-door criterion can be used to identify variables that we should adjust for to obtain a causal effect. The set of variables to be adjusted should (a) blocks every path between X and Y that contains an arrow entering X and (b) does not contain variables that are descendant of X.</span>
+<span id="cb41-182"><a href="#cb41-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-185"><a href="#cb41-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-186"><a href="#cb41-186" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dag4</span></span>
+<span id="cb41-187"><a href="#cb41-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "DAG for a hypothetical model with two measured and one unobserved confounder."</span></span>
+<span id="cb41-188"><a href="#cb41-188" aria-hidden="true" tabindex="-1"></a>dag4 <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(</span>
+<span id="cb41-189"><a href="#cb41-189" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dag{</span></span>
+<span id="cb41-190"><a href="#cb41-190" aria-hidden="true" tabindex="-1"></a><span class="st">      X -&gt; Y; W1 -&gt; X; U -&gt; W2; W2 -&gt; X; W1 -&gt; Y; U -&gt; Y</span></span>
+<span id="cb41-191"><a href="#cb41-191" aria-hidden="true" tabindex="-1"></a><span class="st">    }"</span></span>
+<span id="cb41-192"><a href="#cb41-192" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-193"><a href="#cb41-193" aria-hidden="true" tabindex="-1"></a><span class="fu">latents</span>(dag4) <span class="ot">&lt;-</span> <span class="st">"U"</span></span>
+<span id="cb41-194"><a href="#cb41-194" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(dag4) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X =</span> <span class="dv">0</span>, <span class="at">W1 =</span> <span class="fl">0.66</span>, <span class="at">U =</span> <span class="fl">1.32</span>, <span class="at">W2 =</span> <span class="fl">0.66</span>, <span class="at">Y =</span> <span class="dv">2</span>),</span>
+<span id="cb41-195"><a href="#cb41-195" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X =</span> <span class="dv">0</span>, <span class="at">W1 =</span> <span class="dv">1</span>, <span class="at">U =</span> <span class="dv">1</span>, <span class="at">W2 =</span> <span class="fl">0.5</span>, <span class="at">Y =</span> <span class="dv">0</span>))</span>
+<span id="cb41-196"><a href="#cb41-196" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag4) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span>
+<span id="cb41-197"><a href="#cb41-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-198"><a href="#cb41-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-199"><a href="#cb41-199" aria-hidden="true" tabindex="-1"></a>We can use a function in the <span class="in">`daggity`</span> package to identify the set of variables that satisfy the back-door criterion. In this case, we say that X and Y are $d$-separated by this set of adjusted variables:</span>
+<span id="cb41-200"><a href="#cb41-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-203"><a href="#cb41-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-204"><a href="#cb41-204" aria-hidden="true" tabindex="-1"></a><span class="fu">adjustmentSets</span>(dag4, <span class="at">exposure =</span> <span class="st">"X"</span>, <span class="at">outcome =</span> <span class="st">"Y"</span>,</span>
+<span id="cb41-205"><a href="#cb41-205" aria-hidden="true" tabindex="-1"></a>               <span class="at">effect =</span> <span class="st">"direct"</span>)</span>
+<span id="cb41-206"><a href="#cb41-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-207"><a href="#cb41-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-208"><a href="#cb41-208" aria-hidden="true" tabindex="-1"></a><span class="fu">## Using Multiple Regression Model</span></span>
+<span id="cb41-209"><a href="#cb41-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-210"><a href="#cb41-210" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb41-211"><a href="#cb41-211" aria-hidden="true" tabindex="-1"></a>  \begin{aligned}</span>
+<span id="cb41-212"><a href="#cb41-212" aria-hidden="true" tabindex="-1"></a>    D_i &amp; \sim N(\mu_i, \sigma)  <span class="sc">\\</span></span>
+<span id="cb41-213"><a href="#cb41-213" aria-hidden="true" tabindex="-1"></a>    \mu_i &amp; = \beta_0 + \beta_1 A_i + \beta_2 M_i <span class="sc">\\</span></span>
+<span id="cb41-214"><a href="#cb41-214" aria-hidden="true" tabindex="-1"></a>    \beta_0 &amp; \sim N(0, 1) <span class="sc">\\</span></span>
+<span id="cb41-215"><a href="#cb41-215" aria-hidden="true" tabindex="-1"></a>    \beta_1 &amp; \sim N(0, 1) <span class="sc">\\</span></span>
+<span id="cb41-216"><a href="#cb41-216" aria-hidden="true" tabindex="-1"></a>    \beta_2 &amp; \sim N(0, 1) <span class="sc">\\</span></span>
+<span id="cb41-217"><a href="#cb41-217" aria-hidden="true" tabindex="-1"></a>  \end{aligned}</span>
+<span id="cb41-218"><a href="#cb41-218" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb41-219"><a href="#cb41-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-220"><a href="#cb41-220" aria-hidden="true" tabindex="-1"></a>Assuming a correctly specified DAG, all all assumptions of a linear model are met, $\beta_2$ is the causal effect of M on D. Here is the <span class="in">`brms`</span>{.r} code:</span>
+<span id="cb41-221"><a href="#cb41-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-224"><a href="#cb41-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-225"><a href="#cb41-225" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">brm</span>(Divorce <span class="sc">~</span> MedianAgeMarriage <span class="sc">+</span> Marriage,</span>
+<span id="cb41-226"><a href="#cb41-226" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> waffle_divorce,</span>
+<span id="cb41-227"><a href="#cb41-227" aria-hidden="true" tabindex="-1"></a>          <span class="at">prior =</span> <span class="fu">prior</span>(<span class="fu">std_normal</span>(), <span class="at">class =</span> <span class="st">"b"</span>) <span class="sc">+</span></span>
+<span id="cb41-228"><a href="#cb41-228" aria-hidden="true" tabindex="-1"></a>              <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">class =</span> <span class="st">"Intercept"</span>) <span class="sc">+</span></span>
+<span id="cb41-229"><a href="#cb41-229" aria-hidden="true" tabindex="-1"></a>              <span class="fu">prior</span>(<span class="fu">student_t</span>(<span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">3</span>), <span class="at">class =</span> <span class="st">"sigma"</span>),</span>
+<span id="cb41-230"><a href="#cb41-230" aria-hidden="true" tabindex="-1"></a>          <span class="at">seed =</span> <span class="dv">941</span>,</span>
+<span id="cb41-231"><a href="#cb41-231" aria-hidden="true" tabindex="-1"></a>          <span class="at">iter =</span> <span class="dv">4000</span>,</span>
+<span id="cb41-232"><a href="#cb41-232" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"08_m1"</span></span>
+<span id="cb41-233"><a href="#cb41-233" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-234"><a href="#cb41-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-235"><a href="#cb41-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-236"><a href="#cb41-236" aria-hidden="true" tabindex="-1"></a><span class="fu">### Table</span></span>
+<span id="cb41-237"><a href="#cb41-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-240"><a href="#cb41-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-241"><a href="#cb41-241" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-m1</span></span>
+<span id="cb41-242"><a href="#cb41-242" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Model results for the divorce rate example."</span></span>
+<span id="cb41-243"><a href="#cb41-243" aria-hidden="true" tabindex="-1"></a><span class="fu">msummary</span>(m1,</span>
+<span id="cb41-244"><a href="#cb41-244" aria-hidden="true" tabindex="-1"></a>         <span class="at">estimate =</span> <span class="st">"{estimate} [{conf.low}, {conf.high}]"</span>,</span>
+<span id="cb41-245"><a href="#cb41-245" aria-hidden="true" tabindex="-1"></a>         <span class="at">statistic =</span> <span class="cn">NULL</span>, <span class="at">fmt =</span> <span class="dv">2</span></span>
+<span id="cb41-246"><a href="#cb41-246" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-247"><a href="#cb41-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-248"><a href="#cb41-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-249"><a href="#cb41-249" aria-hidden="true" tabindex="-1"></a>As shown in the table, when holding constant the median marriage age of states, marriage rate has only a small effect on divorce rate.</span>
+<span id="cb41-250"><a href="#cb41-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-251"><a href="#cb41-251" aria-hidden="true" tabindex="-1"></a><span class="fu">### Posterior predictive checks</span></span>
+<span id="cb41-252"><a href="#cb41-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-255"><a href="#cb41-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-256"><a href="#cb41-256" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-m1-pp-check</span></span>
+<span id="cb41-257"><a href="#cb41-257" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Posterior predictive checks for the multiple regression model."</span></span>
+<span id="cb41-258"><a href="#cb41-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb41-259"><a href="#cb41-259" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap:</span></span>
+<span id="cb41-260"><a href="#cb41-260" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Posterior predictive density of divorce rate."</span></span>
+<span id="cb41-261"><a href="#cb41-261" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Posterior predictive intervals of marriage rate predicting divorce rate."</span></span>
+<span id="cb41-262"><a href="#cb41-262" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Posterior predictive intervals of median marriage age predicting marriage rate."</span></span>
+<span id="cb41-263"><a href="#cb41-263" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(m1, <span class="at">ndraws =</span> <span class="dv">100</span>) <span class="co"># density</span></span>
+<span id="cb41-264"><a href="#cb41-264" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(m1, <span class="at">type =</span> <span class="st">"intervals"</span>, <span class="at">x =</span> <span class="st">"Marriage"</span>) <span class="sc">+</span></span>
+<span id="cb41-265"><a href="#cb41-265" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Marriage"</span>, <span class="at">y =</span> <span class="st">"Divorce"</span>)</span>
+<span id="cb41-266"><a href="#cb41-266" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(m1, <span class="at">type =</span> <span class="st">"intervals"</span>, <span class="at">x =</span> <span class="st">"MedianAgeMarriage"</span>) <span class="sc">+</span></span>
+<span id="cb41-267"><a href="#cb41-267" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"MedianAgeMarriage"</span>, <span class="at">y =</span> <span class="st">"Divorce"</span>)</span>
+<span id="cb41-268"><a href="#cb41-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-269"><a href="#cb41-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-270"><a href="#cb41-270" aria-hidden="true" tabindex="-1"></a>The model does not fit every state (e.g., UT, ME, ID).</span>
+<span id="cb41-271"><a href="#cb41-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-272"><a href="#cb41-272" aria-hidden="true" tabindex="-1"></a><span class="fu">## Predicting an Intervention</span></span>
+<span id="cb41-273"><a href="#cb41-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-274"><a href="#cb41-274" aria-hidden="true" tabindex="-1"></a>If the causal assumption in our DAG is reasonable, we have obtained an estimate of the causal effect of marriage rate on divorce rate at the state level. This allows us to answer questions like</span>
+<span id="cb41-275"><a href="#cb41-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-276"><a href="#cb41-276" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; What would happen to the divorce rate if we encouraged more people to get married (so the marriage rate would increase by 10 percentage points)?</span></span>
+<span id="cb41-277"><a href="#cb41-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-278"><a href="#cb41-278" aria-hidden="true" tabindex="-1"></a>We can use the Bayesian model, which is generative, to make such predictions. Consider a state with a marriage rate of 2 (per 10 adults). The predicted divorce rate is</span>
+<span id="cb41-279"><a href="#cb41-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-280"><a href="#cb41-280" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb41-281"><a href="#cb41-281" aria-hidden="true" tabindex="-1"></a>\beta_0 + \beta_1 A + \beta_2 (2)</span>
+<span id="cb41-282"><a href="#cb41-282" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb41-283"><a href="#cb41-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-284"><a href="#cb41-284" aria-hidden="true" tabindex="-1"></a>Consider an intervention that increases the marriage rate from 2 to 3. The predicted divorce rate will be</span>
+<span id="cb41-285"><a href="#cb41-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-286"><a href="#cb41-286" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb41-287"><a href="#cb41-287" aria-hidden="true" tabindex="-1"></a>\beta_0 + \beta_1 A + \beta_2 (3)</span>
+<span id="cb41-288"><a href="#cb41-288" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb41-289"><a href="#cb41-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-290"><a href="#cb41-290" aria-hidden="true" tabindex="-1"></a>The change in divorce rate is</span>
+<span id="cb41-291"><a href="#cb41-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-292"><a href="#cb41-292" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb41-293"><a href="#cb41-293" aria-hidden="true" tabindex="-1"></a>\beta_0 + \beta_1 A + \beta_2 (3) - \beta_0 + \beta_1 A + \beta_2 (2) = \beta_2</span>
+<span id="cb41-294"><a href="#cb41-294" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb41-295"><a href="#cb41-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-296"><a href="#cb41-296" aria-hidden="true" tabindex="-1"></a>Here is what the model would predict in terms of the change in the divorce rate (holding median marriage age to 25 years old), using R:</span>
+<span id="cb41-297"><a href="#cb41-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-300"><a href="#cb41-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-301"><a href="#cb41-301" aria-hidden="true" tabindex="-1"></a>pred_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb41-302"><a href="#cb41-302" aria-hidden="true" tabindex="-1"></a>    <span class="at">Marriage =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb41-303"><a href="#cb41-303" aria-hidden="true" tabindex="-1"></a>    <span class="at">MedianAgeMarriage =</span> <span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">2.5</span>)</span>
+<span id="cb41-304"><a href="#cb41-304" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-305"><a href="#cb41-305" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(pred_df, <span class="fu">fitted</span>(m1, <span class="at">newdata =</span> pred_df)) <span class="sc">%&gt;%</span></span>
+<span id="cb41-306"><a href="#cb41-306" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb41-307"><a href="#cb41-307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-308"><a href="#cb41-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-309"><a href="#cb41-309" aria-hidden="true" tabindex="-1"></a>The difference should be just the estimate of $\beta_2$, which has the following posterior distribution:</span>
+<span id="cb41-310"><a href="#cb41-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-313"><a href="#cb41-313" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-314"><a href="#cb41-314" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-marriage</span></span>
+<span id="cb41-315"><a href="#cb41-315" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Estimated \"causal\" effect of marriage rate on divorce rate, based on the specified DAG and a linear model."</span></span>
+<span id="cb41-316"><a href="#cb41-316" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_dens</span>(m1, <span class="at">pars =</span> <span class="st">"b_Marriage"</span>)</span>
+<span id="cb41-317"><a href="#cb41-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-318"><a href="#cb41-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-319"><a href="#cb41-319" aria-hidden="true" tabindex="-1"></a><span class="fu">## Collider</span></span>
+<span id="cb41-320"><a href="#cb41-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-321"><a href="#cb41-321" aria-hidden="true" tabindex="-1"></a>A collider is a descendant of two parent nodes. When one holds the collider constant, it induces a spurious association between the parents. This leads to many unexpected results in data analysis and daily life. For example, consider people who are nice and who are good-looking. Is there an association between a person being nice and a person being good-looking? Maybe. But this association can be induced when we condition on a collider. Let's say a friend of yours only dates people who are either nice or good-looking. So we have this colliding relation:</span>
+<span id="cb41-322"><a href="#cb41-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-323"><a href="#cb41-323" aria-hidden="true" tabindex="-1"></a>Nice <span class="dv">&amp;rarr;</span> Dating <span class="dv">&amp;larr;</span> Good looking</span>
+<span id="cb41-324"><a href="#cb41-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-325"><a href="#cb41-325" aria-hidden="true" tabindex="-1"></a>Suppose you look at just the people that your friend dated. In that case, they are either nice or good-looking, but the fact that you select to look at (condition on) only the people that your friend dated would automatically eliminate people who are neither nice nor good-looking. This induces a spurious negative association between nice and good-looking, so your friend may believe that nice people would be less likely to have appearances that fit their taste, and vice versa.</span>
+<span id="cb41-326"><a href="#cb41-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-327"><a href="#cb41-327" aria-hidden="true" tabindex="-1"></a>As another example, is research that is newsworthy less trustworthy? There could be a negative association due to collider bias, because people who select research to be reported, funded, or published, consider both newsworthiness and trustworthiness. Assume that trustworthiness has no causal relation with newsworthiness, below shows what happens when we only focus on papers that are either high on newsworthiness or trustworthiness:</span>
+<span id="cb41-328"><a href="#cb41-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-331"><a href="#cb41-331" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-332"><a href="#cb41-332" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb41-333"><a href="#cb41-333" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-sim-news</span></span>
+<span id="cb41-334"><a href="#cb41-334" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Simulation of newsworthiness and trustworthiness."</span></span>
+<span id="cb41-335"><a href="#cb41-335" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2221</span>) <span class="co"># different seed from the text</span></span>
+<span id="cb41-336"><a href="#cb41-336" aria-hidden="true" tabindex="-1"></a>num_proposals <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="co"># number of grant proposals</span></span>
+<span id="cb41-337"><a href="#cb41-337" aria-hidden="true" tabindex="-1"></a>prop_selected <span class="ot">&lt;-</span> <span class="fl">0.1</span> <span class="co"># proportion to select</span></span>
+<span id="cb41-338"><a href="#cb41-338" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate independent newsworthiness and trustworthiness</span></span>
+<span id="cb41-339"><a href="#cb41-339" aria-hidden="true" tabindex="-1"></a>plot_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb41-340"><a href="#cb41-340" aria-hidden="true" tabindex="-1"></a>    <span class="at">nw =</span> <span class="fu">rnorm</span>(num_proposals),</span>
+<span id="cb41-341"><a href="#cb41-341" aria-hidden="true" tabindex="-1"></a>    <span class="at">tw =</span> <span class="fu">rnorm</span>(num_proposals)</span>
+<span id="cb41-342"><a href="#cb41-342" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-343"><a href="#cb41-343" aria-hidden="true" tabindex="-1"></a>plot_dat <span class="ot">&lt;-</span> plot_dat <span class="sc">|&gt;</span></span>
+<span id="cb41-344"><a href="#cb41-344" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total =</span> nw <span class="sc">+</span> tw)</span>
+<span id="cb41-345"><a href="#cb41-345" aria-hidden="true" tabindex="-1"></a>sel_dat <span class="ot">&lt;-</span> plot_dat <span class="sc">|&gt;</span></span>
+<span id="cb41-346"><a href="#cb41-346" aria-hidden="true" tabindex="-1"></a>    <span class="co"># select top 10% of combined scores</span></span>
+<span id="cb41-347"><a href="#cb41-347" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_max</span>(<span class="at">order_by =</span> total, <span class="at">prop =</span> prop_selected)</span>
+<span id="cb41-348"><a href="#cb41-348" aria-hidden="true" tabindex="-1"></a>plot_dat <span class="sc">|&gt;</span></span>
+<span id="cb41-349"><a href="#cb41-349" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> nw, <span class="at">y =</span> tw)) <span class="sc">+</span></span>
+<span id="cb41-350"><a href="#cb41-350" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb41-351"><a href="#cb41-351" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> sel_dat, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb41-352"><a href="#cb41-352" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb41-353"><a href="#cb41-353" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb41-354"><a href="#cb41-354" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">data =</span> sel_dat, <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb41-355"><a href="#cb41-355" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> <span class="st">"purple"</span>) <span class="sc">+</span></span>
+<span id="cb41-356"><a href="#cb41-356" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"newsworthiness"</span>, <span class="at">y =</span> <span class="st">"trustworthiness"</span>)</span>
+<span id="cb41-357"><a href="#cb41-357" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-358"><a href="#cb41-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-359"><a href="#cb41-359" aria-hidden="true" tabindex="-1"></a>As you can see, a negative correlation happens. This is collider bias: spurious correlation due to conditioning on the common descendant. This also goes by the name <span class="co">[</span><span class="ot">Berkson's Paradox</span><span class="co">](https://brilliant.org/wiki/berksons-paradox/)</span>.</span>
+<span id="cb41-360"><a href="#cb41-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-361"><a href="#cb41-361" aria-hidden="true" tabindex="-1"></a>In the DAG below, X and Y have no causal association. Conditioning on S, however, induces a negative correlation between X and Y. With the DAG below,</span>
+<span id="cb41-362"><a href="#cb41-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-363"><a href="#cb41-363" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb41-364"><a href="#cb41-364" aria-hidden="true" tabindex="-1"></a>Generally speaking, do not condition on a collider, unless you're going to de-confound the spurious association using other variables.</span>
+<span id="cb41-365"><a href="#cb41-365" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb41-366"><a href="#cb41-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-369"><a href="#cb41-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-370"><a href="#cb41-370" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb41-371"><a href="#cb41-371" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dag7</span></span>
+<span id="cb41-372"><a href="#cb41-372" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "DAG with collider bias."</span></span>
+<span id="cb41-373"><a href="#cb41-373" aria-hidden="true" tabindex="-1"></a>dag7 <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(</span>
+<span id="cb41-374"><a href="#cb41-374" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dag{</span></span>
+<span id="cb41-375"><a href="#cb41-375" aria-hidden="true" tabindex="-1"></a><span class="st">      X -&gt; Y; X -&gt; S; Y -&gt; S</span></span>
+<span id="cb41-376"><a href="#cb41-376" aria-hidden="true" tabindex="-1"></a><span class="st">    }"</span></span>
+<span id="cb41-377"><a href="#cb41-377" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-378"><a href="#cb41-378" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(dag7) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X =</span> <span class="dv">0</span>, <span class="at">S =</span> <span class="dv">1</span>, <span class="at">Y =</span> <span class="dv">2</span>),</span>
+<span id="cb41-379"><a href="#cb41-379" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X =</span> <span class="dv">0</span>, <span class="at">S =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">Y =</span> <span class="dv">0</span>))</span>
+<span id="cb41-380"><a href="#cb41-380" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag7) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span>
+<span id="cb41-381"><a href="#cb41-381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-382"><a href="#cb41-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-383"><a href="#cb41-383" aria-hidden="true" tabindex="-1"></a>::: {.callout}</span>
+<span id="cb41-384"><a href="#cb41-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-385"><a href="#cb41-385" aria-hidden="true" tabindex="-1"></a><span class="fu">## Age and Happiness, conditioned on Marital Status (Example from text)</span></span>
+<span id="cb41-386"><a href="#cb41-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-387"><a href="#cb41-387" aria-hidden="true" tabindex="-1"></a>In this example, we assume that age and happiness are not related, but as people age, they are more likely to get married.</span>
+<span id="cb41-388"><a href="#cb41-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-391"><a href="#cb41-391" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-392"><a href="#cb41-392" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb41-393"><a href="#cb41-393" aria-hidden="true" tabindex="-1"></a><span class="co"># Code adapted from the rethinking package (https://github.com/rmcelreath/rethinking/blob/master/R/sim_happiness.R)</span></span>
+<span id="cb41-394"><a href="#cb41-394" aria-hidden="true" tabindex="-1"></a>sim_happiness <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="dv">1977</span>, <span class="at">N_years =</span> <span class="dv">100</span>,</span>
+<span id="cb41-395"><a href="#cb41-395" aria-hidden="true" tabindex="-1"></a>                          <span class="at">max_age =</span> <span class="dv">65</span>, <span class="at">N_births =</span> <span class="dv">50</span>,</span>
+<span id="cb41-396"><a href="#cb41-396" aria-hidden="true" tabindex="-1"></a>                          <span class="at">aom =</span> <span class="dv">18</span>) {</span>
+<span id="cb41-397"><a href="#cb41-397" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(seed)</span>
+<span id="cb41-398"><a href="#cb41-398" aria-hidden="true" tabindex="-1"></a>    H <span class="ot">&lt;-</span> M <span class="ot">&lt;-</span> A <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb41-399"><a href="#cb41-399" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (t <span class="cf">in</span> <span class="fu">seq_len</span>(N_years)) {</span>
+<span id="cb41-400"><a href="#cb41-400" aria-hidden="true" tabindex="-1"></a>        A <span class="ot">&lt;-</span> A <span class="sc">+</span> <span class="dv">1</span> <span class="co"># age existing individuals</span></span>
+<span id="cb41-401"><a href="#cb41-401" aria-hidden="true" tabindex="-1"></a>        A <span class="ot">&lt;-</span> <span class="fu">c</span>(A, <span class="fu">rep</span>(<span class="dv">1</span>, N_births)) <span class="co"># newborns</span></span>
+<span id="cb41-402"><a href="#cb41-402" aria-hidden="true" tabindex="-1"></a>        H <span class="ot">&lt;-</span> <span class="fu">c</span>(H, <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">length.out =</span> N_births)) <span class="co"># sim happiness trait - never changes</span></span>
+<span id="cb41-403"><a href="#cb41-403" aria-hidden="true" tabindex="-1"></a>        M <span class="ot">&lt;-</span> <span class="fu">c</span>(M, <span class="fu">rep</span>(<span class="dv">0</span>, N_births)) <span class="co"># not yet married</span></span>
+<span id="cb41-404"><a href="#cb41-404" aria-hidden="true" tabindex="-1"></a>        <span class="co"># for each person over 17, chance get married</span></span>
+<span id="cb41-405"><a href="#cb41-405" aria-hidden="true" tabindex="-1"></a>        M[A <span class="sc">&gt;=</span> aom <span class="sc">&amp;</span> M <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> </span>
+<span id="cb41-406"><a href="#cb41-406" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rbinom</span>(A[A <span class="sc">&gt;=</span> aom <span class="sc">&amp;</span> M <span class="sc">==</span> <span class="dv">0</span>], <span class="at">size =</span> <span class="dv">1</span>,</span>
+<span id="cb41-407"><a href="#cb41-407" aria-hidden="true" tabindex="-1"></a>                   <span class="at">prob =</span> <span class="fu">plogis</span>(H[A <span class="sc">&gt;=</span> aom <span class="sc">&amp;</span> M <span class="sc">==</span> <span class="dv">0</span>] <span class="sc">-</span> <span class="fl">7.9</span>))</span>
+<span id="cb41-408"><a href="#cb41-408" aria-hidden="true" tabindex="-1"></a>        <span class="co"># mortality</span></span>
+<span id="cb41-409"><a href="#cb41-409" aria-hidden="true" tabindex="-1"></a>        deaths <span class="ot">&lt;-</span> <span class="fu">which</span>(A <span class="sc">&gt;</span> max_age)</span>
+<span id="cb41-410"><a href="#cb41-410" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">length</span>(deaths) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb41-411"><a href="#cb41-411" aria-hidden="true" tabindex="-1"></a>            A <span class="ot">&lt;-</span> A[<span class="sc">-</span>deaths]</span>
+<span id="cb41-412"><a href="#cb41-412" aria-hidden="true" tabindex="-1"></a>            H <span class="ot">&lt;-</span> H[<span class="sc">-</span>deaths]</span>
+<span id="cb41-413"><a href="#cb41-413" aria-hidden="true" tabindex="-1"></a>            M <span class="ot">&lt;-</span> M[<span class="sc">-</span>deaths]</span>
+<span id="cb41-414"><a href="#cb41-414" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb41-415"><a href="#cb41-415" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb41-416"><a href="#cb41-416" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> A, <span class="at">married =</span> M, <span class="at">happiness =</span> H)</span>
+<span id="cb41-417"><a href="#cb41-417" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(d)</span>
+<span id="cb41-418"><a href="#cb41-418" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb41-419"><a href="#cb41-419" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">sim_happiness</span>(<span class="dv">2024</span>, <span class="at">N_years =</span> <span class="dv">100</span>)</span>
+<span id="cb41-420"><a href="#cb41-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-421"><a href="#cb41-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-424"><a href="#cb41-424" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-425"><a href="#cb41-425" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-age-happiness</span></span>
+<span id="cb41-426"><a href="#cb41-426" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Age and happiness."</span></span>
+<span id="cb41-427"><a href="#cb41-427" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dd, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
+<span id="cb41-428"><a href="#cb41-428" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">1</span>, <span class="at">size =</span> .<span class="dv">5</span>)</span>
+<span id="cb41-429"><a href="#cb41-429" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-430"><a href="#cb41-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-433"><a href="#cb41-433" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-434"><a href="#cb41-434" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-age-happiness-married</span></span>
+<span id="cb41-435"><a href="#cb41-435" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Age and happiness, conditioned on married couples."</span></span>
+<span id="cb41-436"><a href="#cb41-436" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dd[dd<span class="sc">$</span>married <span class="sc">==</span> <span class="dv">1</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
+<span id="cb41-437"><a href="#cb41-437" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">size =</span> .<span class="dv">5</span>)</span>
+<span id="cb41-438"><a href="#cb41-438" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-439"><a href="#cb41-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-440"><a href="#cb41-440" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb41-441"><a href="#cb41-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-442"><a href="#cb41-442" aria-hidden="true" tabindex="-1"></a>Some other collider examples:</span>
+<span id="cb41-443"><a href="#cb41-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-444"><a href="#cb41-444" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>impulsivity <span class="dv">&amp;rarr;</span> high-risk youth <span class="dv">&amp;larr;</span> delinquency</span>
+<span id="cb41-445"><a href="#cb41-445" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>healthcare worker <span class="dv">&amp;rarr;</span> COVID-19 testing <span class="dv">&amp;larr;</span> COVID-19 severity</span>
+<span id="cb41-446"><a href="#cb41-446" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>standardized test <span class="dv">&amp;rarr;</span> admission <span class="dv">&amp;larr;</span> research skills</span>
+<span id="cb41-447"><a href="#cb41-447" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>maternal smoking <span class="dv">&amp;rarr;</span> birth weight <span class="dv">&amp;rarr;</span> birth defect <span class="dv">&amp;larr;</span> mortality</span>
+<span id="cb41-448"><a href="#cb41-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-449"><a href="#cb41-449" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some Additional References</span></span>
+<span id="cb41-450"><a href="#cb41-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-451"><a href="#cb41-451" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>https://doi.org/10.1177/25152459221095823</span>
+<span id="cb41-452"><a href="#cb41-452" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>https://doi.org/10.1038/s41562-024-01939-z</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
