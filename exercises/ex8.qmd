@@ -1,0 +1,34 @@
+---
+title: "Exercise 8"
+author: "Instructor of PSYC 573"
+eval: false
+format: pdf
+---
+
+```{r}
+library(dagitty)
+```
+
+## Instruction
+
+There are four DAGs in the pictures attached to this exercise on Brightspace. For each DAG, identify (a) which path is a causal path from X to Y, (b) which variables need to be adjusted to satisfy the back-door criterion for the causal effect of X --> Y. Below is an example:
+
+## Q1: Top Left (Example)
+
+Causal paths are X --> Y. The paths (i) X <-- Z --> Y and (ii) X <-- Z <-- A --> Y are not causal. Conditioning on Z is sufficient to block all backdoor paths. 
+
+```{r top-left}
+dag1 <- dagitty("dag{ X -> Y; X <- Z -> Y; X <- Z <- A -> Y }")
+# The part below is optional; it just matches the appearance in the questions
+coordinates(dag1) <- list(x = c(X = 0, Z = 1, A = 2, Y = 2),
+                          y = c(X = 0, Z = -1, A = -1, Y = 0))
+plot(dag1)  # verify it's the same as the given graph
+# Variables to be conditioned on
+adjustmentSets(dag1, exposure = "X", outcome = "Y")
+```
+
+## Q2: Top Right
+
+## Q3: Bottom Left
+
+## Q4: Bottom Right

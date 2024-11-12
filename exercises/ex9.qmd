@@ -1,0 +1,116 @@
+---
+title: "Exercise 9"
+author: "Instructor of PSYC 573"
+eval: false
+---
+
+```{r}
+library(brms)
+options(brms.backend = "cmdstanr", mc.cores = 2)
+library(haven)  # for importing SPSS data
+library(posterior)  # for summarizing posterior draws
+library(bayesplot)  # for convergence plots
+```
+
+## Instruction
+
+!! Remember to set `eval: true` in YAML.
+
+Answer questions 1-5 below. Submit the **rendered** file (PDF/WORD) to Brightspace.
+
+The following code is from the note, performing Gibbs sampling for the word count data from the paper <https://journals.sagepub.com/doi/abs/10.1177/0956797614524581>.
+
+```{r}
+# Use haven::read_sav() to import SPSS data
+nt_dat <- read_sav("https://osf.io/qrs5y/download")
+# Word count for the laptop group
+(wc_laptop <- nt_dat$wordcount[nt_dat$condition == 0] / 100)
+```
+
+```{r}
+set.seed(7944)  # pick a seed for reproducibility
+# Gibbs sampling
+# Sufficient statistics from data
+ybar <- mean(wc_laptop)  # sample mean
+s2y <- var(wc_laptop)  # sample variance
+n <- length(wc_laptop)  # sample size
+# Hyperparameters
+mu_0 <- 5  # Prior mean
+sigma2_0 <- 1  # Prior expectation of the variance
+tau2_0 <- 10^2  # Prior variance (i.e., uncertainty) of the mean
+nu_0 <- 1  # Prior sample size for the variance
+# Initialize the Gibbs sampler
+set.seed(2120)
+num_draws <- 10000
+num_warmup <- num_draws / 2
+num_chains <- 2
+# Initialize a 3-D array (S x # chains x 2 parameters)
+post_all_draws <- array(
+    dim = c(num_draws, num_chains, 2),
+    dimnames = list(NULL, NULL, c("mu", "sigma2"))
+)
+# Step 1: starting values for sigma2
+post_all_draws[1, 1, "sigma2"] <- 1  # for chain 1
+post_all_draws[1, 2, "sigma2"] <- 3  # for chain 2
+for (s in seq_len(num_draws - 1)) {
+    for (j in seq_len(num_chains)) {
+        sigma2_s <- post_all_draws[s, j, "sigma2"]
+        # Step 2: Sample mu from the conditional posterior
+        tau2_n <- 1 / (1 / tau2_0 + n / sigma2_s)
+        mu_n <- tau2_n * (mu_0 / tau2_0 + n * ybar / sigma2_s)
+        mu_new <- rnorm(1, mean = mu_n, sd = sqrt(tau2_n))
+        post_all_draws[s + 1, j, "mu"] <- mu_new
+        # Step 3: Sample sigma2 from the conditional posterior
+        nu_n <- nu_0 + n  # you could put this line outside the loop
+        sigma2_n <- 1 / nu_n *
+            (nu_0 * sigma2_0 + (n - 1) * s2y + (ybar - mu_new)^2)
+        sigma2_new <- 1 / rgamma(1,
+            shape = nu_n / 2,
+            rate = nu_n * sigma2_n / 2
+        )
+        post_all_draws[s + 1, j, "sigma2"] <- sigma2_new
+    }
+}
+# Draws after warm-up
+post_draws_laptop <- post_all_draws[- (1:num_warmup), , ]
+```
+
+Q1: Modify the above code to do Gibbs sampling estimating the mean and variance of word count for the **longhand group.** Call the resulting draws `post_draws_longhand`.
+
+```{r}
+
+```
+
+Q2: Do the chains converge? Include the output of (a) R-hat statistics, (b) effective sample sizes, and (c) rank histograms below. 
+
+```{r}
+post_draws <- as_draws(post_draws_laptop)
+
+```
+
+Q3: Obtain and summarize the posterior of the mean difference between the laptop and the longhand group on word counts. 
+
+```{r}
+
+```
+
+Q4. The following fits a multilevel Poisson model in `brms`, which uses the NUTS sampler, on a built-in data set, with 2 chains, 100 iterations and `adapt_delta` set to .50. Do the chains converge? Describe what you notice in the diagnostic plots.
+
+```{r}
+fit1 <- brm(count ~ zAge + zBase * Trt + (1 | patient),
+            data = epilepsy, family = poisson(),
+            iter = 100,
+            chains = 2,
+            control = list(adapt_delta = .50),
+            seed = 920)
+fit1
+mcmc_hist_by_chain(fit1, pars = "b_zBase:Trt1")
+mcmc_acf(fit1, pars = "b_zBase:Trt1")
+mcmc_rank_hist(fit1, pars = "b_zBase:Trt1")
+```
+
+Q5: Redo Q4, but with more iterations and a higher `adapt_delta` so that the chains converge.
+
+```{r}
+
+```
