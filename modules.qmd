@@ -552,7 +552,40 @@ By the end of this module, you will be able to
 
 </div>
 
-[Link to HTML slides](/slides/mcmc.qmd){target="_blank"}
+[Link to HTML slides](/slides/glm.qmd){target="_blank"}
+
+# Week 13
+
+## Week Learning Objectives
+
+By the end of this module, you will be able to 
+
+- Provide examples of *clustered* data
+- Fit Bayesian multilevel models (MLMs)
+- Name advantages of MLM
+- Interpret coefficients in MLM
+
+## Task List
+
+1. Complete the assigned readings
+    * McElreath ch 13, 14.1, 14.2
+2. Review the resources (slides and [notes][23])
+3. Attend the Tuesday class meetings
+4. Continue to work on final project
+
+[23]: docs/11-multilevel.html
+
+## Slides
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="slides/glm.html" width="525" height="350"></iframe>
+```
+
+</div>
+
+[Link to HTML slides](/slides/mlm.qmd){target="_blank"}
 
 :::
 
