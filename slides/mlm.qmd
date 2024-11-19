@@ -1,0 +1,666 @@
+---
+title: "Multilevel Models"
+date-modified: last-modified
+format: metropolis-revealjs
+---
+
+```{r}
+#| include: false
+#| file: _setting.R
+```
+
+```{r}
+library(brms)
+options(brms.backend = "cmdstanr")
+library(posterior)
+library(bayesplot)
+library(modelsummary)
+```
+
+## Guiding Questions
+
+- What is *hierarchical/multilevel models (MLMs)*?
+- How to fit Bayesian multilevel models?
+- What are the advantages of MLM?
+- How to allow *separate regression lines* for many groups/clusters?
+    * Varying intercepts and slopes (and variances)
+    * Interpretations
+
+## Multilevel Models
+
+- Discovered in different disciplines separately
+    * Mixed/mixed-effect models
+    * Hierarchical linear models
+    * Variance component models
+
+. . .
+
+- A flexible class of models to handle clustered (dependent) data
+    * Extremely common in the behavioral and social sciences
+
+## MLM
+
+::: {.callout-tip appearance="simple"}
+
+## MLM subsumes
+
+- Dependent-sample $t$-test
+- Random-effect ANOVA
+- Repeated-measure ANOVA
+- Variance components models
+- Growth curve models
+- Generalizability theory
+- Random-effect meta-analysis
+
+:::
+
+. . .
+
+- Build cluster-specific regression/other types of models 
+- Borrow information across clusters
+- Include higher-level predictors
+
+## Multilevel Data Structures
+
+- Hierarchical/Nested
+    * Students in schools
+    * Clients nested within therapists within clinics
+    * Employees nested within organizations
+    * Citizens nested within employees
+    * Repeated measures nested within persons
+
+![](../usc-psyc573-notes/images/nested.png){width='100%' fig-align="center"}
+
+## Multilevel Data Structures (Cont'd)
+
+- Crossed
+    * Students cross-classified by high schools and middle schools
+    * Responses cross-classified by items and persons
+
+![](../usc-psyc573-notes/images/crossed.png){width='80%' fig-align="center"}
+
+## Quantifying Dependence
+
+- Intraclass correlation (ICC): $\rho = \dfrac{\tau^2}{\tau^2 + \sigma^2}$
+    * Analogous to $\eta^2$/$R^2$ effect size
+
+::: {.callout-important appearance="simple"}
+
+## ICC
+
+The proportion of variance of the outcome that are due to between-level (e.g., between-group, between-person) differences
+
+:::
+
+```{r}
+#| fig-width: 2.5
+#| layout-ncol: 3
+#| fig-asp: 1
+#| fig-align: center
+set.seed(1)
+fake_dat1 <- data.frame(
+    person = as.character(rep(1:8, 25)),
+    y = rnorm(200,
+        mean = rnorm(8, mean = 50, sd = 0.1),
+        sd = 10
+    )
+)
+
+pbase <- ggplot(fake_dat1, aes(x = person, y = y)) +
+    geom_jitter(width = 0.1, col = "darkgrey") +
+    stat_summary(
+        geom = "point", fun = mean,
+        size = 4, shape = 24, fill = "red"
+    ) +
+    ylim(20, 80) +
+    theme(axis.text.y = element_blank())
+pbase + ggtitle("ICC close to 0")
+
+fake_dat2 <- data.frame(
+    person = as.character(rep(1:8, 25)),
+    y = rnorm(200,
+        mean = rnorm(8, mean = 50, sd = sqrt(20)),
+        sd = sqrt(80)
+    )
+)
+pbase %+% fake_dat2 + ggtitle("ICC = .2")
+
+fake_dat3 <- data.frame(
+    person = as.character(rep(1:8, 25)),
+    y = rnorm(200,
+        mean = rnorm(8, mean = 50, sd = sqrt(95)),
+        sd = sqrt(5)
+    )
+)
+pbase %+% fake_dat3 + ggtitle("ICC = .95")
+```
+
+## Data
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+data(sleepstudy, package = "lme4")
+head(sleepstudy)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| fig-width: 5
+#| fig-align: center
+?lme4::sleepstudy
+hist(sleepstudy$Reaction)
+```
+
+:::
+
+::::
+
+## Trajectories
+
+```{r}
+ggplot(sleepstudy, aes(x = Days, y = Reaction)) +
+    geom_point(size = 0.5) +
+    geom_smooth() +
+    # presented by person
+    facet_wrap(~Subject, ncol = 6)
+```
+
+## ICC of `Reaction`
+
+- Varying/Random intercept model
+
+$$
+\begin{aligned}
+  \text{Reaction}_{ij} & \sim N(\mu_j, \sigma)  \\
+  \mu_j & \sim N(\gamma, \tau)
+\end{aligned}
+$$
+
+- $\mu_j$: mean reaction for the $j$th person
+- $i$ indexes measurement occasions
+
+---
+
+```{r}
+sleepstudy <- sleepstudy %>% 
+  mutate(Reaction10 = Reaction / 10)
+```
+
+```{r}
+m2 <- brm(Reaction10 ~ (1 | Subject), data = sleepstudy,
+          prior = c(# for intercept
+            prior(normal(0, 50), class = "Intercept"),
+            # for tau
+            prior(gamma(2, 0.2), class = "sd"),
+            # for sigma
+            prior(student_t(4, 0, 5), class = "sigma")),
+          # Higher adapt_delta is usually needed for MLM
+          control = list(adapt_delta = .95),
+          seed = 2107,
+          file = "11_m2")
+```
+
+```{r}
+summarize_draws(m2, c("median", "mad", "quantile2"))[1:3, ] |>
+    knitr::kable()
+```
+
+---
+
+```{r}
+#| fig-width: 5
+#| fig-asp: .618
+#| fig-align: center
+icc_draws <- as_draws(m2, variable = c("sd_Subject__Intercept", "sigma")) |>
+    mutate_variables(
+        icc = sd_Subject__Intercept^2 / (sd_Subject__Intercept^2 + sigma^2)
+    )
+mcmc_dens(icc_draws, pars = "icc")
+```
+
+::: {.callout-note}
+
+## Interpretations
+
+```{r}
+#| include: false
+icc_summ <- summarize_draws(icc_draws)
+```
+
+```{r}
+#| include: false
+get_mean_ci <- function(i, summ, scale = 1, unit = "", unit_ci = unit) {
+    paste0(
+        comma(summ[i, "Estimate"] * scale, 2), unit,
+        ", 90% CI [",
+        comma(summ[i, "Q5"] * scale, 2), unit_ci, ", ",
+        comma(summ[i, "Q95"] * scale, 2), unit_ci, "]"
+    )
+}
+```
+
+The model suggested that the average reaction time across individuals and measurement occasions was `r get_mean_ci(1, fixef(m2, prob = c(.05, .95)), scale = 10, unit = "ms")`. It was estimated that `r round(icc_summ[["mean"]][3] * 100, 2)`%, 90% CI [`r round(icc_summ[["q5"]][3] * 100, 2)`%, `r round(icc_summ[["q95"]][3] * 100, 2)`%] of the variations in reaction time was attributed to between-person differences.
+
+:::
+
+## Regression for One Person (308)
+
+$$
+\begin{aligned}
+  \text{Reaction10}_i & \sim N(\mu_i, \sigma)  \\
+  \mu_i & = \beta_0 + \beta_1 \texttt{Days}_i
+\end{aligned}
+$$
+
+```{r}
+#| fig-align: center
+ggplot(sleepstudy |> filter(Subject == "308"), aes(x = Days, y = Reaction)) +
+    geom_point(size = 0.5) +
+    geom_smooth(method = "lm")
+```
+
+## Varying Coefficients
+
+In MLM, parameters ($\beta_0$, $\beta_1$, $\sigma$) can be
+
+- different across clusters (persons)
+- be estimated by partial pooling
+
+```{r}
+#| include: false
+m4 <- brm(Reaction10 ~ Days + (Days | Subject),
+    data = sleepstudy,
+    prior = c( # for intercept
+        prior(normal(0, 50), class = "Intercept"),
+        # for slope
+        prior(normal(0, 10), class = "b"),
+        # for tau_beta0 and tau_beta1
+        prior(gamma(2, 0.2), class = "sd", group = "Subject"),
+        # for correlation
+        prior(lkj(1), class = "cor"),
+        # for sigma
+        prior(student_t(4, 0, 5), class = "sigma")
+    ),
+    control = list(adapt_delta = .95),
+    seed = 2107,
+    file = "11_m4"
+)
+```
+
+```{r}
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: .5
+ce_m4 <- conditional_effects(m4,
+    re_formula = NULL,
+    conditions = data.frame(Subject = unique(sleepstudy$Subject))
+)
+# Add original outcome variable
+plot(ce_m4, points = TRUE, ncol = 6)
+```
+
+## Varying Intercepts
+
+Repeated-measure level:
+
+$$
+\begin{aligned}
+  \text{Reaction10}_{ij} & \sim N(\mu_{ij}, \sigma)  \\
+  \mu_{ij} & = \beta_{0j} + \beta_{1} \text{Days}_{ij}  \\
+\end{aligned}
+$$
+
+Person level:
+
+$$
+\begin{aligned}
+  \beta_{0j} & \sim N(\mu^{[\beta_0]}, \tau^{[\beta_0]})  \\
+\end{aligned}
+$$
+
+Priors:
+
+$$
+\begin{aligned}
+  \mu^{[\beta_0]} & \sim N(0, 50) \\
+  \tau^{[\beta_0]} & \sim \mathrm{Gamma}(2, 0.2) \\
+  \beta_1 & \sim N(0, 10) \\
+  \sigma & \sim t^+(4, 0, 5)
+\end{aligned}
+$$
+
+---
+
+```{r}
+#| echo: true
+m3 <- brm(Reaction10 ~ Days + (1 | Subject),
+    data = sleepstudy,
+    prior = c( # for intercept
+        prior(normal(0, 50), class = "Intercept"),
+        # for slope
+        prior(normal(0, 10), class = "b"),
+        # for tau
+        prior(gamma(2, 0.2), class = "sd"),
+        # for sigma
+        prior(student_t(4, 0, 5), class = "sigma")
+    ),
+    control = list(adapt_delta = .95),
+    seed = 2107,
+    file = "11_m3"
+)
+```
+
+---
+
+```{r}
+summarize_draws(m3, c("median", "mad", "quantile2"))[1:4, ] |>
+    knitr::kable()
+```
+
+## Overall Fit
+
+```{r}
+#| fig-align: center
+pp_check(m3, type = "intervals", x = "Days",
+         re_formula = NA) +
+    geom_smooth(se = FALSE, col = "blue") +
+    geom_smooth(aes(y = y_obs), se = FALSE, col = "red", linetype = "dashed")
+```
+
+## Fit to Individuals
+
+Remember: The model assumes equal slopes for each person
+
+```{r}
+#| fig-align: center
+ce_m3 <- conditional_effects(m3,
+    re_formula = NULL,
+    conditions = data.frame(Subject = unique(sleepstudy$Subject))
+)
+# Add original outcome variable
+plot(ce_m3, points = TRUE, ncol = 6, plot = FALSE)[[1]] +
+    geom_smooth(
+        data = attr(ce_m3[[1]], "points"),
+        aes(x = Days, y = resp__),
+        se = FALSE, col = "red",
+        linewidth = 0.8, alpha = 0.5,
+        inherit.aes = FALSE
+    )
+```
+
+## Varying Slopes
+
+Repeated-measure level:
+
+$$
+\begin{aligned}
+  \text{Reaction10}_{ij} & \sim N(\mu_{ij}, \sigma)  \\
+  \mu_{ij} & = \beta_{0j} + \beta_{1j} \text{Days}_{ij}  \\
+\end{aligned}
+$$
+
+Person level:
+
+$$
+\begin{aligned}
+  \begin{bmatrix}
+    \beta_{0j} \\
+    \beta_{1j} \\
+  \end{bmatrix} & \sim N_2\left(
+    \begin{bmatrix}
+      \mu^{[\beta_0]} \\
+      \mu^{[\beta_1]} \\
+    \end{bmatrix}, \mathbf T
+    \right) \\
+    \mathbf T & = \begin{bmatrix}
+      {\tau^{[\beta_0]}}^2 & \\
+      \tau^{\beta{10}} & {\tau^{[\beta_1]}}^2 \\
+    \end{bmatrix}
+\end{aligned}
+$$
+
+## LKJ Prior
+
+::: {.callout-note}
+
+## Decomposing Covariance Matrix
+
+- Covariance = *SD* $\times$ Correlation $\times$ *SD*
+
+$$
+\mathbf T = \mathrm{diag}(\boldsymbol{\tau}) \boldsymbol{\Omega} \mathrm{diag}(\boldsymbol{\tau})
+$$
+
+:::
+
+Shape parameter $\eta$
+
+$$
+P(\boldsymbol{\Omega} | \eta) \propto \det(\boldsymbol{\Omega})^{\eta - 1}
+$$
+
+---
+
+- $\eta = 1$: Uniform
+- $\eta \geq 1$: increasingly concentrated to zero correlations
+- $\eta \leq 1$: more correlations closer to 1
+
+```{r}
+dlkjcorr2 <- function(rho, eta = 1, log = FALSE) {
+    # Function to compute the LKJ density given a correlation
+    out <- (eta - 1) * log(1 - rho^2) -
+        1 / 2 * log(pi) - lgamma(eta) + lgamma(eta + 1 / 2)
+    if (!log) out <- exp(out)
+    out
+}
+ggplot(data.frame(rho = c(-1, 1)), aes(x = rho)) +
+    stat_function(
+        fun = dlkjcorr2, args = list(eta = 0.1),
+        aes(col = "0.1"), n = 501
+    ) +
+    stat_function(
+        fun = dlkjcorr2, args = list(eta = 0.5),
+        aes(col = "0.5"), n = 501
+    ) +
+    stat_function(
+        fun = dlkjcorr2, args = list(eta = 1),
+        aes(col = "1"), n = 501
+    ) +
+    stat_function(
+        fun = dlkjcorr2, args = list(eta = 2),
+        aes(col = "2"), n = 501
+    ) +
+    stat_function(
+        fun = dlkjcorr2, args = list(eta = 10),
+        aes(col = "10"), n = 501
+    ) +
+    stat_function(
+        fun = dlkjcorr2, args = list(eta = 100),
+        aes(col = "100"), n = 501
+    ) +
+    labs(col = expression(eta), x = expression(rho), y = "Density")
+```
+
+## Priors
+
+$$
+\begin{aligned}
+  \mu^{[\beta_0]} & \sim N(0, 50) \\
+  \mu^{[\beta_1]} & \sim N(0, 10) \\
+  \tau^{[\beta_m]} & \sim \mathrm{Gamma}(2, 0.2), \; m = 0, 1 \\
+  \boldsymbol{\Omega} & \sim \mathrm{LKJ}(1) \\
+  \sigma & \sim t^+(4, 0, 5)
+\end{aligned}
+$$
+
+---
+
+```{r}
+#| echo: true
+#| eval: false
+m4 <- brm(Reaction10 ~ Days + (Days | Subject),
+    data = sleepstudy,
+    prior = c( # for intercept
+        prior(normal(0, 50), class = "Intercept"),
+        # for slope
+        prior(normal(0, 10), class = "b"),
+        # for tau_beta0 and tau_beta1
+        prior(gamma(2, 0.2), class = "sd", group = "Subject"),
+        # for correlation
+        prior(lkj(1), class = "cor"),
+        # for sigma
+        prior(student_t(4, 0, 5), class = "sigma")
+    ),
+    control = list(adapt_delta = .95),
+    seed = 2107,
+    file = "11_m4"
+)
+```
+
+---
+
+```{r}
+summarize_draws(m4, c("median", "mad", "quantile2"))[1:6, ] |>
+    knitr::kable()
+```
+
+## Fit to Individuals
+
+```{r}
+#| fig-align: center
+# Add original outcome variable
+plot(ce_m4, points = TRUE, ncol = 6, plot = FALSE)[[1]] +
+    geom_smooth(
+        data = attr(ce_m4[[1]], "points"),
+        aes(x = Days, y = resp__),
+        se = FALSE, col = "red",
+        linewidth = 0.8, alpha = 0.5,
+        inherit.aes = FALSE
+    )
+```
+
+## Varying Regression Lines
+
+```{r}
+#| fig-align: center
+plot(
+    conditional_effects(m4,
+        effects = "Days:Subject",
+        re_formula = NULL,
+        # suppress credible band
+        prob = 0
+    ),
+    points = TRUE,
+    point_args = list(size = 0.5),
+)
+```
+
+## Interpretations
+
+```{r}
+#| include: false
+tau_m4 <- VarCorr(m4, probs = c(.05, .95))$Subject$sd
+```
+
+::: {.callout-important appearance="minimal"}
+
+## $\beta_0$
+
+Based on the model, at Day 0, the average reaction time across individuals was `r get_mean_ci(1, fixef(m4, probs = c(.05, .95)), scale = 10, unit = "ms")`, and the *SD* at Day 0 was `r tau_m4["Intercept", "Estimate"] * 10`ms, 95% CI [`r tau_m4["Intercept", "Q5"] * 10`ms, `r tau_m4["Intercept", "Q95"] * 10`ms].
+
+:::
+
+::: {.callout-important appearance="minimal"}
+
+## $\beta_1$
+
+The average rate of change per day in reaction time across individuals was `r get_mean_ci(2, fixef(m4, probs = c(.05, .95)), scale = 10, unit = "ms")`, and the *SD* of the rates of change at Day 0 was `r tau_m4["Days", "Estimate"] * 10`ms, 95% CI [`r tau_m4["Days", "Q5"] * 10`ms, `r tau_m4["Days", "Q95"] * 10`ms].
+
+:::
+
+## Random $\sigma$
+
+```{r}
+#| include: false
+m5 <- brm(
+    bf(
+        Reaction10 ~ Days + (Days | p | Subject),
+        sigma ~ (1 | p | Subject)
+    ),
+    data = sleepstudy,
+    prior = c( # for intercept
+        prior(normal(0, 50), class = "Intercept"),
+        # for slope
+        prior(normal(0, 10), class = "b"),
+        # for tau_beta0
+        prior(gamma(2, 0.2),
+            class = "sd", coef = "Intercept",
+            group = "Subject"
+        ),
+        # for tau_beta1
+        prior(gamma(2, 0.2),
+            class = "sd", coef = "Days",
+            group = "Subject"
+        ),
+        # for correlation
+        prior(lkj(1), class = "cor"),
+        # for sigma
+        prior(student_t(4, 0, 1.6), class = "Intercept", dpar = "sigma"),
+        # for tau_sigma
+        prior(gamma(2, 0.625),
+            class = "sd", coef = "Intercept",
+            group = "Subject", dpar = "sigma"
+        )
+    ),
+    control = list(adapt_delta = .95),
+    seed = 2107,
+    file = "11_m5"
+)
+```
+
+```{r}
+#| fig-align: center
+pp_check(m5, type = "ribbon_grouped", group = "Subject", x = "Days",
+         facet_args = list(ncol = 6, scales = "fixed"))
+```
+
+## Comparing Models {.smaller}
+
+```{r}
+cm <- c("b_Intercept" = "\\(\\mu^{[\\beta_0]}\\)",
+        "b_Days" = "\\(\\mu^{[\\beta_1]}\\)",
+        "sigma" = "\\(\\sigma\\)",
+        "b_sigma_Intercept" = "\\(\\mu^{[\\sigma]}\\)",
+        "sd_Subject__Intercept" = "\\(\\tau^{[\\beta_0]}\\)",
+        "sd_Subject__Days" = "\\(\\tau^{[\\beta_1]}\\)",
+        "sd_Subject__sigma_Intercept" = "\\(\\tau^{[\\sigma]}\\)")
+msummary(
+    list(
+        `Var Int` = m3,
+        `Var Slp` = m4,
+        `Var \\(\\sigma\\)` = m5
+    ),
+    metrics = c("WAIC", "LOOIC"),
+    estimate = "{estimate} [{conf.low}, {conf.high}]",
+    shape = effect + term ~ model,
+    coef_map = cm,
+    fmt = 2
+)
+```
+
+## Many More Topics in MLM
+
+- Adding higher-level predictors
+- Cross-level interactions
+- Decomposing effects and the ecological fallacy
+- Categorical outcomes (i.e., generalized linear mixed model, GLMM)
+- Complex data structures (e.g., 3-level, crossed)
+- And more . . . Check out MLM classes on campus
