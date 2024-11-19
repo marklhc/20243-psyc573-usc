@@ -21,7 +21,7 @@ Three components:
 
 - Conditional distribution of $Y$
 - Link function
-- Linear predictor
+- Linear predictor ($\eta$)
 
 ## Some Examples
 
@@ -45,12 +45,14 @@ $$
 \end{aligned}
 $$
 
+::: {.incremental}
 - $\mathrm{Dist}$: conditional distribution of $Y \mid X$ (e.g., normal, Bernoulli, $\ldots$)
     * I.e., distribution of **prediction error**; not the marginal distribution of $Y$
 - $\mu_i$: mean parameter for the $i$th observation
 - $\eta_i$: linear predictor
 - $g(\cdot)$: link function
 - ($\tau$: dispersion parameter)
+:::
 
 ## Illustration
 
@@ -229,12 +231,20 @@ Different link functions can be used
 
 - E.g., identity link or probit link for Bernoulli variables
 
+. . .
+
 Linearity is a strong assumption
 
+::: {.incremental}
 - GLM can allow $\eta$ and $X$ to be nonlinearly related, as long as it's linear in the coefficients
     * E.g., $\eta_i = \beta_0 + \beta_1 \log(X_{i})$
     * E.g., $\eta_i = \beta_0 + \beta_1 X_i + \beta_2 X_i^2$
     * But not something like $\eta_i = \beta_0 \log(\beta_1 + x_i)$
+:::
+
+# Logistic Regression
+
+See exercise 
 
 # Poisson Regression
 
@@ -307,7 +317,7 @@ m3 <- brm(count ~ Trt, data = epilepsy4,
           family = poisson(link = "identity"))
 ```
 
-::: {.content-visible unless-profile="class"}
+::: {.content-hidden unless-profile="class"}
 
 ---
 

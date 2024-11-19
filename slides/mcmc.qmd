@@ -37,6 +37,7 @@ t.test(lies$LDMRT / 1000, lies$LEMRT / 1000, paired = TRUE)
 ```{r}
 library(brms)
 options(brms.backend = "cmdstanr", mc.cores = 4)
+library(rstan)
 lies_long <- lies |>
     select(PP, Gender, LDMRT:TEMRT) |>
     pivot_longer(
@@ -666,5 +667,21 @@ summ_th <- summarise_draws(th_draws_array)
 - Check for representativenes
     * Trace/Rank plot and $\hat{R}$
 - Need large ESS to describe the posterior accurately
+
+::: {.content-hidden unless-profile="class"}
+
+## Week 12
+
+- Rubrics for final project
+- Metropolis algorithm
+    * General, but low ESS
+    * No restriction on priors
+- Gibbs sampler
+    * Requires semi-conjugate prior
+    * High ESS
+- Exercise 9
+- HW 7
+
+:::
 
 ## References

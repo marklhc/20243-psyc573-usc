@@ -12,6 +12,7 @@ The analyses in this exercise are from the example in the note "9 Multiple Predi
 library(tidyverse)
 library(brms)
 options(brms.backend = "cmdstanr")
+library(rstan)
 ```
 
 ```{r}
