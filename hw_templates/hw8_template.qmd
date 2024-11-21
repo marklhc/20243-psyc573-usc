@@ -6,6 +6,7 @@ echo: false
 format:
   gfm:
     toc: true
+    html-math-method: webtex
 ---
 
 ```{r}

@@ -50,23 +50,32 @@ Table 1: Descriptive statistics by groups
 
 # Model
 
-Let $Y$ = profevaluation, $G$ = nonenglish
+Let ![Y](https://latex.codecogs.com/svg.latex?Y "Y") = profevaluation,
+![G](https://latex.codecogs.com/svg.latex?G "G") = nonenglish
 
-Model: $$
-  \begin{aligned}
+Model:
+
+![\begin{aligned}
+    Y\_{i, G = 0} & \sim N(\mu_1, \sigma_1) \\
+    Y\_{i, G = 1} & \sim N(\mu_2, \sigma_2)
+  \end{aligned}](https://latex.codecogs.com/svg.latex?%5Cbegin%7Baligned%7D%0A%20%20%20%20Y_%7Bi%2C%20G%20%3D%200%7D%20%26%20%5Csim%20N%28%5Cmu_1%2C%20%5Csigma_1%29%20%5C%5C%0A%20%20%20%20Y_%7Bi%2C%20G%20%3D%201%7D%20%26%20%5Csim%20N%28%5Cmu_2%2C%20%5Csigma_2%29%0A%20%20%5Cend%7Baligned%7D "\begin{aligned}
     Y_{i, G = 0} & \sim N(\mu_1, \sigma_1) \\
     Y_{i, G = 1} & \sim N(\mu_2, \sigma_2)
-  \end{aligned}
-$$
+  \end{aligned}")
 
-Prior: $$
-  \begin{aligned}
+Prior:
+
+![\begin{aligned}
     \mu_1 & \sim N(3, 2) \\
     \mu_2 & \sim N(3, 2) \\
     \sigma_1 & \sim N^+(0, 2) \\
     \sigma_2 & \sim N^+(0, 2)
-  \end{aligned}
-$$
+  \end{aligned}](https://latex.codecogs.com/svg.latex?%5Cbegin%7Baligned%7D%0A%20%20%20%20%5Cmu_1%20%26%20%5Csim%20N%283%2C%202%29%20%5C%5C%0A%20%20%20%20%5Cmu_2%20%26%20%5Csim%20N%283%2C%202%29%20%5C%5C%0A%20%20%20%20%5Csigma_1%20%26%20%5Csim%20N%5E%2B%280%2C%202%29%20%5C%5C%0A%20%20%20%20%5Csigma_2%20%26%20%5Csim%20N%5E%2B%280%2C%202%29%0A%20%20%5Cend%7Baligned%7D "\begin{aligned}
+    \mu_1 & \sim N(3, 2) \\
+    \mu_2 & \sim N(3, 2) \\
+    \sigma_1 & \sim N^+(0, 2) \\
+    \sigma_2 & \sim N^+(0, 2)
+  \end{aligned}")
 
 ## Analysis
 
@@ -88,8 +97,13 @@ parameters.
 </div>
 
 <a href="#tbl-summ-fit" class="quarto-xref">Table 2</a> shows the
-posterior distributions of $\mu_1$, $\mu_2$, $\sigma_1$, $\sigma_2$, and
-$\mu_2 - \mu_1$.
+posterior distributions of
+![\mu_1](https://latex.codecogs.com/svg.latex?%5Cmu_1 "\mu_1"),
+![\mu_2](https://latex.codecogs.com/svg.latex?%5Cmu_2 "\mu_2"),
+![\sigma_1](https://latex.codecogs.com/svg.latex?%5Csigma_1 "\sigma_1"),
+![\sigma_2](https://latex.codecogs.com/svg.latex?%5Csigma_2 "\sigma_2"),
+and
+![\mu_2 - \mu_1](https://latex.codecogs.com/svg.latex?%5Cmu_2%20-%20%5Cmu_1 "\mu_2 - \mu_1").
 
 <div id="tbl-summ-fit">
 
